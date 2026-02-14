@@ -94,6 +94,19 @@ npm run build:all    # Build + generate in one step
 npm test             # Run tests
 ```
 
+## Publishing
+
+```bash
+# 1. Bump version in package.json
+npm version patch    # 1.0.3 → 1.0.4 (or use minor/major)
+
+# 2. Build + generate configs
+npm run build
+
+# 3. Publish to npm
+npm publish --access public
+```
+
 ---
 
 ## Repository Structure
