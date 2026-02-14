@@ -1,0 +1,2755 @@
+{
+  "id": "ACCOUNTANT-IT-DEFAULT",
+  "name": "Commercialista / Studio Tributarista Italia",
+  "description": "Configurazione per gestione documenti studio commercialista — fatture, dichiarazioni, F24, bilanci, CU, buste paga",
+  "schemaVersion": 1,
+  "documentTypes": [
+    {
+      "id": "doc-isee",
+      "name": "Attestazione ISEE",
+      "description": "Attestazione ISEE — indicatore della situazione economica equivalente",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "anno": {
+            "type": "number",
+            "description": "Anno di riferimento"
+          },
+          "dichiarante": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string",
+                "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "cognome": {
+                "type": "string",
+                "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+              }
+            },
+            "required": [
+              "nome",
+              "cognome",
+              "codiceFiscale"
+            ]
+          },
+          "valoreIsee": {
+            "type": "number",
+            "description": "Valore ISEE in Euro"
+          },
+          "valoreIse": {
+            "type": "number",
+            "description": "Valore ISE in Euro"
+          },
+          "patrimonioMob": {
+            "type": "number",
+            "description": "Patrimonio mobiliare totale in Euro"
+          },
+          "patrimonioImm": {
+            "type": "number",
+            "description": "Patrimonio immobiliare totale in Euro"
+          },
+          "redditoNucleoFamiliare": {
+            "type": "number",
+            "description": "Reddito complessivo del nucleo familiare in Euro"
+          },
+          "numComponenti": {
+            "type": "number",
+            "description": "Numero componenti nucleo familiare"
+          },
+          "scalaDiEquivalenza": {
+            "type": "number",
+            "description": "Scala di equivalenza"
+          },
+          "dataRilascio": {
+            "type": "string",
+            "description": "Data di rilascio attestazione",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "validita": {
+            "type": "string",
+            "description": "Data di scadenza validità",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          }
+        },
+        "required": [
+          "anno",
+          "dichiarante",
+          "valoreIsee"
+        ]
+      }
+    },
+    {
+      "id": "doc-bilancio",
+      "name": "Bilancio d'Esercizio",
+      "description": "Bilancio annuale: stato patrimoniale, conto economico, nota integrativa",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "ragioneSociale": {
+            "type": "string",
+            "description": "Ragione sociale"
+          },
+          "partitaIva": {
+            "type": "string",
+            "description": "Partita IVA — 11 cifre numeriche"
+          },
+          "esercizio": {
+            "type": "string",
+            "description": "Periodo di esercizio (es. 01.01.2025 - 31.12.2025)"
+          },
+          "anno": {
+            "type": "number",
+            "description": "Anno di competenza"
+          },
+          "fatturato": {
+            "type": "number",
+            "description": "Ricavi / fatturato in Euro"
+          },
+          "costiProduzione": {
+            "type": "number",
+            "description": "Costi della produzione in Euro"
+          },
+          "utileEsercizio": {
+            "type": "number",
+            "description": "Utile (o perdita) d'esercizio in Euro"
+          },
+          "totaleAttivo": {
+            "type": "number",
+            "description": "Totale attivo stato patrimoniale in Euro"
+          },
+          "totalePassivo": {
+            "type": "number",
+            "description": "Totale passivo stato patrimoniale in Euro"
+          },
+          "patrimonioNetto": {
+            "type": "number",
+            "description": "Patrimonio netto in Euro"
+          },
+          "risultatoOperativo": {
+            "type": "number",
+            "description": "Risultato operativo (EBIT) in Euro"
+          }
+        },
+        "required": [
+          "ragioneSociale",
+          "anno",
+          "fatturato",
+          "utileEsercizio"
+        ]
+      }
+    },
+    {
+      "id": "doc-busta-paga",
+      "name": "Busta Paga / Cedolino",
+      "description": "Cedolino paga mensile — lordo, netto, ritenute, contributi",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "datore": {
+            "type": "string",
+            "description": "Denominazione del datore di lavoro"
+          },
+          "dipendente": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string",
+                "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "cognome": {
+                "type": "string",
+                "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+              }
+            },
+            "required": [
+              "nome",
+              "cognome",
+              "codiceFiscale"
+            ]
+          },
+          "mese": {
+            "type": "string",
+            "description": "Mese di competenza (es. Gennaio 2025)"
+          },
+          "anno": {
+            "type": "number",
+            "description": "Anno di competenza"
+          },
+          "retribuzioneLorda": {
+            "type": "number",
+            "description": "Retribuzione lorda del mese in Euro"
+          },
+          "contributiInps": {
+            "type": "number",
+            "description": "Contributi INPS a carico dipendente in Euro"
+          },
+          "irpefLorda": {
+            "type": "number",
+            "description": "IRPEF lorda in Euro"
+          },
+          "detrazioni": {
+            "type": "number",
+            "description": "Detrazioni d'imposta in Euro"
+          },
+          "irpefNetta": {
+            "type": "number",
+            "description": "IRPEF netta in Euro"
+          },
+          "retribuzioneNetta": {
+            "type": "number",
+            "description": "Retribuzione netta (netto in busta) in Euro"
+          },
+          "tfr": {
+            "type": "number",
+            "description": "Quota TFR maturata nel mese in Euro"
+          },
+          "oreLavorate": {
+            "type": "number",
+            "description": "Ore lavorate nel mese"
+          },
+          "oreAssenza": {
+            "type": "number",
+            "description": "Ore di assenza (ferie, malattia, ecc.)"
+          }
+        },
+        "required": [
+          "dipendente",
+          "mese",
+          "retribuzioneLorda",
+          "retribuzioneNetta"
+        ]
+      }
+    },
+    {
+      "id": "doc-cu",
+      "name": "Certificazione Unica (CU)",
+      "description": "Certificazione Unica rilasciata dal datore di lavoro / committente",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "anno": {
+            "type": "number",
+            "description": "Anno di riferimento dei redditi"
+          },
+          "datoreLavoro": {
+            "type": "object",
+            "properties": {
+              "denominazione": {
+                "type": "string",
+                "description": "Denominazione/ragione sociale del datore"
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice fiscale del datore"
+              },
+              "partitaIva": {
+                "type": "string",
+                "description": "Partita IVA — 11 cifre numeriche"
+              }
+            },
+            "required": [
+              "denominazione",
+              "codiceFiscale"
+            ]
+          },
+          "percipiente": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string",
+                "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "cognome": {
+                "type": "string",
+                "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+              },
+              "dataNascita": {
+                "type": "string",
+                "description": "Data di nascita",
+                "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+              },
+              "comuneNascita": {
+                "type": "string",
+                "description": "Comune di nascita"
+              }
+            },
+            "required": [
+              "nome",
+              "cognome",
+              "codiceFiscale"
+            ]
+          },
+          "redditoLordo": {
+            "type": "number",
+            "description": "Reddito lordo in Euro"
+          },
+          "ritenuteFiscali": {
+            "type": "number",
+            "description": "Ritenute fiscali operate in Euro"
+          },
+          "addizionaleRegionale": {
+            "type": "number",
+            "description": "Addizionale regionale in Euro"
+          },
+          "addizionaleComunale": {
+            "type": "number",
+            "description": "Addizionale comunale in Euro"
+          },
+          "contributiPrevidenziali": {
+            "type": "number",
+            "description": "Contributi previdenziali trattenuti in Euro"
+          },
+          "giorniLavorati": {
+            "type": "number",
+            "description": "Numero giorni di lavoro"
+          }
+        },
+        "required": [
+          "anno",
+          "datoreLavoro",
+          "percipiente",
+          "redditoLordo",
+          "ritenuteFiscali"
+        ]
+      }
+    },
+    {
+      "id": "doc-contratto-lavoro",
+      "name": "Contratto di Lavoro",
+      "description": "Contratto di lavoro dipendente — CCNL, livello, RAL",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "datore": {
+            "type": "object",
+            "properties": {
+              "denominazione": {
+                "type": "string",
+                "description": "Ragione sociale del datore"
+              },
+              "partitaIva": {
+                "type": "string",
+                "description": "Partita IVA — 11 cifre numeriche"
+              },
+              "sedeLegale": {
+                "type": "string",
+                "description": "Sede legale"
+              }
+            },
+            "required": [
+              "denominazione"
+            ]
+          },
+          "dipendente": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string",
+                "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "cognome": {
+                "type": "string",
+                "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+              },
+              "dataNascita": {
+                "type": "string",
+                "description": "Data di nascita",
+                "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+              }
+            },
+            "required": [
+              "nome",
+              "cognome",
+              "codiceFiscale"
+            ]
+          },
+          "ccnl": {
+            "type": "string",
+            "description": "CCNL applicato (es. Commercio, Metalmeccanico, Studi Professionali)"
+          },
+          "livello": {
+            "type": "string",
+            "description": "Livello contrattuale (es. 3, 4, Q)"
+          },
+          "qualifica": {
+            "type": "string",
+            "description": "Qualifica/mansione"
+          },
+          "tipoContratto": {
+            "type": "string",
+            "description": "Tipo contratto",
+            "enum": [
+              "indeterminato",
+              "determinato",
+              "apprendistato",
+              "somministrazione",
+              "collaborazione",
+              null
+            ],
+            "nullable": true
+          },
+          "dataAssunzione": {
+            "type": "string",
+            "description": "Data di assunzione",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "dataScadenza": {
+            "type": "string",
+            "description": "Data scadenza (per contratti a termine)",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "ral": {
+            "type": "number",
+            "description": "Retribuzione Annua Lorda (RAL) in Euro"
+          },
+          "oreLavoroSettimanali": {
+            "type": "number",
+            "description": "Ore settimanali di lavoro"
+          }
+        },
+        "required": [
+          "datore",
+          "dipendente",
+          "ccnl",
+          "tipoContratto",
+          "dataAssunzione"
+        ]
+      }
+    },
+    {
+      "id": "doc-identita",
+      "name": "Documento d'Identità",
+      "description": "Documento di riconoscimento del cliente (CI, Passaporto, Patente)",
+      "isArrayExtraction": true,
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "tipoDocumento": {
+            "type": "string",
+            "description": "Tipo documento: Carta D'Identità, Passaporto, Patente"
+          },
+          "numeroDocumento": {
+            "type": "string",
+            "description": ""
+          },
+          "dataEmissione": {
+            "type": "string",
+            "description": "Data di emissione in formato DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "dataScadenza": {
+            "type": "string",
+            "description": "Data di scadenza in formato DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "rilasciatoDa": {
+            "type": "string",
+            "description": "Autorità che ha rilasciato il documento"
+          },
+          "luogoNascita": {
+            "type": "string",
+            "description": "Città seguita dalla sigla della provincia tra parentesi tonde — formato: 'NomeCittà (XX)'"
+          },
+          "dataNascita": {
+            "type": "string",
+            "description": "Data di nascita in formato DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "indirizzoDiResidenza": {
+            "type": "string",
+            "description": "Indirizzo completo di residenza"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale",
+          "tipoDocumento",
+          "numeroDocumento",
+          "dataEmissione",
+          "dataScadenza",
+          "luogoNascita",
+          "dataNascita"
+        ]
+      }
+    },
+    {
+      "id": "doc-estratto-conto",
+      "name": "Estratto Conto Bancario",
+      "description": "Estratto conto bancario — saldo, movimenti, periodo",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "banca": {
+            "type": "string",
+            "description": "Nome della banca"
+          },
+          "iban": {
+            "type": "string",
+            "description": "Codice IBAN"
+          },
+          "intestatario": {
+            "type": "string",
+            "description": "Intestatario del conto"
+          },
+          "codiceFiscaleIntestatario": {
+            "type": "string",
+            "description": "Codice fiscale / P.IVA dell'intestatario"
+          },
+          "periodo": {
+            "type": "string",
+            "description": "Periodo di riferimento (es. 01.01.2025 - 31.03.2025)"
+          },
+          "saldoIniziale": {
+            "type": "number",
+            "description": "Saldo iniziale del periodo in Euro"
+          },
+          "saldoFinale": {
+            "type": "number",
+            "description": "Saldo finale del periodo in Euro"
+          },
+          "giacenzaMedia": {
+            "type": "number",
+            "description": "Giacenza media nel periodo in Euro"
+          },
+          "totaleEntrate": {
+            "type": "number",
+            "description": "Totale entrate nel periodo in Euro"
+          },
+          "totaleUscite": {
+            "type": "number",
+            "description": "Totale uscite nel periodo in Euro"
+          }
+        },
+        "required": [
+          "banca",
+          "iban",
+          "intestatario",
+          "saldoFinale"
+        ]
+      }
+    },
+    {
+      "id": "doc-fattura",
+      "name": "Fattura",
+      "description": "Fattura attiva o passiva — dati emittente, destinatario, imponibile, IVA",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "numero": {
+            "type": "string",
+            "description": "Numero fattura"
+          },
+          "data": {
+            "type": "string",
+            "description": "Data di emissione fattura",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "emittente": {
+            "type": "object",
+            "properties": {
+              "ragioneSociale": {
+                "type": "string",
+                "description": "Ragione sociale o nome dell'emittente"
+              },
+              "partitaIva": {
+                "type": "string",
+                "description": "Partita IVA — 11 cifre numeriche"
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice fiscale dell'emittente"
+              },
+              "indirizzo": {
+                "type": "string",
+                "description": "Indirizzo dell'emittente"
+              }
+            },
+            "required": [
+              "ragioneSociale",
+              "partitaIva"
+            ]
+          },
+          "destinatario": {
+            "type": "object",
+            "properties": {
+              "ragioneSociale": {
+                "type": "string",
+                "description": "Ragione sociale o nome del destinatario"
+              },
+              "partitaIva": {
+                "type": "string",
+                "description": "Partita IVA — 11 cifre numeriche"
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice fiscale del destinatario"
+              },
+              "indirizzo": {
+                "type": "string",
+                "description": "Indirizzo del destinatario"
+              }
+            },
+            "required": [
+              "ragioneSociale"
+            ]
+          },
+          "righe": {
+            "type": "array",
+            "description": "Righe della fattura",
+            "items": {
+              "type": "object",
+              "properties": {
+                "descrizione": {
+                  "type": "string",
+                  "description": "Descrizione del bene/servizio"
+                },
+                "quantita": {
+                  "type": "number",
+                  "description": "Quantità"
+                },
+                "prezzoUnitario": {
+                  "type": "number",
+                  "description": "Prezzo unitario in Euro"
+                },
+                "aliquotaIva": {
+                  "type": "number",
+                  "description": "Aliquota IVA in %"
+                },
+                "importo": {
+                  "type": "number",
+                  "description": "Importo totale riga in Euro"
+                }
+              },
+              "required": [
+                "descrizione",
+                "importo"
+              ]
+            }
+          },
+          "imponibile": {
+            "type": "number",
+            "description": "Totale imponibile in Euro"
+          },
+          "iva": {
+            "type": "number",
+            "description": "Totale IVA in Euro"
+          },
+          "totale": {
+            "type": "number",
+            "description": "Totale fattura in Euro"
+          },
+          "modalitaPagamento": {
+            "type": "string",
+            "description": "Modalità di pagamento"
+          },
+          "scadenzaPagamento": {
+            "type": "string",
+            "description": "Data scadenza pagamento",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          }
+        },
+        "required": [
+          "numero",
+          "data",
+          "emittente",
+          "destinatario",
+          "imponibile",
+          "totale"
+        ]
+      }
+    },
+    {
+      "id": "doc-iva-periodica",
+      "name": "Liquidazione IVA Periodica",
+      "description": "Comunicazione liquidazione periodica IVA — mensile o trimestrale",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "contribuente": {
+            "type": "object",
+            "properties": {
+              "denominazione": {
+                "type": "string",
+                "description": "Denominazione / ragione sociale"
+              },
+              "partitaIva": {
+                "type": "string",
+                "description": "Partita IVA — 11 cifre numeriche"
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice fiscale"
+              }
+            },
+            "required": [
+              "partitaIva"
+            ]
+          },
+          "anno": {
+            "type": "number",
+            "description": "Anno di riferimento"
+          },
+          "periodo": {
+            "type": "string",
+            "description": "Periodo: mese o trimestre (es. T1, T2, Gennaio, ecc.)"
+          },
+          "ivaEsigibile": {
+            "type": "number",
+            "description": "IVA a debito (sulle vendite) in Euro"
+          },
+          "ivaDetratta": {
+            "type": "number",
+            "description": "IVA a credito (sugli acquisti) in Euro"
+          },
+          "ivaVersata": {
+            "type": "number",
+            "description": "IVA versata nel periodo in Euro"
+          },
+          "saldo": {
+            "type": "number",
+            "description": "Saldo IVA (debito se positivo, credito se negativo) in Euro"
+          },
+          "creditoPrecedente": {
+            "type": "number",
+            "description": "Credito periodo precedente in Euro"
+          }
+        },
+        "required": [
+          "contribuente",
+          "anno",
+          "periodo",
+          "ivaEsigibile",
+          "ivaDetratta",
+          "saldo"
+        ]
+      }
+    },
+    {
+      "id": "doc-730",
+      "name": "Modello 730",
+      "description": "Dichiarazione dei redditi semplificata per lavoratori dipendenti e pensionati",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "anno": {
+            "type": "number",
+            "description": "Anno fiscale di riferimento"
+          },
+          "contribuente": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string",
+                "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "cognome": {
+                "type": "string",
+                "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+              },
+              "dataNascita": {
+                "type": "string",
+                "description": "Data di nascita",
+                "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+              }
+            },
+            "required": [
+              "nome",
+              "cognome",
+              "codiceFiscale"
+            ]
+          },
+          "redditoComplessivo": {
+            "type": "number",
+            "description": "Reddito complessivo in Euro"
+          },
+          "impostaNetta": {
+            "type": "number",
+            "description": "Imposta netta in Euro"
+          },
+          "detrazioni": {
+            "type": "number",
+            "description": "Totale detrazioni in Euro"
+          },
+          "risultato": {
+            "type": "string",
+            "description": "Risultato della dichiarazione",
+            "enum": [
+              "credito",
+              "debito",
+              null
+            ],
+            "nullable": true
+          },
+          "importoRimborsoDebito": {
+            "type": "number",
+            "description": "Importo rimborso o debito in Euro"
+          },
+          "quadriCompilati": {
+            "type": "string",
+            "description": "Elenco dei quadri compilati (es. A, B, C, D, E)"
+          },
+          "familiari": {
+            "type": "array",
+            "description": "Familiari a carico",
+            "items": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+                },
+                "cognome": {
+                  "type": "string",
+                  "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+                },
+                "codiceFiscale": {
+                  "type": "string",
+                  "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                  "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                },
+                "relazione": {
+                  "type": "string",
+                  "description": "Relazione",
+                  "enum": [
+                    "coniuge",
+                    "figlio",
+                    "altro familiare",
+                    null
+                  ],
+                  "nullable": true
+                },
+                "percentualeCarico": {
+                  "type": "number",
+                  "description": "Percentuale a carico (es. 100, 50)"
+                }
+              },
+              "required": [
+                "codiceFiscale",
+                "relazione"
+              ]
+            }
+          }
+        },
+        "required": [
+          "anno",
+          "contribuente",
+          "redditoComplessivo",
+          "impostaNetta"
+        ]
+      }
+    },
+    {
+      "id": "doc-f24",
+      "name": "Modello F24",
+      "description": "Modello di pagamento unificato per imposte, contributi e premi",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "contribuente": {
+            "type": "object",
+            "properties": {
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice fiscale del contribuente"
+              },
+              "denominazione": {
+                "type": "string",
+                "description": "Cognome e nome o ragione sociale"
+              }
+            },
+            "required": [
+              "codiceFiscale"
+            ]
+          },
+          "dataVersamento": {
+            "type": "string",
+            "description": "Data del versamento",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "tributi": {
+            "type": "array",
+            "description": "Elenco tributi/contributi versati",
+            "items": {
+              "type": "object",
+              "properties": {
+                "sezione": {
+                  "type": "string",
+                  "description": "Sezione (Erario, Regioni, IMU, INPS, ecc.)"
+                },
+                "codiceTributo": {
+                  "type": "string",
+                  "description": "Codice tributo (es. 4001, 3844, 1040)"
+                },
+                "rateazione": {
+                  "type": "string",
+                  "description": "Rateazione/regione/prov./mese rif."
+                },
+                "annoRiferimento": {
+                  "type": "string",
+                  "description": "Anno di riferimento"
+                },
+                "importoDebito": {
+                  "type": "number",
+                  "description": "Importo a debito in Euro"
+                },
+                "importoCredito": {
+                  "type": "number",
+                  "description": "Importo a credito in Euro"
+                }
+              },
+              "required": [
+                "codiceTributo",
+                "importoDebito"
+              ]
+            }
+          },
+          "totaleVersato": {
+            "type": "number",
+            "description": "Totale versato in Euro"
+          },
+          "banca": {
+            "type": "string",
+            "description": "Banca/Posta delegata al pagamento"
+          }
+        },
+        "required": [
+          "contribuente",
+          "dataVersamento",
+          "tributi",
+          "totaleVersato"
+        ]
+      }
+    },
+    {
+      "id": "doc-redditi-pf",
+      "name": "Modello Redditi PF",
+      "description": "Dichiarazione dei redditi per persone fisiche con P.IVA o redditi complessi",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "anno": {
+            "type": "number",
+            "description": "Anno fiscale di riferimento"
+          },
+          "contribuente": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string",
+                "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "cognome": {
+                "type": "string",
+                "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+              },
+              "partitaIva": {
+                "type": "string",
+                "description": "Partita IVA — 11 cifre numeriche"
+              }
+            },
+            "required": [
+              "nome",
+              "cognome",
+              "codiceFiscale"
+            ]
+          },
+          "regime": {
+            "type": "string",
+            "description": "Regime fiscale",
+            "enum": [
+              "ordinario",
+              "forfettario",
+              "semplificato",
+              null
+            ],
+            "nullable": true
+          },
+          "redditoComplessivo": {
+            "type": "number",
+            "description": "Reddito complessivo in Euro"
+          },
+          "impostaNetta": {
+            "type": "number",
+            "description": "Imposta netta in Euro"
+          },
+          "quadriCompilati": {
+            "type": "string",
+            "description": "Elenco dei quadri compilati"
+          },
+          "volumeAffari": {
+            "type": "number",
+            "description": "Volume d'affari in Euro"
+          }
+        },
+        "required": [
+          "anno",
+          "contribuente",
+          "redditoComplessivo"
+        ]
+      }
+    },
+    {
+      "id": "doc-ricevuta",
+      "name": "Ricevuta / Scontrino",
+      "description": "Ricevuta fiscale o scontrino per spese deducibili/detraibili",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "description": "Data della ricevuta/scontrino",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "esercente": {
+            "type": "string",
+            "description": "Nome/ragione sociale dell'esercente"
+          },
+          "partitaIva": {
+            "type": "string",
+            "description": "Partita IVA — 11 cifre numeriche"
+          },
+          "importo": {
+            "type": "number",
+            "description": "Importo totale in Euro"
+          },
+          "descrizione": {
+            "type": "string",
+            "description": "Descrizione della spesa"
+          },
+          "tipoPagamento": {
+            "type": "string",
+            "description": "Tipo pagamento",
+            "enum": [
+              "contanti",
+              "carta",
+              "bonifico",
+              "assegno",
+              null
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "data",
+          "importo",
+          "descrizione"
+        ]
+      }
+    },
+    {
+      "id": "doc-visura-camerale",
+      "name": "Visura Camerale",
+      "description": "Visura della Camera di Commercio — dati societari, legale rappresentante, codice ATECO",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "ragioneSociale": {
+            "type": "string",
+            "description": "Ragione sociale / denominazione"
+          },
+          "partitaIva": {
+            "type": "string",
+            "description": "Partita IVA — 11 cifre numeriche"
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice fiscale dell'impresa"
+          },
+          "sedeLegale": {
+            "type": "string",
+            "description": "Indirizzo sede legale"
+          },
+          "legaleRappresentante": {
+            "type": "string",
+            "description": "Nome e cognome del legale rappresentante"
+          },
+          "cfLegaleRappresentante": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "codiceAteco": {
+            "type": "string",
+            "description": "Codice ATECO principale"
+          },
+          "descrizioneAteco": {
+            "type": "string",
+            "description": "Descrizione attività ATECO"
+          },
+          "formaGiuridica": {
+            "type": "string",
+            "description": "Forma giuridica",
+            "enum": [
+              "SRL",
+              "SRLS",
+              "SPA",
+              "SAS",
+              "SNC",
+              "Ditta Individuale",
+              "Cooperativa",
+              null
+            ],
+            "nullable": true
+          },
+          "capitaleSociale": {
+            "type": "number",
+            "description": "Capitale sociale in Euro"
+          },
+          "statoImpresa": {
+            "type": "string",
+            "description": "Stato dell'impresa",
+            "enum": [
+              "attiva",
+              "inattiva",
+              "cessata",
+              "in liquidazione",
+              null
+            ],
+            "nullable": true
+          },
+          "dataIscrizione": {
+            "type": "string",
+            "description": "Data iscrizione alla Camera di Commercio",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "rea": {
+            "type": "string",
+            "description": "Numero REA"
+          }
+        },
+        "required": [
+          "ragioneSociale",
+          "partitaIva",
+          "legaleRappresentante",
+          "codiceAteco"
+        ]
+      }
+    }
+  ],
+  "entityTypes": [
+    {
+      "id": "entity-cliente",
+      "name": "Cliente",
+      "icon": "user",
+      "color": "#3b82f6",
+      "displayOrder": 0,
+      "fieldOrder": [
+        "nome",
+        "cognome",
+        "codiceFiscale",
+        "dataNascita",
+        "luogoNascita",
+        "indirizzoDiResidenza",
+        "partitaIva",
+        "regime"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-identita",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "dataNascita",
+              "targetField": "dataNascita",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "luogoNascita",
+              "targetField": "luogoNascita",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "indirizzoDiResidenza",
+              "targetField": "indirizzoDiResidenza",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-cu",
+          "enabled": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "percipiente.nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "percipiente.cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "percipiente.codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "percipiente.dataNascita",
+              "targetField": "dataNascita",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-730",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "contribuente.nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "contribuente.cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "contribuente.codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-redditi-pf",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "contribuente.nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "contribuente.cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "contribuente.codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "contribuente.partitaIva",
+              "targetField": "partitaIva",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "regime",
+              "targetField": "regime",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-busta-paga",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "dipendente.nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "dipendente.cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "dipendente.codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-contratto-lavoro",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "dipendente.nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "dipendente.cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "dipendente.codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-isee",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "dichiarante.nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "dichiarante.cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "dichiarante.codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": [
+        {
+          "docTypeId": "doc-730",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-cu",
+              "field": "redditoLordo",
+              "operator": "exists",
+              "value": "true"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-redditi-pf",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-fattura",
+              "field": "emittente.partitaIva",
+              "operator": "exists",
+              "value": "true"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "entity-azienda",
+      "name": "Azienda",
+      "icon": "building",
+      "color": "#8b5cf6",
+      "displayOrder": 1,
+      "fieldOrder": [
+        "ragioneSociale",
+        "partitaIva",
+        "codiceFiscale",
+        "sedeLegale",
+        "codiceAteco",
+        "formaGiuridica",
+        "legaleRappresentante"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-visura-camerale",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "ragioneSociale",
+              "targetField": "ragioneSociale",
+              "matchFields": [
+                {
+                  "field": "partitaIva",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "ragioneSociale",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "partitaIva",
+              "targetField": "partitaIva",
+              "matchFields": [
+                {
+                  "field": "partitaIva",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "ragioneSociale",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "partitaIva",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "ragioneSociale",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "sedeLegale",
+              "targetField": "sedeLegale",
+              "matchFields": [
+                {
+                  "field": "partitaIva",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "ragioneSociale",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "codiceAteco",
+              "targetField": "codiceAteco",
+              "matchFields": [
+                {
+                  "field": "partitaIva",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "ragioneSociale",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "descrizioneAteco",
+              "targetField": "descrizioneAteco",
+              "matchFields": [
+                {
+                  "field": "partitaIva",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "ragioneSociale",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "formaGiuridica",
+              "targetField": "formaGiuridica",
+              "matchFields": [
+                {
+                  "field": "partitaIva",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "ragioneSociale",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "capitaleSociale",
+              "targetField": "capitaleSociale",
+              "matchFields": [
+                {
+                  "field": "partitaIva",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "ragioneSociale",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "legaleRappresentante",
+              "targetField": "legaleRappresentante",
+              "matchFields": [
+                {
+                  "field": "partitaIva",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "ragioneSociale",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-bilancio",
+          "enabled": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "ragioneSociale",
+              "targetField": "ragioneSociale",
+              "matchFields": [
+                {
+                  "field": "partitaIva",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "ragioneSociale",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "partitaIva",
+              "targetField": "partitaIva",
+              "matchFields": [
+                {
+                  "field": "partitaIva",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "ragioneSociale",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-fattura",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "emittente.ragioneSociale",
+              "targetField": "ragioneSociale",
+              "matchFields": [
+                {
+                  "field": "partitaIva",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "ragioneSociale",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "emittente.partitaIva",
+              "targetField": "partitaIva",
+              "matchFields": [
+                {
+                  "field": "partitaIva",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "ragioneSociale",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-iva-periodica",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "contribuente.denominazione",
+              "targetField": "ragioneSociale",
+              "matchFields": [
+                {
+                  "field": "partitaIva",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "ragioneSociale",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "contribuente.partitaIva",
+              "targetField": "partitaIva",
+              "matchFields": [
+                {
+                  "field": "partitaIva",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "ragioneSociale",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": [
+        {
+          "docTypeId": "doc-bilancio",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-visura-camerale",
+              "field": "formaGiuridica",
+              "operator": "contains",
+              "value": "SR"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "entity-anno-fiscale",
+      "name": "Anno Fiscale",
+      "icon": "calendar",
+      "color": "#f59e0b",
+      "displayOrder": 2,
+      "fieldOrder": [
+        "anno",
+        "redditoComplessivo",
+        "impostaNetta",
+        "fatturato",
+        "utileEsercizio",
+        "ivaAnnuale"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-730",
+          "enabled": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "anno",
+              "targetField": "anno",
+              "matchFields": [
+                {
+                  "field": "anno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "redditoComplessivo",
+              "targetField": "redditoComplessivo",
+              "matchFields": [
+                {
+                  "field": "anno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "impostaNetta",
+              "targetField": "impostaNetta",
+              "matchFields": [
+                {
+                  "field": "anno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-redditi-pf",
+          "enabled": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "anno",
+              "targetField": "anno",
+              "matchFields": [
+                {
+                  "field": "anno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "redditoComplessivo",
+              "targetField": "redditoComplessivo",
+              "matchFields": [
+                {
+                  "field": "anno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "impostaNetta",
+              "targetField": "impostaNetta",
+              "matchFields": [
+                {
+                  "field": "anno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-cu",
+          "enabled": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "anno",
+              "targetField": "anno",
+              "matchFields": [
+                {
+                  "field": "anno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-bilancio",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "anno",
+              "targetField": "anno",
+              "matchFields": [
+                {
+                  "field": "anno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "fatturato",
+              "targetField": "fatturato",
+              "matchFields": [
+                {
+                  "field": "anno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "utileEsercizio",
+              "targetField": "utileEsercizio",
+              "matchFields": [
+                {
+                  "field": "anno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": []
+    }
+  ],
+  "documentWorkflows": [
+    {
+      "id": "wf-doc-extraction",
+      "name": "Document Extraction",
+      "isDefault": true,
+      "enabled": true,
+      "priority": 2,
+      "nodes": [
+        {
+          "id": "load-document",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 50
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Load Document",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "documentService",
+              "methodName": "getById",
+              "arguments": {
+                "id": "context.docId"
+              },
+              "outputMapping": {
+                "doc": "doc"
+              }
+            }
+          }
+        },
+        {
+          "id": "check-doctype",
+          "type": "ifElse",
+          "position": {
+            "x": 300,
+            "y": 200
+          },
+          "data": {
+            "nodeType": "ifElse",
+            "label": "Has DocumentType?",
+            "status": "IDLE",
+            "config": {
+              "condition": "context.doc.docTypeId && context.doc.docTypeId !== null"
+            }
+          }
+        },
+        {
+          "id": "notify-no-doctype",
+          "type": "serviceCall",
+          "position": {
+            "x": 650,
+            "y": 200
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Notify: No DocType",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "notificationService",
+              "methodName": "create",
+              "arguments": {
+                "notification": {
+                  "title": "Extraction Stopped",
+                  "message": "No DocumentType set for this document. Cannot extract data.",
+                  "type": "error"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "load-schema",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 350
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Load Extraction Schema",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "projectService",
+              "methodName": "getExtractionSchema",
+              "arguments": {
+                "id": "context.doc.docTypeId"
+              },
+              "outputMapping": "data.schema"
+            }
+          }
+        },
+        {
+          "id": "ai-extract",
+          "type": "aiInteraction",
+          "position": {
+            "x": 300,
+            "y": 500
+          },
+          "data": {
+            "nodeType": "aiInteraction",
+            "label": "AI: Extract Data",
+            "status": "IDLE",
+            "config": {
+              "aiConfig": {
+                "provider": "vertex",
+                "model": "gemini-3-flash-preview",
+                "prompt": "You are a document processing system helping with legitimate data extraction for record keeping purposes. Extract all visible field values from this official document according to the provided JSON schema.\n\nCRITICAL ACCURACY REQUIREMENTS:\n- Transcribe ALL text EXACTLY as it appears on the document, character-by-character\n- Do NOT modify, correct, or reformat any values\n- Preserve exact capitalization, spacing, and punctuation\n- For codes/IDs: copy every character precisely (numbers, letters, special characters)\n- If a field is not visible or empty, use empty string \"\" (NOT null, NOT the word \"null\")\n- Double-check each value before including it\n\nCHARACTER CONFUSION PREVENTION (VERY IMPORTANT):\n- Carefully distinguish between similar-looking characters\n- Letter 'I' (uppercase i) vs Number '1' (one)\n- Letter 'O' (uppercase o) vs Number '0' (zero)\n- Letter 'T' vs Number '7'\n- Letter 'S' vs Number '5'\n- Letter 'B' vs Number '8'\n- Letter 'Z' vs Number '2'\n- Letter 'G' vs Number '6'\n- For Codice Fiscale: contains ONLY uppercase letters (A-Z) and numbers (0-9), 16 characters total, no spaces\n\nFREE-TEXT / SUMMARY FIELDS:\n- Copy text VERBATIM from the document — do NOT paraphrase, summarize, or rephrase\n- Keep the original punctuation, list format (dashes, semicolons), and paragraph structure\n- Do NOT add information not explicitly present in the document\n- Do NOT reorder content or change list bullet styles\n\nVALUE NORMALIZATION:\n- For place names: copy EXACTLY as written on the document (do NOT add province codes or extra info not present)\n- For floor/piano fields: use only the numeric value or code (e.g. \"2\", \"S1\", \"T\", NOT \"2 (Secondo)\" or \"Piano Secondo\")\n- For amounts: numbers only, no currency symbols unless explicitly shown in the original text\n\nReturn ONLY valid JSON matching the schema structure. This is an authorized document processing request.",
+                "input": "context.docId",
+                "inputType": "pdf",
+                "pages": "all",
+                "jsonSchema": "data.schema",
+                "outputKey": "data.data1",
+                "isJson": true,
+                "thinkingLevel": "low"
+              }
+            }
+          }
+        },
+        {
+          "id": "ai-verify",
+          "type": "aiInteraction",
+          "position": {
+            "x": 300,
+            "y": 700
+          },
+          "data": {
+            "nodeType": "aiInteraction",
+            "label": "AI: Verify Extraction",
+            "status": "IDLE",
+            "config": {
+              "aiConfig": {
+                "provider": "vertex",
+                "model": "gemini-3-flash-preview",
+                "prompt": "You are a document verification system. You have been given:\n1. A document (images/PDF)\n2. A previous extraction attempt (JSON) from another AI\n\nYour task:\n- Cross-reference EVERY field in the previous extraction against the actual document\n- Correct any errors: typos, OCR misreads, formatting inconsistencies, missing values\n- Fill in any fields that were missed (use \"\" for genuinely absent fields)\n- Apply the same extraction rules: character-by-character accuracy, no modification of original values, proper normalization\n\nFor each field, assign a confidence score (0.0 to 1.0):\n- 1.0 = clearly legible, no ambiguity\n- 0.7-0.9 = legible but minor ambiguity (e.g. similar-looking characters)\n- 0.3-0.6 = partially legible or context-dependent\n- 0.0-0.2 = guessed or not visible in document\n\nReturn a JSON object with:\n- \"data\": the corrected extraction matching the schema\n- \"corrections\": array of { field, original, corrected, reason } for each change made\n- \"confidence\": object mapping field names to confidence scores (0.0-1.0)\n\nReturn ONLY valid JSON.",
+                "input": "context.docId",
+                "inputType": "pdf",
+                "pages": "all",
+                "jsonSchema": "data.schema",
+                "outputKey": "data.data2",
+                "isJson": true,
+                "thinkingLevel": "medium",
+                "contextInput": "data.data1",
+                "verificationMode": true
+              }
+            }
+          }
+        },
+        {
+          "id": "validate-extraction",
+          "type": "validateExtraction",
+          "position": {
+            "x": 300,
+            "y": 900
+          },
+          "data": {
+            "nodeType": "validateExtraction",
+            "label": "Validate & Score",
+            "status": "IDLE",
+            "config": {
+              "data1Key": "data.data1",
+              "data2Key": "data.data2",
+              "outputKey": "data.extractedData"
+            }
+          }
+        },
+        {
+          "id": "save-results",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 1100
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Save Results",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "documentService",
+              "methodName": "update",
+              "arguments": {
+                "id": "context.docId",
+                "updates": {
+                  "extractedData": "context.data.extractedData",
+                  "doubleValidation": "context.data.doubleValidation",
+                  "extractionConflicts": "context.data.extractionConflicts",
+                  "confidenceScore": "context.data.confidenceScore",
+                  "fieldConfidence": "context.data.fieldConfidence",
+                  "error": "context.data.error"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "notify-success",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 1150
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Notify Success",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "notificationService",
+              "methodName": "create",
+              "arguments": {
+                "notification": {
+                  "title": "Document Processing Complete",
+                  "message": "Document \"{{doc.name}}\" has been successfully processed.",
+                  "type": "success",
+                  "actionUrl": "/documents/{{docId}}"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e-load-doc-check",
+          "source": "load-document",
+          "target": "check-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-check-load-schema",
+          "source": "check-doctype",
+          "sourceHandle": "true",
+          "target": "load-schema",
+          "type": "default"
+        },
+        {
+          "id": "e-check-notify-no",
+          "source": "check-doctype",
+          "sourceHandle": "false",
+          "target": "notify-no-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-schema-extract",
+          "source": "load-schema",
+          "target": "ai-extract",
+          "type": "default"
+        },
+        {
+          "id": "e-extract-verify",
+          "source": "ai-extract",
+          "target": "ai-verify",
+          "type": "default"
+        },
+        {
+          "id": "e-verify-validate",
+          "source": "ai-verify",
+          "target": "validate-extraction",
+          "type": "default"
+        },
+        {
+          "id": "e-validate-save",
+          "source": "validate-extraction",
+          "target": "save-results",
+          "type": "default"
+        },
+        {
+          "id": "e-save-notify",
+          "source": "save-results",
+          "target": "notify-success",
+          "type": "default"
+        }
+      ]
+    },
+    {
+      "id": "wf-doc-identification",
+      "name": "Document Identification",
+      "isDefault": true,
+      "enabled": true,
+      "priority": 1,
+      "nodes": [
+        {
+          "id": "get-document",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 50
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Get Document",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "documentService",
+              "methodName": "getById",
+              "arguments": {
+                "id": "context.docId"
+              },
+              "outputMapping": {
+                "doc": "doc"
+              }
+            }
+          }
+        },
+        {
+          "id": "check-has-doctype",
+          "type": "ifElse",
+          "position": {
+            "x": 300,
+            "y": 250
+          },
+          "data": {
+            "nodeType": "ifElse",
+            "label": "Has DocumentType?",
+            "status": "IDLE",
+            "config": {
+              "condition": "!context.doc.docTypeId || context.doc.docTypeId === null"
+            }
+          }
+        },
+        {
+          "id": "notify-already-exists",
+          "type": "serviceCall",
+          "position": {
+            "x": 650,
+            "y": 250
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Notify: Already Exists",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "notificationService",
+              "methodName": "create",
+              "arguments": {
+                "notification": {
+                  "title": "Document Processing Stopped",
+                  "message": "DocumentType already exists for this document.",
+                  "type": "warning"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "get-doctypes",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 650
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Get Type Names",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "projectService",
+              "methodName": "getIdentificationJSONSchema",
+              "arguments": {},
+              "outputMapping": "data.schema"
+            }
+          }
+        },
+        {
+          "id": "ai-identify-1",
+          "type": "aiInteraction",
+          "position": {
+            "x": 100,
+            "y": 850
+          },
+          "data": {
+            "nodeType": "aiInteraction",
+            "label": "AI: Identify Type #1",
+            "status": "IDLE",
+            "config": {
+              "aiConfig": {
+                "provider": "vertex",
+                "model": "gemini-3-flash-preview",
+                "prompt": "You are a document classification system. Analyze the document structure and content to identify its type. You MUST select one of the valid types from the provided schema. Classify this document.",
+                "input": "context.docId",
+                "inputType": "pdf",
+                "pages": 1,
+                "jsonSchema": "data.schema",
+                "outputKey": "data.type1",
+                "isJson": true,
+                "thinkingLevel": "minimal"
+              }
+            }
+          }
+        },
+        {
+          "id": "ai-identify-2",
+          "type": "aiInteraction",
+          "position": {
+            "x": 500,
+            "y": 850
+          },
+          "data": {
+            "nodeType": "aiInteraction",
+            "label": "AI: Identify Type #2",
+            "status": "IDLE",
+            "config": {
+              "aiConfig": {
+                "provider": "vertex",
+                "model": "gemini-3-flash-preview",
+                "prompt": "You are a document classification system. Analyze the document structure and content to identify its type. You MUST select one of the valid types from the provided schema. Classify this document.",
+                "input": "context.docId",
+                "inputType": "pdf",
+                "pages": 1,
+                "jsonSchema": "data.schema",
+                "outputKey": "data.type2",
+                "isJson": true,
+                "thinkingLevel": "minimal"
+              }
+            }
+          }
+        },
+        {
+          "id": "validate-type-match",
+          "type": "validateExtraction",
+          "position": {
+            "x": 300,
+            "y": 1050
+          },
+          "data": {
+            "nodeType": "validateExtraction",
+            "label": "Validate Type Match",
+            "status": "IDLE",
+            "config": {
+              "data1Key": "data.type1.documentType",
+              "data2Key": "data.type2.documentType",
+              "outputKey": "data.identifiedType"
+            }
+          }
+        },
+        {
+          "id": "lookup-doctype",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 1250
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Lookup Document Type",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "projectService",
+              "methodName": "getDocumentTypeByName",
+              "arguments": {
+                "name": "{{data.identifiedType}}"
+              },
+              "outputMapping": "data.foundDocType"
+            }
+          }
+        },
+        {
+          "id": "check-type-exists",
+          "type": "ifElse",
+          "position": {
+            "x": 300,
+            "y": 1450
+          },
+          "data": {
+            "nodeType": "ifElse",
+            "label": "Type Exists?",
+            "status": "IDLE",
+            "config": {
+              "condition": "!!context.data.foundDocType && !!context.data.foundDocType.id"
+            }
+          }
+        },
+        {
+          "id": "notify-type-not-found",
+          "type": "serviceCall",
+          "position": {
+            "x": 550,
+            "y": 1650
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Notify: Type Not Found",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "notificationService",
+              "methodName": "create",
+              "arguments": {
+                "notification": {
+                  "title": "Document Type Not Found",
+                  "message": "Identified type '{{data.identifiedType}}' does not exist in the system.",
+                  "type": "warning"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "assign-doctype",
+          "type": "serviceCall",
+          "position": {
+            "x": 50,
+            "y": 1650
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Assign DocType",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "documentService",
+              "methodName": "update",
+              "arguments": {
+                "id": "context.docId",
+                "updates": {
+                  "docTypeId": "{{data.foundDocType.id}}"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e-get-check",
+          "source": "get-document",
+          "target": "check-has-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-check-gettypes",
+          "source": "check-has-doctype",
+          "sourceHandle": "true",
+          "target": "get-doctypes",
+          "type": "default"
+        },
+        {
+          "id": "e-check-exists",
+          "source": "check-has-doctype",
+          "sourceHandle": "false",
+          "target": "notify-already-exists",
+          "type": "default"
+        },
+        {
+          "id": "e-gettypes-ai1",
+          "source": "get-doctypes",
+          "target": "ai-identify-1",
+          "type": "default"
+        },
+        {
+          "id": "e-ai1-ai2",
+          "source": "ai-identify-1",
+          "target": "ai-identify-2",
+          "type": "default"
+        },
+        {
+          "id": "e-ai2-validate",
+          "source": "ai-identify-2",
+          "target": "validate-type-match",
+          "type": "default"
+        },
+        {
+          "id": "e-validate-lookup",
+          "source": "validate-type-match",
+          "target": "lookup-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-lookup-check",
+          "source": "lookup-doctype",
+          "target": "check-type-exists",
+          "type": "default"
+        },
+        {
+          "id": "e-check-assign",
+          "source": "check-type-exists",
+          "sourceHandle": "true",
+          "target": "assign-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-check-notfound",
+          "source": "check-type-exists",
+          "sourceHandle": "false",
+          "target": "notify-type-not-found",
+          "type": "default"
+        }
+      ]
+    }
+  ],
+  "createdAt": "2026-02-14T19:11:24.551Z",
+  "updatedAt": "2026-02-14T19:11:24.552Z"
+}

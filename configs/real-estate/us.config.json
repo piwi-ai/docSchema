@@ -1,0 +1,2929 @@
+{
+  "id": "REAL-ESTATE-US-DEFAULT",
+  "name": "US Real Estate",
+  "description": "Default configuration for US residential real estate transactions — purchase, title, mortgage, closing, and inspections",
+  "schemaVersion": 1,
+  "documentTypes": [
+    {
+      "id": "doc-appraisal",
+      "name": "Appraisal Report",
+      "description": "Property appraisal — market value determination for lending",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "appraiser": {
+            "type": "string",
+            "description": "Appraiser name and license number"
+          },
+          "appraisalDate": {
+            "type": "string",
+            "description": "Date of appraisal",
+            "pattern": "^\\\\d{2}/\\\\d{2}/\\\\d{4}$"
+          },
+          "propertyAddress": {
+            "type": "string",
+            "description": "Subject property address"
+          },
+          "appraisedValue": {
+            "type": "number",
+            "description": "Appraised market value (USD, numbers only, no dollar sign)"
+          },
+          "squareFootage": {
+            "type": "number",
+            "description": "Gross living area (sq ft)"
+          },
+          "lotSize": {
+            "type": "string",
+            "description": "Lot size (acres or sq ft)"
+          },
+          "yearBuilt": {
+            "type": "number",
+            "description": "Year built"
+          },
+          "bedrooms": {
+            "type": "number",
+            "description": "Number of bedrooms"
+          },
+          "bathrooms": {
+            "type": "number",
+            "description": "Number of bathrooms"
+          },
+          "condition": {
+            "type": "string",
+            "description": "Overall condition",
+            "enum": [
+              "C1",
+              "C2",
+              "C3",
+              "C4",
+              "C5",
+              "C6",
+              null
+            ],
+            "nullable": true
+          },
+          "comparables": {
+            "type": "array",
+            "description": "Comparable sales used in valuation",
+            "items": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "description": "Comparable property address"
+                },
+                "salePrice": {
+                  "type": "number",
+                  "description": "Sale price (USD, numbers only, no dollar sign)"
+                },
+                "saleDate": {
+                  "type": "string",
+                  "description": "Sale date",
+                  "pattern": "^\\\\d{2}/\\\\d{2}/\\\\d{4}$"
+                },
+                "squareFootage": {
+                  "type": "number",
+                  "description": "Square footage"
+                }
+              },
+              "required": [
+                "address",
+                "salePrice"
+              ]
+            }
+          },
+          "approachesUsed": {
+            "type": "string",
+            "description": "Valuation approaches used (Sales Comparison, Cost, Income)"
+          }
+        },
+        "required": [
+          "appraiser",
+          "appraisalDate",
+          "propertyAddress",
+          "appraisedValue"
+        ]
+      }
+    },
+    {
+      "id": "doc-closing-disclosure",
+      "name": "Closing Disclosure (CD)",
+      "description": "TRID Closing Disclosure — final settlement statement with all costs and credits",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "closingDate": {
+            "type": "string",
+            "description": "Closing date",
+            "pattern": "^\\\\d{2}/\\\\d{2}/\\\\d{4}$"
+          },
+          "propertyAddress": {
+            "type": "string",
+            "description": "Property address"
+          },
+          "seller": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Seller full name"
+              },
+              "address": {
+                "type": "string",
+                "description": "Seller's address"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          },
+          "buyer": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Buyer full name"
+              },
+              "address": {
+                "type": "string",
+                "description": "Buyer's address"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          },
+          "salePrice": {
+            "type": "number",
+            "description": "Sale price (USD, numbers only, no dollar sign)"
+          },
+          "totalClosingCosts": {
+            "type": "number",
+            "description": "Total closing costs (USD, numbers only, no dollar sign)"
+          },
+          "buyerClosingCosts": {
+            "type": "number",
+            "description": "Buyer's total closing costs (USD, numbers only, no dollar sign)"
+          },
+          "sellerClosingCosts": {
+            "type": "number",
+            "description": "Seller's total closing costs (USD, numbers only, no dollar sign)"
+          },
+          "loanAmount": {
+            "type": "number",
+            "description": "Loan amount (USD, numbers only, no dollar sign)"
+          },
+          "interestRate": {
+            "type": "number",
+            "description": "Interest rate (%)"
+          },
+          "monthlyPayment": {
+            "type": "number",
+            "description": "Monthly principal & interest payment (USD, numbers only, no dollar sign)"
+          },
+          "cashToClose": {
+            "type": "number",
+            "description": "Cash to close from buyer (USD, numbers only, no dollar sign)"
+          },
+          "sellerProceeds": {
+            "type": "number",
+            "description": "Net proceeds to seller (USD, numbers only, no dollar sign)"
+          },
+          "prorations": {
+            "type": "string",
+            "description": "Tax and insurance prorations"
+          }
+        },
+        "required": [
+          "closingDate",
+          "propertyAddress",
+          "salePrice",
+          "totalClosingCosts"
+        ]
+      }
+    },
+    {
+      "id": "doc-contact",
+      "name": "Contact Information",
+      "description": "Phone, email, and mailing address for a party",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "First name (given name)"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Last name (surname / family name)"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Primary phone number"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Email address"
+          },
+          "mailingAddress": {
+            "type": "string",
+            "description": "Mailing address (if different from residential)"
+          },
+          "currentAddress": {
+            "type": "string",
+            "description": "Current residential address"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "phone",
+          "email"
+        ]
+      }
+    },
+    {
+      "id": "doc-deed",
+      "name": "Deed",
+      "description": "Property deed — warranty deed, quitclaim deed, special warranty deed",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "deedType": {
+            "type": "string",
+            "description": "Type of deed",
+            "enum": [
+              "General Warranty",
+              "Special Warranty",
+              "Quitclaim",
+              "Bargain and Sale",
+              "Grant Deed",
+              null
+            ],
+            "nullable": true
+          },
+          "grantor": {
+            "type": "object",
+            "properties": {
+              "fullName": {
+                "type": "string",
+                "description": "Full legal name of grantor (seller)"
+              },
+              "address": {
+                "type": "string",
+                "description": "Grantor's address"
+              }
+            },
+            "required": [
+              "fullName"
+            ]
+          },
+          "grantee": {
+            "type": "object",
+            "properties": {
+              "fullName": {
+                "type": "string",
+                "description": "Full legal name of grantee (buyer)"
+              },
+              "vestingType": {
+                "type": "string",
+                "description": "Vesting / How title is held (e.g. tenants in common, joint tenants)"
+              },
+              "address": {
+                "type": "string",
+                "description": "Grantee's address"
+              }
+            },
+            "required": [
+              "fullName"
+            ]
+          },
+          "legalDescription": {
+            "type": "string",
+            "description": "Full legal description of the property (metes and bounds, lot/block, or plat reference)"
+          },
+          "propertyAddress": {
+            "type": "string",
+            "description": "Property street address"
+          },
+          "parcelNumber": {
+            "type": "string",
+            "description": "Assessor Parcel Number (APN) or Tax ID number"
+          },
+          "consideration": {
+            "type": "number",
+            "description": "Consideration / purchase price (USD, numbers only, no dollar sign)"
+          },
+          "recordingDate": {
+            "type": "string",
+            "description": "Date deed was recorded",
+            "pattern": "^\\\\d{2}/\\\\d{2}/\\\\d{4}$"
+          },
+          "county": {
+            "type": "string",
+            "description": "County where deed is recorded"
+          },
+          "bookPage": {
+            "type": "string",
+            "description": "Recording book and page number (e.g. Book 1234, Page 567)"
+          }
+        },
+        "required": [
+          "deedType",
+          "grantor",
+          "grantee",
+          "legalDescription",
+          "propertyAddress"
+        ]
+      }
+    },
+    {
+      "id": "doc-drivers-license",
+      "name": "Driver's License / Government ID",
+      "description": "Government-issued identification: Driver's License, Passport, or State ID",
+      "isArrayExtraction": true,
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "First name (given name)"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Last name (surname / family name)"
+          },
+          "middleName": {
+            "type": "string",
+            "description": "Middle name (if present)"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "description": "Date of birth",
+            "pattern": "^\\\\d{2}/\\\\d{2}/\\\\d{4}$"
+          },
+          "idType": {
+            "type": "string",
+            "description": "Type of identification",
+            "enum": [
+              "Driver's License",
+              "Passport",
+              "State ID",
+              null
+            ],
+            "nullable": true
+          },
+          "idNumber": {
+            "type": "string",
+            "description": "ID / License number"
+          },
+          "issueDate": {
+            "type": "string",
+            "description": "Issue date",
+            "pattern": "^\\\\d{2}/\\\\d{2}/\\\\d{4}$"
+          },
+          "expirationDate": {
+            "type": "string",
+            "description": "Expiration date",
+            "pattern": "^\\\\d{2}/\\\\d{2}/\\\\d{4}$"
+          },
+          "issuingState": {
+            "type": "string",
+            "description": "Issuing state (2-letter abbreviation, e.g. CA, NY, TX)"
+          },
+          "address": {
+            "type": "string",
+            "description": "Residential address as printed on ID"
+          },
+          "sex": {
+            "type": "string",
+            "description": "Sex",
+            "enum": [
+              "M",
+              "F",
+              null
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "dateOfBirth",
+          "idType",
+          "idNumber",
+          "expirationDate"
+        ]
+      }
+    },
+    {
+      "id": "doc-hoa-docs",
+      "name": "HOA Documents",
+      "description": "Homeowners Association documents — CCRs, bylaws, financials, disclosures",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "hoaName": {
+            "type": "string",
+            "description": "HOA / community name"
+          },
+          "managementCompany": {
+            "type": "string",
+            "description": "Management company name"
+          },
+          "monthlyDues": {
+            "type": "number",
+            "description": "Monthly HOA dues (USD, numbers only, no dollar sign)"
+          },
+          "specialAssessments": {
+            "type": "string",
+            "description": "Any pending or recent special assessments"
+          },
+          "reserves": {
+            "type": "number",
+            "description": "HOA reserve fund balance (USD, numbers only, no dollar sign)"
+          },
+          "restrictions": {
+            "type": "string",
+            "description": "Key restrictions and covenants"
+          },
+          "pendingLitigation": {
+            "type": "string",
+            "description": "Any pending litigation or disputes"
+          },
+          "masterInsurance": {
+            "type": "string",
+            "description": "Master insurance policy coverage"
+          }
+        },
+        "required": [
+          "hoaName",
+          "monthlyDues"
+        ]
+      }
+    },
+    {
+      "id": "doc-inspection-report",
+      "name": "Home Inspection Report",
+      "description": "Professional home inspection report — structural, mechanical, plumbing, electrical",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "inspector": {
+            "type": "string",
+            "description": "Inspector name and license number"
+          },
+          "inspectionCompany": {
+            "type": "string",
+            "description": "Inspection company name"
+          },
+          "inspectionDate": {
+            "type": "string",
+            "description": "Date of inspection",
+            "pattern": "^\\\\d{2}/\\\\d{2}/\\\\d{4}$"
+          },
+          "propertyAddress": {
+            "type": "string",
+            "description": "Inspected property address"
+          },
+          "overallCondition": {
+            "type": "string",
+            "description": "Overall condition",
+            "enum": [
+              "excellent",
+              "good",
+              "fair",
+              "poor",
+              null
+            ],
+            "nullable": true
+          },
+          "majorDefects": {
+            "type": "string",
+            "description": "Major defects or safety concerns found"
+          },
+          "roofCondition": {
+            "type": "string",
+            "description": "Roof condition and estimated remaining life"
+          },
+          "foundationCondition": {
+            "type": "string",
+            "description": "Foundation / structural condition"
+          },
+          "plumbing": {
+            "type": "string",
+            "description": "Plumbing system condition"
+          },
+          "electrical": {
+            "type": "string",
+            "description": "Electrical system condition"
+          },
+          "hvac": {
+            "type": "string",
+            "description": "HVAC system condition and age"
+          },
+          "recommendations": {
+            "type": "string",
+            "description": "Recommended repairs or further inspections"
+          }
+        },
+        "required": [
+          "inspector",
+          "inspectionDate",
+          "propertyAddress",
+          "overallCondition"
+        ]
+      }
+    },
+    {
+      "id": "doc-mortgage-application",
+      "name": "Mortgage Application (1003)",
+      "description": "Uniform Residential Loan Application (URLA / 1003)",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "borrower": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "description": "First name (given name)"
+              },
+              "lastName": {
+                "type": "string",
+                "description": "Last name (surname / family name)"
+              },
+              "ssn": {
+                "type": "string",
+                "description": "Social Security Number — 9 digits, format XXX-XX-XXXX (extract with dashes)",
+                "pattern": "^\\\\d{3}-\\\\d{2}-\\\\d{4}$"
+              },
+              "dateOfBirth": {
+                "type": "string",
+                "description": "Date of birth",
+                "pattern": "^\\\\d{2}/\\\\d{2}/\\\\d{4}$"
+              },
+              "currentAddress": {
+                "type": "string",
+                "description": "Current address"
+              },
+              "employer": {
+                "type": "string",
+                "description": "Current employer name"
+              },
+              "jobTitle": {
+                "type": "string",
+                "description": "Job title / position"
+              },
+              "yearsEmployed": {
+                "type": "number",
+                "description": "Years at current employer"
+              },
+              "monthlyIncome": {
+                "type": "number",
+                "description": "Gross monthly income (USD, numbers only, no dollar sign)"
+              }
+            },
+            "required": [
+              "firstName",
+              "lastName",
+              "ssn"
+            ]
+          },
+          "coBorrower": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "description": "First name (given name)"
+              },
+              "lastName": {
+                "type": "string",
+                "description": "Last name (surname / family name)"
+              },
+              "ssn": {
+                "type": "string",
+                "description": "Social Security Number — 9 digits, format XXX-XX-XXXX (extract with dashes)",
+                "pattern": "^\\\\d{3}-\\\\d{2}-\\\\d{4}$"
+              },
+              "monthlyIncome": {
+                "type": "number",
+                "description": "Gross monthly income (USD, numbers only, no dollar sign)"
+              }
+            },
+            "required": [
+              "firstName",
+              "lastName"
+            ]
+          },
+          "propertyAddress": {
+            "type": "string",
+            "description": "Subject property address"
+          },
+          "loanAmount": {
+            "type": "number",
+            "description": "Requested loan amount (USD, numbers only, no dollar sign)"
+          },
+          "loanType": {
+            "type": "string",
+            "description": "Loan type",
+            "enum": [
+              "conventional",
+              "FHA",
+              "VA",
+              "USDA",
+              null
+            ],
+            "nullable": true
+          },
+          "loanPurpose": {
+            "type": "string",
+            "description": "Loan purpose",
+            "enum": [
+              "purchase",
+              "refinance",
+              "construction",
+              null
+            ],
+            "nullable": true
+          },
+          "loanTerm": {
+            "type": "number",
+            "description": "Loan term (years)"
+          },
+          "totalAssets": {
+            "type": "number",
+            "description": "Total assets declared (USD, numbers only, no dollar sign)"
+          },
+          "totalLiabilities": {
+            "type": "number",
+            "description": "Total liabilities / debts (USD, numbers only, no dollar sign)"
+          }
+        },
+        "required": [
+          "borrower",
+          "propertyAddress",
+          "loanAmount",
+          "loanType"
+        ]
+      }
+    },
+    {
+      "id": "doc-mortgage-approval",
+      "name": "Mortgage Approval / Commitment Letter",
+      "description": "Lender commitment or pre-approval letter for mortgage financing",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "lender": {
+            "type": "string",
+            "description": "Lender / bank name"
+          },
+          "loanOfficer": {
+            "type": "string",
+            "description": "Loan officer name"
+          },
+          "borrower": {
+            "type": "string",
+            "description": "Borrower full name"
+          },
+          "approvalDate": {
+            "type": "string",
+            "description": "Date of approval / commitment",
+            "pattern": "^\\\\d{2}/\\\\d{2}/\\\\d{4}$"
+          },
+          "approvedAmount": {
+            "type": "number",
+            "description": "Approved loan amount (USD, numbers only, no dollar sign)"
+          },
+          "interestRate": {
+            "type": "number",
+            "description": "Interest rate (%)"
+          },
+          "loanType": {
+            "type": "string",
+            "description": "Loan type",
+            "enum": [
+              "conventional",
+              "FHA",
+              "VA",
+              "USDA",
+              "jumbo",
+              null
+            ],
+            "nullable": true
+          },
+          "loanTerm": {
+            "type": "number",
+            "description": "Loan term (years)"
+          },
+          "conditions": {
+            "type": "string",
+            "description": "Conditions that must be met prior to closing"
+          },
+          "expirationDate": {
+            "type": "string",
+            "description": "Commitment expiration date",
+            "pattern": "^\\\\d{2}/\\\\d{2}/\\\\d{4}$"
+          },
+          "propertyAddress": {
+            "type": "string",
+            "description": "Subject property address"
+          }
+        },
+        "required": [
+          "lender",
+          "borrower",
+          "approvedAmount",
+          "interestRate",
+          "loanType"
+        ]
+      }
+    },
+    {
+      "id": "doc-survey",
+      "name": "Property Survey / Plat Map",
+      "description": "ALTA/NSPS land survey showing boundaries, improvements, and easements",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "surveyor": {
+            "type": "string",
+            "description": "Surveyor name and license number"
+          },
+          "surveyDate": {
+            "type": "string",
+            "description": "Date of survey",
+            "pattern": "^\\\\d{2}/\\\\d{2}/\\\\d{4}$"
+          },
+          "propertyAddress": {
+            "type": "string",
+            "description": "Property address"
+          },
+          "parcelNumber": {
+            "type": "string",
+            "description": "Assessor Parcel Number (APN) or Tax ID number"
+          },
+          "lotSize": {
+            "type": "string",
+            "description": "Lot size / area (in acres or sq ft)"
+          },
+          "legalDescription": {
+            "type": "string",
+            "description": "Legal description from survey"
+          },
+          "boundaryDescription": {
+            "type": "string",
+            "description": "Property boundary details / metes and bounds"
+          },
+          "improvements": {
+            "type": "string",
+            "description": "Improvements shown (buildings, fences, driveways)"
+          },
+          "easements": {
+            "type": "string",
+            "description": "Easements identified"
+          },
+          "encroachments": {
+            "type": "string",
+            "description": "Any encroachments identified"
+          },
+          "floodZone": {
+            "type": "string",
+            "description": "FEMA flood zone designation (if shown)"
+          }
+        },
+        "required": [
+          "surveyor",
+          "surveyDate",
+          "propertyAddress",
+          "lotSize"
+        ]
+      }
+    },
+    {
+      "id": "doc-tax-record",
+      "name": "Property Tax Record",
+      "description": "County property tax records — assessed value, tax amounts, payment status",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "parcelNumber": {
+            "type": "string",
+            "description": "Assessor Parcel Number (APN) or Tax ID number"
+          },
+          "propertyAddress": {
+            "type": "string",
+            "description": "Property address"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Property owner name per tax records"
+          },
+          "assessedValue": {
+            "type": "number",
+            "description": "Total assessed value (USD, numbers only, no dollar sign)"
+          },
+          "landValue": {
+            "type": "number",
+            "description": "Assessed land value (USD, numbers only, no dollar sign)"
+          },
+          "improvementValue": {
+            "type": "number",
+            "description": "Assessed improvement value (USD, numbers only, no dollar sign)"
+          },
+          "annualTax": {
+            "type": "number",
+            "description": "Annual property tax amount (USD, numbers only, no dollar sign)"
+          },
+          "taxYear": {
+            "type": "number",
+            "description": "Tax year"
+          },
+          "paymentStatus": {
+            "type": "string",
+            "description": "Payment status",
+            "enum": [
+              "current",
+              "delinquent",
+              "paid in full",
+              null
+            ],
+            "nullable": true
+          },
+          "exemptions": {
+            "type": "string",
+            "description": "Homestead or other exemptions applied"
+          }
+        },
+        "required": [
+          "parcelNumber",
+          "propertyAddress",
+          "assessedValue",
+          "annualTax"
+        ]
+      }
+    },
+    {
+      "id": "doc-purchase-agreement",
+      "name": "Purchase Agreement / Contract",
+      "description": "Real estate purchase and sale agreement between buyer and seller",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "seller": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "description": "First name (given name)"
+              },
+              "lastName": {
+                "type": "string",
+                "description": "Last name (surname / family name)"
+              },
+              "address": {
+                "type": "string",
+                "description": "Seller's address"
+              }
+            },
+            "required": [
+              "firstName",
+              "lastName"
+            ]
+          },
+          "buyer": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "description": "First name (given name)"
+              },
+              "lastName": {
+                "type": "string",
+                "description": "Last name (surname / family name)"
+              },
+              "address": {
+                "type": "string",
+                "description": "Buyer's address"
+              }
+            },
+            "required": [
+              "firstName",
+              "lastName"
+            ]
+          },
+          "propertyAddress": {
+            "type": "string",
+            "description": "Subject property address"
+          },
+          "purchasePrice": {
+            "type": "number",
+            "description": "Purchase price (USD, numbers only, no dollar sign)"
+          },
+          "earnestMoney": {
+            "type": "number",
+            "description": "Earnest money deposit amount (USD, numbers only, no dollar sign)"
+          },
+          "closingDate": {
+            "type": "string",
+            "description": "Expected closing date",
+            "pattern": "^\\\\d{2}/\\\\d{2}/\\\\d{4}$"
+          },
+          "contingencies": {
+            "type": "string",
+            "description": "List of contingencies (inspection, financing, appraisal, etc.)"
+          },
+          "financingType": {
+            "type": "string",
+            "description": "Financing type",
+            "enum": [
+              "conventional",
+              "FHA",
+              "VA",
+              "cash",
+              "other",
+              null
+            ],
+            "nullable": true
+          },
+          "sellerConcessions": {
+            "type": "number",
+            "description": "Seller concessions / credits to buyer (USD, numbers only, no dollar sign)"
+          },
+          "personalPropertyIncluded": {
+            "type": "string",
+            "description": "Personal property included (appliances, fixtures, etc.)"
+          },
+          "closingCostsSplit": {
+            "type": "string",
+            "description": "How closing costs are split between parties"
+          },
+          "executionDate": {
+            "type": "string",
+            "description": "Date contract was executed / signed",
+            "pattern": "^\\\\d{2}/\\\\d{2}/\\\\d{4}$"
+          }
+        },
+        "required": [
+          "seller",
+          "buyer",
+          "propertyAddress",
+          "purchasePrice",
+          "closingDate"
+        ]
+      }
+    },
+    {
+      "id": "doc-title-insurance",
+      "name": "Title Insurance Policy",
+      "description": "Title insurance commitment or policy (owner's or lender's)",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "insurer": {
+            "type": "string",
+            "description": "Title insurance company"
+          },
+          "policyNumber": {
+            "type": "string",
+            "description": "Policy or commitment number"
+          },
+          "policyType": {
+            "type": "string",
+            "description": "Policy type",
+            "enum": [
+              "owner's",
+              "lender's",
+              "both",
+              null
+            ],
+            "nullable": true
+          },
+          "coverageAmount": {
+            "type": "number",
+            "description": "Coverage amount (USD, numbers only, no dollar sign)"
+          },
+          "premium": {
+            "type": "number",
+            "description": "Premium amount (USD, numbers only, no dollar sign)"
+          },
+          "insuredParty": {
+            "type": "string",
+            "description": "Name of insured party"
+          },
+          "effectiveDate": {
+            "type": "string",
+            "description": "Effective date",
+            "pattern": "^\\\\d{2}/\\\\d{2}/\\\\d{4}$"
+          },
+          "propertyAddress": {
+            "type": "string",
+            "description": "Insured property address"
+          },
+          "exceptions": {
+            "type": "string",
+            "description": "Policy exceptions and exclusions"
+          }
+        },
+        "required": [
+          "insurer",
+          "policyType",
+          "coverageAmount",
+          "insuredParty",
+          "propertyAddress"
+        ]
+      }
+    },
+    {
+      "id": "doc-title-report",
+      "name": "Title Report / Title Search",
+      "description": "Preliminary title report or title abstract showing ownership history and encumbrances",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "titleCompany": {
+            "type": "string",
+            "description": "Title company name"
+          },
+          "effectiveDate": {
+            "type": "string",
+            "description": "Effective date of the title search",
+            "pattern": "^\\\\d{2}/\\\\d{2}/\\\\d{4}$"
+          },
+          "currentOwner": {
+            "type": "string",
+            "description": "Current title holder / vested owner"
+          },
+          "propertyAddress": {
+            "type": "string",
+            "description": "Subject property address"
+          },
+          "parcelNumber": {
+            "type": "string",
+            "description": "Assessor Parcel Number (APN) or Tax ID number"
+          },
+          "legalDescription": {
+            "type": "string",
+            "description": "Legal description of the property"
+          },
+          "liens": {
+            "type": "string",
+            "description": "Outstanding liens (mortgages, tax liens, judgment liens)"
+          },
+          "easements": {
+            "type": "string",
+            "description": "Easements and rights of way"
+          },
+          "encumbrances": {
+            "type": "string",
+            "description": "Other encumbrances or restrictions"
+          },
+          "taxes": {
+            "type": "string",
+            "description": "Property tax status (current, delinquent, amounts)"
+          },
+          "exceptions": {
+            "type": "string",
+            "description": "Schedule B exceptions from coverage"
+          }
+        },
+        "required": [
+          "titleCompany",
+          "currentOwner",
+          "propertyAddress"
+        ]
+      }
+    }
+  ],
+  "entityTypes": [
+    {
+      "id": "entity-seller",
+      "name": "Seller",
+      "icon": "user-minus",
+      "color": "#ef4444",
+      "displayOrder": 0,
+      "fieldOrder": [
+        "firstName",
+        "lastName",
+        "dateOfBirth",
+        "address",
+        "idNumber",
+        "phone",
+        "email"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-drivers-license",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "firstName",
+              "targetField": "firstName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "lastName",
+              "targetField": "lastName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "dateOfBirth",
+              "targetField": "dateOfBirth",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "address",
+              "targetField": "address",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "idType",
+              "targetField": "idType",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "idNumber",
+              "targetField": "idNumber",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "expirationDate",
+              "targetField": "idExpirationDate",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-purchase-agreement",
+          "enabled": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "seller.firstName",
+              "targetField": "firstName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "seller.lastName",
+              "targetField": "lastName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "seller.address",
+              "targetField": "address",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-deed",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "grantor.fullName",
+              "targetField": "fullName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "grantor.address",
+              "targetField": "address",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-closing-disclosure",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "seller.name",
+              "targetField": "fullName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "sellerProceeds",
+              "targetField": "netProceeds",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "sellerClosingCosts",
+              "targetField": "closingCosts",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-contact",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "firstName",
+              "targetField": "firstName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "lastName",
+              "targetField": "lastName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "phone",
+              "targetField": "phone",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "email",
+              "targetField": "email",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": []
+    },
+    {
+      "id": "entity-buyer",
+      "name": "Buyer",
+      "icon": "user-plus",
+      "color": "#22c55e",
+      "displayOrder": 1,
+      "fieldOrder": [
+        "firstName",
+        "lastName",
+        "dateOfBirth",
+        "address",
+        "idNumber",
+        "phone",
+        "email",
+        "employer",
+        "monthlyIncome"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-drivers-license",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "firstName",
+              "targetField": "firstName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "lastName",
+              "targetField": "lastName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "dateOfBirth",
+              "targetField": "dateOfBirth",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "address",
+              "targetField": "address",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "idType",
+              "targetField": "idType",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "idNumber",
+              "targetField": "idNumber",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "expirationDate",
+              "targetField": "idExpirationDate",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-purchase-agreement",
+          "enabled": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "buyer.firstName",
+              "targetField": "firstName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "buyer.lastName",
+              "targetField": "lastName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "buyer.address",
+              "targetField": "address",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-deed",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "grantee.fullName",
+              "targetField": "fullName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "grantee.vestingType",
+              "targetField": "vestingType",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "grantee.address",
+              "targetField": "address",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-mortgage-application",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "borrower.firstName",
+              "targetField": "firstName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "borrower.lastName",
+              "targetField": "lastName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "borrower.employer",
+              "targetField": "employer",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "borrower.jobTitle",
+              "targetField": "jobTitle",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "borrower.monthlyIncome",
+              "targetField": "monthlyIncome",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-mortgage-approval",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "borrower",
+              "targetField": "fullName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-closing-disclosure",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "buyer.name",
+              "targetField": "fullName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "cashToClose",
+              "targetField": "cashToClose",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "buyerClosingCosts",
+              "targetField": "closingCosts",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-contact",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "firstName",
+              "targetField": "firstName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "lastName",
+              "targetField": "lastName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "phone",
+              "targetField": "phone",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "email",
+              "targetField": "email",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": [
+        {
+          "docTypeId": "doc-mortgage-application",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-purchase-agreement",
+              "field": "financingType",
+              "operator": "exists"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "entity-property",
+      "name": "Property",
+      "icon": "building",
+      "color": "#3b82f6",
+      "displayOrder": 2,
+      "fieldOrder": [
+        "propertyAddress",
+        "parcelNumber",
+        "appraisedValue",
+        "assessedValue",
+        "squareFootage",
+        "lotSize",
+        "yearBuilt",
+        "bedrooms",
+        "bathrooms"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-purchase-agreement",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "propertyAddress",
+              "targetField": "propertyAddress",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-deed",
+          "enabled": true,
+          "isRequired": true,
+          "fieldMappings": [
+            {
+              "sourceField": "propertyAddress",
+              "targetField": "propertyAddress",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "parcelNumber",
+              "targetField": "parcelNumber",
+              "matchFields": [
+                {
+                  "field": "parcelNumber",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "legalDescription",
+              "targetField": "legalDescription",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-title-report",
+          "enabled": true,
+          "isRequired": true,
+          "fieldMappings": [
+            {
+              "sourceField": "propertyAddress",
+              "targetField": "propertyAddress",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "parcelNumber",
+              "targetField": "parcelNumber",
+              "matchFields": [
+                {
+                  "field": "parcelNumber",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "liens",
+              "targetField": "liens",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "easements",
+              "targetField": "easements",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-appraisal",
+          "enabled": true,
+          "isRequired": true,
+          "fieldMappings": [
+            {
+              "sourceField": "propertyAddress",
+              "targetField": "propertyAddress",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "appraisedValue",
+              "targetField": "appraisedValue",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "squareFootage",
+              "targetField": "squareFootage",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "lotSize",
+              "targetField": "lotSize",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "yearBuilt",
+              "targetField": "yearBuilt",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "bedrooms",
+              "targetField": "bedrooms",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "bathrooms",
+              "targetField": "bathrooms",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "condition",
+              "targetField": "condition",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-inspection-report",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "propertyAddress",
+              "targetField": "propertyAddress",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "overallCondition",
+              "targetField": "inspectionCondition",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "majorDefects",
+              "targetField": "majorDefects",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-tax-record",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "propertyAddress",
+              "targetField": "propertyAddress",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "parcelNumber",
+              "targetField": "parcelNumber",
+              "matchFields": [
+                {
+                  "field": "parcelNumber",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "assessedValue",
+              "targetField": "assessedValue",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "annualTax",
+              "targetField": "annualTax",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-survey",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "propertyAddress",
+              "targetField": "propertyAddress",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "parcelNumber",
+              "targetField": "parcelNumber",
+              "matchFields": [
+                {
+                  "field": "parcelNumber",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "lotSize",
+              "targetField": "lotSize",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "easements",
+              "targetField": "surveyEasements",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "encroachments",
+              "targetField": "encroachments",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-hoa-docs",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "hoaName",
+              "targetField": "hoaName",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "monthlyDues",
+              "targetField": "hoaMonthlyDues",
+              "matchFields": [
+                {
+                  "field": "propertyAddress",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": []
+    },
+    {
+      "id": "entity-transaction",
+      "name": "Transaction",
+      "icon": "banknote",
+      "color": "#f59e0b",
+      "displayOrder": 3,
+      "fieldOrder": [
+        "purchasePrice",
+        "closingDate",
+        "loanAmount",
+        "interestRate",
+        "monthlyPayment",
+        "cashToClose",
+        "totalClosingCosts"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-purchase-agreement",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "purchasePrice",
+              "targetField": "purchasePrice"
+            },
+            {
+              "sourceField": "closingDate",
+              "targetField": "closingDate"
+            },
+            {
+              "sourceField": "earnestMoney",
+              "targetField": "earnestMoney"
+            },
+            {
+              "sourceField": "financingType",
+              "targetField": "financingType"
+            },
+            {
+              "sourceField": "sellerConcessions",
+              "targetField": "sellerConcessions"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-closing-disclosure",
+          "enabled": true,
+          "isRequired": true,
+          "fieldMappings": [
+            {
+              "sourceField": "salePrice",
+              "targetField": "salePrice"
+            },
+            {
+              "sourceField": "totalClosingCosts",
+              "targetField": "totalClosingCosts"
+            },
+            {
+              "sourceField": "loanAmount",
+              "targetField": "loanAmount"
+            },
+            {
+              "sourceField": "interestRate",
+              "targetField": "interestRate"
+            },
+            {
+              "sourceField": "monthlyPayment",
+              "targetField": "monthlyPayment"
+            },
+            {
+              "sourceField": "cashToClose",
+              "targetField": "cashToClose"
+            },
+            {
+              "sourceField": "sellerProceeds",
+              "targetField": "sellerProceeds"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-mortgage-approval",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "approvedAmount",
+              "targetField": "approvedAmount"
+            },
+            {
+              "sourceField": "interestRate",
+              "targetField": "interestRate"
+            },
+            {
+              "sourceField": "loanType",
+              "targetField": "loanType"
+            },
+            {
+              "sourceField": "loanTerm",
+              "targetField": "loanTerm"
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": []
+    }
+  ],
+  "documentWorkflows": [
+    {
+      "id": "wf-doc-extraction",
+      "name": "Document Extraction",
+      "isDefault": true,
+      "enabled": true,
+      "priority": 2,
+      "nodes": [
+        {
+          "id": "load-document",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 50
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Load Document",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "documentService",
+              "methodName": "getById",
+              "arguments": {
+                "id": "context.docId"
+              },
+              "outputMapping": {
+                "doc": "doc"
+              }
+            }
+          }
+        },
+        {
+          "id": "check-doctype",
+          "type": "ifElse",
+          "position": {
+            "x": 300,
+            "y": 200
+          },
+          "data": {
+            "nodeType": "ifElse",
+            "label": "Has DocumentType?",
+            "status": "IDLE",
+            "config": {
+              "condition": "context.doc.docTypeId && context.doc.docTypeId !== null"
+            }
+          }
+        },
+        {
+          "id": "notify-no-doctype",
+          "type": "serviceCall",
+          "position": {
+            "x": 650,
+            "y": 200
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Notify: No DocType",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "notificationService",
+              "methodName": "create",
+              "arguments": {
+                "notification": {
+                  "title": "Extraction Stopped",
+                  "message": "No DocumentType set for this document. Cannot extract data.",
+                  "type": "error"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "load-schema",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 350
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Load Extraction Schema",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "projectService",
+              "methodName": "getExtractionSchema",
+              "arguments": {
+                "id": "context.doc.docTypeId"
+              },
+              "outputMapping": "data.schema"
+            }
+          }
+        },
+        {
+          "id": "ai-extract",
+          "type": "aiInteraction",
+          "position": {
+            "x": 300,
+            "y": 500
+          },
+          "data": {
+            "nodeType": "aiInteraction",
+            "label": "AI: Extract Data",
+            "status": "IDLE",
+            "config": {
+              "aiConfig": {
+                "provider": "vertex",
+                "model": "gemini-3-flash-preview",
+                "prompt": "You are a document processing system helping with legitimate data extraction for record keeping purposes. Extract all visible field values from this official document according to the provided JSON schema.\n\nCRITICAL ACCURACY REQUIREMENTS:\n- Transcribe ALL text EXACTLY as it appears on the document, character-by-character\n- Do NOT modify, correct, or reformat any values\n- Preserve exact capitalization, spacing, and punctuation\n- For codes/IDs: copy every character precisely (numbers, letters, special characters)\n- If a field is not visible or empty, use empty string \"\" (NOT null, NOT the word \"null\")\n- Double-check each value before including it\n\nCHARACTER CONFUSION PREVENTION (VERY IMPORTANT):\n- Carefully distinguish between similar-looking characters\n- Letter 'I' (uppercase i) vs Number '1' (one)\n- Letter 'O' (uppercase o) vs Number '0' (zero)\n- Letter 'T' vs Number '7'\n- Letter 'S' vs Number '5'\n- Letter 'B' vs Number '8'\n- Letter 'Z' vs Number '2'\n- Letter 'G' vs Number '6'\n- For SSN: format as XXX-XX-XXXX with dashes\n- For dates: use MM/DD/YYYY format unless the document shows otherwise\n\nFREE-TEXT / SUMMARY FIELDS:\n- Copy text VERBATIM from the document — do NOT paraphrase, summarize, or rephrase\n- Keep the original punctuation, list format (dashes, semicolons), and paragraph structure\n- Do NOT add information not explicitly present in the document\n- Do NOT reorder content or change list bullet styles\n\nVALUE NORMALIZATION:\n- For dollar amounts: numbers only, no dollar sign or commas (e.g. 150000 not $150,000)\n- For state abbreviations: use 2-letter form (CA, NY, TX)\n- For addresses: copy as printed on the document\n\nReturn ONLY valid JSON matching the schema structure. This is an authorized document processing request.",
+                "input": "context.docId",
+                "inputType": "pdf",
+                "pages": "all",
+                "jsonSchema": "data.schema",
+                "outputKey": "data.data1",
+                "isJson": true,
+                "thinkingLevel": "low"
+              }
+            }
+          }
+        },
+        {
+          "id": "ai-verify",
+          "type": "aiInteraction",
+          "position": {
+            "x": 300,
+            "y": 700
+          },
+          "data": {
+            "nodeType": "aiInteraction",
+            "label": "AI: Verify Extraction",
+            "status": "IDLE",
+            "config": {
+              "aiConfig": {
+                "provider": "vertex",
+                "model": "gemini-3-flash-preview",
+                "prompt": "You are a document verification system. You have been given:\n1. A document (images/PDF)\n2. A previous extraction attempt (JSON) from another AI\n\nYour task:\n- Cross-reference EVERY field in the previous extraction against the actual document\n- Correct any errors: typos, OCR misreads, formatting inconsistencies, missing values\n- Fill in any fields that were missed (use \"\" for genuinely absent fields)\n- Apply the same extraction rules: character-by-character accuracy, no modification of original values, proper normalization\n\nFor each field, assign a confidence score (0.0 to 1.0):\n- 1.0 = clearly legible, no ambiguity\n- 0.7-0.9 = legible but minor ambiguity (e.g. similar-looking characters)\n- 0.3-0.6 = partially legible or context-dependent\n- 0.0-0.2 = guessed or not visible in document\n\nReturn a JSON object with:\n- \"data\": the corrected extraction matching the schema\n- \"corrections\": array of { field, original, corrected, reason } for each change made\n- \"confidence\": object mapping field names to confidence scores (0.0-1.0)\n\nReturn ONLY valid JSON.",
+                "input": "context.docId",
+                "inputType": "pdf",
+                "pages": "all",
+                "jsonSchema": "data.schema",
+                "outputKey": "data.data2",
+                "isJson": true,
+                "thinkingLevel": "medium",
+                "contextInput": "data.data1",
+                "verificationMode": true
+              }
+            }
+          }
+        },
+        {
+          "id": "validate-extraction",
+          "type": "validateExtraction",
+          "position": {
+            "x": 300,
+            "y": 900
+          },
+          "data": {
+            "nodeType": "validateExtraction",
+            "label": "Validate & Score",
+            "status": "IDLE",
+            "config": {
+              "data1Key": "data.data1",
+              "data2Key": "data.data2",
+              "outputKey": "data.extractedData"
+            }
+          }
+        },
+        {
+          "id": "save-results",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 1100
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Save Results",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "documentService",
+              "methodName": "update",
+              "arguments": {
+                "id": "context.docId",
+                "updates": {
+                  "extractedData": "context.data.extractedData",
+                  "doubleValidation": "context.data.doubleValidation",
+                  "extractionConflicts": "context.data.extractionConflicts",
+                  "confidenceScore": "context.data.confidenceScore",
+                  "fieldConfidence": "context.data.fieldConfidence",
+                  "error": "context.data.error"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "notify-success",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 1150
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Notify Success",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "notificationService",
+              "methodName": "create",
+              "arguments": {
+                "notification": {
+                  "title": "Document Processing Complete",
+                  "message": "Document \"{{doc.name}}\" has been successfully processed.",
+                  "type": "success",
+                  "actionUrl": "/documents/{{docId}}"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e-load-doc-check",
+          "source": "load-document",
+          "target": "check-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-check-load-schema",
+          "source": "check-doctype",
+          "sourceHandle": "true",
+          "target": "load-schema",
+          "type": "default"
+        },
+        {
+          "id": "e-check-notify-no",
+          "source": "check-doctype",
+          "sourceHandle": "false",
+          "target": "notify-no-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-schema-extract",
+          "source": "load-schema",
+          "target": "ai-extract",
+          "type": "default"
+        },
+        {
+          "id": "e-extract-verify",
+          "source": "ai-extract",
+          "target": "ai-verify",
+          "type": "default"
+        },
+        {
+          "id": "e-verify-validate",
+          "source": "ai-verify",
+          "target": "validate-extraction",
+          "type": "default"
+        },
+        {
+          "id": "e-validate-save",
+          "source": "validate-extraction",
+          "target": "save-results",
+          "type": "default"
+        },
+        {
+          "id": "e-save-notify",
+          "source": "save-results",
+          "target": "notify-success",
+          "type": "default"
+        }
+      ]
+    },
+    {
+      "id": "wf-doc-identification",
+      "name": "Document Identification",
+      "isDefault": true,
+      "enabled": true,
+      "priority": 1,
+      "nodes": [
+        {
+          "id": "get-document",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 50
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Get Document",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "documentService",
+              "methodName": "getById",
+              "arguments": {
+                "id": "context.docId"
+              },
+              "outputMapping": {
+                "doc": "doc"
+              }
+            }
+          }
+        },
+        {
+          "id": "check-has-doctype",
+          "type": "ifElse",
+          "position": {
+            "x": 300,
+            "y": 250
+          },
+          "data": {
+            "nodeType": "ifElse",
+            "label": "Has DocumentType?",
+            "status": "IDLE",
+            "config": {
+              "condition": "!context.doc.docTypeId || context.doc.docTypeId === null"
+            }
+          }
+        },
+        {
+          "id": "notify-already-exists",
+          "type": "serviceCall",
+          "position": {
+            "x": 650,
+            "y": 250
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Notify: Already Exists",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "notificationService",
+              "methodName": "create",
+              "arguments": {
+                "notification": {
+                  "title": "Document Processing Stopped",
+                  "message": "DocumentType already exists for this document.",
+                  "type": "warning"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "get-doctypes",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 650
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Get Type Names",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "projectService",
+              "methodName": "getIdentificationJSONSchema",
+              "arguments": {},
+              "outputMapping": "data.schema"
+            }
+          }
+        },
+        {
+          "id": "ai-identify-1",
+          "type": "aiInteraction",
+          "position": {
+            "x": 100,
+            "y": 850
+          },
+          "data": {
+            "nodeType": "aiInteraction",
+            "label": "AI: Identify Type #1",
+            "status": "IDLE",
+            "config": {
+              "aiConfig": {
+                "provider": "vertex",
+                "model": "gemini-3-flash-preview",
+                "prompt": "You are a document classification system. Analyze the document structure and content to identify its type. You MUST select one of the valid types from the provided schema. Classify this document.",
+                "input": "context.docId",
+                "inputType": "pdf",
+                "pages": 1,
+                "jsonSchema": "data.schema",
+                "outputKey": "data.type1",
+                "isJson": true,
+                "thinkingLevel": "minimal"
+              }
+            }
+          }
+        },
+        {
+          "id": "ai-identify-2",
+          "type": "aiInteraction",
+          "position": {
+            "x": 500,
+            "y": 850
+          },
+          "data": {
+            "nodeType": "aiInteraction",
+            "label": "AI: Identify Type #2",
+            "status": "IDLE",
+            "config": {
+              "aiConfig": {
+                "provider": "vertex",
+                "model": "gemini-3-flash-preview",
+                "prompt": "You are a document classification system. Analyze the document structure and content to identify its type. You MUST select one of the valid types from the provided schema. Classify this document.",
+                "input": "context.docId",
+                "inputType": "pdf",
+                "pages": 1,
+                "jsonSchema": "data.schema",
+                "outputKey": "data.type2",
+                "isJson": true,
+                "thinkingLevel": "minimal"
+              }
+            }
+          }
+        },
+        {
+          "id": "validate-type-match",
+          "type": "validateExtraction",
+          "position": {
+            "x": 300,
+            "y": 1050
+          },
+          "data": {
+            "nodeType": "validateExtraction",
+            "label": "Validate Type Match",
+            "status": "IDLE",
+            "config": {
+              "data1Key": "data.type1.documentType",
+              "data2Key": "data.type2.documentType",
+              "outputKey": "data.identifiedType"
+            }
+          }
+        },
+        {
+          "id": "lookup-doctype",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 1250
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Lookup Document Type",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "projectService",
+              "methodName": "getDocumentTypeByName",
+              "arguments": {
+                "name": "{{data.identifiedType}}"
+              },
+              "outputMapping": "data.foundDocType"
+            }
+          }
+        },
+        {
+          "id": "check-type-exists",
+          "type": "ifElse",
+          "position": {
+            "x": 300,
+            "y": 1450
+          },
+          "data": {
+            "nodeType": "ifElse",
+            "label": "Type Exists?",
+            "status": "IDLE",
+            "config": {
+              "condition": "!!context.data.foundDocType && !!context.data.foundDocType.id"
+            }
+          }
+        },
+        {
+          "id": "notify-type-not-found",
+          "type": "serviceCall",
+          "position": {
+            "x": 550,
+            "y": 1650
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Notify: Type Not Found",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "notificationService",
+              "methodName": "create",
+              "arguments": {
+                "notification": {
+                  "title": "Document Type Not Found",
+                  "message": "Identified type '{{data.identifiedType}}' does not exist in the system.",
+                  "type": "warning"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "assign-doctype",
+          "type": "serviceCall",
+          "position": {
+            "x": 50,
+            "y": 1650
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Assign DocType",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "documentService",
+              "methodName": "update",
+              "arguments": {
+                "id": "context.docId",
+                "updates": {
+                  "docTypeId": "{{data.foundDocType.id}}"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e-get-check",
+          "source": "get-document",
+          "target": "check-has-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-check-gettypes",
+          "source": "check-has-doctype",
+          "sourceHandle": "true",
+          "target": "get-doctypes",
+          "type": "default"
+        },
+        {
+          "id": "e-check-exists",
+          "source": "check-has-doctype",
+          "sourceHandle": "false",
+          "target": "notify-already-exists",
+          "type": "default"
+        },
+        {
+          "id": "e-gettypes-ai1",
+          "source": "get-doctypes",
+          "target": "ai-identify-1",
+          "type": "default"
+        },
+        {
+          "id": "e-ai1-ai2",
+          "source": "ai-identify-1",
+          "target": "ai-identify-2",
+          "type": "default"
+        },
+        {
+          "id": "e-ai2-validate",
+          "source": "ai-identify-2",
+          "target": "validate-type-match",
+          "type": "default"
+        },
+        {
+          "id": "e-validate-lookup",
+          "source": "validate-type-match",
+          "target": "lookup-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-lookup-check",
+          "source": "lookup-doctype",
+          "target": "check-type-exists",
+          "type": "default"
+        },
+        {
+          "id": "e-check-assign",
+          "source": "check-type-exists",
+          "sourceHandle": "true",
+          "target": "assign-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-check-notfound",
+          "source": "check-type-exists",
+          "sourceHandle": "false",
+          "target": "notify-type-not-found",
+          "type": "default"
+        }
+      ]
+    }
+  ],
+  "createdAt": "2026-02-14T19:11:24.574Z",
+  "updatedAt": "2026-02-14T19:11:24.574Z"
+}

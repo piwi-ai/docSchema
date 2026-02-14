@@ -1,0 +1,5624 @@
+{
+  "id": "REAL-ESTATE-IT-DEFAULT",
+  "name": "Agenzia Immobiliare Italia",
+  "description": "Configurazione per gestione documenti agenzia immobiliare — compravendita, locazione, documenti catastali e notarili",
+  "schemaVersion": 1,
+  "documentTypes": [
+    {
+      "id": "doc-contatto",
+      "name": "Documento di Contatto",
+      "description": "Recapiti e indirizzi del cliente per comunicazioni e notifiche legali",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "telefonoCellulare": {
+            "type": "string",
+            "description": "Numero di cellulare principale"
+          },
+          "telefonoFisso": {
+            "type": "string",
+            "description": "Eventuale numero fisso/ufficio"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Indirizzo email ordinario"
+          },
+          "pec": {
+            "type": "string",
+            "format": "email",
+            "description": "Posta Elettronica Certificata (fondamentale per comunicazioni legali)"
+          },
+          "indirizzoResidenza": {
+            "type": "string",
+            "description": "Via/Piazza e numero civico"
+          },
+          "cittaResidenza": {
+            "type": "string",
+            "description": "Comune di residenza"
+          },
+          "cap": {
+            "type": "string",
+            "description": "Codice Avviamento Postale"
+          },
+          "provincia": {
+            "type": "string",
+            "description": "Sigla Provincia (es. MI, RM)"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "telefonoCellulare",
+          "email",
+          "indirizzoResidenza"
+        ]
+      }
+    },
+    {
+      "id": "doc-identita",
+      "name": "Documento d'Identità",
+      "description": "Dati per identificazione (Antiriciclaggio/KYC)",
+      "isArrayExtraction": true,
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "tipoDocumento": {
+            "type": "string",
+            "description": "Tipo documento: Carta D'Identità, Passaporto, Patente, Permesso di Soggiorno, ecc."
+          },
+          "numeroDocumento": {
+            "type": "string",
+            "description": ""
+          },
+          "dataEmissione": {
+            "type": "string",
+            "description": "Data di emissione in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "dataScadenza": {
+            "type": "string",
+            "description": "Data di scadenza in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "rilasciatoDa": {
+            "type": "string",
+            "description": "Autorità che ha rilasciato il documento (es. Comune di Roma, Questura di Milano)"
+          },
+          "luogoNascita": {
+            "type": "string",
+            "description": "Città seguita dalla sigla della provincia SEMPRE tra parentesi tonde — formato OBBLIGATORIO: 'NomeCittà (XX)' (es. 'Milano (MI)', 'Roma (RM)'). MAI senza parentesi (es. 'Milano MI' è SBAGLIATO). Per la sigla: se la città è una di queste usa la sua sigla: Barletta-Andria-Trani (BT) Bolzano (BZ) Caltanissetta (CL) Campobasso (CB) Caserta (CE) Chieti (CH) Crotone (KR) Forlì-Cesena (FC) Lecco (LC) Mantova (MN) Massa-Carrara (MS) Messina (ME) Monza e della Brianza (MB) Parma (PR) Perugia (PG) Pesaro e Urbino (PU) Piacenza (PC) Pistoia (PT) Potenza (PZ) Ragusa (RG) Reggio Calabria (RC) Roma (RM) Siracusa (SR) Sud Sardegna (SU) Trapani (TP) Trieste (TS) Vibo Valentia (VV), se è un'altra città crea la sigla con le prime due lettere del nome della città."
+          },
+          "indirizzoDiResidenza": {
+            "type": "string",
+            "description": "Indirizzo completo di residenza — formato: Via/Piazza Nome Numero, CAP Città (Provincia). Sempre virgola dopo il numero civico prima del CAP (es. \"Viale Augusto 45, 80126 Napoli (NA)\")"
+          },
+          "dataNascita": {
+            "type": "string",
+            "description": "Data in formato europeo  DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "statoCivile": {
+            "type": "string",
+            "description": "Stato civile",
+            "enum": [
+              "celibe",
+              "nubile",
+              "coniugato",
+              "coniugata",
+              "vedovo",
+              "vedova",
+              "divorziato",
+              "divorziata",
+              "separato",
+              "separata",
+              null
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale",
+          "tipoDocumento",
+          "numeroDocumento",
+          "dataEmissione",
+          "dataScadenza",
+          "luogoNascita",
+          "dataNascita"
+        ]
+      }
+    },
+    {
+      "id": "doc-provenienza",
+      "name": "Atto di Provenienza Notarile",
+      "description": "Rogito che attesta la proprietà. Include dati venditori, acquirenti e catastali.",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "venditori": {
+            "type": "array",
+            "description": "Elenco di tutti i venditori nell'atto",
+            "items": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+                },
+                "cognome": {
+                  "type": "string",
+                  "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+                },
+                "quota": {
+                  "type": "string",
+                  "description": "Quota di proprietà venduta (es. 100%, 50/100)"
+                },
+                "codiceFiscale": {
+                  "type": "string",
+                  "description": "Codice Fiscale del venditore (extract without spaces)"
+                },
+                "statoCivile": {
+                  "type": "string",
+                  "description": "Stato civile come scritto nell'atto (es. coniugato, vedova del fu...)",
+                  "enum": [
+                    "celibe",
+                    "nubile",
+                    "coniugato",
+                    "coniugata",
+                    "vedovo",
+                    "vedova",
+                    "divorziato",
+                    "divorziata",
+                    "separato",
+                    "separata",
+                    null
+                  ],
+                  "nullable": true
+                },
+                "regimePatrimoniale": {
+                  "type": "string",
+                  "description": "Regime patrimoniale",
+                  "enum": [
+                    "comunione dei beni",
+                    "separazione dei beni",
+                    null
+                  ],
+                  "nullable": true
+                }
+              },
+              "required": [
+                "nome",
+                "cognome",
+                "quota",
+                "codiceFiscale",
+                "statoCivile",
+                "regimePatrimoniale"
+              ]
+            }
+          },
+          "acquirenti": {
+            "type": "array",
+            "description": "Elenco di tutti gli acquirenti nell'atto",
+            "items": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+                },
+                "cognome": {
+                  "type": "string",
+                  "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+                },
+                "quota": {
+                  "type": "string",
+                  "description": "Quota di proprietà acquistata (es. 100%, 50/100)"
+                },
+                "codiceFiscale": {
+                  "type": "string",
+                  "description": "Codice Fiscale dell'acquirente (extract without spaces)"
+                },
+                "statoCivile": {
+                  "type": "string",
+                  "description": "Stato civile come scritto nell'atto (es. coniugato, vedova del fu...)",
+                  "enum": [
+                    "celibe",
+                    "nubile",
+                    "coniugato",
+                    "coniugata",
+                    "vedovo",
+                    "vedova",
+                    "divorziato",
+                    "divorziata",
+                    "separato",
+                    "separata",
+                    null
+                  ],
+                  "nullable": true
+                },
+                "regimePatrimoniale": {
+                  "type": "string",
+                  "description": "Regime patrimoniale",
+                  "enum": [
+                    "comunione dei beni",
+                    "separazione dei beni",
+                    null
+                  ],
+                  "nullable": true
+                }
+              },
+              "required": [
+                "nome",
+                "cognome",
+                "quota",
+                "codiceFiscale",
+                "statoCivile",
+                "regimePatrimoniale"
+              ]
+            }
+          },
+          "notaio": {
+            "type": "string",
+            "description": "Nome e cognome del notaio rogante"
+          },
+          "dataAtto": {
+            "type": "string",
+            "description": ""
+          },
+          "numeroRepertorio": {
+            "type": "string",
+            "description": ""
+          },
+          "numeroRaccolta": {
+            "type": "string",
+            "description": ""
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo completo del complesso edilizio o dell'immobile"
+          },
+          "immobili": {
+            "type": "array",
+            "description": "Elenco delle unità immobiliari oggetto dell'atto con i dati catastali",
+            "items": {
+              "type": "object",
+              "properties": {
+                "foglio": {
+                  "type": "string",
+                  "description": "Foglio catastale"
+                },
+                "particella": {
+                  "type": "string",
+                  "description": "Particella catastale"
+                },
+                "subalterno": {
+                  "type": "string",
+                  "description": "Subalterno"
+                },
+                "categoria": {
+                  "type": "string",
+                  "description": "Categoria catastale (es. A/3, C/6)",
+                  "enum": [
+                    "A/1",
+                    "A/2",
+                    "A/3",
+                    "A/4",
+                    "A/5",
+                    "A/6",
+                    "A/7",
+                    "A/8",
+                    "A/9",
+                    "A/10",
+                    "A/11",
+                    "B/1",
+                    "B/2",
+                    "B/3",
+                    "B/4",
+                    "B/5",
+                    "B/6",
+                    "B/7",
+                    "B/8",
+                    "C/1",
+                    "C/2",
+                    "C/3",
+                    "C/4",
+                    "C/5",
+                    "C/6",
+                    "C/7",
+                    "D/1",
+                    "D/2",
+                    "D/3",
+                    "D/4",
+                    "D/5",
+                    "D/6",
+                    "D/7",
+                    "D/8",
+                    "D/9",
+                    "D/10",
+                    "E/1",
+                    "E/2",
+                    "E/3",
+                    "E/4",
+                    "E/5",
+                    "E/6",
+                    "E/7",
+                    "E/8",
+                    "E/9",
+                    "F/1",
+                    "F/2",
+                    "F/3",
+                    "F/4",
+                    "F/5",
+                    null
+                  ],
+                  "nullable": true
+                },
+                "piano": {
+                  "type": "string",
+                  "description": "Piano (es. S1, T, S1-T-1-2)"
+                },
+                "consistenza": {
+                  "type": "string",
+                  "description": "Consistenza: vani o mq (es. 7 vani, 37 mq)"
+                },
+                "rendita": {
+                  "type": "number",
+                  "description": "Rendita catastale in Euro"
+                }
+              },
+              "required": [
+                "foglio",
+                "particella",
+                "subalterno"
+              ]
+            }
+          },
+          "tipoProvenienza": {
+            "type": "string",
+            "description": "Come il proprietario attuale ha acquisito l'immobile: compravendita, donazione, successione, divisione, usucapione, altro",
+            "enum": [
+              "compravendita",
+              "donazione",
+              "successione",
+              "divisione",
+              "usucapione",
+              "altro",
+              null
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "venditori",
+          "acquirenti",
+          "notaio",
+          "dataAtto",
+          "immobili",
+          "tipoProvenienza",
+          "indirizzo"
+        ]
+      }
+    },
+    {
+      "id": "doc-preliminare",
+      "name": "Contratto Preliminare",
+      "description": "Compromesso di compravendita",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "acquirenti": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+                },
+                "cognome": {
+                  "type": "string",
+                  "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+                },
+                "codiceFiscale": {
+                  "type": "string",
+                  "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                  "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                },
+                "statoCivile": {
+                  "type": "string",
+                  "description": "Stato civile",
+                  "enum": [
+                    "celibe",
+                    "nubile",
+                    "coniugato",
+                    "coniugata",
+                    "vedovo",
+                    "vedova",
+                    "divorziato",
+                    "divorziata",
+                    "separato",
+                    "separata",
+                    null
+                  ],
+                  "nullable": true
+                }
+              },
+              "required": [
+                "nome",
+                "cognome",
+                "codiceFiscale"
+              ]
+            }
+          },
+          "venditori": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+                },
+                "cognome": {
+                  "type": "string",
+                  "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+                },
+                "codiceFiscale": {
+                  "type": "string",
+                  "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                  "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                },
+                "statoCivile": {
+                  "type": "string",
+                  "description": "Stato civile",
+                  "enum": [
+                    "celibe",
+                    "nubile",
+                    "coniugato",
+                    "coniugata",
+                    "vedovo",
+                    "vedova",
+                    "divorziato",
+                    "divorziata",
+                    "separato",
+                    "separata",
+                    null
+                  ],
+                  "nullable": true
+                }
+              },
+              "required": [
+                "nome",
+                "cognome",
+                "codiceFiscale"
+              ]
+            }
+          },
+          "prezzo": {
+            "type": "number"
+          },
+          "dataStipula": {
+            "type": "string",
+            "description": "Data di stipula in formato europeo DD/MM/YYYY",
+            "pattern": "^\\\\d{2}[./]\\\\d{2}[./]\\\\d{4}$"
+          },
+          "caparra": {
+            "type": "number",
+            "description": "Importo della caparra confirmatoria in Euro"
+          },
+          "dataRogito": {
+            "type": "string",
+            "description": "Data prevista per il rogito definitivo in formato europeo DD/MM/YYYY",
+            "pattern": "^\\\\d{2}[./]\\\\d{2}[./]\\\\d{4}$"
+          },
+          "mediatore": {
+            "type": "string",
+            "description": "Nome dell'agenzia immobiliare o del mediatore (Art. 35 D.Lgs. 223/2006)"
+          },
+          "modalitaPagamento": {
+            "type": "string",
+            "description": "Modalità di pagamento previste"
+          }
+        },
+        "required": [
+          "acquirenti",
+          "venditori",
+          "prezzo",
+          "dataStipula"
+        ]
+      }
+    },
+    {
+      "id": "doc-proposta",
+      "name": "Proposta di Acquisto",
+      "description": "Proposta irrevocabile d'acquisto",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "proponenti": {
+            "type": "array",
+            "description": "Elenco di tutti i proponenti/acquirenti nella proposta",
+            "items": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+                },
+                "cognome": {
+                  "type": "string",
+                  "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+                },
+                "codiceFiscale": {
+                  "type": "string",
+                  "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                  "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                },
+                "statoCivile": {
+                  "type": "string",
+                  "description": "Stato civile",
+                  "enum": [
+                    "celibe",
+                    "nubile",
+                    "coniugato",
+                    "coniugata",
+                    "vedovo",
+                    "vedova",
+                    "divorziato",
+                    "divorziata",
+                    "separato",
+                    "separata",
+                    null
+                  ],
+                  "nullable": true
+                }
+              },
+              "required": [
+                "nome",
+                "cognome",
+                "codiceFiscale"
+              ]
+            }
+          },
+          "prezzoOfferto": {
+            "type": "number"
+          },
+          "validitaProposta": {
+            "type": "string",
+            "description": "Durata di irrevocabilità della proposta. Riporta SOLO il periodo (es. \"15 giorni\", \"30 giorni\"). NON aggiungere \"dalla data odierna\" o altre espressioni."
+          },
+          "condizioniSospensive": {
+            "type": "string",
+            "description": "Eventuali condizioni sospensive (es. approvazione mutuo)"
+          }
+        },
+        "required": [
+          "proponenti",
+          "prezzoOfferto"
+        ]
+      }
+    },
+    {
+      "id": "doc-visura",
+      "name": "Visura Catastale",
+      "description": "Stato attuale dell'immobile in Catasto. Può essere un fabbricato (con categoria, rendita, consistenza) o un terreno (con qualità, classe, superficie, redditi).",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "foglio": {
+            "type": "string",
+            "description": "Foglio catastale"
+          },
+          "particella": {
+            "type": "string",
+            "description": "Particella catastale"
+          },
+          "subalterno": {
+            "type": "string",
+            "description": "Subalterno"
+          },
+          "sezione": {
+            "type": "string",
+            "description": "Sezione catastale (es. ABBIATEGUAZZONE, può essere vuoto)"
+          },
+          "comuneCatastale": {
+            "type": "string",
+            "description": "Comune catastale con codice — copia ESATTAMENTE come scritto (es. TRADATE (L319B))"
+          },
+          "indirizzoCatastale": {
+            "type": "string",
+            "description": "Indirizzo dell'immobile se presente"
+          },
+          "piano": {
+            "type": "string",
+            "description": "Piano dell'immobile — solo il numero o codice (es. S1, T, 1, 2). NON aggiungere descrizioni come \"Secondo\" o \"Piano Terra\""
+          },
+          "categoriaCatastale": {
+            "type": "string",
+            "description": "Categoria catastale (es. A/2, A/10, C/6) — solo per fabbricati",
+            "enum": [
+              "A/1",
+              "A/2",
+              "A/3",
+              "A/4",
+              "A/5",
+              "A/6",
+              "A/7",
+              "A/8",
+              "A/9",
+              "A/10",
+              "A/11",
+              "B/1",
+              "B/2",
+              "B/3",
+              "B/4",
+              "B/5",
+              "B/6",
+              "B/7",
+              "B/8",
+              "C/1",
+              "C/2",
+              "C/3",
+              "C/4",
+              "C/5",
+              "C/6",
+              "C/7",
+              "D/1",
+              "D/2",
+              "D/3",
+              "D/4",
+              "D/5",
+              "D/6",
+              "D/7",
+              "D/8",
+              "D/9",
+              "D/10",
+              "E/1",
+              "E/2",
+              "E/3",
+              "E/4",
+              "E/5",
+              "E/6",
+              "E/7",
+              "E/8",
+              "E/9",
+              "F/1",
+              "F/2",
+              "F/3",
+              "F/4",
+              "F/5",
+              null
+            ],
+            "nullable": true
+          },
+          "classe": {
+            "type": "string",
+            "description": "Classe catastale (numero)"
+          },
+          "renditaCatastale": {
+            "type": "number",
+            "description": "Rendita catastale in Euro — solo per fabbricati"
+          },
+          "consistenza": {
+            "type": "string",
+            "description": "Consistenza: vani per abitazioni, mq per altre categorie"
+          },
+          "qualita": {
+            "type": "string",
+            "description": "Qualità colturale del terreno (es. SEMIN ARBOR, PRATO, VIGNETO) — solo per terreni"
+          },
+          "superficie": {
+            "type": "string",
+            "description": "Superficie totale in mq"
+          },
+          "superficieEscluseAreeScoperte": {
+            "type": "string",
+            "description": "Superficie totale escluse aree scoperte in mq"
+          },
+          "redditoDominicale": {
+            "type": "number",
+            "description": "Reddito dominicale in Euro — solo per terreni"
+          },
+          "redditoAgrario": {
+            "type": "number",
+            "description": "Reddito agrario in Euro — solo per terreni"
+          },
+          "intestatiCatastali": {
+            "type": "array",
+            "description": "Elenco degli intestatari catastali con diritti e quote",
+            "items": {
+              "type": "object",
+              "properties": {
+                "cognome": {
+                  "type": "string",
+                  "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+                },
+                "nome": {
+                  "type": "string",
+                  "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+                },
+                "codiceFiscale": {
+                  "type": "string",
+                  "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                  "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                },
+                "dataNascita": {
+                  "type": "string",
+                  "description": "Data di nascita in formato DD/MM/YYYY"
+                },
+                "luogoNascita": {
+                  "type": "string",
+                  "description": "Città e dopo inserisci la sigla della provincia calcolata così:  Se la città è una di queste usa la sua sigla: Barletta-Andria-Trani (BT) Bolzano (BZ) Caltanissetta (CL) Campobasso (CB) Caserta (CE) Chieti (CH) Crotone (KR) Forlì-Cesena (FC) Lecco (LC) Mantova (MN) Massa-Carrara (MS) Messina (ME) Monza e della Brianza (MB) Parma (PR) Perugia (PG) Pesaro e Urbino (PU) Piacenza (PC) Pistoia (PT) Potenza (PZ) Ragusa (RG) Reggio Calabria (RC) Roma (RM) Siracusa (SR) Sud Sardegna (SU) Trapani (TP) Trieste (TS) Vibo Valentia (VV), se è un'altra città crea la sigla con le prime due lettere del nome della città, possono essere più intestati identificati da un numero progressivo, separali con il numero progressivo seguito da \\\"-\\\""
+                },
+                "diritto": {
+                  "type": "string",
+                  "description": "Tipo di diritto e quota (es. Proprietà per 1/1, Proprietà per 1/2, Nuda proprietà per 1/1, Usufrutto per 1/1)"
+                }
+              },
+              "required": [
+                "cognome",
+                "nome",
+                "codiceFiscale",
+                "dataNascita",
+                "luogoNascita",
+                "diritto"
+              ]
+            }
+          }
+        },
+        "required": [
+          "foglio",
+          "particella",
+          "subalterno",
+          "comuneCatastale",
+          "intestatiCatastali"
+        ]
+      }
+    },
+    {
+      "id": "doc-planimetria",
+      "name": "Planimetria Catastale",
+      "description": "Dati identificativi della scheda grafica",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "foglio": {
+            "type": "string"
+          },
+          "particella": {
+            "type": "string"
+          },
+          "subalterno": {
+            "type": "string"
+          },
+          "protocollo": {
+            "type": "string"
+          },
+          "dataProtocollo": {
+            "type": "string",
+            "description": "Data del protocollo in formato europeo DD/MM/YYYY",
+            "pattern": "^\\\\d{2}[./]\\\\d{2}[./]\\\\d{4}$"
+          },
+          "scala": {
+            "type": "string",
+            "description": "Scala della planimetria (es. 1:100, 1:200, 1:50, 1:500)"
+          }
+        },
+        "required": [
+          "foglio",
+          "particella",
+          "subalterno",
+          "protocollo",
+          "dataProtocollo",
+          "scala"
+        ]
+      }
+    },
+    {
+      "id": "doc-ape",
+      "name": "APE - Certificato Energetico",
+      "description": "Efficienza energetica obbligatoria per annunci e rogito",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "classeEnergetica": {
+            "type": "string",
+            "description": "Classe energetica dell'immobile",
+            "enum": [
+              "A4",
+              "A3",
+              "A2",
+              "A1",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F",
+              "G",
+              null
+            ],
+            "nullable": true
+          },
+          "indiceEpgl": {
+            "type": "number",
+            "description": "Consumo energetico"
+          },
+          "codiceIdentificativo": {
+            "type": "string"
+          },
+          "validoFinoA": {
+            "type": "string",
+            "description": "Data di validità in formato europeo DD/MM/YYYY",
+            "pattern": "^\\\\d{2}[./]\\\\d{2}[./]\\\\d{4}$"
+          },
+          "regione": {
+            "type": "string"
+          },
+          "comune": {
+            "type": "string"
+          },
+          "indirizzo": {
+            "type": "string"
+          },
+          "piano": {
+            "type": "string"
+          },
+          "interno": {
+            "type": "string"
+          },
+          "comuneCatastale": {
+            "type": "string"
+          },
+          "sezione": {
+            "type": "string"
+          },
+          "foglio": {
+            "type": "string"
+          },
+          "particella": {
+            "type": "string"
+          },
+          "subalterni": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "destinazioneUso": {
+            "type": "string",
+            "description": "Destinazione d'uso dell'immobile (es. residenziale, ufficio, commerciale, industriale, agricolo, magazzino, autorimessa)"
+          },
+          "oggettoAttestato": {
+            "type": "string",
+            "description": "Oggetto dell'attestato"
+          },
+          "dataScadenza": {
+            "type": "string",
+            "description": "Data di scadenza in formato europeo DD/MM/YYYY",
+            "pattern": "^\\\\d{2}[./]\\\\d{2}[./]\\\\d{4}$"
+          },
+          "codiceUnivoco": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "classeEnergetica",
+          "indiceEpgl",
+          "codiceIdentificativo",
+          "validoFinoA",
+          "regione",
+          "comune",
+          "indirizzo",
+          "piano",
+          "interno",
+          "comuneCatastale",
+          "sezione",
+          "foglio",
+          "particella",
+          "subalterni",
+          "destinazioneUso",
+          "oggettoAttestato",
+          "dataScadenza",
+          "codiceUnivoco"
+        ]
+      }
+    },
+    {
+      "id": "doc-tessera-sanitaria",
+      "name": "Tessera Sanitaria",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "sesso": {
+            "type": "string",
+            "description": "Sesso del titolare",
+            "enum": [
+              "M",
+              "F",
+              null
+            ],
+            "nullable": true
+          },
+          "luogoDiNascita": {
+            "type": "string",
+            "description": ""
+          },
+          "provincia": {
+            "type": "string",
+            "description": "può essere indicata con \"( )\" o senza"
+          },
+          "dataDiNascita": {
+            "type": "string",
+            "description": "Data in formato DD.MM.YYYY — ALWAYS use dots as separator (es. 15.01.2021), NEVER use slashes (15/01/2021 is WRONG)",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "dataDiScadenza": {
+            "type": "string",
+            "description": "Data in formato DD.MM.YYYY — ALWAYS use dots as separator (es. 15.01.2021), NEVER use slashes (15/01/2021 is WRONG)",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "dataEmissione": {
+            "type": "string",
+            "description": "Data in formato DD.MM.YYYY — ALWAYS use dots as separator (es. 15.01.2021), NEVER use slashes (15/01/2021 is WRONG)",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          }
+        },
+        "required": [
+          "codiceFiscale",
+          "cognome",
+          "nome",
+          "sesso",
+          "luogoDiNascita",
+          "provincia",
+          "dataDiNascita",
+          "dataDiScadenza",
+          "dataEmissione"
+        ]
+      }
+    },
+    {
+      "id": "doc-morte",
+      "name": "Certificato di Morte",
+      "description": "Certificato/Estratto che attesta il decesso, richiesto quando il venditore/acquirente è vedovo/a",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "nomeDefunto": {
+            "type": "string",
+            "description": "Nome del defunto"
+          },
+          "cognomeDefunto": {
+            "type": "string",
+            "description": "Cognome del defunto"
+          },
+          "codiceFiscaleDefunto": {
+            "type": "string",
+            "description": "Codice Fiscale del defunto — fondamentale per cross-reference con successione (extract without spaces)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "dataNascita": {
+            "type": "string",
+            "description": "Data di nascita del defunto in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "luogoNascita": {
+            "type": "string",
+            "description": "Comune di nascita del defunto"
+          },
+          "dataDecesso": {
+            "type": "string",
+            "description": "Data del decesso in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "oraDecesso": {
+            "type": "string",
+            "description": "Ora del decesso, se indicata"
+          },
+          "luogoMorte": {
+            "type": "string",
+            "description": "Comune di decesso"
+          },
+          "ultimaResidenza": {
+            "type": "string",
+            "description": "Ultimo comune di residenza del defunto"
+          },
+          "statoCivile": {
+            "type": "string",
+            "description": "Stato civile del defunto al momento del decesso",
+            "enum": [
+              "celibe",
+              "nubile",
+              "coniugato",
+              "coniugata",
+              "vedovo",
+              "vedova",
+              "divorziato",
+              "divorziata",
+              "separato",
+              "separata",
+              null
+            ],
+            "nullable": true
+          },
+          "nomeConiuge": {
+            "type": "string",
+            "description": "Nome e cognome del coniuge superstite, se presente"
+          },
+          "comuneRegistrazione": {
+            "type": "string",
+            "description": "Comune dove è stato registrato l'atto di morte"
+          },
+          "parteSerie": {
+            "type": "string",
+            "description": "Parte e serie dell'atto"
+          },
+          "numero": {
+            "type": "string",
+            "description": "Numero dell'atto di morte"
+          }
+        },
+        "required": [
+          "nomeDefunto",
+          "cognomeDefunto",
+          "dataDecesso",
+          "luogoMorte",
+          "comuneRegistrazione"
+        ]
+      }
+    },
+    {
+      "id": "doc-successione",
+      "name": "Dichiarazione di Successione",
+      "description": "Denuncia di successione presentata all'Agenzia delle Entrate, richiesta quando l'immobile proviene da eredità",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "defunto": {
+            "type": "string",
+            "description": "Nome e cognome del defunto"
+          },
+          "codiceFiscaleDefunto": {
+            "type": "string",
+            "description": "Codice Fiscale del defunto — per cross-reference con certificato di morte (extract without spaces)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "dataDecesso": {
+            "type": "string",
+            "description": "Data del decesso in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "dataPresentazione": {
+            "type": "string",
+            "description": "Data di presentazione della dichiarazione in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "protocollo": {
+            "type": "string",
+            "description": "Numero di protocollo Agenzia delle Entrate (es. SUC/2021/FI/12345)"
+          },
+          "eredi": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string"
+                },
+                "cognome": {
+                  "type": "string"
+                },
+                "codiceFiscale": {
+                  "type": "string"
+                },
+                "quotaEreditaria": {
+                  "type": "string",
+                  "description": "Quota di eredità (es. 1/2, 1/3)"
+                },
+                "rapportoParentela": {
+                  "type": "string",
+                  "description": "Rapporto di parentela con il defunto (es. coniuge, figlio, fratello)"
+                }
+              },
+              "required": [
+                "nome",
+                "cognome",
+                "codiceFiscale",
+                "quotaEreditaria"
+              ]
+            }
+          },
+          "foglio": {
+            "type": "string"
+          },
+          "particella": {
+            "type": "string"
+          },
+          "subalterno": {
+            "type": "string"
+          },
+          "volumeAtti": {
+            "type": "string",
+            "description": "Volume e numero di registrazione"
+          }
+        },
+        "required": [
+          "defunto",
+          "dataDecesso",
+          "dataPresentazione",
+          "eredi",
+          "foglio",
+          "particella",
+          "subalterno"
+        ]
+      }
+    },
+    {
+      "id": "doc-eredita",
+      "name": "Accettazione di Eredità",
+      "description": "Atto di accettazione dell'eredità trascritto in Conservatoria, necessario per la vendita di immobili ereditati",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "erede": {
+            "type": "string",
+            "description": "Nome e cognome dell'erede accettante"
+          },
+          "codiceFiscaleErede": {
+            "type": "string",
+            "description": "Codice Fiscale dell'erede"
+          },
+          "defunto": {
+            "type": "string",
+            "description": "Nome e cognome del defunto"
+          },
+          "tipoAccettazione": {
+            "type": "string",
+            "description": "Tipo di accettazione",
+            "enum": [
+              "pura e semplice",
+              "con beneficio d'inventario",
+              null
+            ],
+            "nullable": true
+          },
+          "dataTrascrizione": {
+            "type": "string",
+            "description": "Data di trascrizione in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "notaio": {
+            "type": "string",
+            "description": "Notaio rogante"
+          },
+          "numeroRepertorio": {
+            "type": "string"
+          },
+          "numeroTrascrizione": {
+            "type": "string",
+            "description": "Numero di trascrizione in Conservatoria"
+          }
+        },
+        "required": [
+          "erede",
+          "codiceFiscaleErede",
+          "defunto",
+          "dataTrascrizione"
+        ]
+      }
+    },
+    {
+      "id": "doc-famiglia",
+      "name": "Certificato di Stato di Famiglia",
+      "description": "Certificato anagrafico che attesta la composizione del nucleo familiare, utile per verifiche sul regime patrimoniale",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "intestatario": {
+            "type": "string",
+            "description": "Nome e cognome dell'intestatario del nucleo familiare"
+          },
+          "codiceFiscaleIntestatario": {
+            "type": "string",
+            "description": "Codice Fiscale dell'intestatario (extract without spaces)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo di residenza del nucleo familiare"
+          },
+          "comune": {
+            "type": "string"
+          },
+          "componenti": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string"
+                },
+                "cognome": {
+                  "type": "string"
+                },
+                "codiceFiscale": {
+                  "type": "string",
+                  "description": "Codice Fiscale del componente, se presente"
+                },
+                "dataNascita": {
+                  "type": "string"
+                },
+                "relazione": {
+                  "type": "string",
+                  "description": "Relazione familiare (es. intestatario, coniuge, convivente, figlio/a, padre, madre, fratello/sorella, nipote)"
+                }
+              },
+              "required": [
+                "nome",
+                "cognome",
+                "dataNascita",
+                "relazione"
+              ]
+            }
+          },
+          "dataRilascio": {
+            "type": "string",
+            "description": "Data di rilascio in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          }
+        },
+        "required": [
+          "intestatario",
+          "indirizzo",
+          "comune",
+          "componenti",
+          "dataRilascio"
+        ]
+      }
+    },
+    {
+      "id": "doc-visura-ipotecaria",
+      "name": "Visura Ipotecaria",
+      "description": "Ispezione ipotecaria che riporta la situazione giuridica dell'immobile: proprietà, ipoteche, pignoramenti e vincoli",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "tipoFormalita": {
+            "type": "string",
+            "description": "Tipo di formalità (es. compravendita, ipoteca volontaria, ipoteca giudiziale, ipoteca legale, pignoramento, sequestro conservativo, successione ereditaria, donazione, trascrizione, servitù, cancellazione, annotazione)"
+          },
+          "dataRegistrazione": {
+            "type": "string",
+            "description": "Data di registrazione in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "numeroRegistrazione": {
+            "type": "string",
+            "description": "Numero di registro (Registro Generale e Registro Particolare)"
+          },
+          "soggetti": {
+            "type": "array",
+            "description": "Soggetti coinvolti nella formalità",
+            "items": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string"
+                },
+                "cognome": {
+                  "type": "string"
+                },
+                "codiceFiscale": {
+                  "type": "string"
+                },
+                "ruolo": {
+                  "type": "string",
+                  "description": "Ruolo del soggetto (es. proprietario, creditore, debitore, garante, dante causa, avente causa)"
+                }
+              },
+              "required": [
+                "nome",
+                "cognome",
+                "codiceFiscale",
+                "ruolo"
+              ]
+            }
+          },
+          "foglio": {
+            "type": "string",
+            "description": "Foglio catastale dell'immobile"
+          },
+          "particella": {
+            "type": "string",
+            "description": "Particella catastale dell'immobile"
+          },
+          "subalterno": {
+            "type": "string",
+            "description": "Subalterno dell'immobile"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo dell'immobile, se presente"
+          },
+          "importo": {
+            "type": "string",
+            "description": "Importo dell'ipoteca o del credito, se applicabile"
+          },
+          "note": {
+            "type": "string",
+            "description": "Note o annotazioni aggiuntive — copiare TESTUALMENTE dal documento (es. cancellazione, restrizione). Se non ci sono note, restituire stringa vuota. NON scrivere frasi come \"Nessuna ipoteca\" o \"Nessun vincolo\"."
+          }
+        },
+        "required": [
+          "tipoFormalita",
+          "dataRegistrazione",
+          "numeroRegistrazione",
+          "soggetti",
+          "foglio",
+          "particella"
+        ]
+      }
+    },
+    {
+      "id": "doc-agibilita",
+      "name": "Certificato di Agibilità",
+      "description": "Attesta che l'immobile soddisfa requisiti di sicurezza, igiene, salubrità e risparmio energetico",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "numeroProtocollo": {
+            "type": "string",
+            "description": "Numero di protocollo del certificato"
+          },
+          "dataRilascio": {
+            "type": "string",
+            "description": "Data di rilascio in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "comuneRilascio": {
+            "type": "string",
+            "description": "Comune che ha rilasciato il certificato"
+          },
+          "richiedente": {
+            "type": "string",
+            "description": "Nome e cognome del richiedente"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo completo dell'immobile"
+          },
+          "foglio": {
+            "type": "string"
+          },
+          "particella": {
+            "type": "string"
+          },
+          "subalterno": {
+            "type": "string"
+          },
+          "destinazioneUso": {
+            "type": "string",
+            "description": "Destinazione d'uso dell'immobile (es. residenziale, ufficio, commerciale, industriale, agricolo, magazzino, autorimessa)"
+          },
+          "tecnicoAsseverante": {
+            "type": "string",
+            "description": "Nome del tecnico che ha asseverato la conformità"
+          }
+        },
+        "required": [
+          "numeroProtocollo",
+          "dataRilascio",
+          "comuneRilascio",
+          "indirizzo",
+          "destinazioneUso"
+        ]
+      }
+    },
+    {
+      "id": "doc-matrimonio",
+      "name": "Estratto Atto di Matrimonio",
+      "description": "Estratto dell'atto di matrimonio o certificato di stato libero, richiesto dal notaio per verificare il regime patrimoniale",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "coniuge1": {
+            "type": "string",
+            "description": "Nome e cognome del primo coniuge"
+          },
+          "coniuge2": {
+            "type": "string",
+            "description": "Nome e cognome del secondo coniuge"
+          },
+          "dataMatrimonio": {
+            "type": "string",
+            "description": "Data di celebrazione del matrimonio in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "luogoMatrimonio": {
+            "type": "string",
+            "description": "Comune di celebrazione"
+          },
+          "regimePatrimoniale": {
+            "type": "string",
+            "description": "Regime patrimoniale scelto",
+            "enum": [
+              "comunione dei beni",
+              "separazione dei beni",
+              null
+            ],
+            "nullable": true
+          },
+          "annotazioni": {
+            "type": "string",
+            "description": "Annotazioni marginali — copiare TESTUALMENTE dal documento (es. separazione, divorzio, convenzioni patrimoniali)"
+          },
+          "comuneRegistrazione": {
+            "type": "string",
+            "description": "Comune dove è stato registrato l'atto"
+          },
+          "parte": {
+            "type": "string",
+            "description": "Parte e numero dell'atto"
+          }
+        },
+        "required": [
+          "coniuge1",
+          "coniuge2",
+          "dataMatrimonio",
+          "luogoMatrimonio",
+          "regimePatrimoniale"
+        ]
+      }
+    },
+    {
+      "id": "doc-conformita-urbanistica",
+      "name": "Conformità Urbanistica ed Edilizia",
+      "description": "Relazione tecnica che attesta la corrispondenza tra lo stato di fatto dell'immobile e i titoli abilitativi depositati in Comune",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "tecnico": {
+            "type": "string",
+            "description": "Nome del tecnico abilitato (architetto, ingegnere, geometra)"
+          },
+          "dataRelazione": {
+            "type": "string",
+            "description": "Data della relazione in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo completo dell'immobile"
+          },
+          "foglio": {
+            "type": "string"
+          },
+          "particella": {
+            "type": "string"
+          },
+          "subalterno": {
+            "type": "string"
+          },
+          "titoliAbilitativi": {
+            "type": "string",
+            "description": "Elenco dei titoli edilizi (licenza edilizia, concessione, permesso di costruire, SCIA, CILA)"
+          },
+          "esito": {
+            "type": "string",
+            "description": "Esito della verifica (es. conforme, non conforme, conforme con riserva, conforme con prescrizioni)"
+          },
+          "difformita": {
+            "type": "string",
+            "description": "Descrizione di eventuali difformità riscontrate — copiare TESTUALMENTE dal documento"
+          },
+          "condoni": {
+            "type": "string",
+            "description": "Eventuali domande di condono edilizio presentate — copiare TESTUALMENTE dal documento"
+          }
+        },
+        "required": [
+          "tecnico",
+          "dataRelazione",
+          "indirizzo",
+          "esito"
+        ]
+      }
+    },
+    {
+      "id": "doc-conformita-impianti",
+      "name": "Certificazione Conformità Impianti",
+      "description": "Dichiarazioni di conformità degli impianti (elettrico, idraulico, gas, riscaldamento) ai sensi del DM 37/2008",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "tipoImpianto": {
+            "type": "string",
+            "description": "Tipo di impianto certificato (es. elettrico, idraulico, gas, riscaldamento, climatizzazione, ascensore, elettrico e termoidraulico)"
+          },
+          "impresaInstallatrice": {
+            "type": "string",
+            "description": "Ragione sociale dell'impresa installatrice"
+          },
+          "responsabileTecnico": {
+            "type": "string",
+            "description": "Nome del responsabile tecnico"
+          },
+          "dataRilascio": {
+            "type": "string",
+            "description": "Data di rilascio della dichiarazione in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "numeroProtocollo": {
+            "type": "string",
+            "description": "Numero di protocollo della dichiarazione"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo dell'immobile"
+          },
+          "foglio": {
+            "type": "string",
+            "description": "Foglio catastale, se presente"
+          },
+          "particella": {
+            "type": "string",
+            "description": "Particella catastale, se presente"
+          },
+          "subalterno": {
+            "type": "string",
+            "description": "Subalterno, se presente"
+          },
+          "normativaRiferimento": {
+            "type": "string",
+            "description": "Normativa di riferimento (es. DM 37/2008, CEI 64-8)"
+          }
+        },
+        "required": [
+          "tipoImpianto",
+          "impresaInstallatrice",
+          "dataRilascio",
+          "indirizzo"
+        ]
+      }
+    },
+    {
+      "id": "doc-condominiale",
+      "name": "Documentazione Condominiale",
+      "description": "Dichiarazione dell'amministratore di condominio sulle spese e regolamento condominiale",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "amministratore": {
+            "type": "string",
+            "description": "Nome e cognome o ragione sociale dell'amministratore"
+          },
+          "condominio": {
+            "type": "string",
+            "description": "Denominazione del condominio"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo del condominio"
+          },
+          "unitaImmobiliare": {
+            "type": "string",
+            "description": "Identificazione dell'unità immobiliare (es. Scala A, Piano 3, Int. 5)"
+          },
+          "quoteRegolari": {
+            "type": "string",
+            "description": "Le quote condominiali sono regolarmente pagate",
+            "enum": [
+              "sì",
+              "no",
+              null
+            ],
+            "nullable": true
+          },
+          "importoArretrati": {
+            "type": "string",
+            "description": "Eventuali arretrati dovuti"
+          },
+          "speseStraodinarie": {
+            "type": "string",
+            "description": "Spese straordinarie deliberate o in corso"
+          },
+          "millesimi": {
+            "type": "string",
+            "description": "Millesimi di proprietà dell'unità"
+          },
+          "dataRilascio": {
+            "type": "string",
+            "description": "Data di rilascio della dichiarazione in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          }
+        },
+        "required": [
+          "amministratore",
+          "condominio",
+          "indirizzo",
+          "unitaImmobiliare",
+          "quoteRegolari",
+          "dataRilascio"
+        ]
+      }
+    },
+    {
+      "id": "doc-separazione",
+      "name": "Sentenza di Separazione/Divorzio",
+      "description": "Provvedimento giudiziario di separazione legale o divorzio, rilevante per la determinazione dei diritti patrimoniali sull'immobile",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "tribunale": {
+            "type": "string",
+            "description": "Tribunale competente che ha emesso la sentenza"
+          },
+          "numeroSentenza": {
+            "type": "string",
+            "description": "Numero di ruolo/sentenza"
+          },
+          "dataSentenza": {
+            "type": "string",
+            "description": "Data della sentenza in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "coniuge1": {
+            "type": "string",
+            "description": "Nome e cognome del primo coniuge"
+          },
+          "coniuge2": {
+            "type": "string",
+            "description": "Nome e cognome del secondo coniuge"
+          },
+          "tipoProvvedimento": {
+            "type": "string",
+            "description": "Tipo di provvedimento",
+            "enum": [
+              "separazione consensuale",
+              "separazione giudiziale",
+              "divorzio",
+              null
+            ],
+            "nullable": true
+          },
+          "disposizioniPatrimoniali": {
+            "type": "string",
+            "description": "Disposizioni relative ai beni immobili — copiare TESTUALMENTE dal documento, senza riformulare o riassumere (es. assegnazione casa coniugale)"
+          },
+          "passaggioInGiudicato": {
+            "type": "string",
+            "description": "Data di passaggio in giudicato in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          }
+        },
+        "required": [
+          "tribunale",
+          "dataSentenza",
+          "coniuge1",
+          "coniuge2",
+          "tipoProvvedimento"
+        ]
+      }
+    },
+    {
+      "id": "doc-delibera-mutuo",
+      "name": "Delibera di Mutuo",
+      "description": "Lettera di delibera della banca che conferma l'approvazione del mutuo ipotecario",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "banca": {
+            "type": "string",
+            "description": "Nome della banca o istituto di credito"
+          },
+          "filiale": {
+            "type": "string",
+            "description": "Filiale o agenzia"
+          },
+          "mutuatario": {
+            "type": "string",
+            "description": "Nome e cognome del mutuatario"
+          },
+          "codiceFiscaleMutuatario": {
+            "type": "string",
+            "description": "Codice Fiscale del mutuatario (extract without spaces)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "importoMutuo": {
+            "type": "number",
+            "description": "Importo del mutuo deliberato in Euro"
+          },
+          "durataAnni": {
+            "type": "number",
+            "description": "Durata del mutuo in anni"
+          },
+          "tassoInteresse": {
+            "type": "string",
+            "description": "Tasso di interesse (fisso, variabile, misto) e percentuale"
+          },
+          "tipoTasso": {
+            "type": "string",
+            "description": "Tipo di tasso",
+            "enum": [
+              "fisso",
+              "variabile",
+              "misto",
+              null
+            ],
+            "nullable": true
+          },
+          "dataDelibera": {
+            "type": "string",
+            "description": "Data della delibera in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "validitaDelibera": {
+            "type": "string",
+            "description": "Validità temporale della delibera (es. 6 mesi)"
+          },
+          "condizioniSospensive": {
+            "type": "string",
+            "description": "Eventuali condizioni sospensive (es. ipoteca di primo grado)"
+          }
+        },
+        "required": [
+          "banca",
+          "mutuatario",
+          "codiceFiscaleMutuatario",
+          "importoMutuo",
+          "dataDelibera"
+        ]
+      }
+    },
+    {
+      "id": "doc-perizia-bancaria",
+      "name": "Perizia Bancaria",
+      "description": "Perizia estimativa dell'immobile richiesta dalla banca per la concessione del mutuo",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "perito": {
+            "type": "string",
+            "description": "Nome e cognome del perito incaricato"
+          },
+          "dataPerizia": {
+            "type": "string",
+            "description": "Data della perizia in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo completo dell'immobile periziato"
+          },
+          "foglio": {
+            "type": "string",
+            "description": "Foglio catastale"
+          },
+          "particella": {
+            "type": "string",
+            "description": "Particella catastale"
+          },
+          "subalterno": {
+            "type": "string",
+            "description": "Subalterno"
+          },
+          "valoreStimato": {
+            "type": "number",
+            "description": "Valore di stima dell'immobile in Euro"
+          },
+          "superficieCommerciale": {
+            "type": "number",
+            "description": "Superficie commerciale in mq"
+          },
+          "statoConservazione": {
+            "type": "string",
+            "description": "Stato di conservazione (es. buono, ottimo, da ristrutturare)"
+          },
+          "conformitaCatastale": {
+            "type": "string",
+            "description": "Esito verifica conformità catastale"
+          },
+          "conformitaUrbanistica": {
+            "type": "string",
+            "description": "Esito verifica conformità urbanistica"
+          },
+          "note": {
+            "type": "string",
+            "description": "Note o osservazioni del perito — copiare TESTUALMENTE dal documento. Se non ci sono note, restituire stringa vuota."
+          }
+        },
+        "required": [
+          "perito",
+          "dataPerizia",
+          "indirizzo",
+          "valoreStimato"
+        ]
+      }
+    },
+    {
+      "id": "doc-contratto-mutuo",
+      "name": "Contratto di Mutuo",
+      "description": "Contratto di mutuo ipotecario stipulato contestualmente al rogito",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "banca": {
+            "type": "string",
+            "description": "Nome della banca o istituto di credito"
+          },
+          "mutuatario": {
+            "type": "string",
+            "description": "Nome e cognome del mutuatario"
+          },
+          "codiceFiscaleMutuatario": {
+            "type": "string",
+            "description": "Codice Fiscale del mutuatario (extract without spaces)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "importoMutuo": {
+            "type": "number",
+            "description": "Importo del mutuo erogato in Euro"
+          },
+          "durataAnni": {
+            "type": "number",
+            "description": "Durata del mutuo in anni"
+          },
+          "tassoInteresse": {
+            "type": "string",
+            "description": "Tasso di interesse e percentuale"
+          },
+          "tipoTasso": {
+            "type": "string",
+            "description": "Tipo di tasso",
+            "enum": [
+              "fisso",
+              "variabile",
+              "misto",
+              null
+            ],
+            "nullable": true
+          },
+          "rataMensile": {
+            "type": "number",
+            "description": "Importo rata mensile in Euro"
+          },
+          "notaio": {
+            "type": "string",
+            "description": "Nome e cognome del notaio rogante"
+          },
+          "dataStipula": {
+            "type": "string",
+            "description": "Data di stipula in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "numeroRepertorio": {
+            "type": "string",
+            "description": "Numero di repertorio"
+          },
+          "ipoteca": {
+            "type": "string",
+            "description": "Grado e importo dell'ipoteca iscritta"
+          }
+        },
+        "required": [
+          "banca",
+          "mutuatario",
+          "codiceFiscaleMutuatario",
+          "importoMutuo",
+          "dataStipula",
+          "notaio"
+        ]
+      }
+    },
+    {
+      "id": "doc-mezzi-pagamento",
+      "name": "Dichiarazione Mezzi di Pagamento",
+      "description": "Dichiarazione analitica dei mezzi di pagamento utilizzati nella compravendita (Art. 35 D.Lgs. 223/2006)",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "pagamenti": {
+            "type": "array",
+            "description": "Elenco analitico di tutti i mezzi di pagamento",
+            "items": {
+              "type": "object",
+              "properties": {
+                "tipo": {
+                  "type": "string",
+                  "description": "Tipo di pagamento (es. assegno circolare, bonifico bancario, mutuo fondiario)"
+                },
+                "importo": {
+                  "type": "number",
+                  "description": "Importo in Euro"
+                },
+                "numeroBonifico": {
+                  "type": "string",
+                  "description": "Numero CRO/TRN del bonifico o numero assegno"
+                },
+                "bancaEmittente": {
+                  "type": "string",
+                  "description": "Banca emittente dell'assegno o ordinante del bonifico"
+                },
+                "dataPagamento": {
+                  "type": "string",
+                  "description": "Data del pagamento in formato europeo DD.MM.YYYY",
+                  "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+                },
+                "intestatario": {
+                  "type": "string",
+                  "description": "Intestatario del mezzo di pagamento"
+                }
+              },
+              "required": [
+                "tipo",
+                "importo"
+              ]
+            }
+          },
+          "importoTotale": {
+            "type": "number",
+            "description": "Importo totale dei pagamenti in Euro"
+          },
+          "mediatore": {
+            "type": "string",
+            "description": "Nome dell'agenzia o mediatore, se presente"
+          },
+          "provvigione": {
+            "type": "number",
+            "description": "Importo della provvigione del mediatore in Euro"
+          }
+        },
+        "required": [
+          "pagamenti",
+          "importoTotale"
+        ]
+      }
+    },
+    {
+      "id": "doc-residenza",
+      "name": "Certificato di Residenza",
+      "description": "Certificato anagrafico che attesta la residenza attuale, richiesto quando l'indirizzo sull'identità differisce dalla residenza corrente",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo completo di residenza attuale"
+          },
+          "comune": {
+            "type": "string",
+            "description": "Comune di residenza"
+          },
+          "provincia": {
+            "type": "string",
+            "description": "Sigla Provincia"
+          },
+          "cap": {
+            "type": "string",
+            "description": "Codice Avviamento Postale"
+          },
+          "dataRilascio": {
+            "type": "string",
+            "description": "Data di rilascio in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "comuneRilascio": {
+            "type": "string",
+            "description": "Comune che ha rilasciato il certificato"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale",
+          "indirizzo",
+          "comune",
+          "dataRilascio"
+        ]
+      }
+    },
+    {
+      "id": "doc-cdu",
+      "name": "Certificato di Destinazione Urbanistica (CDU)",
+      "description": "Certificato rilasciato dal Comune che attesta la destinazione urbanistica di un terreno — obbligatorio per terreni >5000 mq (Art. 30 D.P.R. 380/2001)",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "foglio": {
+            "type": "string",
+            "description": "Foglio catastale"
+          },
+          "particella": {
+            "type": "string",
+            "description": "Particella catastale"
+          },
+          "comune": {
+            "type": "string",
+            "description": "Comune di ubicazione"
+          },
+          "destinazioneUrbanistica": {
+            "type": "string",
+            "description": "Destinazione urbanistica (es. Zona Residenziale B2, Zona Agricola E1)"
+          },
+          "estremiPRG": {
+            "type": "string",
+            "description": "Estremi del Piano Regolatore o Piano Urbanistico vigente"
+          },
+          "dataRilascio": {
+            "type": "string",
+            "description": "Data di rilascio in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "validita": {
+            "type": "string",
+            "description": "Validità del certificato (1 anno dalla data di rilascio)"
+          }
+        },
+        "required": [
+          "foglio",
+          "particella",
+          "comune",
+          "destinazioneUrbanistica",
+          "dataRilascio"
+        ]
+      }
+    },
+    {
+      "id": "doc-permesso-soggiorno",
+      "name": "Permesso di Soggiorno",
+      "description": "Documento rilasciato dalla Questura per cittadini extracomunitari — richiesto per acquirenti/venditori non-UE",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "cittadinanza": {
+            "type": "string",
+            "description": "Cittadinanza del titolare"
+          },
+          "tipoPermesso": {
+            "type": "string",
+            "description": "Tipo di permesso (es. lavoro subordinato, famiglia, lungo soggiorno)"
+          },
+          "numeroPermesso": {
+            "type": "string",
+            "description": "Numero del permesso di soggiorno"
+          },
+          "dataRilascio": {
+            "type": "string",
+            "description": "Data di rilascio in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "dataScadenza": {
+            "type": "string",
+            "description": "Data di scadenza in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "questura": {
+            "type": "string",
+            "description": "Questura rilasciante"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale",
+          "tipoPermesso",
+          "dataRilascio",
+          "dataScadenza"
+        ]
+      }
+    },
+    {
+      "id": "doc-visura-camerale",
+      "name": "Visura Camerale",
+      "description": "Documento della Camera di Commercio che attesta i dati di una società — richiesto quando il venditore/acquirente è una persona giuridica",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "ragioneSociale": {
+            "type": "string",
+            "description": "Denominazione o ragione sociale della società"
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale / Partita IVA della società"
+          },
+          "sedeLegale": {
+            "type": "string",
+            "description": "Indirizzo della sede legale"
+          },
+          "formaGiuridica": {
+            "type": "string",
+            "description": "Forma giuridica (es. S.r.l., S.p.A., S.a.s.)"
+          },
+          "legaleRappresentante": {
+            "type": "string",
+            "description": "Nome e cognome del legale rappresentante"
+          },
+          "codiceFiscaleRappresentante": {
+            "type": "string",
+            "description": "Codice Fiscale del legale rappresentante (extract without spaces)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "numeroREA": {
+            "type": "string",
+            "description": "Numero di iscrizione al Registro Imprese (REA)"
+          },
+          "dataIscrizione": {
+            "type": "string",
+            "description": "Data di iscrizione al Registro Imprese"
+          },
+          "statoAttivita": {
+            "type": "string",
+            "description": "Stato di attività (es. attiva, in liquidazione, cessata)"
+          },
+          "oggettoSociale": {
+            "type": "string",
+            "description": "Oggetto sociale della società"
+          }
+        },
+        "required": [
+          "ragioneSociale",
+          "codiceFiscale",
+          "sedeLegale",
+          "formaGiuridica",
+          "legaleRappresentante"
+        ]
+      }
+    },
+    {
+      "id": "doc-procura",
+      "name": "Procura",
+      "description": "Atto notarile che conferisce il potere di rappresentanza per compiere atti per conto di un'altra persona in sede di rogito",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "nomeMandante": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognomeMandante": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscaleMandante": {
+            "type": "string",
+            "description": "Codice Fiscale del mandante (extract without spaces)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "nomeMandatario": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognomeMandatario": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscaleMandatario": {
+            "type": "string",
+            "description": "Codice Fiscale del mandatario (extract without spaces)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "tipoProcura": {
+            "type": "string",
+            "description": "Tipo di procura",
+            "enum": [
+              "speciale",
+              "generale",
+              null
+            ],
+            "nullable": true
+          },
+          "oggettoDelega": {
+            "type": "string",
+            "description": "Oggetto specifico della delega (es. vendita dell'immobile sito in...)"
+          },
+          "notaio": {
+            "type": "string",
+            "description": "Notaio che ha autenticato la procura"
+          },
+          "dataAtto": {
+            "type": "string",
+            "description": "Data dell'atto in formato europeo DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "numeroRepertorio": {
+            "type": "string",
+            "description": "Numero di repertorio"
+          }
+        },
+        "required": [
+          "nomeMandante",
+          "cognomeMandante",
+          "codiceFiscaleMandante",
+          "nomeMandatario",
+          "cognomeMandatario",
+          "codiceFiscaleMandatario",
+          "tipoProcura",
+          "dataAtto"
+        ]
+      }
+    }
+  ],
+  "entityTypes": [
+    {
+      "id": "entity-venditore",
+      "name": "Venditore",
+      "icon": "user-minus",
+      "color": "#ef4444",
+      "displayOrder": 0,
+      "fieldOrder": [
+        "nome",
+        "cognome",
+        "codiceFiscale",
+        "dataNascita",
+        "luogoNascita",
+        "indirizzoDiResidenza",
+        "statoCivile",
+        "regimePatrimoniale",
+        "telefono",
+        "email"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-identita",
+          "enabled": true,
+          "isRequired": true,
+          "fieldMappings": [
+            {
+              "sourceField": "nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "indirizzoDiResidenza",
+              "targetField": "indirizzoDiResidenza",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "luogoNascita",
+              "targetField": "luogoNascita",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "dataNascita",
+              "targetField": "dataNascita",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "statoCivile",
+              "targetField": "statoCivile",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-contatto",
+          "enabled": true,
+          "isRequired": true,
+          "fieldMappings": [
+            {
+              "sourceField": "telefonoCellulare",
+              "targetField": "telefono",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "email",
+              "targetField": "email",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-provenienza",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "acquirenti.nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "acquirenti.cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "acquirenti.codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "acquirenti.statoCivile",
+              "targetField": "statoCivile",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "acquirenti.regimePatrimoniale",
+              "targetField": "regimePatrimoniale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-preliminare",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "venditori.nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "venditori.cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "venditori.codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "venditori.statoCivile",
+              "targetField": "statoCivile",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-tessera-sanitaria",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-visura",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "intestatiCatastali.cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "intestatiCatastali.nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "intestatiCatastali.codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "intestatiCatastali.dataNascita",
+              "targetField": "dataNascita",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "intestatiCatastali.luogoNascita",
+              "targetField": "luogoNascita",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-matrimonio",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "regimePatrimoniale",
+              "targetField": "regimePatrimoniale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-residenza",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "indirizzo",
+              "targetField": "indirizzoDiResidenza",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-procura",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "nomeMandante",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "cognomeMandante",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "codiceFiscaleMandante",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": [
+        {
+          "docTypeId": "doc-morte",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-provenienza",
+              "field": "acquirenti.statoCivile",
+              "operator": "contains",
+              "value": "vedov"
+            },
+            {
+              "sourceDocTypeId": "doc-identita",
+              "field": "statoCivile",
+              "operator": "contains",
+              "value": "vedov"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-famiglia",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-provenienza",
+              "field": "acquirenti.statoCivile",
+              "operator": "contains",
+              "value": "vedov"
+            },
+            {
+              "sourceDocTypeId": "doc-identita",
+              "field": "statoCivile",
+              "operator": "contains",
+              "value": "vedov"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-matrimonio",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-provenienza",
+              "field": "acquirenti.statoCivile",
+              "operator": "contains",
+              "value": "coniugat"
+            },
+            {
+              "sourceDocTypeId": "doc-identita",
+              "field": "statoCivile",
+              "operator": "contains",
+              "value": "coniugat"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-separazione",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-provenienza",
+              "field": "acquirenti.statoCivile",
+              "operator": "contains",
+              "value": "separat"
+            },
+            {
+              "sourceDocTypeId": "doc-provenienza",
+              "field": "acquirenti.statoCivile",
+              "operator": "contains",
+              "value": "divorziat"
+            },
+            {
+              "sourceDocTypeId": "doc-identita",
+              "field": "statoCivile",
+              "operator": "contains",
+              "value": "separat"
+            },
+            {
+              "sourceDocTypeId": "doc-identita",
+              "field": "statoCivile",
+              "operator": "contains",
+              "value": "divorziat"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-matrimonio",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-provenienza",
+              "field": "acquirenti.statoCivile",
+              "operator": "contains",
+              "value": "separat"
+            },
+            {
+              "sourceDocTypeId": "doc-provenienza",
+              "field": "acquirenti.statoCivile",
+              "operator": "contains",
+              "value": "divorziat"
+            },
+            {
+              "sourceDocTypeId": "doc-identita",
+              "field": "statoCivile",
+              "operator": "contains",
+              "value": "separat"
+            },
+            {
+              "sourceDocTypeId": "doc-identita",
+              "field": "statoCivile",
+              "operator": "contains",
+              "value": "divorziat"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "entity-immobile",
+      "name": "Immobile",
+      "icon": "home",
+      "color": "#3b82f6",
+      "displayOrder": 1,
+      "fieldOrder": [
+        "foglio",
+        "particella",
+        "subalterno",
+        "indirizzo",
+        "comuneCatastale",
+        "sezione",
+        "categoria",
+        "classe",
+        "piano",
+        "consistenza",
+        "rendita",
+        "superficie",
+        "classeEnergetica",
+        "destinazioneUso",
+        "destinazioneUrbanistica"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-provenienza",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "immobili.foglio",
+              "targetField": "foglio",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "immobili.particella",
+              "targetField": "particella",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "immobili.subalterno",
+              "targetField": "subalterno",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "indirizzo",
+              "targetField": "indirizzo",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "immobili.categoria",
+              "targetField": "categoria",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "immobili.piano",
+              "targetField": "piano",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "immobili.consistenza",
+              "targetField": "consistenza",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "immobili.rendita",
+              "targetField": "rendita",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-visura",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "foglio",
+              "targetField": "foglio",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "particella",
+              "targetField": "particella",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "subalterno",
+              "targetField": "subalterno",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "sezione",
+              "targetField": "sezione",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "comuneCatastale",
+              "targetField": "comuneCatastale",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "indirizzoCatastale",
+              "targetField": "indirizzo",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "piano",
+              "targetField": "piano",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "categoriaCatastale",
+              "targetField": "categoria",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "classe",
+              "targetField": "classe",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "renditaCatastale",
+              "targetField": "rendita",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "consistenza",
+              "targetField": "consistenza",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "superficie",
+              "targetField": "superficie",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-planimetria",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "foglio",
+              "targetField": "foglio",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "particella",
+              "targetField": "particella",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "subalterno",
+              "targetField": "subalterno",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-ape",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "foglio",
+              "targetField": "foglio",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "particella",
+              "targetField": "particella",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "subalterni",
+              "targetField": "subalterno",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "indirizzo",
+              "targetField": "indirizzo",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "classeEnergetica",
+              "targetField": "classeEnergetica",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-visura-ipotecaria",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "foglio",
+              "targetField": "foglio",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "particella",
+              "targetField": "particella",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "subalterno",
+              "targetField": "subalterno",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "indirizzo",
+              "targetField": "indirizzo",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-agibilita",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "foglio",
+              "targetField": "foglio",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "particella",
+              "targetField": "particella",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "subalterno",
+              "targetField": "subalterno",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "indirizzo",
+              "targetField": "indirizzo",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "destinazioneUso",
+              "targetField": "destinazioneUso",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-conformita-urbanistica",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "foglio",
+              "targetField": "foglio",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "particella",
+              "targetField": "particella",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "subalterno",
+              "targetField": "subalterno",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "indirizzo",
+              "targetField": "indirizzo",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-conformita-impianti",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "foglio",
+              "targetField": "foglio",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "particella",
+              "targetField": "particella",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "subalterno",
+              "targetField": "subalterno",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "indirizzo",
+              "targetField": "indirizzo",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-successione",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "foglio",
+              "targetField": "foglio",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "particella",
+              "targetField": "particella",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "subalterno",
+              "targetField": "subalterno",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-condominiale",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "indirizzo",
+              "targetField": "indirizzo",
+              "matchFields": [
+                {
+                  "field": "indirizzo",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-cdu",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "foglio",
+              "targetField": "foglio",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "particella",
+              "targetField": "particella",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "destinazioneUrbanistica",
+              "targetField": "destinazioneUrbanistica",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-perizia-bancaria",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "foglio",
+              "targetField": "foglio",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "particella",
+              "targetField": "particella",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "subalterno",
+              "targetField": "subalterno",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "indirizzo",
+              "targetField": "indirizzo",
+              "matchFields": [
+                {
+                  "field": "foglio",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "particella",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "subalterno",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": [
+        {
+          "docTypeId": "doc-successione",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-provenienza",
+              "field": "tipoProvenienza",
+              "operator": "equals",
+              "value": "successione"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-eredita",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-provenienza",
+              "field": "tipoProvenienza",
+              "operator": "equals",
+              "value": "successione"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-famiglia",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-provenienza",
+              "field": "tipoProvenienza",
+              "operator": "equals",
+              "value": "donazione"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-condominiale",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-visura",
+              "field": "categoriaCatastale",
+              "operator": "contains",
+              "value": "A/"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-cdu",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-visura",
+              "field": "qualita",
+              "operator": "exists"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-perizia-bancaria",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-delibera-mutuo",
+              "field": "importoMutuo",
+              "operator": "exists"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "entity-acquirente",
+      "name": "Acquirente",
+      "icon": "user-plus",
+      "color": "#22c55e",
+      "displayOrder": 2,
+      "fieldOrder": [
+        "nome",
+        "cognome",
+        "codiceFiscale",
+        "dataNascita",
+        "luogoNascita",
+        "indirizzoDiResidenza",
+        "statoCivile",
+        "regimePatrimoniale",
+        "telefono",
+        "email"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-identita",
+          "enabled": true,
+          "isRequired": true,
+          "fieldMappings": [
+            {
+              "sourceField": "nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "indirizzoDiResidenza",
+              "targetField": "indirizzoDiResidenza",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "luogoNascita",
+              "targetField": "luogoNascita",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "dataNascita",
+              "targetField": "dataNascita",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "statoCivile",
+              "targetField": "statoCivile",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-contatto",
+          "enabled": true,
+          "isRequired": true,
+          "fieldMappings": [
+            {
+              "sourceField": "telefonoCellulare",
+              "targetField": "telefono",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "email",
+              "targetField": "email",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-preliminare",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "acquirenti.nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "acquirenti.cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "acquirenti.codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "acquirenti.statoCivile",
+              "targetField": "statoCivile",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-proposta",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "proponenti.nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "proponenti.cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "proponenti.codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-tessera-sanitaria",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-matrimonio",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "regimePatrimoniale",
+              "targetField": "regimePatrimoniale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-residenza",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "indirizzo",
+              "targetField": "indirizzoDiResidenza",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-procura",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "nomeMandante",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "cognomeMandante",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "codiceFiscaleMandante",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-delibera-mutuo",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "codiceFiscaleMutuatario",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-contratto-mutuo",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "codiceFiscaleMutuatario",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": [
+        {
+          "docTypeId": "doc-morte",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-preliminare",
+              "field": "acquirenti.statoCivile",
+              "operator": "contains",
+              "value": "vedov"
+            },
+            {
+              "sourceDocTypeId": "doc-identita",
+              "field": "statoCivile",
+              "operator": "contains",
+              "value": "vedov"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-famiglia",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-preliminare",
+              "field": "acquirenti.statoCivile",
+              "operator": "contains",
+              "value": "vedov"
+            },
+            {
+              "sourceDocTypeId": "doc-identita",
+              "field": "statoCivile",
+              "operator": "contains",
+              "value": "vedov"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-matrimonio",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-preliminare",
+              "field": "acquirenti.statoCivile",
+              "operator": "contains",
+              "value": "coniugat"
+            },
+            {
+              "sourceDocTypeId": "doc-identita",
+              "field": "statoCivile",
+              "operator": "contains",
+              "value": "coniugat"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-separazione",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-preliminare",
+              "field": "acquirenti.statoCivile",
+              "operator": "contains",
+              "value": "separat"
+            },
+            {
+              "sourceDocTypeId": "doc-preliminare",
+              "field": "acquirenti.statoCivile",
+              "operator": "contains",
+              "value": "divorziat"
+            },
+            {
+              "sourceDocTypeId": "doc-identita",
+              "field": "statoCivile",
+              "operator": "contains",
+              "value": "separat"
+            },
+            {
+              "sourceDocTypeId": "doc-identita",
+              "field": "statoCivile",
+              "operator": "contains",
+              "value": "divorziat"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-matrimonio",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-preliminare",
+              "field": "acquirenti.statoCivile",
+              "operator": "contains",
+              "value": "separat"
+            },
+            {
+              "sourceDocTypeId": "doc-preliminare",
+              "field": "acquirenti.statoCivile",
+              "operator": "contains",
+              "value": "divorziat"
+            },
+            {
+              "sourceDocTypeId": "doc-identita",
+              "field": "statoCivile",
+              "operator": "contains",
+              "value": "separat"
+            },
+            {
+              "sourceDocTypeId": "doc-identita",
+              "field": "statoCivile",
+              "operator": "contains",
+              "value": "divorziat"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "entity-transazione",
+      "name": "Transazione",
+      "icon": "banknote",
+      "color": "#f59e0b",
+      "displayOrder": 3,
+      "fieldOrder": [
+        "prezzo",
+        "prezzoOfferto",
+        "caparra",
+        "mediatore",
+        "provvigione",
+        "importoMutuo",
+        "banca",
+        "tipoTasso",
+        "importoMutuoErogato",
+        "rataMensile",
+        "tassoInteresse",
+        "importoTotale",
+        "dataStipulaPrelim"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-preliminare",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "prezzo",
+              "targetField": "prezzo"
+            },
+            {
+              "sourceField": "caparra",
+              "targetField": "caparra"
+            },
+            {
+              "sourceField": "dataStipula",
+              "targetField": "dataStipulaPrelim"
+            },
+            {
+              "sourceField": "mediatore",
+              "targetField": "mediatore"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-proposta",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "prezzoOfferto",
+              "targetField": "prezzoOfferto"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-delibera-mutuo",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "importoMutuo",
+              "targetField": "importoMutuo"
+            },
+            {
+              "sourceField": "banca",
+              "targetField": "banca"
+            },
+            {
+              "sourceField": "tipoTasso",
+              "targetField": "tipoTasso"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-contratto-mutuo",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "importoMutuo",
+              "targetField": "importoMutuoErogato"
+            },
+            {
+              "sourceField": "rataMensile",
+              "targetField": "rataMensile"
+            },
+            {
+              "sourceField": "tassoInteresse",
+              "targetField": "tassoInteresse"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-mezzi-pagamento",
+          "enabled": true,
+          "isRequired": true,
+          "fieldMappings": [
+            {
+              "sourceField": "importoTotale",
+              "targetField": "importoTotale"
+            },
+            {
+              "sourceField": "mediatore",
+              "targetField": "mediatore"
+            },
+            {
+              "sourceField": "provvigione",
+              "targetField": "provvigione"
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": []
+    }
+  ],
+  "documentWorkflows": [
+    {
+      "id": "wf-doc-extraction",
+      "name": "Document Extraction",
+      "isDefault": true,
+      "enabled": true,
+      "priority": 2,
+      "nodes": [
+        {
+          "id": "load-document",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 50
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Load Document",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "documentService",
+              "methodName": "getById",
+              "arguments": {
+                "id": "context.docId"
+              },
+              "outputMapping": {
+                "doc": "doc"
+              }
+            }
+          }
+        },
+        {
+          "id": "check-doctype",
+          "type": "ifElse",
+          "position": {
+            "x": 300,
+            "y": 200
+          },
+          "data": {
+            "nodeType": "ifElse",
+            "label": "Has DocumentType?",
+            "status": "IDLE",
+            "config": {
+              "condition": "context.doc.docTypeId && context.doc.docTypeId !== null"
+            }
+          }
+        },
+        {
+          "id": "notify-no-doctype",
+          "type": "serviceCall",
+          "position": {
+            "x": 650,
+            "y": 200
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Notify: No DocType",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "notificationService",
+              "methodName": "create",
+              "arguments": {
+                "notification": {
+                  "title": "Extraction Stopped",
+                  "message": "No DocumentType set for this document. Cannot extract data.",
+                  "type": "error"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "load-schema",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 350
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Load Extraction Schema",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "projectService",
+              "methodName": "getExtractionSchema",
+              "arguments": {
+                "id": "context.doc.docTypeId"
+              },
+              "outputMapping": "data.schema"
+            }
+          }
+        },
+        {
+          "id": "ai-extract",
+          "type": "aiInteraction",
+          "position": {
+            "x": 300,
+            "y": 500
+          },
+          "data": {
+            "nodeType": "aiInteraction",
+            "label": "AI: Extract Data",
+            "status": "IDLE",
+            "config": {
+              "aiConfig": {
+                "provider": "vertex",
+                "model": "gemini-3-flash-preview",
+                "prompt": "You are a document processing system helping with legitimate data extraction for record keeping purposes. Extract all visible field values from this official document according to the provided JSON schema.\n\nCRITICAL ACCURACY REQUIREMENTS:\n- Transcribe ALL text EXACTLY as it appears on the document, character-by-character\n- Do NOT modify, correct, or reformat any values\n- Preserve exact capitalization, spacing, and punctuation\n- For codes/IDs: copy every character precisely (numbers, letters, special characters)\n- If a field is not visible or empty, use empty string \"\" (NOT null, NOT the word \"null\")\n- Double-check each value before including it\n\nCHARACTER CONFUSION PREVENTION (VERY IMPORTANT):\n- Carefully distinguish between similar-looking characters\n- Letter 'I' (uppercase i) vs Number '1' (one)\n- Letter 'O' (uppercase o) vs Number '0' (zero)\n- Letter 'T' vs Number '7'\n- Letter 'S' vs Number '5'\n- Letter 'B' vs Number '8'\n- Letter 'Z' vs Number '2'\n- Letter 'G' vs Number '6'\n- For Codice Fiscale: contains ONLY uppercase letters (A-Z) and numbers (0-9), 16 characters total, no spaces\n\nFREE-TEXT / SUMMARY FIELDS:\n- Copy text VERBATIM from the document — do NOT paraphrase, summarize, or rephrase\n- Keep the original punctuation, list format (dashes, semicolons), and paragraph structure\n- Do NOT add information not explicitly present in the document\n- Do NOT reorder content or change list bullet styles\n\nVALUE NORMALIZATION:\n- For place names: copy EXACTLY as written on the document (do NOT add province codes or extra info not present)\n- For floor/piano fields: use only the numeric value or code (e.g. \"2\", \"S1\", \"T\", NOT \"2 (Secondo)\" or \"Piano Secondo\")\n- For amounts: numbers only, no currency symbols unless explicitly shown in the original text\n\nReturn ONLY valid JSON matching the schema structure. This is an authorized document processing request.",
+                "input": "context.docId",
+                "inputType": "pdf",
+                "pages": "all",
+                "jsonSchema": "data.schema",
+                "outputKey": "data.data1",
+                "isJson": true,
+                "thinkingLevel": "low"
+              }
+            }
+          }
+        },
+        {
+          "id": "ai-verify",
+          "type": "aiInteraction",
+          "position": {
+            "x": 300,
+            "y": 700
+          },
+          "data": {
+            "nodeType": "aiInteraction",
+            "label": "AI: Verify Extraction",
+            "status": "IDLE",
+            "config": {
+              "aiConfig": {
+                "provider": "vertex",
+                "model": "gemini-3-flash-preview",
+                "prompt": "You are a document verification system. You have been given:\n1. A document (images/PDF)\n2. A previous extraction attempt (JSON) from another AI\n\nYour task:\n- Cross-reference EVERY field in the previous extraction against the actual document\n- Correct any errors: typos, OCR misreads, formatting inconsistencies, missing values\n- Fill in any fields that were missed (use \"\" for genuinely absent fields)\n- Apply the same extraction rules: character-by-character accuracy, no modification of original values, proper normalization\n\nFor each field, assign a confidence score (0.0 to 1.0):\n- 1.0 = clearly legible, no ambiguity\n- 0.7-0.9 = legible but minor ambiguity (e.g. similar-looking characters)\n- 0.3-0.6 = partially legible or context-dependent\n- 0.0-0.2 = guessed or not visible in document\n\nReturn a JSON object with:\n- \"data\": the corrected extraction matching the schema\n- \"corrections\": array of { field, original, corrected, reason } for each change made\n- \"confidence\": object mapping field names to confidence scores (0.0-1.0)\n\nReturn ONLY valid JSON.",
+                "input": "context.docId",
+                "inputType": "pdf",
+                "pages": "all",
+                "jsonSchema": "data.schema",
+                "outputKey": "data.data2",
+                "isJson": true,
+                "thinkingLevel": "medium",
+                "contextInput": "data.data1",
+                "verificationMode": true
+              }
+            }
+          }
+        },
+        {
+          "id": "validate-extraction",
+          "type": "validateExtraction",
+          "position": {
+            "x": 300,
+            "y": 900
+          },
+          "data": {
+            "nodeType": "validateExtraction",
+            "label": "Validate & Score",
+            "status": "IDLE",
+            "config": {
+              "data1Key": "data.data1",
+              "data2Key": "data.data2",
+              "outputKey": "data.extractedData"
+            }
+          }
+        },
+        {
+          "id": "save-results",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 1100
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Save Results",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "documentService",
+              "methodName": "update",
+              "arguments": {
+                "id": "context.docId",
+                "updates": {
+                  "extractedData": "context.data.extractedData",
+                  "doubleValidation": "context.data.doubleValidation",
+                  "extractionConflicts": "context.data.extractionConflicts",
+                  "confidenceScore": "context.data.confidenceScore",
+                  "fieldConfidence": "context.data.fieldConfidence",
+                  "error": "context.data.error"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "notify-success",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 1150
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Notify Success",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "notificationService",
+              "methodName": "create",
+              "arguments": {
+                "notification": {
+                  "title": "Document Processing Complete",
+                  "message": "Document \"{{doc.name}}\" has been successfully processed.",
+                  "type": "success",
+                  "actionUrl": "/documents/{{docId}}"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e-load-doc-check",
+          "source": "load-document",
+          "target": "check-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-check-load-schema",
+          "source": "check-doctype",
+          "sourceHandle": "true",
+          "target": "load-schema",
+          "type": "default"
+        },
+        {
+          "id": "e-check-notify-no",
+          "source": "check-doctype",
+          "sourceHandle": "false",
+          "target": "notify-no-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-schema-extract",
+          "source": "load-schema",
+          "target": "ai-extract",
+          "type": "default"
+        },
+        {
+          "id": "e-extract-verify",
+          "source": "ai-extract",
+          "target": "ai-verify",
+          "type": "default"
+        },
+        {
+          "id": "e-verify-validate",
+          "source": "ai-verify",
+          "target": "validate-extraction",
+          "type": "default"
+        },
+        {
+          "id": "e-validate-save",
+          "source": "validate-extraction",
+          "target": "save-results",
+          "type": "default"
+        },
+        {
+          "id": "e-save-notify",
+          "source": "save-results",
+          "target": "notify-success",
+          "type": "default"
+        }
+      ]
+    },
+    {
+      "id": "wf-doc-identification",
+      "name": "Document Identification",
+      "isDefault": true,
+      "enabled": true,
+      "priority": 1,
+      "nodes": [
+        {
+          "id": "get-document",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 50
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Get Document",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "documentService",
+              "methodName": "getById",
+              "arguments": {
+                "id": "context.docId"
+              },
+              "outputMapping": {
+                "doc": "doc"
+              }
+            }
+          }
+        },
+        {
+          "id": "check-has-doctype",
+          "type": "ifElse",
+          "position": {
+            "x": 300,
+            "y": 250
+          },
+          "data": {
+            "nodeType": "ifElse",
+            "label": "Has DocumentType?",
+            "status": "IDLE",
+            "config": {
+              "condition": "!context.doc.docTypeId || context.doc.docTypeId === null"
+            }
+          }
+        },
+        {
+          "id": "notify-already-exists",
+          "type": "serviceCall",
+          "position": {
+            "x": 650,
+            "y": 250
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Notify: Already Exists",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "notificationService",
+              "methodName": "create",
+              "arguments": {
+                "notification": {
+                  "title": "Document Processing Stopped",
+                  "message": "DocumentType already exists for this document.",
+                  "type": "warning"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "get-doctypes",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 650
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Get Type Names",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "projectService",
+              "methodName": "getIdentificationJSONSchema",
+              "arguments": {},
+              "outputMapping": "data.schema"
+            }
+          }
+        },
+        {
+          "id": "ai-identify-1",
+          "type": "aiInteraction",
+          "position": {
+            "x": 100,
+            "y": 850
+          },
+          "data": {
+            "nodeType": "aiInteraction",
+            "label": "AI: Identify Type #1",
+            "status": "IDLE",
+            "config": {
+              "aiConfig": {
+                "provider": "vertex",
+                "model": "gemini-3-flash-preview",
+                "prompt": "You are a document classification system. Analyze the document structure and content to identify its type. You MUST select one of the valid types from the provided schema. Classify this document.",
+                "input": "context.docId",
+                "inputType": "pdf",
+                "pages": 1,
+                "jsonSchema": "data.schema",
+                "outputKey": "data.type1",
+                "isJson": true,
+                "thinkingLevel": "minimal"
+              }
+            }
+          }
+        },
+        {
+          "id": "ai-identify-2",
+          "type": "aiInteraction",
+          "position": {
+            "x": 500,
+            "y": 850
+          },
+          "data": {
+            "nodeType": "aiInteraction",
+            "label": "AI: Identify Type #2",
+            "status": "IDLE",
+            "config": {
+              "aiConfig": {
+                "provider": "vertex",
+                "model": "gemini-3-flash-preview",
+                "prompt": "You are a document classification system. Analyze the document structure and content to identify its type. You MUST select one of the valid types from the provided schema. Classify this document.",
+                "input": "context.docId",
+                "inputType": "pdf",
+                "pages": 1,
+                "jsonSchema": "data.schema",
+                "outputKey": "data.type2",
+                "isJson": true,
+                "thinkingLevel": "minimal"
+              }
+            }
+          }
+        },
+        {
+          "id": "validate-type-match",
+          "type": "validateExtraction",
+          "position": {
+            "x": 300,
+            "y": 1050
+          },
+          "data": {
+            "nodeType": "validateExtraction",
+            "label": "Validate Type Match",
+            "status": "IDLE",
+            "config": {
+              "data1Key": "data.type1.documentType",
+              "data2Key": "data.type2.documentType",
+              "outputKey": "data.identifiedType"
+            }
+          }
+        },
+        {
+          "id": "lookup-doctype",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 1250
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Lookup Document Type",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "projectService",
+              "methodName": "getDocumentTypeByName",
+              "arguments": {
+                "name": "{{data.identifiedType}}"
+              },
+              "outputMapping": "data.foundDocType"
+            }
+          }
+        },
+        {
+          "id": "check-type-exists",
+          "type": "ifElse",
+          "position": {
+            "x": 300,
+            "y": 1450
+          },
+          "data": {
+            "nodeType": "ifElse",
+            "label": "Type Exists?",
+            "status": "IDLE",
+            "config": {
+              "condition": "!!context.data.foundDocType && !!context.data.foundDocType.id"
+            }
+          }
+        },
+        {
+          "id": "notify-type-not-found",
+          "type": "serviceCall",
+          "position": {
+            "x": 550,
+            "y": 1650
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Notify: Type Not Found",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "notificationService",
+              "methodName": "create",
+              "arguments": {
+                "notification": {
+                  "title": "Document Type Not Found",
+                  "message": "Identified type '{{data.identifiedType}}' does not exist in the system.",
+                  "type": "warning"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "assign-doctype",
+          "type": "serviceCall",
+          "position": {
+            "x": 50,
+            "y": 1650
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Assign DocType",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "documentService",
+              "methodName": "update",
+              "arguments": {
+                "id": "context.docId",
+                "updates": {
+                  "docTypeId": "{{data.foundDocType.id}}"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e-get-check",
+          "source": "get-document",
+          "target": "check-has-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-check-gettypes",
+          "source": "check-has-doctype",
+          "sourceHandle": "true",
+          "target": "get-doctypes",
+          "type": "default"
+        },
+        {
+          "id": "e-check-exists",
+          "source": "check-has-doctype",
+          "sourceHandle": "false",
+          "target": "notify-already-exists",
+          "type": "default"
+        },
+        {
+          "id": "e-gettypes-ai1",
+          "source": "get-doctypes",
+          "target": "ai-identify-1",
+          "type": "default"
+        },
+        {
+          "id": "e-ai1-ai2",
+          "source": "ai-identify-1",
+          "target": "ai-identify-2",
+          "type": "default"
+        },
+        {
+          "id": "e-ai2-validate",
+          "source": "ai-identify-2",
+          "target": "validate-type-match",
+          "type": "default"
+        },
+        {
+          "id": "e-validate-lookup",
+          "source": "validate-type-match",
+          "target": "lookup-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-lookup-check",
+          "source": "lookup-doctype",
+          "target": "check-type-exists",
+          "type": "default"
+        },
+        {
+          "id": "e-check-assign",
+          "source": "check-type-exists",
+          "sourceHandle": "true",
+          "target": "assign-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-check-notfound",
+          "source": "check-type-exists",
+          "sourceHandle": "false",
+          "target": "notify-type-not-found",
+          "type": "default"
+        }
+      ]
+    }
+  ],
+  "createdAt": "2026-02-14T19:11:24.567Z",
+  "updatedAt": "2026-02-14T19:11:24.567Z"
+}

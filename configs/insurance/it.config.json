@@ -1,0 +1,2783 @@
+{
+  "id": "INSURANCE-AGENCY-IT-DEFAULT",
+  "name": "Agenzia Assicurativa Italia",
+  "description": "Configurazione per gestione documenti agenzia assicurativa — polizze, sinistri, perizie, certificati medici, RCA e multi-ramo",
+  "schemaVersion": 1,
+  "documentTypes": [
+    {
+      "id": "doc-attestato-rischio",
+      "name": "Attestato di Rischio",
+      "description": "Attestato di rischio RCA — classe di merito, sinistri pregressi",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "compagnia": {
+            "type": "string",
+            "description": "Compagnia assicurativa emittente"
+          },
+          "contraente": {
+            "type": "string",
+            "description": "Nome e cognome del contraente"
+          },
+          "codiceFiscaleContraente": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "targa": {
+            "type": "string",
+            "description": "Numero di targa del veicolo (es. AB123CD)"
+          },
+          "classeMeritoProvenienza": {
+            "type": "string",
+            "description": "Classe di merito CU provenienza"
+          },
+          "classeMeritoAssegnazione": {
+            "type": "string",
+            "description": "Classe di merito CU assegnazione"
+          },
+          "sinistri": {
+            "type": "array",
+            "description": "Tabella sinistri ultimi 5 anni",
+            "items": {
+              "type": "object",
+              "properties": {
+                "anno": {
+                  "type": "number",
+                  "description": "Anno del sinistro"
+                },
+                "responsabilita": {
+                  "type": "string",
+                  "description": "Tipo responsabilità",
+                  "enum": [
+                    "principale",
+                    "paritaria",
+                    "nessuna",
+                    null
+                  ],
+                  "nullable": true
+                },
+                "tipo": {
+                  "type": "string",
+                  "description": "Tipo sinistro (cose, persone)"
+                },
+                "importo": {
+                  "type": "number",
+                  "description": "Importo liquidato in Euro"
+                }
+              },
+              "required": [
+                "anno",
+                "responsabilita"
+              ]
+            }
+          },
+          "anniAssicurazione": {
+            "type": "number",
+            "description": "Anni di osservazione assicurativa"
+          },
+          "dataEmissione": {
+            "type": "string",
+            "description": "Data emissione attestato",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          }
+        },
+        "required": [
+          "compagnia",
+          "contraente",
+          "targa",
+          "classeMeritoProvenienza",
+          "classeMeritoAssegnazione"
+        ]
+      }
+    },
+    {
+      "id": "doc-certificato-morte",
+      "name": "Certificato di Morte",
+      "description": "Certificato di morte — per liquidazione polizza vita caso morte",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "defunto": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string",
+                "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "cognome": {
+                "type": "string",
+                "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+              },
+              "dataNascita": {
+                "type": "string",
+                "description": "Data di nascita",
+                "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+              },
+              "luogoNascita": {
+                "type": "string",
+                "description": "Luogo di nascita"
+              }
+            },
+            "required": [
+              "nome",
+              "cognome",
+              "codiceFiscale"
+            ]
+          },
+          "dataDecesso": {
+            "type": "string",
+            "description": "Data del decesso",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "luogoDecesso": {
+            "type": "string",
+            "description": "Luogo del decesso"
+          },
+          "causaDecesso": {
+            "type": "string",
+            "description": "Causa del decesso (se indicata)"
+          },
+          "comune": {
+            "type": "string",
+            "description": "Comune che ha rilasciato il certificato"
+          },
+          "dataRilascio": {
+            "type": "string",
+            "description": "Data di rilascio",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          }
+        },
+        "required": [
+          "defunto",
+          "dataDecesso",
+          "luogoDecesso"
+        ]
+      }
+    },
+    {
+      "id": "doc-certificato-medico",
+      "name": "Certificato Medico",
+      "description": "Certificato medico per lesioni da sinistro o infortunio coperto da polizza",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "paziente": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string",
+                "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "cognome": {
+                "type": "string",
+                "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+              },
+              "dataNascita": {
+                "type": "string",
+                "description": "Data di nascita",
+                "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+              }
+            },
+            "required": [
+              "nome",
+              "cognome",
+              "codiceFiscale"
+            ]
+          },
+          "medico": {
+            "type": "string",
+            "description": "Nome e cognome del medico"
+          },
+          "struttura": {
+            "type": "string",
+            "description": "Struttura sanitaria / ospedale"
+          },
+          "dataVisita": {
+            "type": "string",
+            "description": "Data della visita/referto",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "diagnosi": {
+            "type": "string",
+            "description": "Diagnosi — copia VERBATIM dal certificato"
+          },
+          "prognosi": {
+            "type": "string",
+            "description": "Prognosi — giorni di guarigione o invalidità"
+          },
+          "giorniPrognosi": {
+            "type": "number",
+            "description": "Numero giorni di prognosi"
+          },
+          "invaliditaPermanente": {
+            "type": "number",
+            "description": "Percentuale di invalidità permanente (se indicata)"
+          },
+          "terapiaPrescritta": {
+            "type": "string",
+            "description": "Terapia prescritta"
+          }
+        },
+        "required": [
+          "paziente",
+          "medico",
+          "dataVisita",
+          "diagnosi"
+        ]
+      }
+    },
+    {
+      "id": "doc-stato-famiglia",
+      "name": "Certificato Stato Famiglia",
+      "description": "Certificato stato di famiglia — per polizze vita e beneficiari",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "intestatario": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string",
+                "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "cognome": {
+                "type": "string",
+                "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+              },
+              "indirizzo": {
+                "type": "string",
+                "description": "Indirizzo di residenza"
+              }
+            },
+            "required": [
+              "nome",
+              "cognome",
+              "codiceFiscale"
+            ]
+          },
+          "componenti": {
+            "type": "array",
+            "description": "Componenti del nucleo familiare",
+            "items": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+                },
+                "cognome": {
+                  "type": "string",
+                  "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+                },
+                "codiceFiscale": {
+                  "type": "string",
+                  "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                  "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                },
+                "relazione": {
+                  "type": "string",
+                  "description": "Relazione con l'intestatario (coniuge, figlio, ecc.)"
+                },
+                "dataNascita": {
+                  "type": "string",
+                  "description": "Data di nascita",
+                  "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+                }
+              },
+              "required": [
+                "nome",
+                "cognome",
+                "relazione"
+              ]
+            }
+          },
+          "dataRilascio": {
+            "type": "string",
+            "description": "Data di rilascio del certificato",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "comune": {
+            "type": "string",
+            "description": "Comune che ha rilasciato il certificato"
+          }
+        },
+        "required": [
+          "intestatario",
+          "componenti"
+        ]
+      }
+    },
+    {
+      "id": "doc-denuncia-sinistro",
+      "name": "Denuncia Sinistro / CID",
+      "description": "Constatazione amichevole (CAI/CID) o denuncia sinistro — dinamica, danni, veicoli",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "numeroSinistro": {
+            "type": "string",
+            "description": "Numero sinistro assegnato dalla compagnia (se già presente)"
+          },
+          "dataSinistro": {
+            "type": "string",
+            "description": "Data del sinistro",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "oraSinistro": {
+            "type": "string",
+            "description": "Ora del sinistro (es. 14:30)"
+          },
+          "luogoSinistro": {
+            "type": "string",
+            "description": "Luogo del sinistro (indirizzo, comune, provincia)"
+          },
+          "dinamica": {
+            "type": "string",
+            "description": "Descrizione della dinamica dell'incidente — copia VERBATIM dal modulo"
+          },
+          "veicoloA": {
+            "type": "object",
+            "properties": {
+              "targa": {
+                "type": "string",
+                "description": "Numero di targa del veicolo (es. AB123CD)"
+              },
+              "marca": {
+                "type": "string",
+                "description": "Marca"
+              },
+              "modello": {
+                "type": "string",
+                "description": "Modello"
+              },
+              "contraente": {
+                "type": "string",
+                "description": "Nome cognome contraente"
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+              },
+              "compagnia": {
+                "type": "string",
+                "description": "Compagnia assicurativa"
+              },
+              "numeroPolizza": {
+                "type": "string",
+                "description": "Numero polizza"
+              },
+              "danni": {
+                "type": "string",
+                "description": "Danni visibili al veicolo A"
+              }
+            },
+            "required": [
+              "targa",
+              "contraente"
+            ]
+          },
+          "veicoloB": {
+            "type": "object",
+            "properties": {
+              "targa": {
+                "type": "string",
+                "description": "Numero di targa del veicolo (es. AB123CD)"
+              },
+              "marca": {
+                "type": "string",
+                "description": "Marca"
+              },
+              "modello": {
+                "type": "string",
+                "description": "Modello"
+              },
+              "contraente": {
+                "type": "string",
+                "description": "Nome cognome contraente"
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice fiscale del contraente B"
+              },
+              "compagnia": {
+                "type": "string",
+                "description": "Compagnia assicurativa"
+              },
+              "numeroPolizza": {
+                "type": "string",
+                "description": "Numero polizza"
+              },
+              "danni": {
+                "type": "string",
+                "description": "Danni visibili al veicolo B"
+              }
+            },
+            "required": [
+              "targa"
+            ]
+          },
+          "feriti": {
+            "type": "string",
+            "description": "Presenza di feriti",
+            "enum": [
+              "sì",
+              "no",
+              null
+            ],
+            "nullable": true
+          },
+          "testimoni": {
+            "type": "string",
+            "description": "Eventuali testimoni (nome e cognome)"
+          },
+          "autoritaIntervenuta": {
+            "type": "string",
+            "description": "Autorità intervenuta",
+            "enum": [
+              "Polizia Stradale",
+              "Carabinieri",
+              "Polizia Municipale",
+              "nessuna",
+              null
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "dataSinistro",
+          "luogoSinistro",
+          "dinamica",
+          "veicoloA"
+        ]
+      }
+    },
+    {
+      "id": "doc-identita",
+      "name": "Documento d'Identità",
+      "description": "Documento di riconoscimento dell'assicurato (CI, Passaporto, Patente)",
+      "isArrayExtraction": true,
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "tipoDocumento": {
+            "type": "string",
+            "description": "Tipo documento: Carta D'Identità, Passaporto, Patente"
+          },
+          "numeroDocumento": {
+            "type": "string",
+            "description": ""
+          },
+          "dataEmissione": {
+            "type": "string",
+            "description": "Data di emissione in formato DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "dataScadenza": {
+            "type": "string",
+            "description": "Data di scadenza in formato DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "rilasciatoDa": {
+            "type": "string",
+            "description": "Autorità che ha rilasciato il documento"
+          },
+          "luogoNascita": {
+            "type": "string",
+            "description": "Città seguita dalla sigla della provincia tra parentesi tonde — formato: 'NomeCittà (XX)'"
+          },
+          "dataNascita": {
+            "type": "string",
+            "description": "Data di nascita in formato DD.MM.YYYY",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "indirizzoDiResidenza": {
+            "type": "string",
+            "description": "Indirizzo completo di residenza"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale",
+          "tipoDocumento",
+          "numeroDocumento",
+          "dataEmissione",
+          "dataScadenza",
+          "luogoNascita",
+          "dataNascita"
+        ]
+      }
+    },
+    {
+      "id": "doc-fattura-riparazione",
+      "name": "Fattura di Riparazione",
+      "description": "Fattura dell'officina/carrozzeria per riparazione danni",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "officina": {
+            "type": "string",
+            "description": "Denominazione officina/carrozzeria"
+          },
+          "partitaIva": {
+            "type": "string",
+            "description": "Partita IVA officina"
+          },
+          "numero": {
+            "type": "string",
+            "description": "Numero fattura"
+          },
+          "data": {
+            "type": "string",
+            "description": "Data fattura",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "targa": {
+            "type": "string",
+            "description": "Numero di targa del veicolo (es. AB123CD)"
+          },
+          "lavorazioni": {
+            "type": "string",
+            "description": "Descrizione lavorazioni eseguite"
+          },
+          "ricambi": {
+            "type": "string",
+            "description": "Elenco ricambi utilizzati"
+          },
+          "manodopera": {
+            "type": "number",
+            "description": "Costo manodopera in Euro"
+          },
+          "costoRicambi": {
+            "type": "number",
+            "description": "Costo ricambi in Euro"
+          },
+          "imponibile": {
+            "type": "number",
+            "description": "Totale imponibile in Euro"
+          },
+          "iva": {
+            "type": "number",
+            "description": "IVA in Euro"
+          },
+          "totale": {
+            "type": "number",
+            "description": "Totale fattura in Euro"
+          }
+        },
+        "required": [
+          "officina",
+          "numero",
+          "data",
+          "targa",
+          "totale"
+        ]
+      }
+    },
+    {
+      "id": "doc-disdetta",
+      "name": "Lettera di Disdetta",
+      "description": "Comunicazione di disdetta della polizza assicurativa",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "mittente": {
+            "type": "string",
+            "description": "Nome e cognome / ragione sociale del mittente"
+          },
+          "codiceFiscaleMittente": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "destinatario": {
+            "type": "string",
+            "description": "Compagnia assicurativa destinataria"
+          },
+          "numeroPolizza": {
+            "type": "string",
+            "description": "Numero polizza da disdettare"
+          },
+          "dataEffettoDisdetta": {
+            "type": "string",
+            "description": "Data effetto della disdetta",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "motivo": {
+            "type": "string",
+            "description": "Motivo della disdetta (se dichiarato)"
+          },
+          "dataLettera": {
+            "type": "string",
+            "description": "Data della lettera",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          }
+        },
+        "required": [
+          "mittente",
+          "numeroPolizza",
+          "dataEffettoDisdetta"
+        ]
+      }
+    },
+    {
+      "id": "doc-libretto",
+      "name": "Libretto di Circolazione",
+      "description": "Carta di circolazione del veicolo assicurato",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "targa": {
+            "type": "string",
+            "description": "Numero di targa del veicolo (es. AB123CD)"
+          },
+          "telaio": {
+            "type": "string",
+            "description": "Numero di telaio / VIN (Vehicle Identification Number) — 17 caratteri alfanumerici"
+          },
+          "marca": {
+            "type": "string",
+            "description": "Marca del veicolo"
+          },
+          "modello": {
+            "type": "string",
+            "description": "Modello del veicolo"
+          },
+          "cilindrata": {
+            "type": "number",
+            "description": "Cilindrata in cc"
+          },
+          "potenzaKw": {
+            "type": "number",
+            "description": "Potenza in kW"
+          },
+          "alimentazione": {
+            "type": "string",
+            "description": "Tipo alimentazione",
+            "enum": [
+              "benzina",
+              "diesel",
+              "GPL",
+              "metano",
+              "ibrido",
+              "elettrico",
+              null
+            ],
+            "nullable": true
+          },
+          "dataImmatricolazione": {
+            "type": "string",
+            "description": "Data di prima immatricolazione",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "intestatario": {
+            "type": "string",
+            "description": "Nome e cognome/ragione sociale intestatario"
+          },
+          "codiceFiscaleIntestatario": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          }
+        },
+        "required": [
+          "targa",
+          "telaio",
+          "marca",
+          "modello",
+          "dataImmatricolazione",
+          "intestatario"
+        ]
+      }
+    },
+    {
+      "id": "doc-perizia-danni",
+      "name": "Perizia Danni",
+      "description": "Perizia tecnica dei danni — importo, descrizione danni, perito",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "numeroSinistro": {
+            "type": "string",
+            "description": "Numero sinistro di riferimento"
+          },
+          "perito": {
+            "type": "string",
+            "description": "Nome e cognome del perito"
+          },
+          "studioPeritale": {
+            "type": "string",
+            "description": "Studio peritale incaricato"
+          },
+          "targa": {
+            "type": "string",
+            "description": "Numero di targa del veicolo (es. AB123CD)"
+          },
+          "dataPerizia": {
+            "type": "string",
+            "description": "Data della perizia",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "danni": {
+            "type": "string",
+            "description": "Descrizione dettagliata dei danni riscontrati"
+          },
+          "importoRiparazione": {
+            "type": "number",
+            "description": "Importo stimato per la riparazione in Euro"
+          },
+          "importoLiquidazione": {
+            "type": "number",
+            "description": "Importo proposto per la liquidazione in Euro"
+          },
+          "demolizione": {
+            "type": "string",
+            "description": "Veicolo da demolire",
+            "enum": [
+              "sì",
+              "no",
+              null
+            ],
+            "nullable": true
+          },
+          "valoreAntesinistro": {
+            "type": "number",
+            "description": "Valore del veicolo ante-sinistro in Euro"
+          },
+          "fotografieAllegate": {
+            "type": "string",
+            "description": "Fotografie allegate",
+            "enum": [
+              "sì",
+              "no",
+              null
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "numeroSinistro",
+          "perito",
+          "targa",
+          "danni",
+          "importoRiparazione"
+        ]
+      }
+    },
+    {
+      "id": "doc-polizza",
+      "name": "Polizza Assicurativa",
+      "description": "Contratto di assicurazione — tutti i rami (RCA, vita, casa, infortuni, RC professionale)",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "compagnia": {
+            "type": "string",
+            "description": "Compagnia assicurativa"
+          },
+          "numeroPolizza": {
+            "type": "string",
+            "description": "Numero polizza"
+          },
+          "ramo": {
+            "type": "string",
+            "description": "Ramo assicurativo",
+            "enum": [
+              "RCA",
+              "vita",
+              "casa",
+              "infortuni",
+              "RC professionale",
+              "salute",
+              "furto/incendio",
+              "kasko",
+              "trasporti",
+              "altro",
+              null
+            ],
+            "nullable": true
+          },
+          "contraente": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string",
+                "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "cognome": {
+                "type": "string",
+                "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+              },
+              "indirizzo": {
+                "type": "string",
+                "description": "Indirizzo del contraente"
+              }
+            },
+            "required": [
+              "nome",
+              "cognome",
+              "codiceFiscale"
+            ]
+          },
+          "assicurato": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string",
+                "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "cognome": {
+                "type": "string",
+                "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+              }
+            },
+            "required": [
+              "nome",
+              "cognome",
+              "codiceFiscale"
+            ]
+          },
+          "targa": {
+            "type": "string",
+            "description": "Numero di targa del veicolo (es. AB123CD)"
+          },
+          "premioAnnuo": {
+            "type": "number",
+            "description": "Premio annuo totale in Euro"
+          },
+          "premioSemestrale": {
+            "type": "number",
+            "description": "Premio semestrale in Euro (se frazionato)"
+          },
+          "decorrenza": {
+            "type": "string",
+            "description": "Data decorrenza copertura",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "scadenza": {
+            "type": "string",
+            "description": "Data scadenza copertura",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "massimale": {
+            "type": "string",
+            "description": "Massimale di copertura (es. Euro 6.450.000)"
+          },
+          "franchigia": {
+            "type": "string",
+            "description": "Eventuale franchigia o scoperto"
+          },
+          "garanzie": {
+            "type": "string",
+            "description": "Elenco garanzie incluse (separare con virgola)"
+          },
+          "beneficiario": {
+            "type": "string",
+            "description": "Beneficiario designato (per polizze vita)"
+          }
+        },
+        "required": [
+          "compagnia",
+          "numeroPolizza",
+          "ramo",
+          "contraente",
+          "premioAnnuo",
+          "decorrenza",
+          "scadenza"
+        ]
+      }
+    },
+    {
+      "id": "doc-quietanza",
+      "name": "Quietanza di Premio",
+      "description": "Ricevuta di pagamento del premio assicurativo",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "compagnia": {
+            "type": "string",
+            "description": "Compagnia assicurativa"
+          },
+          "numeroPolizza": {
+            "type": "string",
+            "description": "Numero polizza"
+          },
+          "contraente": {
+            "type": "string",
+            "description": "Nome e cognome del contraente"
+          },
+          "importo": {
+            "type": "number",
+            "description": "Importo pagato in Euro"
+          },
+          "dataPagamento": {
+            "type": "string",
+            "description": "Data del pagamento",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "periodoRiferimento": {
+            "type": "string",
+            "description": "Periodo di copertura (es. 01.01.2025 - 01.01.2026)"
+          },
+          "modalitaPagamento": {
+            "type": "string",
+            "description": "Modalità di pagamento"
+          }
+        },
+        "required": [
+          "compagnia",
+          "numeroPolizza",
+          "importo",
+          "dataPagamento"
+        ]
+      }
+    },
+    {
+      "id": "doc-scheda-fabbricato",
+      "name": "Scheda Fabbricato / Immobile",
+      "description": "Dati dell'immobile assicurato — per polizze casa/incendio",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "proprietario": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string",
+                "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "cognome": {
+                "type": "string",
+                "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+              },
+              "codiceFiscale": {
+                "type": "string",
+                "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+              }
+            },
+            "required": [
+              "nome",
+              "cognome",
+              "codiceFiscale"
+            ]
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo completo dell'immobile"
+          },
+          "comune": {
+            "type": "string",
+            "description": "Comune"
+          },
+          "provincia": {
+            "type": "string",
+            "description": "Provincia"
+          },
+          "tipoImmobile": {
+            "type": "string",
+            "description": "Tipo immobile",
+            "enum": [
+              "appartamento",
+              "villa",
+              "villetta a schiera",
+              "ufficio",
+              "negozio",
+              "capannone",
+              "altro",
+              null
+            ],
+            "nullable": true
+          },
+          "superficie": {
+            "type": "number",
+            "description": "Superficie in mq"
+          },
+          "annoCostruzione": {
+            "type": "number",
+            "description": "Anno di costruzione"
+          },
+          "valoreRicostruzione": {
+            "type": "number",
+            "description": "Valore di ricostruzione a nuovo in Euro"
+          },
+          "valoreContenuto": {
+            "type": "number",
+            "description": "Valore del contenuto assicurato in Euro"
+          },
+          "sistemaAllarme": {
+            "type": "string",
+            "description": "Sistema di allarme presente",
+            "enum": [
+              "sì",
+              "no",
+              null
+            ],
+            "nullable": true
+          },
+          "pianterreno": {
+            "type": "string",
+            "description": "Al pianterreno",
+            "enum": [
+              "sì",
+              "no",
+              null
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "proprietario",
+          "indirizzo",
+          "tipoImmobile",
+          "superficie"
+        ]
+      }
+    },
+    {
+      "id": "doc-tessera-sanitaria",
+      "name": "Tessera Sanitaria",
+      "description": "Tessera sanitaria / Codice Fiscale — conferma CF e dati anagrafici",
+      "isArrayExtraction": true,
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "sesso": {
+            "type": "string",
+            "description": "Sesso",
+            "enum": [
+              "M",
+              "F",
+              null
+            ],
+            "nullable": true
+          },
+          "dataNascita": {
+            "type": "string",
+            "description": "Data di nascita",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "luogoNascita": {
+            "type": "string",
+            "description": "Comune di nascita"
+          },
+          "dataScadenza": {
+            "type": "string",
+            "description": "Data di scadenza",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale",
+          "sesso",
+          "dataNascita"
+        ]
+      }
+    },
+    {
+      "id": "doc-verbale-autorita",
+      "name": "Verbale Autorità",
+      "description": "Verbale di Polizia Stradale, Carabinieri o Polizia Municipale",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "autorita": {
+            "type": "string",
+            "description": "Autorità che ha redatto il verbale"
+          },
+          "dataVerbale": {
+            "type": "string",
+            "description": "Data del verbale",
+            "pattern": "^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$"
+          },
+          "luogo": {
+            "type": "string",
+            "description": "Luogo dell'intervento"
+          },
+          "numeroVerbale": {
+            "type": "string",
+            "description": "Numero protocollo verbale"
+          },
+          "veicoliCoinvolti": {
+            "type": "array",
+            "description": "Veicoli coinvolti",
+            "items": {
+              "type": "object",
+              "properties": {
+                "targa": {
+                  "type": "string",
+                  "description": "Numero di targa del veicolo (es. AB123CD)"
+                },
+                "conducente": {
+                  "type": "string",
+                  "description": "Nome e cognome del conducente"
+                }
+              },
+              "required": [
+                "targa"
+              ]
+            }
+          },
+          "contravvenzioni": {
+            "type": "string",
+            "description": "Eventuali contravvenzioni contestate"
+          },
+          "rilievi": {
+            "type": "string",
+            "description": "Rilievi e osservazioni dell'autorità — copia VERBATIM"
+          },
+          "feriti": {
+            "type": "string",
+            "description": "Feriti segnalati",
+            "enum": [
+              "sì",
+              "no",
+              null
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "autorita",
+          "dataVerbale",
+          "luogo"
+        ]
+      }
+    }
+  ],
+  "entityTypes": [
+    {
+      "id": "entity-assicurato",
+      "name": "Assicurato",
+      "icon": "shield-check",
+      "color": "#3b82f6",
+      "displayOrder": 0,
+      "fieldOrder": [
+        "nome",
+        "cognome",
+        "codiceFiscale",
+        "indirizzoDiResidenza",
+        "dataNascita",
+        "luogoNascita"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-identita",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "dataNascita",
+              "targetField": "dataNascita",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "luogoNascita",
+              "targetField": "luogoNascita",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "indirizzoDiResidenza",
+              "targetField": "indirizzoDiResidenza",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-tessera-sanitaria",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "dataNascita",
+              "targetField": "dataNascita",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-polizza",
+          "enabled": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "contraente.nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "contraente.cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "contraente.codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "contraente.indirizzo",
+              "targetField": "indirizzoDiResidenza",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-denuncia-sinistro",
+          "enabled": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "veicoloA.contraente",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "veicoloA.codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-certificato-medico",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "paziente.nome",
+              "targetField": "nome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "paziente.cognome",
+              "targetField": "cognome",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "paziente.codiceFiscale",
+              "targetField": "codiceFiscale",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "paziente.dataNascita",
+              "targetField": "dataNascita",
+              "matchFields": [
+                {
+                  "field": "codiceFiscale",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "nome",
+                  "fuzzyThreshold": 0
+                },
+                {
+                  "field": "cognome",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": [
+        {
+          "docTypeId": "doc-certificato-morte",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-polizza",
+              "field": "ramo",
+              "operator": "equals",
+              "value": "vita"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "entity-veicolo",
+      "name": "Veicolo",
+      "icon": "car",
+      "color": "#6366f1",
+      "displayOrder": 1,
+      "fieldOrder": [
+        "targa",
+        "telaio",
+        "marca",
+        "modello",
+        "dataImmatricolazione",
+        "cilindrata",
+        "potenzaKw",
+        "alimentazione"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-libretto",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "targa",
+              "targetField": "targa",
+              "matchFields": [
+                {
+                  "field": "targa",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "telaio",
+              "targetField": "telaio",
+              "matchFields": [
+                {
+                  "field": "targa",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "marca",
+              "targetField": "marca",
+              "matchFields": [
+                {
+                  "field": "targa",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "modello",
+              "targetField": "modello",
+              "matchFields": [
+                {
+                  "field": "targa",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "dataImmatricolazione",
+              "targetField": "dataImmatricolazione",
+              "matchFields": [
+                {
+                  "field": "targa",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "cilindrata",
+              "targetField": "cilindrata",
+              "matchFields": [
+                {
+                  "field": "targa",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "potenzaKw",
+              "targetField": "potenzaKw",
+              "matchFields": [
+                {
+                  "field": "targa",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "alimentazione",
+              "targetField": "alimentazione",
+              "matchFields": [
+                {
+                  "field": "targa",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-polizza",
+          "enabled": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "targa",
+              "targetField": "targa",
+              "matchFields": [
+                {
+                  "field": "targa",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-attestato-rischio",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "targa",
+              "targetField": "targa",
+              "matchFields": [
+                {
+                  "field": "targa",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-denuncia-sinistro",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "veicoloA.targa",
+              "targetField": "targa",
+              "matchFields": [
+                {
+                  "field": "targa",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "veicoloA.marca",
+              "targetField": "marca",
+              "matchFields": [
+                {
+                  "field": "targa",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "veicoloA.modello",
+              "targetField": "modello",
+              "matchFields": [
+                {
+                  "field": "targa",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-perizia-danni",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "targa",
+              "targetField": "targa",
+              "matchFields": [
+                {
+                  "field": "targa",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-fattura-riparazione",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "targa",
+              "targetField": "targa",
+              "matchFields": [
+                {
+                  "field": "targa",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": []
+    },
+    {
+      "id": "entity-sinistro",
+      "name": "Sinistro",
+      "icon": "alert-triangle",
+      "color": "#ef4444",
+      "displayOrder": 2,
+      "fieldOrder": [
+        "numeroSinistro",
+        "dataSinistro",
+        "luogoSinistro",
+        "dinamica",
+        "importoRiparazione",
+        "importoLiquidazione"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-denuncia-sinistro",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "numeroSinistro",
+              "targetField": "numeroSinistro",
+              "matchFields": [
+                {
+                  "field": "numeroSinistro",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "dataSinistro",
+              "targetField": "dataSinistro",
+              "matchFields": [
+                {
+                  "field": "numeroSinistro",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "luogoSinistro",
+              "targetField": "luogoSinistro",
+              "matchFields": [
+                {
+                  "field": "numeroSinistro",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "dinamica",
+              "targetField": "dinamica",
+              "matchFields": [
+                {
+                  "field": "numeroSinistro",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-perizia-danni",
+          "enabled": true,
+          "isRequired": true,
+          "fieldMappings": [
+            {
+              "sourceField": "numeroSinistro",
+              "targetField": "numeroSinistro",
+              "matchFields": [
+                {
+                  "field": "numeroSinistro",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "importoRiparazione",
+              "targetField": "importoRiparazione",
+              "matchFields": [
+                {
+                  "field": "numeroSinistro",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "importoLiquidazione",
+              "targetField": "importoLiquidazione",
+              "matchFields": [
+                {
+                  "field": "numeroSinistro",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-fattura-riparazione",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "totale",
+              "targetField": "costoRiparazioneEffettivo",
+              "matchFields": [
+                {
+                  "field": "numeroSinistro",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-verbale-autorita",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "numeroVerbale",
+              "targetField": "numeroVerbale",
+              "matchFields": [
+                {
+                  "field": "numeroSinistro",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-certificato-medico",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "diagnosi",
+              "targetField": "diagnosiLesioni",
+              "matchFields": [
+                {
+                  "field": "numeroSinistro",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "giorniPrognosi",
+              "targetField": "giorniPrognosi",
+              "matchFields": [
+                {
+                  "field": "numeroSinistro",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "invaliditaPermanente",
+              "targetField": "invaliditaPermanente",
+              "matchFields": [
+                {
+                  "field": "numeroSinistro",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": [
+        {
+          "docTypeId": "doc-certificato-medico",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-denuncia-sinistro",
+              "field": "feriti",
+              "operator": "equals",
+              "value": "sì"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-verbale-autorita",
+          "enabled": true,
+          "conditions": [
+            {
+              "sourceDocTypeId": "doc-denuncia-sinistro",
+              "field": "autoritaIntervenuta",
+              "operator": "exists"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "entity-polizza",
+      "name": "Polizza",
+      "icon": "file-shield",
+      "color": "#22c55e",
+      "displayOrder": 3,
+      "fieldOrder": [
+        "numeroPolizza",
+        "compagnia",
+        "ramo",
+        "premioAnnuo",
+        "decorrenza",
+        "scadenza",
+        "massimale",
+        "classeMerito"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-polizza",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "numeroPolizza",
+              "targetField": "numeroPolizza",
+              "matchFields": [
+                {
+                  "field": "numeroPolizza",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "compagnia",
+              "targetField": "compagnia",
+              "matchFields": [
+                {
+                  "field": "numeroPolizza",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "ramo",
+              "targetField": "ramo",
+              "matchFields": [
+                {
+                  "field": "numeroPolizza",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "premioAnnuo",
+              "targetField": "premioAnnuo",
+              "matchFields": [
+                {
+                  "field": "numeroPolizza",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "decorrenza",
+              "targetField": "decorrenza",
+              "matchFields": [
+                {
+                  "field": "numeroPolizza",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "scadenza",
+              "targetField": "scadenza",
+              "matchFields": [
+                {
+                  "field": "numeroPolizza",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "massimale",
+              "targetField": "massimale",
+              "matchFields": [
+                {
+                  "field": "numeroPolizza",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "garanzie",
+              "targetField": "garanzie",
+              "matchFields": [
+                {
+                  "field": "numeroPolizza",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-attestato-rischio",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "classeMeritoAssegnazione",
+              "targetField": "classeMerito",
+              "matchFields": [
+                {
+                  "field": "numeroPolizza",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "classeMeritoProvenienza",
+              "targetField": "classeMeritoProvenienza",
+              "matchFields": [
+                {
+                  "field": "numeroPolizza",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-quietanza",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "importo",
+              "targetField": "ultimoPremio",
+              "matchFields": [
+                {
+                  "field": "numeroPolizza",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "dataPagamento",
+              "targetField": "ultimoPagamento",
+              "matchFields": [
+                {
+                  "field": "numeroPolizza",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": []
+    }
+  ],
+  "documentWorkflows": [
+    {
+      "id": "wf-doc-extraction",
+      "name": "Document Extraction",
+      "isDefault": true,
+      "enabled": true,
+      "priority": 2,
+      "nodes": [
+        {
+          "id": "load-document",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 50
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Load Document",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "documentService",
+              "methodName": "getById",
+              "arguments": {
+                "id": "context.docId"
+              },
+              "outputMapping": {
+                "doc": "doc"
+              }
+            }
+          }
+        },
+        {
+          "id": "check-doctype",
+          "type": "ifElse",
+          "position": {
+            "x": 300,
+            "y": 200
+          },
+          "data": {
+            "nodeType": "ifElse",
+            "label": "Has DocumentType?",
+            "status": "IDLE",
+            "config": {
+              "condition": "context.doc.docTypeId && context.doc.docTypeId !== null"
+            }
+          }
+        },
+        {
+          "id": "notify-no-doctype",
+          "type": "serviceCall",
+          "position": {
+            "x": 650,
+            "y": 200
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Notify: No DocType",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "notificationService",
+              "methodName": "create",
+              "arguments": {
+                "notification": {
+                  "title": "Extraction Stopped",
+                  "message": "No DocumentType set for this document. Cannot extract data.",
+                  "type": "error"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "load-schema",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 350
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Load Extraction Schema",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "projectService",
+              "methodName": "getExtractionSchema",
+              "arguments": {
+                "id": "context.doc.docTypeId"
+              },
+              "outputMapping": "data.schema"
+            }
+          }
+        },
+        {
+          "id": "ai-extract",
+          "type": "aiInteraction",
+          "position": {
+            "x": 300,
+            "y": 500
+          },
+          "data": {
+            "nodeType": "aiInteraction",
+            "label": "AI: Extract Data",
+            "status": "IDLE",
+            "config": {
+              "aiConfig": {
+                "provider": "vertex",
+                "model": "gemini-3-flash-preview",
+                "prompt": "You are a document processing system helping with legitimate data extraction for record keeping purposes. Extract all visible field values from this official document according to the provided JSON schema.\n\nCRITICAL ACCURACY REQUIREMENTS:\n- Transcribe ALL text EXACTLY as it appears on the document, character-by-character\n- Do NOT modify, correct, or reformat any values\n- Preserve exact capitalization, spacing, and punctuation\n- For codes/IDs: copy every character precisely (numbers, letters, special characters)\n- If a field is not visible or empty, use empty string \"\" (NOT null, NOT the word \"null\")\n- Double-check each value before including it\n\nCHARACTER CONFUSION PREVENTION (VERY IMPORTANT):\n- Carefully distinguish between similar-looking characters\n- Letter 'I' (uppercase i) vs Number '1' (one)\n- Letter 'O' (uppercase o) vs Number '0' (zero)\n- Letter 'T' vs Number '7'\n- Letter 'S' vs Number '5'\n- Letter 'B' vs Number '8'\n- Letter 'Z' vs Number '2'\n- Letter 'G' vs Number '6'\n- For Codice Fiscale: contains ONLY uppercase letters (A-Z) and numbers (0-9), 16 characters total, no spaces\n\nFREE-TEXT / SUMMARY FIELDS:\n- Copy text VERBATIM from the document — do NOT paraphrase, summarize, or rephrase\n- Keep the original punctuation, list format (dashes, semicolons), and paragraph structure\n- Do NOT add information not explicitly present in the document\n- Do NOT reorder content or change list bullet styles\n\nVALUE NORMALIZATION:\n- For place names: copy EXACTLY as written on the document (do NOT add province codes or extra info not present)\n- For floor/piano fields: use only the numeric value or code (e.g. \"2\", \"S1\", \"T\", NOT \"2 (Secondo)\" or \"Piano Secondo\")\n- For amounts: numbers only, no currency symbols unless explicitly shown in the original text\n\nReturn ONLY valid JSON matching the schema structure. This is an authorized document processing request.",
+                "input": "context.docId",
+                "inputType": "pdf",
+                "pages": "all",
+                "jsonSchema": "data.schema",
+                "outputKey": "data.data1",
+                "isJson": true,
+                "thinkingLevel": "low"
+              }
+            }
+          }
+        },
+        {
+          "id": "ai-verify",
+          "type": "aiInteraction",
+          "position": {
+            "x": 300,
+            "y": 700
+          },
+          "data": {
+            "nodeType": "aiInteraction",
+            "label": "AI: Verify Extraction",
+            "status": "IDLE",
+            "config": {
+              "aiConfig": {
+                "provider": "vertex",
+                "model": "gemini-3-flash-preview",
+                "prompt": "You are a document verification system. You have been given:\n1. A document (images/PDF)\n2. A previous extraction attempt (JSON) from another AI\n\nYour task:\n- Cross-reference EVERY field in the previous extraction against the actual document\n- Correct any errors: typos, OCR misreads, formatting inconsistencies, missing values\n- Fill in any fields that were missed (use \"\" for genuinely absent fields)\n- Apply the same extraction rules: character-by-character accuracy, no modification of original values, proper normalization\n\nFor each field, assign a confidence score (0.0 to 1.0):\n- 1.0 = clearly legible, no ambiguity\n- 0.7-0.9 = legible but minor ambiguity (e.g. similar-looking characters)\n- 0.3-0.6 = partially legible or context-dependent\n- 0.0-0.2 = guessed or not visible in document\n\nReturn a JSON object with:\n- \"data\": the corrected extraction matching the schema\n- \"corrections\": array of { field, original, corrected, reason } for each change made\n- \"confidence\": object mapping field names to confidence scores (0.0-1.0)\n\nReturn ONLY valid JSON.",
+                "input": "context.docId",
+                "inputType": "pdf",
+                "pages": "all",
+                "jsonSchema": "data.schema",
+                "outputKey": "data.data2",
+                "isJson": true,
+                "thinkingLevel": "medium",
+                "contextInput": "data.data1",
+                "verificationMode": true
+              }
+            }
+          }
+        },
+        {
+          "id": "validate-extraction",
+          "type": "validateExtraction",
+          "position": {
+            "x": 300,
+            "y": 900
+          },
+          "data": {
+            "nodeType": "validateExtraction",
+            "label": "Validate & Score",
+            "status": "IDLE",
+            "config": {
+              "data1Key": "data.data1",
+              "data2Key": "data.data2",
+              "outputKey": "data.extractedData"
+            }
+          }
+        },
+        {
+          "id": "save-results",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 1100
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Save Results",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "documentService",
+              "methodName": "update",
+              "arguments": {
+                "id": "context.docId",
+                "updates": {
+                  "extractedData": "context.data.extractedData",
+                  "doubleValidation": "context.data.doubleValidation",
+                  "extractionConflicts": "context.data.extractionConflicts",
+                  "confidenceScore": "context.data.confidenceScore",
+                  "fieldConfidence": "context.data.fieldConfidence",
+                  "error": "context.data.error"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "notify-success",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 1150
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Notify Success",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "notificationService",
+              "methodName": "create",
+              "arguments": {
+                "notification": {
+                  "title": "Document Processing Complete",
+                  "message": "Document \"{{doc.name}}\" has been successfully processed.",
+                  "type": "success",
+                  "actionUrl": "/documents/{{docId}}"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e-load-doc-check",
+          "source": "load-document",
+          "target": "check-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-check-load-schema",
+          "source": "check-doctype",
+          "sourceHandle": "true",
+          "target": "load-schema",
+          "type": "default"
+        },
+        {
+          "id": "e-check-notify-no",
+          "source": "check-doctype",
+          "sourceHandle": "false",
+          "target": "notify-no-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-schema-extract",
+          "source": "load-schema",
+          "target": "ai-extract",
+          "type": "default"
+        },
+        {
+          "id": "e-extract-verify",
+          "source": "ai-extract",
+          "target": "ai-verify",
+          "type": "default"
+        },
+        {
+          "id": "e-verify-validate",
+          "source": "ai-verify",
+          "target": "validate-extraction",
+          "type": "default"
+        },
+        {
+          "id": "e-validate-save",
+          "source": "validate-extraction",
+          "target": "save-results",
+          "type": "default"
+        },
+        {
+          "id": "e-save-notify",
+          "source": "save-results",
+          "target": "notify-success",
+          "type": "default"
+        }
+      ]
+    },
+    {
+      "id": "wf-doc-identification",
+      "name": "Document Identification",
+      "isDefault": true,
+      "enabled": true,
+      "priority": 1,
+      "nodes": [
+        {
+          "id": "get-document",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 50
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Get Document",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "documentService",
+              "methodName": "getById",
+              "arguments": {
+                "id": "context.docId"
+              },
+              "outputMapping": {
+                "doc": "doc"
+              }
+            }
+          }
+        },
+        {
+          "id": "check-has-doctype",
+          "type": "ifElse",
+          "position": {
+            "x": 300,
+            "y": 250
+          },
+          "data": {
+            "nodeType": "ifElse",
+            "label": "Has DocumentType?",
+            "status": "IDLE",
+            "config": {
+              "condition": "!context.doc.docTypeId || context.doc.docTypeId === null"
+            }
+          }
+        },
+        {
+          "id": "notify-already-exists",
+          "type": "serviceCall",
+          "position": {
+            "x": 650,
+            "y": 250
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Notify: Already Exists",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "notificationService",
+              "methodName": "create",
+              "arguments": {
+                "notification": {
+                  "title": "Document Processing Stopped",
+                  "message": "DocumentType already exists for this document.",
+                  "type": "warning"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "get-doctypes",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 650
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Get Type Names",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "projectService",
+              "methodName": "getIdentificationJSONSchema",
+              "arguments": {},
+              "outputMapping": "data.schema"
+            }
+          }
+        },
+        {
+          "id": "ai-identify-1",
+          "type": "aiInteraction",
+          "position": {
+            "x": 100,
+            "y": 850
+          },
+          "data": {
+            "nodeType": "aiInteraction",
+            "label": "AI: Identify Type #1",
+            "status": "IDLE",
+            "config": {
+              "aiConfig": {
+                "provider": "vertex",
+                "model": "gemini-3-flash-preview",
+                "prompt": "You are a document classification system. Analyze the document structure and content to identify its type. You MUST select one of the valid types from the provided schema. Classify this document.",
+                "input": "context.docId",
+                "inputType": "pdf",
+                "pages": 1,
+                "jsonSchema": "data.schema",
+                "outputKey": "data.type1",
+                "isJson": true,
+                "thinkingLevel": "minimal"
+              }
+            }
+          }
+        },
+        {
+          "id": "ai-identify-2",
+          "type": "aiInteraction",
+          "position": {
+            "x": 500,
+            "y": 850
+          },
+          "data": {
+            "nodeType": "aiInteraction",
+            "label": "AI: Identify Type #2",
+            "status": "IDLE",
+            "config": {
+              "aiConfig": {
+                "provider": "vertex",
+                "model": "gemini-3-flash-preview",
+                "prompt": "You are a document classification system. Analyze the document structure and content to identify its type. You MUST select one of the valid types from the provided schema. Classify this document.",
+                "input": "context.docId",
+                "inputType": "pdf",
+                "pages": 1,
+                "jsonSchema": "data.schema",
+                "outputKey": "data.type2",
+                "isJson": true,
+                "thinkingLevel": "minimal"
+              }
+            }
+          }
+        },
+        {
+          "id": "validate-type-match",
+          "type": "validateExtraction",
+          "position": {
+            "x": 300,
+            "y": 1050
+          },
+          "data": {
+            "nodeType": "validateExtraction",
+            "label": "Validate Type Match",
+            "status": "IDLE",
+            "config": {
+              "data1Key": "data.type1.documentType",
+              "data2Key": "data.type2.documentType",
+              "outputKey": "data.identifiedType"
+            }
+          }
+        },
+        {
+          "id": "lookup-doctype",
+          "type": "serviceCall",
+          "position": {
+            "x": 300,
+            "y": 1250
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Lookup Document Type",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "projectService",
+              "methodName": "getDocumentTypeByName",
+              "arguments": {
+                "name": "{{data.identifiedType}}"
+              },
+              "outputMapping": "data.foundDocType"
+            }
+          }
+        },
+        {
+          "id": "check-type-exists",
+          "type": "ifElse",
+          "position": {
+            "x": 300,
+            "y": 1450
+          },
+          "data": {
+            "nodeType": "ifElse",
+            "label": "Type Exists?",
+            "status": "IDLE",
+            "config": {
+              "condition": "!!context.data.foundDocType && !!context.data.foundDocType.id"
+            }
+          }
+        },
+        {
+          "id": "notify-type-not-found",
+          "type": "serviceCall",
+          "position": {
+            "x": 550,
+            "y": 1650
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Notify: Type Not Found",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "notificationService",
+              "methodName": "create",
+              "arguments": {
+                "notification": {
+                  "title": "Document Type Not Found",
+                  "message": "Identified type '{{data.identifiedType}}' does not exist in the system.",
+                  "type": "warning"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "assign-doctype",
+          "type": "serviceCall",
+          "position": {
+            "x": 50,
+            "y": 1650
+          },
+          "data": {
+            "nodeType": "serviceCall",
+            "label": "Assign DocType",
+            "status": "IDLE",
+            "config": {
+              "serviceName": "documentService",
+              "methodName": "update",
+              "arguments": {
+                "id": "context.docId",
+                "updates": {
+                  "docTypeId": "{{data.foundDocType.id}}"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e-get-check",
+          "source": "get-document",
+          "target": "check-has-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-check-gettypes",
+          "source": "check-has-doctype",
+          "sourceHandle": "true",
+          "target": "get-doctypes",
+          "type": "default"
+        },
+        {
+          "id": "e-check-exists",
+          "source": "check-has-doctype",
+          "sourceHandle": "false",
+          "target": "notify-already-exists",
+          "type": "default"
+        },
+        {
+          "id": "e-gettypes-ai1",
+          "source": "get-doctypes",
+          "target": "ai-identify-1",
+          "type": "default"
+        },
+        {
+          "id": "e-ai1-ai2",
+          "source": "ai-identify-1",
+          "target": "ai-identify-2",
+          "type": "default"
+        },
+        {
+          "id": "e-ai2-validate",
+          "source": "ai-identify-2",
+          "target": "validate-type-match",
+          "type": "default"
+        },
+        {
+          "id": "e-validate-lookup",
+          "source": "validate-type-match",
+          "target": "lookup-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-lookup-check",
+          "source": "lookup-doctype",
+          "target": "check-type-exists",
+          "type": "default"
+        },
+        {
+          "id": "e-check-assign",
+          "source": "check-type-exists",
+          "sourceHandle": "true",
+          "target": "assign-doctype",
+          "type": "default"
+        },
+        {
+          "id": "e-check-notfound",
+          "source": "check-type-exists",
+          "sourceHandle": "false",
+          "target": "notify-type-not-found",
+          "type": "default"
+        }
+      ]
+    }
+  ],
+  "createdAt": "2026-02-14T19:11:24.562Z",
+  "updatedAt": "2026-02-14T19:11:24.562Z"
+}

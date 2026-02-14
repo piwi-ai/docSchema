@@ -1,0 +1,57 @@
+{
+    "name": "@piwi-ai/business-schema-configurations",
+    "version": "1.0.0",
+    "description": "JSON schema configurations for intelligent document processing — document types, entity types, entity relationships, and AI extraction workflows for various business verticals.",
+    "keywords": [
+        "business-schema",
+        "document-processing",
+        "ai-extraction",
+        "json-schema",
+        "idp",
+        "document-types",
+        "entity-types",
+        "workflow",
+        "real-estate",
+        "accountant",
+        "insurance",
+        "car-dealership",
+        "llm",
+        "ai-agents"
+    ],
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/piwi-ai/business-schema-configurations.git"
+    },
+    "homepage": "https://github.com/piwi-ai/business-schema-configurations#readme",
+    "bugs": {
+        "url": "https://github.com/piwi-ai/business-schema-configurations/issues"
+    },
+    "type": "module",
+    "exports": {
+        "./configs/*": "./configs/*",
+        "./schema": "./schema/config.schema.json",
+        "./types": "./dist/types.js"
+    },
+    "files": [
+        "configs/",
+        "schema/",
+        "dist/",
+        "llms.txt",
+        "llms-full.txt",
+        "AGENTS.md"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "generate": "tsx src/generate-all.ts",
+        "build:all": "tsc && tsx src/generate-all.ts",
+        "test": "vitest run",
+        "test:watch": "vitest"
+    },
+    "devDependencies": {
+        "@types/node": "^25.2.3",
+        "tsx": "^4.19.0",
+        "typescript": "^5.9.3",
+        "vitest": "^3.0.0"
+    }
+}
