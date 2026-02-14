@@ -27,9 +27,6 @@
     "bugs": {
         "url": "https://github.com/piwi-ai/business-schema-configurations/issues"
     },
-    "publishConfig": {
-        "registry": "https://npm.pkg.github.com"
-    },
     "type": "module",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",

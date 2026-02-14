@@ -22,26 +22,26 @@ jobs:
       - run: npm run generate
       - run: npm test
 
-  # ── Publish to GitHub Packages ─────────────────────────────────────────
+  # ── Publish to npm ─────────────────────────────────────────────────────
   publish:
     needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     permissions:
       contents: read
-      packages: write
+      id-token: write
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: https://npm.pkg.github.com
+          registry-url: https://registry.npmjs.org
 
       - run: npm ci
       - run: npm run build
       - run: npm run generate
 
-      - run: npm publish
+      - run: npm publish --provenance --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
