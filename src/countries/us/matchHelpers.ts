@@ -20,9 +20,39 @@ export const addressMatch = (): MatchFieldConfig[] => [
     { field: F.PROPERTY_ADDRESS, fuzzyThreshold: 0.3 },
 ];
 
+/** Match by generic address (contact/business identity) */
+export const contactAddressMatch = (): MatchFieldConfig[] => [
+    { field: F.ADDRESS, fuzzyThreshold: 0.3 },
+];
+
 /** Match by parcelNumber (property identity — exact) */
 export const parcelMatch = (): MatchFieldConfig[] => [
     { field: F.PARCEL_NUMBER, fuzzyThreshold: 0 },
+];
+
+/** Match by taxId/SSN/EIN (exact) */
+export const taxIdMatch = (): MatchFieldConfig[] => [
+    { field: F.TAX_ID, fuzzyThreshold: 0 },
+];
+
+/** Match by accountNumber (exact) */
+export const accountMatch = (): MatchFieldConfig[] => [
+    { field: F.ACCOUNT_NUMBER, fuzzyThreshold: 0 },
+];
+
+/** Match by poNumber (exact) */
+export const poMatch = (): MatchFieldConfig[] => [
+    { field: F.PO_NUMBER, fuzzyThreshold: 0 },
+];
+
+/** Match by invoiceNumber (exact) */
+export const invoiceMatch = (): MatchFieldConfig[] => [
+    { field: F.INVOICE_NUMBER, fuzzyThreshold: 0 },
+];
+
+/** Match by Bill of Lading Number (exact) */
+export const bolMatch = (): MatchFieldConfig[] => [
+    { field: 'bolNumber', fuzzyThreshold: 0 },
 ];
 
 // ─── Field-mapping shorthand ────────────────────────────────────────────────
