@@ -1,0 +1,42 @@
+name: "\U0001F30D Add Country Support"
+description: Propose adding a new country with localized helpers and document types
+title: "[Country] "
+labels: ["enhancement", "country"]
+body:
+  - type: input
+    id: country
+    attributes:
+      label: Country
+      description: "Country name and ISO 3166-1 alpha-2 code"
+      placeholder: "e.g. Germany (DE)"
+    validations:
+      required: true
+  - type: textarea
+    id: date-format
+    attributes:
+      label: Date Format
+      description: "Standard date format used in official documents"
+      placeholder: "DD.MM.YYYY"
+    validations:
+      required: true
+  - type: textarea
+    id: national-ids
+    attributes:
+      label: National ID Formats
+      description: "Personal/business identification numbers and their formats"
+      placeholder: |
+        - Steueridentifikationsnummer (Tax ID): 11 digits
+        - Personalausweisnummer (ID card): 10 alphanumeric characters
+    validations:
+      required: true
+  - type: textarea
+    id: verticals
+    attributes:
+      label: Target Verticals
+      description: "Which business verticals would you like to support first?"
+      placeholder: "e.g. Real Estate, Accounting"
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: "Any relevant legal requirements, document naming conventions, etc."

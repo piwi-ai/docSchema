@@ -87,8 +87,6 @@ describe('Generated JSON configs', () => {
                 expect((parsed.documentTypes as unknown[]).length).toBeGreaterThan(0);
                 expect(Array.isArray(parsed.entityTypes)).toBe(true);
                 expect((parsed.entityTypes as unknown[]).length).toBeGreaterThan(0);
-                expect(Array.isArray(parsed.documentWorkflows)).toBe(true);
-                expect((parsed.documentWorkflows as unknown[]).length).toBeGreaterThan(0);
             });
 
             it('all "pattern" values are valid regex and match expected inputs', () => {

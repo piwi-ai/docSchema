@@ -42,9 +42,6 @@ describe.each(ALL_CONFIGS.map(c => [c.name, c] as const))('%s', (_name, config) 
         expect(config.entityTypes.length).toBeGreaterThan(0);
     });
 
-    it('has at least 1 workflow', () => {
-        expect(config.documentWorkflows.length).toBeGreaterThan(0);
-    });
 
     // ── Document Types ────────────────────────────────────────────────────
 
@@ -143,51 +140,6 @@ describe.each(ALL_CONFIGS.map(c => [c.name, c] as const))('%s', (_name, config) 
         });
     });
 
-    // ── Workflows ─────────────────────────────────────────────────────────
-
-    describe('workflows', () => {
-        it('all have unique IDs', () => {
-            const ids = config.documentWorkflows.map(wf => wf.id);
-            expect(new Set(ids).size).toBe(ids.length);
-        });
-
-        it('all have nodes and edges', () => {
-            for (const wf of config.documentWorkflows) {
-                expect(wf.nodes.length).toBeGreaterThan(0);
-                expect(wf.edges.length).toBeGreaterThan(0);
-            }
-        });
-
-        it('all edges reference existing node IDs', () => {
-            for (const wf of config.documentWorkflows) {
-                const nodeIds = new Set(wf.nodes.map(n => n.id));
-                for (const edge of wf.edges) {
-                    expect(nodeIds.has(edge.source)).toBe(true);
-                    expect(nodeIds.has(edge.target)).toBe(true);
-                }
-            }
-        });
-
-        it('all nodes have unique IDs within a workflow', () => {
-            for (const wf of config.documentWorkflows) {
-                const ids = wf.nodes.map(n => n.id);
-                expect(new Set(ids).size).toBe(ids.length);
-            }
-        });
-
-        it('all edges have unique IDs within a workflow', () => {
-            for (const wf of config.documentWorkflows) {
-                const ids = wf.edges.map(e => e.id);
-                expect(new Set(ids).size).toBe(ids.length);
-            }
-        });
-
-        it('has both extraction and identification workflows', () => {
-            const ids = config.documentWorkflows.map(wf => wf.id);
-            expect(ids).toContain('wf-doc-extraction');
-            expect(ids).toContain('wf-doc-identification');
-        });
-    });
 });
 
 // ── Cross-Config Tests ──────────────────────────────────────────────────────

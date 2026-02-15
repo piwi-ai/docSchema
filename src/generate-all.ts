@@ -79,21 +79,14 @@ for (const { business, country, modulePath } of verticals) {
     const outPath = join(CONFIGS_DIR, business, `${country}.config.json`);
     mkdirSync(dirname(outPath), { recursive: true });
 
-    const enriched = {
-        ...config,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-    };
-
-    const json = JSON.stringify(enriched, null, 2);
+    const json = JSON.stringify(config, null, 2);
     writeFileSync(outPath, json, 'utf-8');
     totalBytes += json.length;
 
     console.log(
         `  ✅ ${business}/${country}.config.json — ` +
         `${config.documentTypes.length} doc types, ` +
-        `${config.entityTypes.length} entity types, ` +
-        `${config.documentWorkflows.length} workflows`
+        `${config.entityTypes.length} entity types`
     );
 }
 

@@ -1,31 +1,27 @@
 {
-    "name": "@piwi.ai/business-schema-configurations",
+    "name": "@piwi.ai/docschema",
     "version": "1.0.4",
-    "description": "JSON schema configurations for intelligent document processing — document types, entity types, entity relationships, and AI extraction workflows for various business verticals.",
+    "description": "DocSchema — An open standard for AI-readable document schemas. Define document types, entity types, and conditional logic for any business vertical.",
     "keywords": [
-        "business-schema",
-        "document-processing",
+        "docschema",
+        "document-schema",
         "ai-extraction",
         "json-schema",
         "idp",
         "document-types",
         "entity-types",
-        "workflow",
-        "real-estate",
-        "accountant",
-        "insurance",
-        "car-dealership",
+        "open-standard",
         "llm",
         "ai-agents"
     ],
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/piwi-ai/business-schema-configurations.git"
+        "url": "https://github.com/piwi-ai/docSchema.git"
     },
-    "homepage": "https://github.com/piwi-ai/business-schema-configurations#readme",
+    "homepage": "https://piwi-ai.github.io/docSchema",
     "bugs": {
-        "url": "https://github.com/piwi-ai/business-schema-configurations/issues"
+        "url": "https://github.com/piwi-ai/docSchema/issues"
     },
     "type": "module",
     "main": "./dist/index.js",

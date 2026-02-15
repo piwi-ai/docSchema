@@ -2,23 +2,9 @@
  * Self-contained type definitions for business schema configurations.
  *
  * These types define the structure of document types, entity types, and
- * workflows used for AI-powered document processing. They are intentionally
- * decoupled from any specific platform implementation.
+ * cross-document validation rules for AI-powered document processing.
+ * They are intentionally decoupled from any specific platform implementation.
  */
-
-// ─── Enums ──────────────────────────────────────────────────────────────────
-
-/** Status values for workflow nodes */
-export enum JobStatus {
-    IDLE = 'IDLE',
-    RUNNING = 'RUNNING',
-    SUCCESS = 'SUCCESS',
-    ERROR = 'ERROR',
-    SKIPPED = 'SKIPPED',
-    CANCELLED = 'CANCELLED',
-}
-
-export type NodeStatus = JobStatus;
 
 // ─── Document Types ─────────────────────────────────────────────────────────
 
@@ -142,48 +128,6 @@ export interface EntityTypeDef {
     displayOrder?: number;
 }
 
-// ─── Workflows ──────────────────────────────────────────────────────────────
-
-/** Data payload of a workflow node */
-export interface WorkflowNodeData {
-    nodeType: string;
-    label?: string;
-    status?: NodeStatus;
-    config?: Record<string, unknown>;
-    [key: string]: unknown;
-}
-
-/** A node in a workflow graph */
-export interface WorkflowNode {
-    id: string;
-    type?: string;
-    data: WorkflowNodeData;
-    position?: { x: number; y: number };
-}
-
-/** An edge connecting two workflow nodes */
-export interface WorkflowEdge {
-    id: string;
-    source: string;
-    target: string;
-    sourceHandle?: string | null;
-    type?: string;
-}
-
-/**
- * A workflow definition that orchestrates AI processing steps.
- * For example, the extraction workflow: load → extract → verify → validate → save.
- */
-export interface WorkflowDef {
-    id: string;
-    name: string;
-    isDefault?: boolean;
-    enabled?: boolean;
-    priority?: number;
-    nodes: WorkflowNode[];
-    edges: WorkflowEdge[];
-}
-
 // ─── Business Configuration ─────────────────────────────────────────────────
 
 /**
@@ -203,6 +147,5 @@ export interface BusinessConfiguration {
     documentTypes: DocumentTypeDef[];
     /** Entity type definitions with aggregation and validation rules */
     entityTypes: EntityTypeDef[];
-    /** Workflow definitions for AI document processing */
-    documentWorkflows: WorkflowDef[];
 }
+

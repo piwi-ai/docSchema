@@ -1,0 +1,137 @@
+/* ── JSON Viewer ──────────────────────────────────────────────── */
+.json-viewer__inner {
+    max-width: 1000px;
+}
+
+.json-viewer__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-6);
+    margin-bottom: var(--space-6);
+}
+
+.json-viewer__controls {
+    display: flex;
+    gap: var(--space-2);
+    flex-shrink: 0;
+}
+
+/* ── Dropdown ─────────────────────────────────────────────────── */
+.json-dropdown {
+    position: relative;
+}
+
+.json-dropdown__trigger {
+    white-space: nowrap;
+}
+
+.json-dropdown__menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    min-width: 240px;
+    padding: var(--space-2);
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.json-dropdown__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    border: none;
+    border-radius: var(--radius-sm);
+    background: none;
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: left;
+    width: 100%;
+}
+
+.json-dropdown__item:hover {
+    background: var(--bg-card);
+    color: var(--text-primary);
+}
+
+.json-dropdown__item--active {
+    background: rgba(124, 58, 237, 0.12);
+    color: var(--text-primary);
+}
+
+/* ── Code Block ───────────────────────────────────────────────── */
+.json-viewer__block {
+    overflow: hidden;
+}
+
+.json-viewer__block:hover {
+    transform: none;
+}
+
+.json-viewer__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--border-color);
+    background: rgba(15, 17, 23, 0.4);
+}
+
+.json-viewer__size {
+    margin-left: auto;
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+}
+
+.json-viewer__code {
+    padding: var(--space-6);
+    font-size: var(--text-xs);
+    line-height: 1.7;
+    overflow-x: auto;
+    max-height: 75vh;
+    overflow-y: auto;
+    color: var(--text-secondary);
+}
+
+/* ── Syntax Colors ────────────────────────────────────────────── */
+.json-key {
+    color: var(--accent-purple);
+}
+
+.json-string {
+    color: var(--accent-green);
+}
+
+.json-number {
+    color: var(--accent-amber);
+}
+
+.json-boolean {
+    color: var(--accent-cyan);
+}
+
+.json-null {
+    color: var(--text-muted);
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .json-viewer__header {
+        flex-direction: column;
+    }
+
+    .json-viewer__controls {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .json-dropdown__trigger {
+        flex: 1;
+    }
+}

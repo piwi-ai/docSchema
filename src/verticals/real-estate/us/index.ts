@@ -8,7 +8,6 @@
 import type { BusinessConfiguration } from '../../../types.js';
 import { documentTypes, DOC_IDS } from './documentTypes.js';
 import { entityTypes, ENTITY_IDS } from './entityTypes.js';
-import { documentWorkflows } from './documentWorkflows.js';
 
 export { DOC_IDS, ENTITY_IDS };
 
@@ -19,5 +18,4 @@ export const realEstateUsConfig: BusinessConfiguration = {
     schemaVersion: 1,
     documentTypes,
     entityTypes,
-    documentWorkflows,
 };

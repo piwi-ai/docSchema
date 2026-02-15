@@ -1,13 +1,13 @@
 /**
- * @piwi-ai/business-schema-configurations
+ * @piwi.ai/docschema
  *
  * Open-source business schema configurations for AI-powered document processing.
- * Each vertical defines document types, entity types, and workflows for a specific
- * industry and country combination.
+ * Each vertical defines document types, entity types, and cross-document
+ * validation rules for a specific industry and country combination.
  *
  * @example
  * ```typescript
- * import { realEstateItConfig } from '@piwi-ai/business-schema-configurations';
+ * import { realEstateItConfig } from '@piwi.ai/docschema';
  * console.log(realEstateItConfig.documentTypes);
  * ```
  */
@@ -21,22 +21,13 @@ export type {
     MatchFieldConfig,
     ConditionalRequirement,
     DocumentCondition,
-    WorkflowDef,
-    WorkflowNode,
-    WorkflowEdge,
-    WorkflowNodeData,
     BusinessConfiguration,
 } from './types.js';
-export { JobStatus } from './types.js';
 
 // ─── Helpers (per country — re-export schema primitives from each) ──────────
 export * as schemaHelpers from './helpers/schema.js';
 export * as itHelpers from './helpers/it.js';
 export * as usHelpers from './helpers/us.js';
-
-// ─── Shared Workflows ───────────────────────────────────────────────────────
-export { italianWorkflows } from './workflows/italian-standard.js';
-export { usWorkflows } from './workflows/us-standard.js';
 
 // ─── Vertical Configurations ────────────────────────────────────────────────
 export { accountantItConfig } from './verticals/accountant/it/index.js';
@@ -61,3 +52,4 @@ export const allConfigurations: BusinessConfiguration[] = [
     realEstateItConfig,
     realEstateUsConfig,
 ];
+

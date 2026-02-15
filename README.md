@@ -1,8 +1,35 @@
-# Business Schema Configurations
+# DocSchema — Business Schema Configurations
 
-Open-source, AI-readable business schema configurations for **[PIWI](https://piwi.ai)** — an intelligent document processing (IDP) platform that uses AI to automatically extract, validate, and export structured data from business documents.
+An **open standard** for AI-readable document schemas. Define what documents exist in a business, what data to extract, how to validate across documents, and how to link everything to real-world entities — in a single JSON file that any AI can consume.
 
-This package provides the **brain** behind document understanding: it tells the AI **what documents exist** in a business, **what data to extract** from each one, **how to match** extracted data to real-world entities, and **what processing pipeline** to follow — all in pure TypeScript with zero runtime dependencies.
+[![npm](https://img.shields.io/npm/v/@piwi.ai/docschema)](https://www.npmjs.com/package/@piwi.ai/docschema)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+> **📖 [Read the full specification →](SPECIFICATION.md)**
+
+---
+
+## The Standard
+
+DocSchema defines **four core primitives** for AI-powered document processing:
+
+| Primitive | Purpose | Spec Section |
+|-----------|---------|:------------:|
+| **Document Types** | JSON Schema definitions for AI data extraction | [§3](SPECIFICATION.md#3-document-types) |
+| **Entity Types** | Cross-document data aggregation with identity resolution | [§4](SPECIFICATION.md#4-entity-types) |
+| **Conditional Requirements** | IF-THEN validation logic across documents | [§5](SPECIFICATION.md#5-cross-document-validation) |
+
+
+### Why a Standard?
+
+Every AI document processing system reinvents the same wheel: *"What fields should I extract from this invoice?"* DocSchema provides a **universal, portable format** so that:
+
+- **AI agents** can use any schema to extract structured data from any document, with any LLM
+- **Businesses** get pre-built configurations for their industry — no prompt engineering required
+- **Developers** can build document processing systems that work with any configuration
+- **Countries** get localized schemas with proper date formats, ID patterns, and field names
+
+The standard is LLM-agnostic (Gemini, GPT, Claude, Llama, …), open-source, and has zero runtime dependencies.
 
 ---
 
@@ -69,8 +96,8 @@ This package defines the **configuration layer** — the rules that drive everyt
 | Layer | Role | This Repo? |
 |-------|------|:----------:|
 | Document Upload & Storage | Handle file uploads, store in S3 | ❌ |
-| AI Processing Engine | Run LLM calls, orchestrate workflows | ❌ |
-| **Schema Configurations** | **Define document types, entity types, extraction schemas, workflows** | **✅** |
+| AI Processing Engine | Run LLM calls, orchestrate processing pipelines | ❌ |
+| **Schema Configurations** | **Define document types, entity types, extraction schemas** | **✅** |
 | Entity Resolution | Match extracted data to entities using fuzzy rules | ❌ |
 | API & PDF Export | Serve structured data, render filled PDFs | ❌ |
 
@@ -122,10 +149,6 @@ src/
 │   ├── it.ts                     # Italian fields (nome, cognome, codiceFiscale, date DD.MM.YYYY, …)
 │   └── us.ts                     # US fields (firstName, lastName, ssn, dateUS MM/DD/YYYY, …)
 │
-├── workflows/                    # Shared document processing workflows
-│   ├── italian-standard.ts       # Italian extraction + identification pipelines
-│   └── us-standard.ts            # US extraction + identification pipelines
-│
 └── verticals/                    # Business configurations, organized by {business}/{country}
     ├── accountant/it/            # Italian accountant / tax firm
     ├── car-dealership/it/        # Italian car dealership
@@ -141,13 +164,12 @@ configs/                          # Generated JSON output (created by `npm run g
 └── real-estate/us.config.json
 ```
 
-Each vertical folder contains exactly 4 files:
+Each vertical folder contains exactly 3 files:
 
 | File | Purpose |
 |------|---------|
 | `documentTypes.ts` | What documents this business handles and what fields to extract |
 | `entityTypes.ts` | What business entities exist and how to match documents to them |
-| `documentWorkflows.ts` | What AI processing pipelines to run on documents |
 | `index.ts` | Assembles the above into a single `BusinessConfiguration` |
 
 ---
@@ -197,16 +219,7 @@ An entity type defines a business object (e.g., "Buyer", "Property", "Vehicle") 
 }
 ```
 
-### 3. Workflows (`WorkflowDef`)
-
-A workflow is a directed graph of processing nodes. Two standard workflows exist:
-
-- **Document Extraction**: Load document → check type → load schema → AI extract → AI verify → validate → save
-- **Document Identification**: Load document → check if typed → get available types → AI classify (×2) → validate match → assign type
-
-Each workflow uses `serviceCall`, `aiInteraction`, `ifElse`, and `validateExtraction` node types.
-
-### 4. Business Configuration (`BusinessConfiguration`)
+### 3. Business Configuration (`BusinessConfiguration`)
 
 The top-level object that bundles everything together:
 
@@ -218,7 +231,6 @@ The top-level object that bundles everything together:
     schemaVersion: 1,
     documentTypes: [...],      // DocumentTypeDef[]
     entityTypes: [...],        // EntityTypeDef[]
-    documentWorkflows: [...],  // WorkflowDef[]
 }
 ```
 
@@ -303,19 +315,7 @@ export const entityTypes: EntityTypeDef[] = [
 ];
 ```
 
-### Step 4: Create `documentWorkflows.ts`
-
-Re-export shared workflows for your country, or define custom ones:
-
-```typescript
-// For US verticals:
-export { usWorkflows as documentWorkflows } from '../../../workflows/us-standard';
-
-// For Italian verticals:
-export { italianWorkflows as documentWorkflows } from '../../../workflows/italian-standard';
-```
-
-### Step 5: Create `index.ts`
+### Step 4: Create `index.ts`
 
 Assemble and export the configuration:
 
@@ -323,7 +323,6 @@ Assemble and export the configuration:
 import type { BusinessConfiguration } from '../../../types';
 import { documentTypes, DOC_IDS } from './documentTypes';
 import { entityTypes, ENTITY_IDS } from './entityTypes';
-import { documentWorkflows } from './documentWorkflows';
 
 export { DOC_IDS, ENTITY_IDS };
 
@@ -334,11 +333,10 @@ export const lawFirmUsConfig: BusinessConfiguration = {
     schemaVersion: 1,
     documentTypes,
     entityTypes,
-    documentWorkflows,
 };
 ```
 
-### Step 6: Generate
+### Step 5: Generate
 
 Run `npm run generate` — the script auto-discovers all `verticals/{business}/{country}/index.ts` folders and writes JSON configs to `configs/`. No manual registration needed.
 
@@ -406,7 +404,7 @@ Includes all universal helpers plus:
 ## Usage
 
 ```typescript
-import { realEstateUsConfig, allConfigurations } from '@piwi-ai/business-schema-configurations';
+import { realEstateUsConfig, allConfigurations } from '@piwi.ai/docschema';
 
 // Use a specific configuration
 console.log(realEstateUsConfig.documentTypes.map(dt => dt.name));
