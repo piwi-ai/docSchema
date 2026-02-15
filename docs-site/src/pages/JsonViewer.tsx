@@ -1,24 +1,8 @@
 import { useState } from 'react'
 import { verticals } from '../data/configs'
 import { Copy, Check, ChevronDown } from 'lucide-react'
+import { syntaxHighlight, getConfigFilename } from '../utils/json'
 import './JsonViewer.css'
-
-function syntaxHighlight(json: string): string {
-    return json.replace(
-        /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
-        (match) => {
-            let cls = 'json-number';
-            if (/^"/.test(match)) {
-                cls = /:$/.test(match) ? 'json-key' : 'json-string';
-            } else if (/true|false/.test(match)) {
-                cls = 'json-boolean';
-            } else if (/null/.test(match)) {
-                cls = 'json-null';
-            }
-            return `<span class="${cls}">${match}</span>`;
-        }
-    );
-}
 
 export default function JsonViewer() {
     const [activeIdx, setActiveIdx] = useState(0);
@@ -81,7 +65,7 @@ export default function JsonViewer() {
                         <span className="preview__dot preview__dot--yellow" />
                         <span className="preview__dot preview__dot--green" />
                         <span className="preview__filename">
-                            {active.slug.split('-').slice(0, -1).join('-')}/{active.slug.split('-').pop()}.config.json
+                            {getConfigFilename(active.slug)}
                         </span>
                         <span className="json-viewer__size">
                             {(new Blob([jsonStr]).size / 1024).toFixed(1)} KB

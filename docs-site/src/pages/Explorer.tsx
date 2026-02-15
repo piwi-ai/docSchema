@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { verticals, type DocTypeDef, type SchemaField } from '../data/configs'
 import { FileText, ChevronDown, ChevronRight, Hash, Type, List, Braces, AlertCircle } from 'lucide-react'
+import VerticalSidebar from '../components/VerticalSidebar'
 import './Explorer.css'
-
 
 function FieldRow({ name, field, isRequired }: { name: string; field: SchemaField; isRequired: boolean }) {
     const typeIcon = {
@@ -105,26 +105,12 @@ export default function Explorer() {
     return (
         <div className="explorer page-wrapper">
             <div className="explorer__inner container">
-                {/* Sidebar */}
-                <aside className="explorer__sidebar">
-                    <h2 className="explorer__sidebar-title">Verticals</h2>
-                    {verticals.map((v, i) => (
-                        <button
-                            key={v.slug}
-                            className={`explorer__vertical-btn ${i === activeIdx ? 'explorer__vertical-btn--active' : ''}`}
-                            onClick={() => setActiveIdx(i)}
-                        >
-                            <span className="explorer__vertical-flag">{v.flag}</span>
-                            <div>
-                                <span className="explorer__vertical-name">{v.vertical}</span>
-                                <span className="explorer__vertical-country">{v.country}</span>
-                            </div>
-                            <span className="explorer__vertical-count">{v.config.documentTypes.length}</span>
-                        </button>
-                    ))}
-                </aside>
+                <VerticalSidebar
+                    activeIdx={activeIdx}
+                    onSelect={setActiveIdx}
+                    countKey="documentTypes"
+                />
 
-                {/* Main */}
                 <main className="explorer__main">
                     <div className="explorer__header">
                         <h1 className="explorer__title">
