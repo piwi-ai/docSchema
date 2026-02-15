@@ -8,6 +8,13 @@
       "id": "doc-bollo",
       "name": "Attestazione Pagamento Bollo",
       "description": "Ricevuta pagamento tassa automobilistica",
+      "references": [
+        {
+          "title": "ACI — Bollo Auto",
+          "url": "https://www.aci.it/i-servizi/servizi-online/bollo-auto.html",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -45,6 +52,13 @@
       "id": "doc-atto-vendita",
       "name": "Atto di Vendita / Passaggio di Proprietà",
       "description": "Contratto di compravendita veicolo con dati delle parti e del veicolo",
+      "references": [
+        {
+          "title": "ACI — Passaggio di proprietà",
+          "url": "https://www.aci.it/i-servizi/guide-utili/guida-pratiche-auto/passaggio-di-proprieta.html",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -236,6 +250,18 @@
       "id": "doc-certificato-proprieta",
       "name": "Certificato di Proprietà (CDP)",
       "description": "Certificato di proprietà digitale (CDPD) — attesta la titolarità del veicolo al PRA",
+      "references": [
+        {
+          "title": "ACI — Certificato di Proprietà Digitale",
+          "url": "https://www.aci.it/i-servizi/guide-utili/guida-pratiche-auto/certificato-di-proprieta.html",
+          "type": "documentation"
+        },
+        {
+          "title": "PRA — Pubblico Registro Automobilistico",
+          "url": "https://www.aci.it/i-servizi/servizi-online/pra.html",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -286,6 +312,13 @@
       "id": "doc-revisione",
       "name": "Certificato di Revisione",
       "description": "Esito della revisione ministeriale del veicolo",
+      "references": [
+        {
+          "title": "Portale dell'Automobilista — Revisione",
+          "url": "https://www.ilportaledellautomobilista.it/web/portale-automobilista/revisioni",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -334,6 +367,13 @@
       "id": "doc-finanziamento",
       "name": "Contratto di Finanziamento",
       "description": "Contratto di finanziamento per acquisto veicolo (prestito, leasing)",
+      "references": [
+        {
+          "title": "Banca d'Italia — Credito ai consumatori",
+          "url": "https://www.bancaditalia.it/compiti/vigilanza/normativa/archivio-norme/disposizioni/trasparenza/index.html",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -447,6 +487,18 @@
       "id": "doc-identita",
       "name": "Documento d'Identità",
       "description": "Documento di riconoscimento (CI, Passaporto, Patente) per identificazione e Antiriciclaggio",
+      "references": [
+        {
+          "title": "Carta d'Identità Elettronica (CIE)",
+          "url": "https://www.cartaidentita.interno.gov.it/",
+          "type": "documentation"
+        },
+        {
+          "title": "Adeguata verifica — D.Lgs. 231/2007",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2007-11-21;231",
+          "type": "regulation"
+        }
+      ],
       "isArrayExtraction": true,
       "jsonSchema": {
         "type": "object",
@@ -534,7 +586,14 @@
     {
       "id": "doc-contatto",
       "name": "Documento di Contatto",
-      "description": "Recapiti e indirizzi del cliente",
+      "description": "Recapiti e indirizzi del cliente per comunicazioni e notifiche legali",
+      "references": [
+        {
+          "title": "ANPR — Anagrafe Nazionale Popolazione Residente",
+          "url": "https://www.anagrafenazionale.interno.it/",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -594,6 +653,13 @@
       "id": "doc-libretto-circolazione",
       "name": "Libretto di Circolazione",
       "description": "Carta di circolazione del veicolo con dati tecnici e intestatario",
+      "references": [
+        {
+          "title": "Motorizzazione Civile — Carta di Circolazione",
+          "url": "https://www.mit.gov.it/temi/trasporti/motorizzazione",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -681,6 +747,18 @@
       "id": "doc-assicurazione",
       "name": "Polizza Assicurativa RCA",
       "description": "Certificato di assicurazione obbligatoria RC Auto",
+      "references": [
+        {
+          "title": "IVASS — Codice delle Assicurazioni",
+          "url": "https://www.ivass.it/normativa/nazionale/primaria/index.html",
+          "type": "regulation"
+        },
+        {
+          "title": "ANIA — Attestato di Rischio",
+          "url": "https://www.ania.it/",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -740,7 +818,14 @@
     {
       "id": "doc-procura",
       "name": "Procura",
-      "description": "Mandato a rappresentare — usata quando il passaggio è fatto per delega",
+      "description": "Atto notarile che conferisce il potere di rappresentanza per compiere atti per conto di un'altra persona",
+      "references": [
+        {
+          "title": "Art. 1392 Codice Civile — Forma della procura",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1392",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -754,7 +839,7 @@
           },
           "codiceFiscaleMandante": {
             "type": "string",
-            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "description": "Codice Fiscale del mandante (extract without spaces)",
             "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
           },
           "nomeMandatario": {
@@ -767,17 +852,35 @@
           },
           "codiceFiscaleMandatario": {
             "type": "string",
-            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "description": "Codice Fiscale del mandatario (extract without spaces)",
             "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
           },
-          "oggetto": {
+          "tipoProcura": {
             "type": "string",
-            "description": "Oggetto della procura (es. vendita/acquisto veicolo targa XX000YY)"
+            "description": "Tipo di procura",
+            "enum": [
+              "speciale",
+              "generale",
+              null
+            ],
+            "nullable": true
           },
-          "dataStipula": {
+          "oggettoDelega": {
             "type": "string",
-            "description": "Data della procura",
+            "description": "Oggetto specifico della delega"
+          },
+          "notaio": {
+            "type": "string",
+            "description": "Notaio che ha autenticato la procura"
+          },
+          "dataAtto": {
+            "type": "string",
+            "description": "Data dell'atto in formato europeo DD.MM.YYYY",
             "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "numeroRepertorio": {
+            "type": "string",
+            "description": "Numero di repertorio"
           }
         },
         "required": [
@@ -786,7 +889,9 @@
           "codiceFiscaleMandante",
           "nomeMandatario",
           "cognomeMandatario",
-          "oggetto"
+          "codiceFiscaleMandatario",
+          "tipoProcura",
+          "dataAtto"
         ]
       }
     },
@@ -840,6 +945,13 @@
       "id": "doc-tessera-sanitaria",
       "name": "Tessera Sanitaria",
       "description": "Tessera sanitaria / Codice Fiscale — conferma CF e dati anagrafici",
+      "references": [
+        {
+          "title": "Agenzia delle Entrate — Tessera Sanitaria",
+          "url": "https://sistemats1.sanita.finanze.it/portale/tessera-sanitaria",
+          "type": "documentation"
+        }
+      ],
       "isArrayExtraction": true,
       "jsonSchema": {
         "type": "object",
@@ -876,9 +988,18 @@
             "type": "string",
             "description": "Comune di nascita"
           },
+          "provincia": {
+            "type": "string",
+            "description": "Sigla provincia di nascita"
+          },
           "dataScadenza": {
             "type": "string",
             "description": "Data di scadenza",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "dataEmissione": {
+            "type": "string",
+            "description": "Data di emissione",
             "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
           }
         },
@@ -894,7 +1015,19 @@
     {
       "id": "doc-visura-camerale",
       "name": "Visura Camerale",
-      "description": "Visura CCIAA — necessaria quando venditore o acquirente è persona giuridica",
+      "description": "Visura della Camera di Commercio — dati societari, legale rappresentante, codice ATECO",
+      "references": [
+        {
+          "title": "Registro Imprese — Camera di Commercio",
+          "url": "https://www.registroimprese.it/",
+          "type": "documentation"
+        },
+        {
+          "title": "InfoCamere — Visure",
+          "url": "https://www.infocamere.it/visure",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -927,6 +1060,18 @@
             "type": "string",
             "description": "Codice ATECO principale"
           },
+          "descrizioneAteco": {
+            "type": "string",
+            "description": "Descrizione attività ATECO"
+          },
+          "formaGiuridica": {
+            "type": "string",
+            "description": "Forma giuridica (es. S.r.l., S.p.A., S.a.s.)"
+          },
+          "capitaleSociale": {
+            "type": "number",
+            "description": "Capitale sociale in Euro"
+          },
           "statoImpresa": {
             "type": "string",
             "description": "Stato dell'impresa",
@@ -947,12 +1092,17 @@
           "rea": {
             "type": "string",
             "description": "Numero REA"
+          },
+          "oggettoSociale": {
+            "type": "string",
+            "description": "Oggetto sociale della società"
           }
         },
         "required": [
           "ragioneSociale",
           "partitaIva",
-          "legaleRappresentante"
+          "legaleRappresentante",
+          "codiceAteco"
         ]
       }
     },
@@ -960,6 +1110,13 @@
       "id": "doc-visura-pra",
       "name": "Visura PRA",
       "description": "Visura del Pubblico Registro Automobilistico — gravami, fermi, ipoteche",
+      "references": [
+        {
+          "title": "ACI — Visura PRA online",
+          "url": "https://www.aci.it/i-servizi/servizi-online/pra.html",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {

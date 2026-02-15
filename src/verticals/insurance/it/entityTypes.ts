@@ -5,26 +5,9 @@
  * Aggregates data from identity, policies, claims, assessments, and medical certificates.
  */
 import type { EntityTypeDef } from '../../../types.js';
+import { F } from '../../../countries/it/fields.js';
+import { cfMatch, targaMatch, polizzaMatch, sinistroMatch, fm } from '../../../countries/it/matchHelpers.js';
 import { DOC_IDS } from './documentTypes.js';
-
-// ─── Match helpers ──────────────────────────────────────────────────────────
-
-const cfMatch = () => [
-    { field: 'codiceFiscale', fuzzyThreshold: 0.2 },
-    { field: 'nome', fuzzyThreshold: 0 },
-    { field: 'cognome', fuzzyThreshold: 0 },
-];
-const targaMatch = () => [
-    { field: 'targa', fuzzyThreshold: 0 },
-];
-const polizzaMatch = () => [
-    { field: 'numeroPolizza', fuzzyThreshold: 0 },
-];
-const sinistroMatch = () => [
-    { field: 'numeroSinistro', fuzzyThreshold: 0 },
-];
-const fm = (sourceField: string, targetField: string, matchFields?: Array<{ field: string; fuzzyThreshold: number }>) =>
-    ({ sourceField, targetField, ...(matchFields ? { matchFields } : {}) });
 
 // ─── Entity IDs ─────────────────────────────────────────────────────────────
 
@@ -44,46 +27,46 @@ export const entityTypes: EntityTypeDef[] = [
         icon: 'shield-check',
         color: '#3b82f6',
         displayOrder: 0,
-        fieldOrder: ['nome', 'cognome', 'codiceFiscale', 'indirizzoDiResidenza', 'dataNascita', 'luogoNascita'],
+        fieldOrder: [F.NOME, F.COGNOME, F.CODICE_FISCALE, F.INDIRIZZO_RESIDENZA, F.DATA_NASCITA, F.LUOGO_NASCITA],
         dataSources: [
             {
                 docTypeId: DOC_IDS.IDENTITA, enabled: true, isRequired: true, canCreateEntity: true,
                 fieldMappings: [
-                    fm('nome', 'nome', cfMatch()), fm('cognome', 'cognome', cfMatch()),
-                    fm('codiceFiscale', 'codiceFiscale', cfMatch()),
-                    fm('dataNascita', 'dataNascita', cfMatch()), fm('luogoNascita', 'luogoNascita', cfMatch()),
-                    fm('indirizzoDiResidenza', 'indirizzoDiResidenza', cfMatch()),
+                    fm(F.NOME, F.NOME, cfMatch()), fm(F.COGNOME, F.COGNOME, cfMatch()),
+                    fm(F.CODICE_FISCALE, F.CODICE_FISCALE, cfMatch()),
+                    fm(F.DATA_NASCITA, F.DATA_NASCITA, cfMatch()), fm(F.LUOGO_NASCITA, F.LUOGO_NASCITA, cfMatch()),
+                    fm(F.INDIRIZZO_RESIDENZA, F.INDIRIZZO_RESIDENZA, cfMatch()),
                 ],
             },
             {
                 docTypeId: DOC_IDS.TESSERA_SANITARIA, enabled: true,
                 fieldMappings: [
-                    fm('nome', 'nome', cfMatch()), fm('cognome', 'cognome', cfMatch()),
-                    fm('codiceFiscale', 'codiceFiscale', cfMatch()),
-                    fm('dataNascita', 'dataNascita', cfMatch()),
+                    fm(F.NOME, F.NOME, cfMatch()), fm(F.COGNOME, F.COGNOME, cfMatch()),
+                    fm(F.CODICE_FISCALE, F.CODICE_FISCALE, cfMatch()),
+                    fm(F.DATA_NASCITA, F.DATA_NASCITA, cfMatch()),
                 ],
             },
             {
                 docTypeId: DOC_IDS.POLIZZA, enabled: true, canCreateEntity: true,
                 fieldMappings: [
-                    fm('contraente.nome', 'nome', cfMatch()), fm('contraente.cognome', 'cognome', cfMatch()),
-                    fm('contraente.codiceFiscale', 'codiceFiscale', cfMatch()),
-                    fm('contraente.indirizzo', 'indirizzoDiResidenza', cfMatch()),
+                    fm('contraente.nome', F.NOME, cfMatch()), fm('contraente.cognome', F.COGNOME, cfMatch()),
+                    fm('contraente.codiceFiscale', F.CODICE_FISCALE, cfMatch()),
+                    fm('contraente.indirizzo', F.INDIRIZZO_RESIDENZA, cfMatch()),
                 ],
             },
             {
                 docTypeId: DOC_IDS.DENUNCIA_SINISTRO, enabled: true, canCreateEntity: true,
                 fieldMappings: [
-                    fm('veicoloA.contraente', 'nome', cfMatch()),
-                    fm('veicoloA.codiceFiscale', 'codiceFiscale', cfMatch()),
+                    fm('veicoloA.contraente', F.NOME, cfMatch()),
+                    fm('veicoloA.codiceFiscale', F.CODICE_FISCALE, cfMatch()),
                 ],
             },
             {
                 docTypeId: DOC_IDS.CERTIFICATO_MEDICO, enabled: true,
                 fieldMappings: [
-                    fm('paziente.nome', 'nome', cfMatch()), fm('paziente.cognome', 'cognome', cfMatch()),
-                    fm('paziente.codiceFiscale', 'codiceFiscale', cfMatch()),
-                    fm('paziente.dataNascita', 'dataNascita', cfMatch()),
+                    fm('paziente.nome', F.NOME, cfMatch()), fm('paziente.cognome', F.COGNOME, cfMatch()),
+                    fm('paziente.codiceFiscale', F.CODICE_FISCALE, cfMatch()),
+                    fm('paziente.dataNascita', F.DATA_NASCITA, cfMatch()),
                 ],
             },
         ],
@@ -91,7 +74,7 @@ export const entityTypes: EntityTypeDef[] = [
             {
                 docTypeId: DOC_IDS.CERTIFICATO_MORTE, enabled: true,
                 conditions: [
-                    { sourceDocTypeId: DOC_IDS.POLIZZA, field: 'ramo', operator: 'equals', value: 'vita' },
+                    { sourceDocTypeId: DOC_IDS.POLIZZA, field: F.RAMO, operator: 'equals', value: 'vita' },
                 ],
             },
         ],
@@ -102,48 +85,48 @@ export const entityTypes: EntityTypeDef[] = [
         icon: 'car',
         color: '#6366f1',
         displayOrder: 1,
-        fieldOrder: ['targa', 'telaio', 'marca', 'modello', 'dataImmatricolazione', 'cilindrata', 'potenzaKw', 'alimentazione'],
+        fieldOrder: [F.TARGA, F.TELAIO, F.MARCA, F.MODELLO, F.DATA_IMMATRICOLAZIONE, F.CILINDRATA, F.POTENZA_KW, F.ALIMENTAZIONE],
         dataSources: [
             {
                 docTypeId: DOC_IDS.LIBRETTO, enabled: true, isRequired: true, canCreateEntity: true,
                 fieldMappings: [
-                    fm('targa', 'targa', targaMatch()), fm('telaio', 'telaio', targaMatch()),
-                    fm('marca', 'marca', targaMatch()), fm('modello', 'modello', targaMatch()),
-                    fm('dataImmatricolazione', 'dataImmatricolazione', targaMatch()),
-                    fm('cilindrata', 'cilindrata', targaMatch()), fm('potenzaKw', 'potenzaKw', targaMatch()),
-                    fm('alimentazione', 'alimentazione', targaMatch()),
+                    fm(F.TARGA, F.TARGA, targaMatch()), fm(F.TELAIO, F.TELAIO, targaMatch()),
+                    fm(F.MARCA, F.MARCA, targaMatch()), fm(F.MODELLO, F.MODELLO, targaMatch()),
+                    fm(F.DATA_IMMATRICOLAZIONE, F.DATA_IMMATRICOLAZIONE, targaMatch()),
+                    fm(F.CILINDRATA, F.CILINDRATA, targaMatch()), fm(F.POTENZA_KW, F.POTENZA_KW, targaMatch()),
+                    fm(F.ALIMENTAZIONE, F.ALIMENTAZIONE, targaMatch()),
                 ],
             },
             {
                 docTypeId: DOC_IDS.POLIZZA, enabled: true, canCreateEntity: true,
                 fieldMappings: [
-                    fm('targa', 'targa', targaMatch()),
+                    fm(F.TARGA, F.TARGA, targaMatch()),
                 ],
             },
             {
                 docTypeId: DOC_IDS.ATTESTATO_RISCHIO, enabled: true,
                 fieldMappings: [
-                    fm('targa', 'targa', targaMatch()),
+                    fm(F.TARGA, F.TARGA, targaMatch()),
                 ],
             },
             {
                 docTypeId: DOC_IDS.DENUNCIA_SINISTRO, enabled: true,
                 fieldMappings: [
-                    fm('veicoloA.targa', 'targa', targaMatch()),
-                    fm('veicoloA.marca', 'marca', targaMatch()),
-                    fm('veicoloA.modello', 'modello', targaMatch()),
+                    fm('veicoloA.targa', F.TARGA, targaMatch()),
+                    fm('veicoloA.marca', F.MARCA, targaMatch()),
+                    fm('veicoloA.modello', F.MODELLO, targaMatch()),
                 ],
             },
             {
                 docTypeId: DOC_IDS.PERIZIA_DANNI, enabled: true,
                 fieldMappings: [
-                    fm('targa', 'targa', targaMatch()),
+                    fm(F.TARGA, F.TARGA, targaMatch()),
                 ],
             },
             {
                 docTypeId: DOC_IDS.FATTURA_RIPARAZIONE, enabled: true,
                 fieldMappings: [
-                    fm('targa', 'targa', targaMatch()),
+                    fm(F.TARGA, F.TARGA, targaMatch()),
                 ],
             },
         ],
@@ -155,43 +138,43 @@ export const entityTypes: EntityTypeDef[] = [
         icon: 'alert-triangle',
         color: '#ef4444',
         displayOrder: 2,
-        fieldOrder: ['numeroSinistro', 'dataSinistro', 'luogoSinistro', 'dinamica', 'importoRiparazione', 'importoLiquidazione'],
+        fieldOrder: [F.NUMERO_SINISTRO, F.DATA_SINISTRO, F.LUOGO_SINISTRO, F.DINAMICA, F.IMPORTO_RIPARAZIONE, F.IMPORTO_LIQUIDAZIONE],
         dataSources: [
             {
                 docTypeId: DOC_IDS.DENUNCIA_SINISTRO, enabled: true, isRequired: true, canCreateEntity: true,
                 fieldMappings: [
-                    fm('numeroSinistro', 'numeroSinistro', sinistroMatch()),
-                    fm('dataSinistro', 'dataSinistro', sinistroMatch()),
-                    fm('luogoSinistro', 'luogoSinistro', sinistroMatch()),
-                    fm('dinamica', 'dinamica', sinistroMatch()),
+                    fm(F.NUMERO_SINISTRO, F.NUMERO_SINISTRO, sinistroMatch()),
+                    fm(F.DATA_SINISTRO, F.DATA_SINISTRO, sinistroMatch()),
+                    fm(F.LUOGO_SINISTRO, F.LUOGO_SINISTRO, sinistroMatch()),
+                    fm(F.DINAMICA, F.DINAMICA, sinistroMatch()),
                 ],
             },
             {
                 docTypeId: DOC_IDS.PERIZIA_DANNI, enabled: true, isRequired: true,
                 fieldMappings: [
-                    fm('numeroSinistro', 'numeroSinistro', sinistroMatch()),
-                    fm('importoRiparazione', 'importoRiparazione', sinistroMatch()),
-                    fm('importoLiquidazione', 'importoLiquidazione', sinistroMatch()),
+                    fm(F.NUMERO_SINISTRO, F.NUMERO_SINISTRO, sinistroMatch()),
+                    fm(F.IMPORTO_RIPARAZIONE, F.IMPORTO_RIPARAZIONE, sinistroMatch()),
+                    fm(F.IMPORTO_LIQUIDAZIONE, F.IMPORTO_LIQUIDAZIONE, sinistroMatch()),
                 ],
             },
             {
                 docTypeId: DOC_IDS.FATTURA_RIPARAZIONE, enabled: true,
                 fieldMappings: [
-                    fm('totale', 'costoRiparazioneEffettivo', sinistroMatch()),
+                    fm('totale', F.COSTO_RIPARAZIONE_EFFETTIVO, sinistroMatch()),
                 ],
             },
             {
                 docTypeId: DOC_IDS.VERBALE_AUTORITA, enabled: true,
                 fieldMappings: [
-                    fm('numeroVerbale', 'numeroVerbale', sinistroMatch()),
+                    fm(F.NUMERO_VERBALE, F.NUMERO_VERBALE, sinistroMatch()),
                 ],
             },
             {
                 docTypeId: DOC_IDS.CERTIFICATO_MEDICO, enabled: true,
                 fieldMappings: [
-                    fm('diagnosi', 'diagnosiLesioni', sinistroMatch()),
-                    fm('giorniPrognosi', 'giorniPrognosi', sinistroMatch()),
-                    fm('invaliditaPermanente', 'invaliditaPermanente', sinistroMatch()),
+                    fm('diagnosi', F.DIAGNOSI_LESIONI, sinistroMatch()),
+                    fm('giorniPrognosi', F.GIORNI_PROGNOSI, sinistroMatch()),
+                    fm('invaliditaPermanente', F.INVALIDITA_PERMANENTE, sinistroMatch()),
                 ],
             },
         ],
@@ -216,33 +199,33 @@ export const entityTypes: EntityTypeDef[] = [
         icon: 'file-shield',
         color: '#22c55e',
         displayOrder: 3,
-        fieldOrder: ['numeroPolizza', 'compagnia', 'ramo', 'premioAnnuo', 'decorrenza', 'scadenza', 'massimale', 'classeMerito'],
+        fieldOrder: [F.NUMERO_POLIZZA, F.COMPAGNIA, F.RAMO, F.PREMIO_ANNUO, F.DECORRENZA, F.SCADENZA, F.MASSIMALE, F.CLASSE_MERITO],
         dataSources: [
             {
                 docTypeId: DOC_IDS.POLIZZA, enabled: true, isRequired: true, canCreateEntity: true,
                 fieldMappings: [
-                    fm('numeroPolizza', 'numeroPolizza', polizzaMatch()),
-                    fm('compagnia', 'compagnia', polizzaMatch()),
-                    fm('ramo', 'ramo', polizzaMatch()),
-                    fm('premioAnnuo', 'premioAnnuo', polizzaMatch()),
-                    fm('decorrenza', 'decorrenza', polizzaMatch()),
-                    fm('scadenza', 'scadenza', polizzaMatch()),
-                    fm('massimale', 'massimale', polizzaMatch()),
-                    fm('garanzie', 'garanzie', polizzaMatch()),
+                    fm(F.NUMERO_POLIZZA, F.NUMERO_POLIZZA, polizzaMatch()),
+                    fm(F.COMPAGNIA, F.COMPAGNIA, polizzaMatch()),
+                    fm(F.RAMO, F.RAMO, polizzaMatch()),
+                    fm(F.PREMIO_ANNUO, F.PREMIO_ANNUO, polizzaMatch()),
+                    fm(F.DECORRENZA, F.DECORRENZA, polizzaMatch()),
+                    fm(F.SCADENZA, F.SCADENZA, polizzaMatch()),
+                    fm(F.MASSIMALE, F.MASSIMALE, polizzaMatch()),
+                    fm(F.GARANZIE, F.GARANZIE, polizzaMatch()),
                 ],
             },
             {
                 docTypeId: DOC_IDS.ATTESTATO_RISCHIO, enabled: true,
                 fieldMappings: [
-                    fm('classeMeritoAssegnazione', 'classeMerito', polizzaMatch()),
-                    fm('classeMeritoProvenienza', 'classeMeritoProvenienza', polizzaMatch()),
+                    fm('classeMeritoAssegnazione', F.CLASSE_MERITO, polizzaMatch()),
+                    fm('classeMeritoProvenienza', F.CLASSE_MERITO_PROVENIENZA, polizzaMatch()),
                 ],
             },
             {
                 docTypeId: DOC_IDS.QUIETANZA, enabled: true,
                 fieldMappings: [
-                    fm('importo', 'ultimoPremio', polizzaMatch()),
-                    fm('dataPagamento', 'ultimoPagamento', polizzaMatch()),
+                    fm('importo', F.ULTIMO_PREMIO, polizzaMatch()),
+                    fm('dataPagamento', F.ULTIMO_PAGAMENTO, polizzaMatch()),
                 ],
             },
         ],

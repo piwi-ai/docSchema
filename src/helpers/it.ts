@@ -7,7 +7,7 @@
  * statoCivile, targa, telaio.
  */
 import { enumField as _enumField } from './schema.js';
-export { text, num, enumField, email, datePattern, objectSchema, arrayOfObjects } from './schema.js';
+export { text, num, enumField, email, datePattern, objectSchema, arrayOfObjects, ref } from './schema.js';
 
 // Local alias for use within this module
 const enumField = _enumField;

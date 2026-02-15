@@ -6,7 +6,7 @@
  * firstName, lastName, ssn, ein, dateUS (MM/DD/YYYY),
  * currency, address, parcelNumber.
  */
-export { text, num, enumField, email, datePattern, objectSchema, arrayOfObjects } from './schema.js';
+export { text, num, enumField, email, datePattern, objectSchema, arrayOfObjects, ref } from './schema.js';
 
 // ─── US Date ────────────────────────────────────────────────────────────────
 

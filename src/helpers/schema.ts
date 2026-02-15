@@ -60,3 +60,14 @@ export function arrayOfObjects(
         items: { type: 'object', properties, required },
     };
 }
+
+// ─── Reference Builder ──────────────────────────────────────────────────────
+
+import type { DocumentReference } from '../types.js';
+
+type RefType = NonNullable<DocumentReference['type']>;
+
+/** Create a typed DocumentReference (preserves literal type inference) */
+export const ref = (title: string, url: string, type?: RefType): DocumentReference =>
+    type ? { title, url, type } : { title, url };
+

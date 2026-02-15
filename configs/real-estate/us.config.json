@@ -8,6 +8,18 @@
       "id": "doc-appraisal",
       "name": "Appraisal Report",
       "description": "Property appraisal — market value determination for lending",
+      "references": [
+        {
+          "title": "USPAP — Uniform Standards of Professional Appraisal Practice",
+          "url": "https://www.appraisalfoundation.org/imis/TAF/Standards/Appraisal_Standards/Uniform_Standards_of_Professional_Appraisal_Practice/TAF/USPAP.aspx",
+          "type": "specification"
+        },
+        {
+          "title": "Fannie Mae Form 1004 (Uniform Residential Appraisal Report)",
+          "url": "https://singlefamily.fanniemae.com/originating-underwriting/appraisal-valuation",
+          "type": "specification"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -109,6 +121,18 @@
       "id": "doc-closing-disclosure",
       "name": "Closing Disclosure (CD)",
       "description": "TRID Closing Disclosure — final settlement statement with all costs and credits",
+      "references": [
+        {
+          "title": "CFPB — Closing Disclosure Explainer",
+          "url": "https://www.consumerfinance.gov/owning-a-home/closing-disclosure/",
+          "type": "documentation"
+        },
+        {
+          "title": "TILA-RESPA Integrated Disclosure Rule",
+          "url": "https://www.consumerfinance.gov/rules-policy/final-rules/integrated-mortgage-disclosures-under-real-estate-settlement-procedures-act-regulation-x-and-truth-lending-act-regulation-z/",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -247,6 +271,13 @@
       "id": "doc-deed",
       "name": "Deed",
       "description": "Property deed — warranty deed, quitclaim deed, special warranty deed",
+      "references": [
+        {
+          "title": "ALTA — Deed Standards",
+          "url": "https://www.alta.org/",
+          "type": "specification"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -342,6 +373,13 @@
       "id": "doc-drivers-license",
       "name": "Driver's License / Government ID",
       "description": "Government-issued identification: Driver's License, Passport, or State ID",
+      "references": [
+        {
+          "title": "REAL ID Act — DHS",
+          "url": "https://www.dhs.gov/real-id",
+          "type": "regulation"
+        }
+      ],
       "isArrayExtraction": true,
       "jsonSchema": {
         "type": "object",
@@ -421,6 +459,13 @@
       "id": "doc-hoa-docs",
       "name": "HOA Documents",
       "description": "Homeowners Association documents — CCRs, bylaws, financials, disclosures",
+      "references": [
+        {
+          "title": "CAI — Community Associations Institute",
+          "url": "https://www.caionline.org/",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -467,6 +512,13 @@
       "id": "doc-inspection-report",
       "name": "Home Inspection Report",
       "description": "Professional home inspection report — structural, mechanical, plumbing, electrical",
+      "references": [
+        {
+          "title": "ASHI — Standards of Practice",
+          "url": "https://www.homeinspector.org/standards-of-practice",
+          "type": "specification"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -540,6 +592,18 @@
       "id": "doc-mortgage-application",
       "name": "Mortgage Application (1003)",
       "description": "Uniform Residential Loan Application (URLA / 1003)",
+      "references": [
+        {
+          "title": "Fannie Mae Form 1003 — URLA",
+          "url": "https://singlefamily.fanniemae.com/originating-underwriting/uniform-residential-loan-application",
+          "type": "specification"
+        },
+        {
+          "title": "CFPB — Applying for a Mortgage",
+          "url": "https://www.consumerfinance.gov/owning-a-home/process/apply/",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -673,6 +737,13 @@
       "id": "doc-mortgage-approval",
       "name": "Mortgage Approval / Commitment Letter",
       "description": "Lender commitment or pre-approval letter for mortgage financing",
+      "references": [
+        {
+          "title": "CFPB — Loan Estimate Explainer",
+          "url": "https://www.consumerfinance.gov/owning-a-home/loan-estimate/",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -745,6 +816,18 @@
       "id": "doc-survey",
       "name": "Property Survey / Plat Map",
       "description": "ALTA/NSPS land survey showing boundaries, improvements, and easements",
+      "references": [
+        {
+          "title": "ALTA/NSPS Land Title Survey Standards",
+          "url": "https://www.alta.org/land-survey-standards/",
+          "type": "specification"
+        },
+        {
+          "title": "NSPS — National Society of Professional Surveyors",
+          "url": "https://www.nsps.us.com/",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -806,6 +889,13 @@
       "id": "doc-tax-record",
       "name": "Property Tax Record",
       "description": "County property tax records — assessed value, tax amounts, payment status",
+      "references": [
+        {
+          "title": "IRS — Property Tax Deduction",
+          "url": "https://www.irs.gov/taxtopics/tc503",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -869,6 +959,13 @@
       "id": "doc-purchase-agreement",
       "name": "Purchase Agreement / Contract",
       "description": "Real estate purchase and sale agreement between buyer and seller",
+      "references": [
+        {
+          "title": "NAR — Residential Purchase Agreement",
+          "url": "https://www.nar.realtor/legal",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -979,6 +1076,13 @@
       "id": "doc-title-insurance",
       "name": "Title Insurance Policy",
       "description": "Title insurance commitment or policy (owner's or lender's)",
+      "references": [
+        {
+          "title": "ALTA — Policy Forms",
+          "url": "https://www.alta.org/policy-forms/",
+          "type": "specification"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -1040,6 +1144,13 @@
       "id": "doc-title-report",
       "name": "Title Report / Title Search",
       "description": "Preliminary title report or title abstract showing ownership history and encumbrances",
+      "references": [
+        {
+          "title": "ALTA — Title Insurance Forms",
+          "url": "https://www.alta.org/policy-forms/",
+          "type": "specification"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {

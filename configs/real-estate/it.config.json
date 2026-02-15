@@ -5,149 +5,189 @@
   "schemaVersion": 1,
   "documentTypes": [
     {
-      "id": "doc-contatto",
-      "name": "Documento di Contatto",
-      "description": "Recapiti e indirizzi del cliente per comunicazioni e notifiche legali",
+      "id": "doc-eredita",
+      "name": "Accettazione di Eredità",
+      "description": "Atto di accettazione dell'eredità trascritto in Conservatoria, necessario per la vendita di immobili ereditati",
+      "references": [
+        {
+          "title": "Art. 459–511 Codice Civile — Successioni",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art459",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
-          "nome": {
+          "erede": {
             "type": "string",
-            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+            "description": "Nome e cognome dell'erede accettante"
           },
-          "cognome": {
+          "codiceFiscaleErede": {
             "type": "string",
-            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+            "description": "Codice Fiscale dell'erede"
           },
-          "telefonoCellulare": {
+          "defunto": {
             "type": "string",
-            "description": "Numero di cellulare principale"
+            "description": "Nome e cognome del defunto"
           },
-          "telefonoFisso": {
+          "tipoAccettazione": {
             "type": "string",
-            "description": "Eventuale numero fisso/ufficio"
+            "description": "Tipo di accettazione",
+            "enum": [
+              "pura e semplice",
+              "con beneficio d'inventario",
+              null
+            ],
+            "nullable": true
           },
-          "email": {
+          "dataTrascrizione": {
             "type": "string",
-            "format": "email",
-            "description": "Indirizzo email ordinario"
+            "description": "Data di trascrizione in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
           },
-          "pec": {
+          "notaio": {
             "type": "string",
-            "format": "email",
-            "description": "Posta Elettronica Certificata (fondamentale per comunicazioni legali)"
+            "description": "Notaio rogante"
           },
-          "indirizzoResidenza": {
-            "type": "string",
-            "description": "Via/Piazza e numero civico"
+          "numeroRepertorio": {
+            "type": "string"
           },
-          "cittaResidenza": {
+          "numeroTrascrizione": {
             "type": "string",
-            "description": "Comune di residenza"
-          },
-          "cap": {
-            "type": "string",
-            "description": "Codice Avviamento Postale"
-          },
-          "provincia": {
-            "type": "string",
-            "description": "Sigla Provincia (es. MI, RM)"
+            "description": "Numero di trascrizione in Conservatoria"
           }
         },
         "required": [
-          "nome",
-          "cognome",
-          "telefonoCellulare",
-          "email",
-          "indirizzoResidenza"
+          "erede",
+          "codiceFiscaleErede",
+          "defunto",
+          "dataTrascrizione"
         ]
       }
     },
     {
-      "id": "doc-identita",
-      "name": "Documento d'Identità",
-      "description": "Dati per identificazione (Antiriciclaggio/KYC)",
-      "isArrayExtraction": true,
+      "id": "doc-ape",
+      "name": "APE - Certificato Energetico",
+      "description": "Efficienza energetica obbligatoria per annunci e rogito",
+      "references": [
+        {
+          "title": "ENEA — Attestato di Prestazione Energetica",
+          "url": "https://www.efficienzaenergetica.enea.it/",
+          "type": "documentation"
+        },
+        {
+          "title": "D.Lgs. 192/2005 — Rendimento energetico nell'edilizia",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-08-19;192",
+          "type": "regulation"
+        },
+        {
+          "title": "SIAPE — Sistema Informativo APE",
+          "url": "https://siape.enea.it/",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
-          "nome": {
+          "classeEnergetica": {
             "type": "string",
-            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
-          },
-          "cognome": {
-            "type": "string",
-            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
-          },
-          "codiceFiscale": {
-            "type": "string",
-            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
-          },
-          "tipoDocumento": {
-            "type": "string",
-            "description": "Tipo documento: Carta D'Identità, Passaporto, Patente, Permesso di Soggiorno, ecc."
-          },
-          "numeroDocumento": {
-            "type": "string",
-            "description": ""
-          },
-          "dataEmissione": {
-            "type": "string",
-            "description": "Data di emissione in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "dataScadenza": {
-            "type": "string",
-            "description": "Data di scadenza in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "rilasciatoDa": {
-            "type": "string",
-            "description": "Autorità che ha rilasciato il documento (es. Comune di Roma, Questura di Milano)"
-          },
-          "luogoNascita": {
-            "type": "string",
-            "description": "Città seguita dalla sigla della provincia SEMPRE tra parentesi tonde — formato OBBLIGATORIO: 'NomeCittà (XX)' (es. 'Milano (MI)', 'Roma (RM)'). MAI senza parentesi (es. 'Milano MI' è SBAGLIATO). Per la sigla: se la città è una di queste usa la sua sigla: Barletta-Andria-Trani (BT) Bolzano (BZ) Caltanissetta (CL) Campobasso (CB) Caserta (CE) Chieti (CH) Crotone (KR) Forlì-Cesena (FC) Lecco (LC) Mantova (MN) Massa-Carrara (MS) Messina (ME) Monza e della Brianza (MB) Parma (PR) Perugia (PG) Pesaro e Urbino (PU) Piacenza (PC) Pistoia (PT) Potenza (PZ) Ragusa (RG) Reggio Calabria (RC) Roma (RM) Siracusa (SR) Sud Sardegna (SU) Trapani (TP) Trieste (TS) Vibo Valentia (VV), se è un'altra città crea la sigla con le prime due lettere del nome della città."
-          },
-          "indirizzoDiResidenza": {
-            "type": "string",
-            "description": "Indirizzo completo di residenza — formato: Via/Piazza Nome Numero, CAP Città (Provincia). Sempre virgola dopo il numero civico prima del CAP (es. \"Viale Augusto 45, 80126 Napoli (NA)\")"
-          },
-          "dataNascita": {
-            "type": "string",
-            "description": "Data in formato europeo  DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "statoCivile": {
-            "type": "string",
-            "description": "Stato civile",
+            "description": "Classe energetica dell'immobile",
             "enum": [
-              "celibe",
-              "nubile",
-              "coniugato",
-              "coniugata",
-              "vedovo",
-              "vedova",
-              "divorziato",
-              "divorziata",
-              "separato",
-              "separata",
+              "A4",
+              "A3",
+              "A2",
+              "A1",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F",
+              "G",
               null
             ],
             "nullable": true
+          },
+          "indiceEpgl": {
+            "type": "number",
+            "description": "Consumo energetico"
+          },
+          "codiceIdentificativo": {
+            "type": "string"
+          },
+          "validoFinoA": {
+            "type": "string",
+            "description": "Data di validità in formato europeo DD/MM/YYYY",
+            "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$"
+          },
+          "regione": {
+            "type": "string"
+          },
+          "comune": {
+            "type": "string"
+          },
+          "indirizzo": {
+            "type": "string"
+          },
+          "piano": {
+            "type": "string"
+          },
+          "interno": {
+            "type": "string"
+          },
+          "comuneCatastale": {
+            "type": "string"
+          },
+          "sezione": {
+            "type": "string"
+          },
+          "foglio": {
+            "type": "string"
+          },
+          "particella": {
+            "type": "string"
+          },
+          "subalterni": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "destinazioneUso": {
+            "type": "string",
+            "description": "Destinazione d'uso dell'immobile (es. residenziale, ufficio, commerciale, industriale, agricolo, magazzino, autorimessa)"
+          },
+          "oggettoAttestato": {
+            "type": "string",
+            "description": "Oggetto dell'attestato"
+          },
+          "dataScadenza": {
+            "type": "string",
+            "description": "Data di scadenza in formato europeo DD/MM/YYYY",
+            "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$"
+          },
+          "codiceUnivoco": {
+            "type": "string"
           }
         },
         "required": [
-          "nome",
-          "cognome",
-          "codiceFiscale",
-          "tipoDocumento",
-          "numeroDocumento",
-          "dataEmissione",
+          "classeEnergetica",
+          "indiceEpgl",
+          "codiceIdentificativo",
+          "validoFinoA",
+          "regione",
+          "comune",
+          "indirizzo",
+          "piano",
+          "interno",
+          "comuneCatastale",
+          "sezione",
+          "foglio",
+          "particella",
+          "subalterni",
+          "destinazioneUso",
+          "oggettoAttestato",
           "dataScadenza",
-          "luogoNascita",
-          "dataNascita"
+          "codiceUnivoco"
         ]
       }
     },
@@ -155,6 +195,18 @@
       "id": "doc-provenienza",
       "name": "Atto di Provenienza Notarile",
       "description": "Rogito che attesta la proprietà. Include dati venditori, acquirenti e catastali.",
+      "references": [
+        {
+          "title": "Consiglio Nazionale del Notariato",
+          "url": "https://www.notariato.it/",
+          "type": "documentation"
+        },
+        {
+          "title": "Art. 2643 Codice Civile — Trascrizione",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art2643",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -423,9 +475,579 @@
       }
     },
     {
+      "id": "doc-agibilita",
+      "name": "Certificato di Agibilità",
+      "description": "Attesta che l'immobile soddisfa requisiti di sicurezza, igiene, salubrità e risparmio energetico",
+      "references": [
+        {
+          "title": "Art. 24 D.P.R. 380/2001 — Agibilità",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:2001-06-06;380~art24",
+          "type": "regulation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "numeroProtocollo": {
+            "type": "string",
+            "description": "Numero di protocollo del certificato"
+          },
+          "dataRilascio": {
+            "type": "string",
+            "description": "Data di rilascio in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "comuneRilascio": {
+            "type": "string",
+            "description": "Comune che ha rilasciato il certificato"
+          },
+          "richiedente": {
+            "type": "string",
+            "description": "Nome e cognome del richiedente"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo completo dell'immobile"
+          },
+          "foglio": {
+            "type": "string"
+          },
+          "particella": {
+            "type": "string"
+          },
+          "subalterno": {
+            "type": "string"
+          },
+          "destinazioneUso": {
+            "type": "string",
+            "description": "Destinazione d'uso dell'immobile (es. residenziale, ufficio, commerciale, industriale, agricolo, magazzino, autorimessa)"
+          },
+          "tecnicoAsseverante": {
+            "type": "string",
+            "description": "Nome del tecnico che ha asseverato la conformità"
+          }
+        },
+        "required": [
+          "numeroProtocollo",
+          "dataRilascio",
+          "comuneRilascio",
+          "indirizzo",
+          "destinazioneUso"
+        ]
+      }
+    },
+    {
+      "id": "doc-cdu",
+      "name": "Certificato di Destinazione Urbanistica (CDU)",
+      "description": "Certificato rilasciato dal Comune che attesta la destinazione urbanistica di un terreno — obbligatorio per terreni >5000 mq (Art. 30 D.P.R. 380/2001)",
+      "references": [
+        {
+          "title": "Art. 30 D.P.R. 380/2001 — CDU",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:2001-06-06;380~art30",
+          "type": "regulation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "foglio": {
+            "type": "string",
+            "description": "Foglio catastale"
+          },
+          "particella": {
+            "type": "string",
+            "description": "Particella catastale"
+          },
+          "comune": {
+            "type": "string",
+            "description": "Comune di ubicazione"
+          },
+          "destinazioneUrbanistica": {
+            "type": "string",
+            "description": "Destinazione urbanistica (es. Zona Residenziale B2, Zona Agricola E1)"
+          },
+          "estremiPRG": {
+            "type": "string",
+            "description": "Estremi del Piano Regolatore o Piano Urbanistico vigente"
+          },
+          "dataRilascio": {
+            "type": "string",
+            "description": "Data di rilascio in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "validita": {
+            "type": "string",
+            "description": "Validità del certificato (1 anno dalla data di rilascio)"
+          }
+        },
+        "required": [
+          "foglio",
+          "particella",
+          "comune",
+          "destinazioneUrbanistica",
+          "dataRilascio"
+        ]
+      }
+    },
+    {
+      "id": "doc-morte",
+      "name": "Certificato di Morte",
+      "description": "Certificato/Estratto che attesta il decesso, richiesto quando il venditore/acquirente è vedovo/a",
+      "references": [
+        {
+          "title": "Ministero dell'Interno — Servizi demografici",
+          "url": "https://dait.interno.gov.it/servizi-demografici",
+          "type": "documentation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "nomeDefunto": {
+            "type": "string",
+            "description": "Nome del defunto"
+          },
+          "cognomeDefunto": {
+            "type": "string",
+            "description": "Cognome del defunto"
+          },
+          "codiceFiscaleDefunto": {
+            "type": "string",
+            "description": "Codice Fiscale del defunto — fondamentale per cross-reference con successione (extract without spaces)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "dataNascita": {
+            "type": "string",
+            "description": "Data di nascita del defunto in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "luogoNascita": {
+            "type": "string",
+            "description": "Comune di nascita del defunto"
+          },
+          "dataDecesso": {
+            "type": "string",
+            "description": "Data del decesso in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "oraDecesso": {
+            "type": "string",
+            "description": "Ora del decesso, se indicata"
+          },
+          "luogoMorte": {
+            "type": "string",
+            "description": "Comune di decesso"
+          },
+          "ultimaResidenza": {
+            "type": "string",
+            "description": "Ultimo comune di residenza del defunto"
+          },
+          "statoCivile": {
+            "type": "string",
+            "description": "Stato civile del defunto al momento del decesso",
+            "enum": [
+              "celibe",
+              "nubile",
+              "coniugato",
+              "coniugata",
+              "vedovo",
+              "vedova",
+              "divorziato",
+              "divorziata",
+              "separato",
+              "separata",
+              null
+            ],
+            "nullable": true
+          },
+          "nomeConiuge": {
+            "type": "string",
+            "description": "Nome e cognome del coniuge superstite, se presente"
+          },
+          "comuneRegistrazione": {
+            "type": "string",
+            "description": "Comune dove è stato registrato l'atto di morte"
+          },
+          "parteSerie": {
+            "type": "string",
+            "description": "Parte e serie dell'atto"
+          },
+          "numero": {
+            "type": "string",
+            "description": "Numero dell'atto di morte"
+          }
+        },
+        "required": [
+          "nomeDefunto",
+          "cognomeDefunto",
+          "dataDecesso",
+          "luogoMorte",
+          "comuneRegistrazione"
+        ]
+      }
+    },
+    {
+      "id": "doc-residenza",
+      "name": "Certificato di Residenza",
+      "description": "Certificato anagrafico che attesta la residenza attuale, richiesto quando l'indirizzo sull'identità differisce dalla residenza corrente",
+      "references": [
+        {
+          "title": "ANPR — Anagrafe Nazionale Popolazione Residente",
+          "url": "https://www.anagrafenazionale.interno.it/",
+          "type": "documentation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo completo di residenza attuale"
+          },
+          "comune": {
+            "type": "string",
+            "description": "Comune di residenza"
+          },
+          "provincia": {
+            "type": "string",
+            "description": "Sigla Provincia"
+          },
+          "cap": {
+            "type": "string",
+            "description": "Codice Avviamento Postale"
+          },
+          "dataRilascio": {
+            "type": "string",
+            "description": "Data di rilascio in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "comuneRilascio": {
+            "type": "string",
+            "description": "Comune che ha rilasciato il certificato"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale",
+          "indirizzo",
+          "comune",
+          "dataRilascio"
+        ]
+      }
+    },
+    {
+      "id": "doc-famiglia",
+      "name": "Certificato di Stato di Famiglia",
+      "description": "Certificato anagrafico che attesta la composizione del nucleo familiare, utile per verifiche sul regime patrimoniale",
+      "references": [
+        {
+          "title": "Ministero dell'Interno — Servizi demografici",
+          "url": "https://dait.interno.gov.it/servizi-demografici",
+          "type": "documentation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "intestatario": {
+            "type": "string",
+            "description": "Nome e cognome dell'intestatario del nucleo familiare"
+          },
+          "codiceFiscaleIntestatario": {
+            "type": "string",
+            "description": "Codice Fiscale dell'intestatario (extract without spaces)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo di residenza del nucleo familiare"
+          },
+          "comune": {
+            "type": "string"
+          },
+          "componenti": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string"
+                },
+                "cognome": {
+                  "type": "string"
+                },
+                "codiceFiscale": {
+                  "type": "string",
+                  "description": "Codice Fiscale del componente, se presente"
+                },
+                "dataNascita": {
+                  "type": "string"
+                },
+                "relazione": {
+                  "type": "string",
+                  "description": "Relazione familiare (es. intestatario, coniuge, convivente, figlio/a, padre, madre, fratello/sorella, nipote)"
+                }
+              },
+              "required": [
+                "nome",
+                "cognome",
+                "dataNascita",
+                "relazione"
+              ]
+            }
+          },
+          "dataRilascio": {
+            "type": "string",
+            "description": "Data di rilascio in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          }
+        },
+        "required": [
+          "intestatario",
+          "indirizzo",
+          "comune",
+          "componenti",
+          "dataRilascio"
+        ]
+      }
+    },
+    {
+      "id": "doc-conformita-impianti",
+      "name": "Certificazione Conformità Impianti",
+      "description": "Dichiarazioni di conformità degli impianti (elettrico, idraulico, gas, riscaldamento) ai sensi del DM 37/2008",
+      "references": [
+        {
+          "title": "DM 37/2008 — Sicurezza impianti",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.ministeriale:2008-01-22;37",
+          "type": "regulation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "tipoImpianto": {
+            "type": "string",
+            "description": "Tipo di impianto certificato (es. elettrico, idraulico, gas, riscaldamento, climatizzazione, ascensore, elettrico e termoidraulico)"
+          },
+          "impresaInstallatrice": {
+            "type": "string",
+            "description": "Ragione sociale dell'impresa installatrice"
+          },
+          "responsabileTecnico": {
+            "type": "string",
+            "description": "Nome del responsabile tecnico"
+          },
+          "dataRilascio": {
+            "type": "string",
+            "description": "Data di rilascio della dichiarazione in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "numeroProtocollo": {
+            "type": "string",
+            "description": "Numero di protocollo della dichiarazione"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo dell'immobile"
+          },
+          "foglio": {
+            "type": "string",
+            "description": "Foglio catastale, se presente"
+          },
+          "particella": {
+            "type": "string",
+            "description": "Particella catastale, se presente"
+          },
+          "subalterno": {
+            "type": "string",
+            "description": "Subalterno, se presente"
+          },
+          "normativaRiferimento": {
+            "type": "string",
+            "description": "Normativa di riferimento (es. DM 37/2008, CEI 64-8)"
+          }
+        },
+        "required": [
+          "tipoImpianto",
+          "impresaInstallatrice",
+          "dataRilascio",
+          "indirizzo"
+        ]
+      }
+    },
+    {
+      "id": "doc-conformita-urbanistica",
+      "name": "Conformità Urbanistica ed Edilizia",
+      "description": "Relazione tecnica che attesta la corrispondenza tra lo stato di fatto dell'immobile e i titoli abilitativi depositati in Comune",
+      "references": [
+        {
+          "title": "D.P.R. 380/2001 — Testo Unico Edilizia",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:2001-06-06;380",
+          "type": "regulation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "tecnico": {
+            "type": "string",
+            "description": "Nome del tecnico abilitato (architetto, ingegnere, geometra)"
+          },
+          "dataRelazione": {
+            "type": "string",
+            "description": "Data della relazione in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo completo dell'immobile"
+          },
+          "foglio": {
+            "type": "string"
+          },
+          "particella": {
+            "type": "string"
+          },
+          "subalterno": {
+            "type": "string"
+          },
+          "titoliAbilitativi": {
+            "type": "string",
+            "description": "Elenco dei titoli edilizi (licenza edilizia, concessione, permesso di costruire, SCIA, CILA)"
+          },
+          "esito": {
+            "type": "string",
+            "description": "Esito della verifica (es. conforme, non conforme, conforme con riserva, conforme con prescrizioni)"
+          },
+          "difformita": {
+            "type": "string",
+            "description": "Descrizione di eventuali difformità riscontrate — copiare TESTUALMENTE dal documento"
+          },
+          "condoni": {
+            "type": "string",
+            "description": "Eventuali domande di condono edilizio presentate — copiare TESTUALMENTE dal documento"
+          }
+        },
+        "required": [
+          "tecnico",
+          "dataRelazione",
+          "indirizzo",
+          "esito"
+        ]
+      }
+    },
+    {
+      "id": "doc-contratto-mutuo",
+      "name": "Contratto di Mutuo",
+      "description": "Contratto di mutuo ipotecario stipulato contestualmente al rogito",
+      "references": [
+        {
+          "title": "Art. 1813–1822 Codice Civile — Mutuo",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1813",
+          "type": "regulation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "banca": {
+            "type": "string",
+            "description": "Nome della banca o istituto di credito"
+          },
+          "mutuatario": {
+            "type": "string",
+            "description": "Nome e cognome del mutuatario"
+          },
+          "codiceFiscaleMutuatario": {
+            "type": "string",
+            "description": "Codice Fiscale del mutuatario (extract without spaces)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "importoMutuo": {
+            "type": "number",
+            "description": "Importo del mutuo erogato in Euro"
+          },
+          "durataAnni": {
+            "type": "number",
+            "description": "Durata del mutuo in anni"
+          },
+          "tassoInteresse": {
+            "type": "string",
+            "description": "Tasso di interesse e percentuale"
+          },
+          "tipoTasso": {
+            "type": "string",
+            "description": "Tipo di tasso",
+            "enum": [
+              "fisso",
+              "variabile",
+              "misto",
+              null
+            ],
+            "nullable": true
+          },
+          "rataMensile": {
+            "type": "number",
+            "description": "Importo rata mensile in Euro"
+          },
+          "notaio": {
+            "type": "string",
+            "description": "Nome e cognome del notaio rogante"
+          },
+          "dataStipula": {
+            "type": "string",
+            "description": "Data di stipula in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "numeroRepertorio": {
+            "type": "string",
+            "description": "Numero di repertorio"
+          },
+          "ipoteca": {
+            "type": "string",
+            "description": "Grado e importo dell'ipoteca iscritta"
+          }
+        },
+        "required": [
+          "banca",
+          "mutuatario",
+          "codiceFiscaleMutuatario",
+          "importoMutuo",
+          "dataStipula",
+          "notaio"
+        ]
+      }
+    },
+    {
       "id": "doc-preliminare",
       "name": "Contratto Preliminare",
       "description": "Compromesso di compravendita",
+      "references": [
+        {
+          "title": "Art. 1351 Codice Civile — Contratto preliminare",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1351",
+          "type": "regulation"
+        },
+        {
+          "title": "Agenzia delle Entrate — Registrazione preliminare",
+          "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/registrazione/registrazione-preliminare",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -552,9 +1174,836 @@
       }
     },
     {
+      "id": "doc-delibera-mutuo",
+      "name": "Delibera di Mutuo",
+      "description": "Lettera di delibera della banca che conferma l'approvazione del mutuo ipotecario",
+      "references": [
+        {
+          "title": "Banca d'Italia — Trasparenza bancaria",
+          "url": "https://www.bancaditalia.it/compiti/vigilanza/normativa/archivio-norme/disposizioni/trasparenza/index.html",
+          "type": "regulation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "banca": {
+            "type": "string",
+            "description": "Nome della banca o istituto di credito"
+          },
+          "filiale": {
+            "type": "string",
+            "description": "Filiale o agenzia"
+          },
+          "mutuatario": {
+            "type": "string",
+            "description": "Nome e cognome del mutuatario"
+          },
+          "codiceFiscaleMutuatario": {
+            "type": "string",
+            "description": "Codice Fiscale del mutuatario (extract without spaces)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "importoMutuo": {
+            "type": "number",
+            "description": "Importo del mutuo deliberato in Euro"
+          },
+          "durataAnni": {
+            "type": "number",
+            "description": "Durata del mutuo in anni"
+          },
+          "tassoInteresse": {
+            "type": "string",
+            "description": "Tasso di interesse (fisso, variabile, misto) e percentuale"
+          },
+          "tipoTasso": {
+            "type": "string",
+            "description": "Tipo di tasso",
+            "enum": [
+              "fisso",
+              "variabile",
+              "misto",
+              null
+            ],
+            "nullable": true
+          },
+          "dataDelibera": {
+            "type": "string",
+            "description": "Data della delibera in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "validitaDelibera": {
+            "type": "string",
+            "description": "Validità temporale della delibera (es. 6 mesi)"
+          },
+          "condizioniSospensive": {
+            "type": "string",
+            "description": "Eventuali condizioni sospensive (es. ipoteca di primo grado)"
+          }
+        },
+        "required": [
+          "banca",
+          "mutuatario",
+          "codiceFiscaleMutuatario",
+          "importoMutuo",
+          "dataDelibera"
+        ]
+      }
+    },
+    {
+      "id": "doc-successione",
+      "name": "Dichiarazione di Successione",
+      "description": "Denuncia di successione presentata all'Agenzia delle Entrate, richiesta quando l'immobile proviene da eredità",
+      "references": [
+        {
+          "title": "Agenzia delle Entrate — Dichiarazione di Successione",
+          "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/dichiarazioni/dichiarazione-di-successione",
+          "type": "documentation"
+        },
+        {
+          "title": "D.Lgs. 346/1990 — Imposta sulle successioni",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:1990-10-31;346",
+          "type": "regulation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "defunto": {
+            "type": "string",
+            "description": "Nome e cognome del defunto"
+          },
+          "codiceFiscaleDefunto": {
+            "type": "string",
+            "description": "Codice Fiscale del defunto — per cross-reference con certificato di morte (extract without spaces)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "dataDecesso": {
+            "type": "string",
+            "description": "Data del decesso in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "dataPresentazione": {
+            "type": "string",
+            "description": "Data di presentazione della dichiarazione in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "protocollo": {
+            "type": "string",
+            "description": "Numero di protocollo Agenzia delle Entrate (es. SUC/2021/FI/12345)"
+          },
+          "eredi": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string"
+                },
+                "cognome": {
+                  "type": "string"
+                },
+                "codiceFiscale": {
+                  "type": "string"
+                },
+                "quotaEreditaria": {
+                  "type": "string",
+                  "description": "Quota di eredità (es. 1/2, 1/3)"
+                },
+                "rapportoParentela": {
+                  "type": "string",
+                  "description": "Rapporto di parentela con il defunto (es. coniuge, figlio, fratello)"
+                }
+              },
+              "required": [
+                "nome",
+                "cognome",
+                "codiceFiscale",
+                "quotaEreditaria"
+              ]
+            }
+          },
+          "foglio": {
+            "type": "string"
+          },
+          "particella": {
+            "type": "string"
+          },
+          "subalterno": {
+            "type": "string"
+          },
+          "volumeAtti": {
+            "type": "string",
+            "description": "Volume e numero di registrazione"
+          }
+        },
+        "required": [
+          "defunto",
+          "dataDecesso",
+          "dataPresentazione",
+          "eredi",
+          "foglio",
+          "particella",
+          "subalterno"
+        ]
+      }
+    },
+    {
+      "id": "doc-mezzi-pagamento",
+      "name": "Dichiarazione Mezzi di Pagamento",
+      "description": "Dichiarazione analitica dei mezzi di pagamento utilizzati nella compravendita (Art. 35 D.Lgs. 223/2006)",
+      "references": [
+        {
+          "title": "Art. 35 D.Lgs. 223/2006 — Tracciabilità compravendite",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2006-07-04;223~art35",
+          "type": "regulation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "pagamenti": {
+            "type": "array",
+            "description": "Elenco analitico di tutti i mezzi di pagamento",
+            "items": {
+              "type": "object",
+              "properties": {
+                "tipo": {
+                  "type": "string",
+                  "description": "Tipo di pagamento (es. assegno circolare, bonifico bancario, mutuo fondiario)"
+                },
+                "importo": {
+                  "type": "number",
+                  "description": "Importo in Euro"
+                },
+                "numeroBonifico": {
+                  "type": "string",
+                  "description": "Numero CRO/TRN del bonifico o numero assegno"
+                },
+                "bancaEmittente": {
+                  "type": "string",
+                  "description": "Banca emittente dell'assegno o ordinante del bonifico"
+                },
+                "dataPagamento": {
+                  "type": "string",
+                  "description": "Data del pagamento in formato europeo DD.MM.YYYY",
+                  "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+                },
+                "intestatario": {
+                  "type": "string",
+                  "description": "Intestatario del mezzo di pagamento"
+                }
+              },
+              "required": [
+                "tipo",
+                "importo"
+              ]
+            }
+          },
+          "importoTotale": {
+            "type": "number",
+            "description": "Importo totale dei pagamenti in Euro"
+          },
+          "mediatore": {
+            "type": "string",
+            "description": "Nome dell'agenzia o mediatore, se presente"
+          },
+          "provvigione": {
+            "type": "number",
+            "description": "Importo della provvigione del mediatore in Euro"
+          }
+        },
+        "required": [
+          "pagamenti",
+          "importoTotale"
+        ]
+      }
+    },
+    {
+      "id": "doc-condominiale",
+      "name": "Documentazione Condominiale",
+      "description": "Dichiarazione dell'amministratore di condominio sulle spese e regolamento condominiale",
+      "references": [
+        {
+          "title": "Art. 1117–1139 Codice Civile — Condominio",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1117",
+          "type": "regulation"
+        },
+        {
+          "title": "L. 220/2012 — Riforma del condominio",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2012-12-11;220",
+          "type": "regulation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "amministratore": {
+            "type": "string",
+            "description": "Nome e cognome o ragione sociale dell'amministratore"
+          },
+          "condominio": {
+            "type": "string",
+            "description": "Denominazione del condominio"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo del condominio"
+          },
+          "unitaImmobiliare": {
+            "type": "string",
+            "description": "Identificazione dell'unità immobiliare (es. Scala A, Piano 3, Int. 5)"
+          },
+          "quoteRegolari": {
+            "type": "string",
+            "description": "Le quote condominiali sono regolarmente pagate",
+            "enum": [
+              "sì",
+              "no",
+              null
+            ],
+            "nullable": true
+          },
+          "importoArretrati": {
+            "type": "string",
+            "description": "Eventuali arretrati dovuti"
+          },
+          "speseStraodinarie": {
+            "type": "string",
+            "description": "Spese straordinarie deliberate o in corso"
+          },
+          "millesimi": {
+            "type": "string",
+            "description": "Millesimi di proprietà dell'unità"
+          },
+          "dataRilascio": {
+            "type": "string",
+            "description": "Data di rilascio della dichiarazione in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          }
+        },
+        "required": [
+          "amministratore",
+          "condominio",
+          "indirizzo",
+          "unitaImmobiliare",
+          "quoteRegolari",
+          "dataRilascio"
+        ]
+      }
+    },
+    {
+      "id": "doc-identita",
+      "name": "Documento d'Identità",
+      "description": "Documento di riconoscimento (CI, Passaporto, Patente) per identificazione e Antiriciclaggio",
+      "references": [
+        {
+          "title": "Carta d'Identità Elettronica (CIE)",
+          "url": "https://www.cartaidentita.interno.gov.it/",
+          "type": "documentation"
+        },
+        {
+          "title": "Adeguata verifica — D.Lgs. 231/2007",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2007-11-21;231",
+          "type": "regulation"
+        }
+      ],
+      "isArrayExtraction": true,
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "tipoDocumento": {
+            "type": "string",
+            "description": "Tipo documento: Carta D'Identità, Passaporto, Patente"
+          },
+          "numeroDocumento": {
+            "type": "string",
+            "description": ""
+          },
+          "dataEmissione": {
+            "type": "string",
+            "description": "Data di emissione in formato DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "dataScadenza": {
+            "type": "string",
+            "description": "Data di scadenza in formato DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "rilasciatoDa": {
+            "type": "string",
+            "description": "Autorità che ha rilasciato il documento"
+          },
+          "luogoNascita": {
+            "type": "string",
+            "description": "Città seguita dalla sigla della provincia tra parentesi tonde — formato: 'NomeCittà (XX)'"
+          },
+          "dataNascita": {
+            "type": "string",
+            "description": "Data di nascita in formato DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "indirizzoDiResidenza": {
+            "type": "string",
+            "description": "Indirizzo completo di residenza — formato: Via/Piazza Nome Numero, CAP Città (Provincia)"
+          },
+          "statoCivile": {
+            "type": "string",
+            "description": "Stato civile",
+            "enum": [
+              "celibe",
+              "nubile",
+              "coniugato",
+              "coniugata",
+              "vedovo",
+              "vedova",
+              "divorziato",
+              "divorziata",
+              "separato",
+              "separata",
+              null
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale",
+          "tipoDocumento",
+          "numeroDocumento",
+          "dataEmissione",
+          "dataScadenza",
+          "luogoNascita",
+          "dataNascita"
+        ]
+      }
+    },
+    {
+      "id": "doc-contatto",
+      "name": "Documento di Contatto",
+      "description": "Recapiti e indirizzi del cliente per comunicazioni e notifiche legali",
+      "references": [
+        {
+          "title": "ANPR — Anagrafe Nazionale Popolazione Residente",
+          "url": "https://www.anagrafenazionale.interno.it/",
+          "type": "documentation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "telefonoCellulare": {
+            "type": "string",
+            "description": "Numero di cellulare principale"
+          },
+          "telefonoFisso": {
+            "type": "string",
+            "description": "Eventuale numero fisso/ufficio"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Indirizzo email"
+          },
+          "pec": {
+            "type": "string",
+            "format": "email",
+            "description": "Posta Elettronica Certificata"
+          },
+          "indirizzoResidenza": {
+            "type": "string",
+            "description": "Via/Piazza e numero civico"
+          },
+          "cittaResidenza": {
+            "type": "string",
+            "description": "Comune di residenza"
+          },
+          "cap": {
+            "type": "string",
+            "description": "Codice Avviamento Postale"
+          },
+          "provincia": {
+            "type": "string",
+            "description": "Sigla Provincia (es. MI, RM)"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "telefonoCellulare",
+          "email",
+          "indirizzoResidenza"
+        ]
+      }
+    },
+    {
+      "id": "doc-matrimonio",
+      "name": "Estratto Atto di Matrimonio",
+      "description": "Estratto dell'atto di matrimonio o certificato di stato libero, richiesto dal notaio per verificare il regime patrimoniale",
+      "references": [
+        {
+          "title": "Ministero dell'Interno — Servizi demografici",
+          "url": "https://dait.interno.gov.it/servizi-demografici",
+          "type": "documentation"
+        },
+        {
+          "title": "Art. 159 Codice Civile — Regime patrimoniale",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art159",
+          "type": "regulation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "coniuge1": {
+            "type": "string",
+            "description": "Nome e cognome del primo coniuge"
+          },
+          "coniuge2": {
+            "type": "string",
+            "description": "Nome e cognome del secondo coniuge"
+          },
+          "dataMatrimonio": {
+            "type": "string",
+            "description": "Data di celebrazione del matrimonio in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "luogoMatrimonio": {
+            "type": "string",
+            "description": "Comune di celebrazione"
+          },
+          "regimePatrimoniale": {
+            "type": "string",
+            "description": "Regime patrimoniale scelto",
+            "enum": [
+              "comunione dei beni",
+              "separazione dei beni",
+              null
+            ],
+            "nullable": true
+          },
+          "annotazioni": {
+            "type": "string",
+            "description": "Annotazioni marginali — copiare TESTUALMENTE dal documento (es. separazione, divorzio, convenzioni patrimoniali)"
+          },
+          "comuneRegistrazione": {
+            "type": "string",
+            "description": "Comune dove è stato registrato l'atto"
+          },
+          "parte": {
+            "type": "string",
+            "description": "Parte e numero dell'atto"
+          }
+        },
+        "required": [
+          "coniuge1",
+          "coniuge2",
+          "dataMatrimonio",
+          "luogoMatrimonio",
+          "regimePatrimoniale"
+        ]
+      }
+    },
+    {
+      "id": "doc-perizia-bancaria",
+      "name": "Perizia Bancaria",
+      "description": "Perizia estimativa dell'immobile richiesta dalla banca per la concessione del mutuo",
+      "references": [
+        {
+          "title": "ABI — Linee guida valuazione immobiliare",
+          "url": "https://www.abi.it/",
+          "type": "specification"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "perito": {
+            "type": "string",
+            "description": "Nome e cognome del perito incaricato"
+          },
+          "dataPerizia": {
+            "type": "string",
+            "description": "Data della perizia in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo completo dell'immobile periziato"
+          },
+          "foglio": {
+            "type": "string",
+            "description": "Foglio catastale"
+          },
+          "particella": {
+            "type": "string",
+            "description": "Particella catastale"
+          },
+          "subalterno": {
+            "type": "string",
+            "description": "Subalterno"
+          },
+          "valoreStimato": {
+            "type": "number",
+            "description": "Valore di stima dell'immobile in Euro"
+          },
+          "superficieCommerciale": {
+            "type": "number",
+            "description": "Superficie commerciale in mq"
+          },
+          "statoConservazione": {
+            "type": "string",
+            "description": "Stato di conservazione (es. buono, ottimo, da ristrutturare)"
+          },
+          "conformitaCatastale": {
+            "type": "string",
+            "description": "Esito verifica conformità catastale"
+          },
+          "conformitaUrbanistica": {
+            "type": "string",
+            "description": "Esito verifica conformità urbanistica"
+          },
+          "note": {
+            "type": "string",
+            "description": "Note o osservazioni del perito — copiare TESTUALMENTE dal documento. Se non ci sono note, restituire stringa vuota."
+          }
+        },
+        "required": [
+          "perito",
+          "dataPerizia",
+          "indirizzo",
+          "valoreStimato"
+        ]
+      }
+    },
+    {
+      "id": "doc-permesso-soggiorno",
+      "name": "Permesso di Soggiorno",
+      "description": "Documento rilasciato dalla Questura per cittadini extracomunitari — richiesto per acquirenti/venditori non-UE",
+      "references": [
+        {
+          "title": "Questura — Permesso di soggiorno",
+          "url": "https://questure.poliziadistato.it/stranieri",
+          "type": "documentation"
+        },
+        {
+          "title": "D.Lgs. 286/1998 — Testo Unico Immigrazione",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:1998-07-25;286",
+          "type": "regulation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "cittadinanza": {
+            "type": "string",
+            "description": "Cittadinanza del titolare"
+          },
+          "tipoPermesso": {
+            "type": "string",
+            "description": "Tipo di permesso (es. lavoro subordinato, famiglia, lungo soggiorno)"
+          },
+          "numeroPermesso": {
+            "type": "string",
+            "description": "Numero del permesso di soggiorno"
+          },
+          "dataRilascio": {
+            "type": "string",
+            "description": "Data di rilascio in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "dataScadenza": {
+            "type": "string",
+            "description": "Data di scadenza in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "questura": {
+            "type": "string",
+            "description": "Questura rilasciante"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale",
+          "tipoPermesso",
+          "dataRilascio",
+          "dataScadenza"
+        ]
+      }
+    },
+    {
+      "id": "doc-planimetria",
+      "name": "Planimetria Catastale",
+      "description": "Dati identificativi della scheda grafica",
+      "references": [
+        {
+          "title": "Agenzia delle Entrate — Planimetria catastale",
+          "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/visura-catastale",
+          "type": "documentation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "foglio": {
+            "type": "string"
+          },
+          "particella": {
+            "type": "string"
+          },
+          "subalterno": {
+            "type": "string"
+          },
+          "protocollo": {
+            "type": "string"
+          },
+          "dataProtocollo": {
+            "type": "string",
+            "description": "Data del protocollo in formato europeo DD/MM/YYYY",
+            "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$"
+          },
+          "scala": {
+            "type": "string",
+            "description": "Scala della planimetria (es. 1:100, 1:200, 1:50, 1:500)"
+          }
+        },
+        "required": [
+          "foglio",
+          "particella",
+          "subalterno",
+          "protocollo",
+          "dataProtocollo",
+          "scala"
+        ]
+      }
+    },
+    {
+      "id": "doc-procura",
+      "name": "Procura",
+      "description": "Atto notarile che conferisce il potere di rappresentanza per compiere atti per conto di un'altra persona",
+      "references": [
+        {
+          "title": "Art. 1392 Codice Civile — Forma della procura",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1392",
+          "type": "regulation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "nomeMandante": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognomeMandante": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscaleMandante": {
+            "type": "string",
+            "description": "Codice Fiscale del mandante (extract without spaces)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "nomeMandatario": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognomeMandatario": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscaleMandatario": {
+            "type": "string",
+            "description": "Codice Fiscale del mandatario (extract without spaces)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "tipoProcura": {
+            "type": "string",
+            "description": "Tipo di procura",
+            "enum": [
+              "speciale",
+              "generale",
+              null
+            ],
+            "nullable": true
+          },
+          "oggettoDelega": {
+            "type": "string",
+            "description": "Oggetto specifico della delega"
+          },
+          "notaio": {
+            "type": "string",
+            "description": "Notaio che ha autenticato la procura"
+          },
+          "dataAtto": {
+            "type": "string",
+            "description": "Data dell'atto in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "numeroRepertorio": {
+            "type": "string",
+            "description": "Numero di repertorio"
+          }
+        },
+        "required": [
+          "nomeMandante",
+          "cognomeMandante",
+          "codiceFiscaleMandante",
+          "nomeMandatario",
+          "cognomeMandatario",
+          "codiceFiscaleMandatario",
+          "tipoProcura",
+          "dataAtto"
+        ]
+      }
+    },
+    {
       "id": "doc-proposta",
       "name": "Proposta di Acquisto",
       "description": "Proposta irrevocabile d'acquisto",
+      "references": [
+        {
+          "title": "Art. 1326 Codice Civile — Proposta e accettazione",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1326",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -622,9 +2071,251 @@
       }
     },
     {
+      "id": "doc-separazione",
+      "name": "Sentenza di Separazione/Divorzio",
+      "description": "Provvedimento giudiziario di separazione legale o divorzio, rilevante per la determinazione dei diritti patrimoniali sull'immobile",
+      "references": [
+        {
+          "title": "Art. 150–158 Codice Civile — Separazione",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art150",
+          "type": "regulation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "tribunale": {
+            "type": "string",
+            "description": "Tribunale competente che ha emesso la sentenza"
+          },
+          "numeroSentenza": {
+            "type": "string",
+            "description": "Numero di ruolo/sentenza"
+          },
+          "dataSentenza": {
+            "type": "string",
+            "description": "Data della sentenza in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "coniuge1": {
+            "type": "string",
+            "description": "Nome e cognome del primo coniuge"
+          },
+          "coniuge2": {
+            "type": "string",
+            "description": "Nome e cognome del secondo coniuge"
+          },
+          "tipoProvvedimento": {
+            "type": "string",
+            "description": "Tipo di provvedimento",
+            "enum": [
+              "separazione consensuale",
+              "separazione giudiziale",
+              "divorzio",
+              null
+            ],
+            "nullable": true
+          },
+          "disposizioniPatrimoniali": {
+            "type": "string",
+            "description": "Disposizioni relative ai beni immobili — copiare TESTUALMENTE dal documento, senza riformulare o riassumere (es. assegnazione casa coniugale)"
+          },
+          "passaggioInGiudicato": {
+            "type": "string",
+            "description": "Data di passaggio in giudicato in formato europeo DD.MM.YYYY",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          }
+        },
+        "required": [
+          "tribunale",
+          "dataSentenza",
+          "coniuge1",
+          "coniuge2",
+          "tipoProvvedimento"
+        ]
+      }
+    },
+    {
+      "id": "doc-tessera-sanitaria",
+      "name": "Tessera Sanitaria",
+      "description": "Tessera sanitaria / Codice Fiscale — conferma CF e dati anagrafici",
+      "references": [
+        {
+          "title": "Agenzia delle Entrate — Tessera Sanitaria",
+          "url": "https://sistemats1.sanita.finanze.it/portale/tessera-sanitaria",
+          "type": "documentation"
+        }
+      ],
+      "isArrayExtraction": true,
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "sesso": {
+            "type": "string",
+            "description": "Sesso",
+            "enum": [
+              "M",
+              "F",
+              null
+            ],
+            "nullable": true
+          },
+          "dataNascita": {
+            "type": "string",
+            "description": "Data di nascita",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "luogoNascita": {
+            "type": "string",
+            "description": "Comune di nascita"
+          },
+          "provincia": {
+            "type": "string",
+            "description": "Sigla provincia di nascita"
+          },
+          "dataScadenza": {
+            "type": "string",
+            "description": "Data di scadenza",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "dataEmissione": {
+            "type": "string",
+            "description": "Data di emissione",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale",
+          "sesso",
+          "dataNascita"
+        ]
+      }
+    },
+    {
+      "id": "doc-visura-camerale",
+      "name": "Visura Camerale",
+      "description": "Visura della Camera di Commercio — dati societari, legale rappresentante, codice ATECO",
+      "references": [
+        {
+          "title": "Registro Imprese — Camera di Commercio",
+          "url": "https://www.registroimprese.it/",
+          "type": "documentation"
+        },
+        {
+          "title": "InfoCamere — Visure",
+          "url": "https://www.infocamere.it/visure",
+          "type": "documentation"
+        }
+      ],
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "ragioneSociale": {
+            "type": "string",
+            "description": "Ragione sociale / denominazione"
+          },
+          "partitaIva": {
+            "type": "string",
+            "description": "Partita IVA"
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice fiscale dell'impresa"
+          },
+          "sedeLegale": {
+            "type": "string",
+            "description": "Indirizzo sede legale"
+          },
+          "legaleRappresentante": {
+            "type": "string",
+            "description": "Nome e cognome del legale rappresentante"
+          },
+          "cfLegaleRappresentante": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+          },
+          "codiceAteco": {
+            "type": "string",
+            "description": "Codice ATECO principale"
+          },
+          "descrizioneAteco": {
+            "type": "string",
+            "description": "Descrizione attività ATECO"
+          },
+          "formaGiuridica": {
+            "type": "string",
+            "description": "Forma giuridica (es. S.r.l., S.p.A., S.a.s.)"
+          },
+          "capitaleSociale": {
+            "type": "number",
+            "description": "Capitale sociale in Euro"
+          },
+          "statoImpresa": {
+            "type": "string",
+            "description": "Stato dell'impresa",
+            "enum": [
+              "attiva",
+              "inattiva",
+              "cessata",
+              "in liquidazione",
+              null
+            ],
+            "nullable": true
+          },
+          "dataIscrizione": {
+            "type": "string",
+            "description": "Data iscrizione alla Camera di Commercio",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "rea": {
+            "type": "string",
+            "description": "Numero REA"
+          },
+          "oggettoSociale": {
+            "type": "string",
+            "description": "Oggetto sociale della società"
+          }
+        },
+        "required": [
+          "ragioneSociale",
+          "partitaIva",
+          "legaleRappresentante",
+          "codiceAteco"
+        ]
+      }
+    },
+    {
       "id": "doc-visura",
       "name": "Visura Catastale",
       "description": "Stato attuale dell'immobile in Catasto. Può essere un fabbricato (con categoria, rendita, consistenza) o un terreno (con qualità, classe, superficie, redditi).",
+      "references": [
+        {
+          "title": "Agenzia delle Entrate — Consultazione dati catastali",
+          "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/visura-catastale",
+          "type": "documentation"
+        },
+        {
+          "title": "Sister — Servizi catastali online",
+          "url": "https://sister.agenziaentrate.gov.it/",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -771,7 +2462,7 @@
                 },
                 "luogoNascita": {
                   "type": "string",
-                  "description": "Città e dopo inserisci la sigla della provincia calcolata così:  Se la città è una di queste usa la sua sigla: Barletta-Andria-Trani (BT) Bolzano (BZ) Caltanissetta (CL) Campobasso (CB) Caserta (CE) Chieti (CH) Crotone (KR) Forlì-Cesena (FC) Lecco (LC) Mantova (MN) Massa-Carrara (MS) Messina (ME) Monza e della Brianza (MB) Parma (PR) Perugia (PG) Pesaro e Urbino (PU) Piacenza (PC) Pistoia (PT) Potenza (PZ) Ragusa (RG) Reggio Calabria (RC) Roma (RM) Siracusa (SR) Sud Sardegna (SU) Trapani (TP) Trieste (TS) Vibo Valentia (VV), se è un'altra città crea la sigla con le prime due lettere del nome della città, possono essere più intestati identificati da un numero progressivo, separali con il numero progressivo seguito da \\\"-\\\""
+                  "description": "Città e dopo inserisci la sigla della provincia calcolata così:  Se la città è una di queste usa la sua sigla: Barletta-Andria-Trani (BT) Bolzano (BZ) Caltanissetta (CL) Campobasso (CB) Caserta (CE) Chieti (CH) Crotone (KR) Forlì-Cesena (FC) Lecco (LC) Mantova (MN) Massa-Carrara (MS) Messina (ME) Monza e della Brianza (MB) Parma (PR) Perugia (PG) Pesaro e Urbino (PU) Piacenza (PC) Pistoia (PT) Potenza (PZ) Ragusa (RG) Reggio Calabria (RC) Roma (RM) Siracusa (SR) Sud Sardegna (SU) Trapani (TP) Trieste (TS) Vibo Valentia (VV), se è un'altra città crea la sigla con le prime due lettere del nome della città, possono essere più intestati identificati da un numero progressivo, separali con il numero progressivo seguito da \\\\\"-\\\\\""
                 },
                 "diritto": {
                   "type": "string",
@@ -799,522 +2490,21 @@
       }
     },
     {
-      "id": "doc-planimetria",
-      "name": "Planimetria Catastale",
-      "description": "Dati identificativi della scheda grafica",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "foglio": {
-            "type": "string"
-          },
-          "particella": {
-            "type": "string"
-          },
-          "subalterno": {
-            "type": "string"
-          },
-          "protocollo": {
-            "type": "string"
-          },
-          "dataProtocollo": {
-            "type": "string",
-            "description": "Data del protocollo in formato europeo DD/MM/YYYY",
-            "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$"
-          },
-          "scala": {
-            "type": "string",
-            "description": "Scala della planimetria (es. 1:100, 1:200, 1:50, 1:500)"
-          }
-        },
-        "required": [
-          "foglio",
-          "particella",
-          "subalterno",
-          "protocollo",
-          "dataProtocollo",
-          "scala"
-        ]
-      }
-    },
-    {
-      "id": "doc-ape",
-      "name": "APE - Certificato Energetico",
-      "description": "Efficienza energetica obbligatoria per annunci e rogito",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "classeEnergetica": {
-            "type": "string",
-            "description": "Classe energetica dell'immobile",
-            "enum": [
-              "A4",
-              "A3",
-              "A2",
-              "A1",
-              "B",
-              "C",
-              "D",
-              "E",
-              "F",
-              "G",
-              null
-            ],
-            "nullable": true
-          },
-          "indiceEpgl": {
-            "type": "number",
-            "description": "Consumo energetico"
-          },
-          "codiceIdentificativo": {
-            "type": "string"
-          },
-          "validoFinoA": {
-            "type": "string",
-            "description": "Data di validità in formato europeo DD/MM/YYYY",
-            "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$"
-          },
-          "regione": {
-            "type": "string"
-          },
-          "comune": {
-            "type": "string"
-          },
-          "indirizzo": {
-            "type": "string"
-          },
-          "piano": {
-            "type": "string"
-          },
-          "interno": {
-            "type": "string"
-          },
-          "comuneCatastale": {
-            "type": "string"
-          },
-          "sezione": {
-            "type": "string"
-          },
-          "foglio": {
-            "type": "string"
-          },
-          "particella": {
-            "type": "string"
-          },
-          "subalterni": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "destinazioneUso": {
-            "type": "string",
-            "description": "Destinazione d'uso dell'immobile (es. residenziale, ufficio, commerciale, industriale, agricolo, magazzino, autorimessa)"
-          },
-          "oggettoAttestato": {
-            "type": "string",
-            "description": "Oggetto dell'attestato"
-          },
-          "dataScadenza": {
-            "type": "string",
-            "description": "Data di scadenza in formato europeo DD/MM/YYYY",
-            "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$"
-          },
-          "codiceUnivoco": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "classeEnergetica",
-          "indiceEpgl",
-          "codiceIdentificativo",
-          "validoFinoA",
-          "regione",
-          "comune",
-          "indirizzo",
-          "piano",
-          "interno",
-          "comuneCatastale",
-          "sezione",
-          "foglio",
-          "particella",
-          "subalterni",
-          "destinazioneUso",
-          "oggettoAttestato",
-          "dataScadenza",
-          "codiceUnivoco"
-        ]
-      }
-    },
-    {
-      "id": "doc-tessera-sanitaria",
-      "name": "Tessera Sanitaria",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "codiceFiscale": {
-            "type": "string",
-            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
-          },
-          "cognome": {
-            "type": "string",
-            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
-          },
-          "nome": {
-            "type": "string",
-            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
-          },
-          "sesso": {
-            "type": "string",
-            "description": "Sesso del titolare",
-            "enum": [
-              "M",
-              "F",
-              null
-            ],
-            "nullable": true
-          },
-          "luogoDiNascita": {
-            "type": "string",
-            "description": ""
-          },
-          "provincia": {
-            "type": "string",
-            "description": "può essere indicata con \"( )\" o senza"
-          },
-          "dataDiNascita": {
-            "type": "string",
-            "description": "Data in formato DD.MM.YYYY — ALWAYS use dots as separator (es. 15.01.2021), NEVER use slashes (15/01/2021 is WRONG)",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "dataDiScadenza": {
-            "type": "string",
-            "description": "Data in formato DD.MM.YYYY — ALWAYS use dots as separator (es. 15.01.2021), NEVER use slashes (15/01/2021 is WRONG)",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "dataEmissione": {
-            "type": "string",
-            "description": "Data in formato DD.MM.YYYY — ALWAYS use dots as separator (es. 15.01.2021), NEVER use slashes (15/01/2021 is WRONG)",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          }
-        },
-        "required": [
-          "codiceFiscale",
-          "cognome",
-          "nome",
-          "sesso",
-          "luogoDiNascita",
-          "provincia",
-          "dataDiNascita",
-          "dataDiScadenza",
-          "dataEmissione"
-        ]
-      }
-    },
-    {
-      "id": "doc-morte",
-      "name": "Certificato di Morte",
-      "description": "Certificato/Estratto che attesta il decesso, richiesto quando il venditore/acquirente è vedovo/a",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "nomeDefunto": {
-            "type": "string",
-            "description": "Nome del defunto"
-          },
-          "cognomeDefunto": {
-            "type": "string",
-            "description": "Cognome del defunto"
-          },
-          "codiceFiscaleDefunto": {
-            "type": "string",
-            "description": "Codice Fiscale del defunto — fondamentale per cross-reference con successione (extract without spaces)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
-          },
-          "dataNascita": {
-            "type": "string",
-            "description": "Data di nascita del defunto in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "luogoNascita": {
-            "type": "string",
-            "description": "Comune di nascita del defunto"
-          },
-          "dataDecesso": {
-            "type": "string",
-            "description": "Data del decesso in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "oraDecesso": {
-            "type": "string",
-            "description": "Ora del decesso, se indicata"
-          },
-          "luogoMorte": {
-            "type": "string",
-            "description": "Comune di decesso"
-          },
-          "ultimaResidenza": {
-            "type": "string",
-            "description": "Ultimo comune di residenza del defunto"
-          },
-          "statoCivile": {
-            "type": "string",
-            "description": "Stato civile del defunto al momento del decesso",
-            "enum": [
-              "celibe",
-              "nubile",
-              "coniugato",
-              "coniugata",
-              "vedovo",
-              "vedova",
-              "divorziato",
-              "divorziata",
-              "separato",
-              "separata",
-              null
-            ],
-            "nullable": true
-          },
-          "nomeConiuge": {
-            "type": "string",
-            "description": "Nome e cognome del coniuge superstite, se presente"
-          },
-          "comuneRegistrazione": {
-            "type": "string",
-            "description": "Comune dove è stato registrato l'atto di morte"
-          },
-          "parteSerie": {
-            "type": "string",
-            "description": "Parte e serie dell'atto"
-          },
-          "numero": {
-            "type": "string",
-            "description": "Numero dell'atto di morte"
-          }
-        },
-        "required": [
-          "nomeDefunto",
-          "cognomeDefunto",
-          "dataDecesso",
-          "luogoMorte",
-          "comuneRegistrazione"
-        ]
-      }
-    },
-    {
-      "id": "doc-successione",
-      "name": "Dichiarazione di Successione",
-      "description": "Denuncia di successione presentata all'Agenzia delle Entrate, richiesta quando l'immobile proviene da eredità",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "defunto": {
-            "type": "string",
-            "description": "Nome e cognome del defunto"
-          },
-          "codiceFiscaleDefunto": {
-            "type": "string",
-            "description": "Codice Fiscale del defunto — per cross-reference con certificato di morte (extract without spaces)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
-          },
-          "dataDecesso": {
-            "type": "string",
-            "description": "Data del decesso in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "dataPresentazione": {
-            "type": "string",
-            "description": "Data di presentazione della dichiarazione in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "protocollo": {
-            "type": "string",
-            "description": "Numero di protocollo Agenzia delle Entrate (es. SUC/2021/FI/12345)"
-          },
-          "eredi": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "nome": {
-                  "type": "string"
-                },
-                "cognome": {
-                  "type": "string"
-                },
-                "codiceFiscale": {
-                  "type": "string"
-                },
-                "quotaEreditaria": {
-                  "type": "string",
-                  "description": "Quota di eredità (es. 1/2, 1/3)"
-                },
-                "rapportoParentela": {
-                  "type": "string",
-                  "description": "Rapporto di parentela con il defunto (es. coniuge, figlio, fratello)"
-                }
-              },
-              "required": [
-                "nome",
-                "cognome",
-                "codiceFiscale",
-                "quotaEreditaria"
-              ]
-            }
-          },
-          "foglio": {
-            "type": "string"
-          },
-          "particella": {
-            "type": "string"
-          },
-          "subalterno": {
-            "type": "string"
-          },
-          "volumeAtti": {
-            "type": "string",
-            "description": "Volume e numero di registrazione"
-          }
-        },
-        "required": [
-          "defunto",
-          "dataDecesso",
-          "dataPresentazione",
-          "eredi",
-          "foglio",
-          "particella",
-          "subalterno"
-        ]
-      }
-    },
-    {
-      "id": "doc-eredita",
-      "name": "Accettazione di Eredità",
-      "description": "Atto di accettazione dell'eredità trascritto in Conservatoria, necessario per la vendita di immobili ereditati",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "erede": {
-            "type": "string",
-            "description": "Nome e cognome dell'erede accettante"
-          },
-          "codiceFiscaleErede": {
-            "type": "string",
-            "description": "Codice Fiscale dell'erede"
-          },
-          "defunto": {
-            "type": "string",
-            "description": "Nome e cognome del defunto"
-          },
-          "tipoAccettazione": {
-            "type": "string",
-            "description": "Tipo di accettazione",
-            "enum": [
-              "pura e semplice",
-              "con beneficio d'inventario",
-              null
-            ],
-            "nullable": true
-          },
-          "dataTrascrizione": {
-            "type": "string",
-            "description": "Data di trascrizione in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "notaio": {
-            "type": "string",
-            "description": "Notaio rogante"
-          },
-          "numeroRepertorio": {
-            "type": "string"
-          },
-          "numeroTrascrizione": {
-            "type": "string",
-            "description": "Numero di trascrizione in Conservatoria"
-          }
-        },
-        "required": [
-          "erede",
-          "codiceFiscaleErede",
-          "defunto",
-          "dataTrascrizione"
-        ]
-      }
-    },
-    {
-      "id": "doc-famiglia",
-      "name": "Certificato di Stato di Famiglia",
-      "description": "Certificato anagrafico che attesta la composizione del nucleo familiare, utile per verifiche sul regime patrimoniale",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "intestatario": {
-            "type": "string",
-            "description": "Nome e cognome dell'intestatario del nucleo familiare"
-          },
-          "codiceFiscaleIntestatario": {
-            "type": "string",
-            "description": "Codice Fiscale dell'intestatario (extract without spaces)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
-          },
-          "indirizzo": {
-            "type": "string",
-            "description": "Indirizzo di residenza del nucleo familiare"
-          },
-          "comune": {
-            "type": "string"
-          },
-          "componenti": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "nome": {
-                  "type": "string"
-                },
-                "cognome": {
-                  "type": "string"
-                },
-                "codiceFiscale": {
-                  "type": "string",
-                  "description": "Codice Fiscale del componente, se presente"
-                },
-                "dataNascita": {
-                  "type": "string"
-                },
-                "relazione": {
-                  "type": "string",
-                  "description": "Relazione familiare (es. intestatario, coniuge, convivente, figlio/a, padre, madre, fratello/sorella, nipote)"
-                }
-              },
-              "required": [
-                "nome",
-                "cognome",
-                "dataNascita",
-                "relazione"
-              ]
-            }
-          },
-          "dataRilascio": {
-            "type": "string",
-            "description": "Data di rilascio in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          }
-        },
-        "required": [
-          "intestatario",
-          "indirizzo",
-          "comune",
-          "componenti",
-          "dataRilascio"
-        ]
-      }
-    },
-    {
       "id": "doc-visura-ipotecaria",
       "name": "Visura Ipotecaria",
       "description": "Ispezione ipotecaria che riporta la situazione giuridica dell'immobile: proprietà, ipoteche, pignoramenti e vincoli",
+      "references": [
+        {
+          "title": "Agenzia delle Entrate — Ispezione ipotecaria",
+          "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/ispezione-ipotecaria",
+          "type": "documentation"
+        },
+        {
+          "title": "Conservatoria dei Registri Immobiliari",
+          "url": "https://sister.agenziaentrate.gov.it/",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -1391,911 +2581,6 @@
           "soggetti",
           "foglio",
           "particella"
-        ]
-      }
-    },
-    {
-      "id": "doc-agibilita",
-      "name": "Certificato di Agibilità",
-      "description": "Attesta che l'immobile soddisfa requisiti di sicurezza, igiene, salubrità e risparmio energetico",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "numeroProtocollo": {
-            "type": "string",
-            "description": "Numero di protocollo del certificato"
-          },
-          "dataRilascio": {
-            "type": "string",
-            "description": "Data di rilascio in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "comuneRilascio": {
-            "type": "string",
-            "description": "Comune che ha rilasciato il certificato"
-          },
-          "richiedente": {
-            "type": "string",
-            "description": "Nome e cognome del richiedente"
-          },
-          "indirizzo": {
-            "type": "string",
-            "description": "Indirizzo completo dell'immobile"
-          },
-          "foglio": {
-            "type": "string"
-          },
-          "particella": {
-            "type": "string"
-          },
-          "subalterno": {
-            "type": "string"
-          },
-          "destinazioneUso": {
-            "type": "string",
-            "description": "Destinazione d'uso dell'immobile (es. residenziale, ufficio, commerciale, industriale, agricolo, magazzino, autorimessa)"
-          },
-          "tecnicoAsseverante": {
-            "type": "string",
-            "description": "Nome del tecnico che ha asseverato la conformità"
-          }
-        },
-        "required": [
-          "numeroProtocollo",
-          "dataRilascio",
-          "comuneRilascio",
-          "indirizzo",
-          "destinazioneUso"
-        ]
-      }
-    },
-    {
-      "id": "doc-matrimonio",
-      "name": "Estratto Atto di Matrimonio",
-      "description": "Estratto dell'atto di matrimonio o certificato di stato libero, richiesto dal notaio per verificare il regime patrimoniale",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "coniuge1": {
-            "type": "string",
-            "description": "Nome e cognome del primo coniuge"
-          },
-          "coniuge2": {
-            "type": "string",
-            "description": "Nome e cognome del secondo coniuge"
-          },
-          "dataMatrimonio": {
-            "type": "string",
-            "description": "Data di celebrazione del matrimonio in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "luogoMatrimonio": {
-            "type": "string",
-            "description": "Comune di celebrazione"
-          },
-          "regimePatrimoniale": {
-            "type": "string",
-            "description": "Regime patrimoniale scelto",
-            "enum": [
-              "comunione dei beni",
-              "separazione dei beni",
-              null
-            ],
-            "nullable": true
-          },
-          "annotazioni": {
-            "type": "string",
-            "description": "Annotazioni marginali — copiare TESTUALMENTE dal documento (es. separazione, divorzio, convenzioni patrimoniali)"
-          },
-          "comuneRegistrazione": {
-            "type": "string",
-            "description": "Comune dove è stato registrato l'atto"
-          },
-          "parte": {
-            "type": "string",
-            "description": "Parte e numero dell'atto"
-          }
-        },
-        "required": [
-          "coniuge1",
-          "coniuge2",
-          "dataMatrimonio",
-          "luogoMatrimonio",
-          "regimePatrimoniale"
-        ]
-      }
-    },
-    {
-      "id": "doc-conformita-urbanistica",
-      "name": "Conformità Urbanistica ed Edilizia",
-      "description": "Relazione tecnica che attesta la corrispondenza tra lo stato di fatto dell'immobile e i titoli abilitativi depositati in Comune",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "tecnico": {
-            "type": "string",
-            "description": "Nome del tecnico abilitato (architetto, ingegnere, geometra)"
-          },
-          "dataRelazione": {
-            "type": "string",
-            "description": "Data della relazione in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "indirizzo": {
-            "type": "string",
-            "description": "Indirizzo completo dell'immobile"
-          },
-          "foglio": {
-            "type": "string"
-          },
-          "particella": {
-            "type": "string"
-          },
-          "subalterno": {
-            "type": "string"
-          },
-          "titoliAbilitativi": {
-            "type": "string",
-            "description": "Elenco dei titoli edilizi (licenza edilizia, concessione, permesso di costruire, SCIA, CILA)"
-          },
-          "esito": {
-            "type": "string",
-            "description": "Esito della verifica (es. conforme, non conforme, conforme con riserva, conforme con prescrizioni)"
-          },
-          "difformita": {
-            "type": "string",
-            "description": "Descrizione di eventuali difformità riscontrate — copiare TESTUALMENTE dal documento"
-          },
-          "condoni": {
-            "type": "string",
-            "description": "Eventuali domande di condono edilizio presentate — copiare TESTUALMENTE dal documento"
-          }
-        },
-        "required": [
-          "tecnico",
-          "dataRelazione",
-          "indirizzo",
-          "esito"
-        ]
-      }
-    },
-    {
-      "id": "doc-conformita-impianti",
-      "name": "Certificazione Conformità Impianti",
-      "description": "Dichiarazioni di conformità degli impianti (elettrico, idraulico, gas, riscaldamento) ai sensi del DM 37/2008",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "tipoImpianto": {
-            "type": "string",
-            "description": "Tipo di impianto certificato (es. elettrico, idraulico, gas, riscaldamento, climatizzazione, ascensore, elettrico e termoidraulico)"
-          },
-          "impresaInstallatrice": {
-            "type": "string",
-            "description": "Ragione sociale dell'impresa installatrice"
-          },
-          "responsabileTecnico": {
-            "type": "string",
-            "description": "Nome del responsabile tecnico"
-          },
-          "dataRilascio": {
-            "type": "string",
-            "description": "Data di rilascio della dichiarazione in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "numeroProtocollo": {
-            "type": "string",
-            "description": "Numero di protocollo della dichiarazione"
-          },
-          "indirizzo": {
-            "type": "string",
-            "description": "Indirizzo dell'immobile"
-          },
-          "foglio": {
-            "type": "string",
-            "description": "Foglio catastale, se presente"
-          },
-          "particella": {
-            "type": "string",
-            "description": "Particella catastale, se presente"
-          },
-          "subalterno": {
-            "type": "string",
-            "description": "Subalterno, se presente"
-          },
-          "normativaRiferimento": {
-            "type": "string",
-            "description": "Normativa di riferimento (es. DM 37/2008, CEI 64-8)"
-          }
-        },
-        "required": [
-          "tipoImpianto",
-          "impresaInstallatrice",
-          "dataRilascio",
-          "indirizzo"
-        ]
-      }
-    },
-    {
-      "id": "doc-condominiale",
-      "name": "Documentazione Condominiale",
-      "description": "Dichiarazione dell'amministratore di condominio sulle spese e regolamento condominiale",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "amministratore": {
-            "type": "string",
-            "description": "Nome e cognome o ragione sociale dell'amministratore"
-          },
-          "condominio": {
-            "type": "string",
-            "description": "Denominazione del condominio"
-          },
-          "indirizzo": {
-            "type": "string",
-            "description": "Indirizzo del condominio"
-          },
-          "unitaImmobiliare": {
-            "type": "string",
-            "description": "Identificazione dell'unità immobiliare (es. Scala A, Piano 3, Int. 5)"
-          },
-          "quoteRegolari": {
-            "type": "string",
-            "description": "Le quote condominiali sono regolarmente pagate",
-            "enum": [
-              "sì",
-              "no",
-              null
-            ],
-            "nullable": true
-          },
-          "importoArretrati": {
-            "type": "string",
-            "description": "Eventuali arretrati dovuti"
-          },
-          "speseStraodinarie": {
-            "type": "string",
-            "description": "Spese straordinarie deliberate o in corso"
-          },
-          "millesimi": {
-            "type": "string",
-            "description": "Millesimi di proprietà dell'unità"
-          },
-          "dataRilascio": {
-            "type": "string",
-            "description": "Data di rilascio della dichiarazione in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          }
-        },
-        "required": [
-          "amministratore",
-          "condominio",
-          "indirizzo",
-          "unitaImmobiliare",
-          "quoteRegolari",
-          "dataRilascio"
-        ]
-      }
-    },
-    {
-      "id": "doc-separazione",
-      "name": "Sentenza di Separazione/Divorzio",
-      "description": "Provvedimento giudiziario di separazione legale o divorzio, rilevante per la determinazione dei diritti patrimoniali sull'immobile",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "tribunale": {
-            "type": "string",
-            "description": "Tribunale competente che ha emesso la sentenza"
-          },
-          "numeroSentenza": {
-            "type": "string",
-            "description": "Numero di ruolo/sentenza"
-          },
-          "dataSentenza": {
-            "type": "string",
-            "description": "Data della sentenza in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "coniuge1": {
-            "type": "string",
-            "description": "Nome e cognome del primo coniuge"
-          },
-          "coniuge2": {
-            "type": "string",
-            "description": "Nome e cognome del secondo coniuge"
-          },
-          "tipoProvvedimento": {
-            "type": "string",
-            "description": "Tipo di provvedimento",
-            "enum": [
-              "separazione consensuale",
-              "separazione giudiziale",
-              "divorzio",
-              null
-            ],
-            "nullable": true
-          },
-          "disposizioniPatrimoniali": {
-            "type": "string",
-            "description": "Disposizioni relative ai beni immobili — copiare TESTUALMENTE dal documento, senza riformulare o riassumere (es. assegnazione casa coniugale)"
-          },
-          "passaggioInGiudicato": {
-            "type": "string",
-            "description": "Data di passaggio in giudicato in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          }
-        },
-        "required": [
-          "tribunale",
-          "dataSentenza",
-          "coniuge1",
-          "coniuge2",
-          "tipoProvvedimento"
-        ]
-      }
-    },
-    {
-      "id": "doc-delibera-mutuo",
-      "name": "Delibera di Mutuo",
-      "description": "Lettera di delibera della banca che conferma l'approvazione del mutuo ipotecario",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "banca": {
-            "type": "string",
-            "description": "Nome della banca o istituto di credito"
-          },
-          "filiale": {
-            "type": "string",
-            "description": "Filiale o agenzia"
-          },
-          "mutuatario": {
-            "type": "string",
-            "description": "Nome e cognome del mutuatario"
-          },
-          "codiceFiscaleMutuatario": {
-            "type": "string",
-            "description": "Codice Fiscale del mutuatario (extract without spaces)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
-          },
-          "importoMutuo": {
-            "type": "number",
-            "description": "Importo del mutuo deliberato in Euro"
-          },
-          "durataAnni": {
-            "type": "number",
-            "description": "Durata del mutuo in anni"
-          },
-          "tassoInteresse": {
-            "type": "string",
-            "description": "Tasso di interesse (fisso, variabile, misto) e percentuale"
-          },
-          "tipoTasso": {
-            "type": "string",
-            "description": "Tipo di tasso",
-            "enum": [
-              "fisso",
-              "variabile",
-              "misto",
-              null
-            ],
-            "nullable": true
-          },
-          "dataDelibera": {
-            "type": "string",
-            "description": "Data della delibera in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "validitaDelibera": {
-            "type": "string",
-            "description": "Validità temporale della delibera (es. 6 mesi)"
-          },
-          "condizioniSospensive": {
-            "type": "string",
-            "description": "Eventuali condizioni sospensive (es. ipoteca di primo grado)"
-          }
-        },
-        "required": [
-          "banca",
-          "mutuatario",
-          "codiceFiscaleMutuatario",
-          "importoMutuo",
-          "dataDelibera"
-        ]
-      }
-    },
-    {
-      "id": "doc-perizia-bancaria",
-      "name": "Perizia Bancaria",
-      "description": "Perizia estimativa dell'immobile richiesta dalla banca per la concessione del mutuo",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "perito": {
-            "type": "string",
-            "description": "Nome e cognome del perito incaricato"
-          },
-          "dataPerizia": {
-            "type": "string",
-            "description": "Data della perizia in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "indirizzo": {
-            "type": "string",
-            "description": "Indirizzo completo dell'immobile periziato"
-          },
-          "foglio": {
-            "type": "string",
-            "description": "Foglio catastale"
-          },
-          "particella": {
-            "type": "string",
-            "description": "Particella catastale"
-          },
-          "subalterno": {
-            "type": "string",
-            "description": "Subalterno"
-          },
-          "valoreStimato": {
-            "type": "number",
-            "description": "Valore di stima dell'immobile in Euro"
-          },
-          "superficieCommerciale": {
-            "type": "number",
-            "description": "Superficie commerciale in mq"
-          },
-          "statoConservazione": {
-            "type": "string",
-            "description": "Stato di conservazione (es. buono, ottimo, da ristrutturare)"
-          },
-          "conformitaCatastale": {
-            "type": "string",
-            "description": "Esito verifica conformità catastale"
-          },
-          "conformitaUrbanistica": {
-            "type": "string",
-            "description": "Esito verifica conformità urbanistica"
-          },
-          "note": {
-            "type": "string",
-            "description": "Note o osservazioni del perito — copiare TESTUALMENTE dal documento. Se non ci sono note, restituire stringa vuota."
-          }
-        },
-        "required": [
-          "perito",
-          "dataPerizia",
-          "indirizzo",
-          "valoreStimato"
-        ]
-      }
-    },
-    {
-      "id": "doc-contratto-mutuo",
-      "name": "Contratto di Mutuo",
-      "description": "Contratto di mutuo ipotecario stipulato contestualmente al rogito",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "banca": {
-            "type": "string",
-            "description": "Nome della banca o istituto di credito"
-          },
-          "mutuatario": {
-            "type": "string",
-            "description": "Nome e cognome del mutuatario"
-          },
-          "codiceFiscaleMutuatario": {
-            "type": "string",
-            "description": "Codice Fiscale del mutuatario (extract without spaces)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
-          },
-          "importoMutuo": {
-            "type": "number",
-            "description": "Importo del mutuo erogato in Euro"
-          },
-          "durataAnni": {
-            "type": "number",
-            "description": "Durata del mutuo in anni"
-          },
-          "tassoInteresse": {
-            "type": "string",
-            "description": "Tasso di interesse e percentuale"
-          },
-          "tipoTasso": {
-            "type": "string",
-            "description": "Tipo di tasso",
-            "enum": [
-              "fisso",
-              "variabile",
-              "misto",
-              null
-            ],
-            "nullable": true
-          },
-          "rataMensile": {
-            "type": "number",
-            "description": "Importo rata mensile in Euro"
-          },
-          "notaio": {
-            "type": "string",
-            "description": "Nome e cognome del notaio rogante"
-          },
-          "dataStipula": {
-            "type": "string",
-            "description": "Data di stipula in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "numeroRepertorio": {
-            "type": "string",
-            "description": "Numero di repertorio"
-          },
-          "ipoteca": {
-            "type": "string",
-            "description": "Grado e importo dell'ipoteca iscritta"
-          }
-        },
-        "required": [
-          "banca",
-          "mutuatario",
-          "codiceFiscaleMutuatario",
-          "importoMutuo",
-          "dataStipula",
-          "notaio"
-        ]
-      }
-    },
-    {
-      "id": "doc-mezzi-pagamento",
-      "name": "Dichiarazione Mezzi di Pagamento",
-      "description": "Dichiarazione analitica dei mezzi di pagamento utilizzati nella compravendita (Art. 35 D.Lgs. 223/2006)",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "pagamenti": {
-            "type": "array",
-            "description": "Elenco analitico di tutti i mezzi di pagamento",
-            "items": {
-              "type": "object",
-              "properties": {
-                "tipo": {
-                  "type": "string",
-                  "description": "Tipo di pagamento (es. assegno circolare, bonifico bancario, mutuo fondiario)"
-                },
-                "importo": {
-                  "type": "number",
-                  "description": "Importo in Euro"
-                },
-                "numeroBonifico": {
-                  "type": "string",
-                  "description": "Numero CRO/TRN del bonifico o numero assegno"
-                },
-                "bancaEmittente": {
-                  "type": "string",
-                  "description": "Banca emittente dell'assegno o ordinante del bonifico"
-                },
-                "dataPagamento": {
-                  "type": "string",
-                  "description": "Data del pagamento in formato europeo DD.MM.YYYY",
-                  "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-                },
-                "intestatario": {
-                  "type": "string",
-                  "description": "Intestatario del mezzo di pagamento"
-                }
-              },
-              "required": [
-                "tipo",
-                "importo"
-              ]
-            }
-          },
-          "importoTotale": {
-            "type": "number",
-            "description": "Importo totale dei pagamenti in Euro"
-          },
-          "mediatore": {
-            "type": "string",
-            "description": "Nome dell'agenzia o mediatore, se presente"
-          },
-          "provvigione": {
-            "type": "number",
-            "description": "Importo della provvigione del mediatore in Euro"
-          }
-        },
-        "required": [
-          "pagamenti",
-          "importoTotale"
-        ]
-      }
-    },
-    {
-      "id": "doc-residenza",
-      "name": "Certificato di Residenza",
-      "description": "Certificato anagrafico che attesta la residenza attuale, richiesto quando l'indirizzo sull'identità differisce dalla residenza corrente",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "nome": {
-            "type": "string",
-            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
-          },
-          "cognome": {
-            "type": "string",
-            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
-          },
-          "codiceFiscale": {
-            "type": "string",
-            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
-          },
-          "indirizzo": {
-            "type": "string",
-            "description": "Indirizzo completo di residenza attuale"
-          },
-          "comune": {
-            "type": "string",
-            "description": "Comune di residenza"
-          },
-          "provincia": {
-            "type": "string",
-            "description": "Sigla Provincia"
-          },
-          "cap": {
-            "type": "string",
-            "description": "Codice Avviamento Postale"
-          },
-          "dataRilascio": {
-            "type": "string",
-            "description": "Data di rilascio in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "comuneRilascio": {
-            "type": "string",
-            "description": "Comune che ha rilasciato il certificato"
-          }
-        },
-        "required": [
-          "nome",
-          "cognome",
-          "codiceFiscale",
-          "indirizzo",
-          "comune",
-          "dataRilascio"
-        ]
-      }
-    },
-    {
-      "id": "doc-cdu",
-      "name": "Certificato di Destinazione Urbanistica (CDU)",
-      "description": "Certificato rilasciato dal Comune che attesta la destinazione urbanistica di un terreno — obbligatorio per terreni >5000 mq (Art. 30 D.P.R. 380/2001)",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "foglio": {
-            "type": "string",
-            "description": "Foglio catastale"
-          },
-          "particella": {
-            "type": "string",
-            "description": "Particella catastale"
-          },
-          "comune": {
-            "type": "string",
-            "description": "Comune di ubicazione"
-          },
-          "destinazioneUrbanistica": {
-            "type": "string",
-            "description": "Destinazione urbanistica (es. Zona Residenziale B2, Zona Agricola E1)"
-          },
-          "estremiPRG": {
-            "type": "string",
-            "description": "Estremi del Piano Regolatore o Piano Urbanistico vigente"
-          },
-          "dataRilascio": {
-            "type": "string",
-            "description": "Data di rilascio in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "validita": {
-            "type": "string",
-            "description": "Validità del certificato (1 anno dalla data di rilascio)"
-          }
-        },
-        "required": [
-          "foglio",
-          "particella",
-          "comune",
-          "destinazioneUrbanistica",
-          "dataRilascio"
-        ]
-      }
-    },
-    {
-      "id": "doc-permesso-soggiorno",
-      "name": "Permesso di Soggiorno",
-      "description": "Documento rilasciato dalla Questura per cittadini extracomunitari — richiesto per acquirenti/venditori non-UE",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "nome": {
-            "type": "string",
-            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
-          },
-          "cognome": {
-            "type": "string",
-            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
-          },
-          "codiceFiscale": {
-            "type": "string",
-            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
-          },
-          "cittadinanza": {
-            "type": "string",
-            "description": "Cittadinanza del titolare"
-          },
-          "tipoPermesso": {
-            "type": "string",
-            "description": "Tipo di permesso (es. lavoro subordinato, famiglia, lungo soggiorno)"
-          },
-          "numeroPermesso": {
-            "type": "string",
-            "description": "Numero del permesso di soggiorno"
-          },
-          "dataRilascio": {
-            "type": "string",
-            "description": "Data di rilascio in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "dataScadenza": {
-            "type": "string",
-            "description": "Data di scadenza in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "questura": {
-            "type": "string",
-            "description": "Questura rilasciante"
-          }
-        },
-        "required": [
-          "nome",
-          "cognome",
-          "codiceFiscale",
-          "tipoPermesso",
-          "dataRilascio",
-          "dataScadenza"
-        ]
-      }
-    },
-    {
-      "id": "doc-visura-camerale",
-      "name": "Visura Camerale",
-      "description": "Documento della Camera di Commercio che attesta i dati di una società — richiesto quando il venditore/acquirente è una persona giuridica",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "ragioneSociale": {
-            "type": "string",
-            "description": "Denominazione o ragione sociale della società"
-          },
-          "codiceFiscale": {
-            "type": "string",
-            "description": "Codice Fiscale / Partita IVA della società"
-          },
-          "sedeLegale": {
-            "type": "string",
-            "description": "Indirizzo della sede legale"
-          },
-          "formaGiuridica": {
-            "type": "string",
-            "description": "Forma giuridica (es. S.r.l., S.p.A., S.a.s.)"
-          },
-          "legaleRappresentante": {
-            "type": "string",
-            "description": "Nome e cognome del legale rappresentante"
-          },
-          "codiceFiscaleRappresentante": {
-            "type": "string",
-            "description": "Codice Fiscale del legale rappresentante (extract without spaces)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
-          },
-          "numeroREA": {
-            "type": "string",
-            "description": "Numero di iscrizione al Registro Imprese (REA)"
-          },
-          "dataIscrizione": {
-            "type": "string",
-            "description": "Data di iscrizione al Registro Imprese"
-          },
-          "statoAttivita": {
-            "type": "string",
-            "description": "Stato di attività (es. attiva, in liquidazione, cessata)"
-          },
-          "oggettoSociale": {
-            "type": "string",
-            "description": "Oggetto sociale della società"
-          }
-        },
-        "required": [
-          "ragioneSociale",
-          "codiceFiscale",
-          "sedeLegale",
-          "formaGiuridica",
-          "legaleRappresentante"
-        ]
-      }
-    },
-    {
-      "id": "doc-procura",
-      "name": "Procura",
-      "description": "Atto notarile che conferisce il potere di rappresentanza per compiere atti per conto di un'altra persona in sede di rogito",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "nomeMandante": {
-            "type": "string",
-            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
-          },
-          "cognomeMandante": {
-            "type": "string",
-            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
-          },
-          "codiceFiscaleMandante": {
-            "type": "string",
-            "description": "Codice Fiscale del mandante (extract without spaces)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
-          },
-          "nomeMandatario": {
-            "type": "string",
-            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
-          },
-          "cognomeMandatario": {
-            "type": "string",
-            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
-          },
-          "codiceFiscaleMandatario": {
-            "type": "string",
-            "description": "Codice Fiscale del mandatario (extract without spaces)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
-          },
-          "tipoProcura": {
-            "type": "string",
-            "description": "Tipo di procura",
-            "enum": [
-              "speciale",
-              "generale",
-              null
-            ],
-            "nullable": true
-          },
-          "oggettoDelega": {
-            "type": "string",
-            "description": "Oggetto specifico della delega (es. vendita dell'immobile sito in...)"
-          },
-          "notaio": {
-            "type": "string",
-            "description": "Notaio che ha autenticato la procura"
-          },
-          "dataAtto": {
-            "type": "string",
-            "description": "Data dell'atto in formato europeo DD.MM.YYYY",
-            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
-          },
-          "numeroRepertorio": {
-            "type": "string",
-            "description": "Numero di repertorio"
-          }
-        },
-        "required": [
-          "nomeMandante",
-          "cognomeMandante",
-          "codiceFiscaleMandante",
-          "nomeMandatario",
-          "cognomeMandatario",
-          "codiceFiscaleMandatario",
-          "tipoProcura",
-          "dataAtto"
         ]
       }
     }

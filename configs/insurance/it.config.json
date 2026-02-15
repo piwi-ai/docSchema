@@ -8,6 +8,18 @@
       "id": "doc-attestato-rischio",
       "name": "Attestato di Rischio",
       "description": "Attestato di rischio RCA — classe di merito, sinistri pregressi",
+      "references": [
+        {
+          "title": "IVASS — Attestato di Rischio",
+          "url": "https://www.ivass.it/consumatori/sos-assicurati/attestato-rischio/index.html",
+          "type": "documentation"
+        },
+        {
+          "title": "Regolamento IVASS n. 9/2015",
+          "url": "https://www.ivass.it/normativa/nazionale/secondaria-ivass/regolamenti/2015/n9/",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -95,6 +107,13 @@
       "id": "doc-certificato-morte",
       "name": "Certificato di Morte",
       "description": "Certificato di morte — per liquidazione polizza vita caso morte",
+      "references": [
+        {
+          "title": "Ministero dell'Interno — Servizi demografici",
+          "url": "https://dait.interno.gov.it/servizi-demografici",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -164,6 +183,13 @@
       "id": "doc-certificato-medico",
       "name": "Certificato Medico",
       "description": "Certificato medico per lesioni da sinistro o infortunio coperto da polizza",
+      "references": [
+        {
+          "title": "Art. 139 Codice delle Assicurazioni — Danno biologico",
+          "url": "https://www.ivass.it/normativa/nazionale/primaria/index.html",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -241,6 +267,13 @@
       "id": "doc-stato-famiglia",
       "name": "Certificato Stato Famiglia",
       "description": "Certificato stato di famiglia — per polizze vita e beneficiari",
+      "references": [
+        {
+          "title": "Ministero dell'Interno — Servizi demografici",
+          "url": "https://dait.interno.gov.it/servizi-demografici",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -327,6 +360,18 @@
       "id": "doc-denuncia-sinistro",
       "name": "Denuncia Sinistro / CID",
       "description": "Constatazione amichevole (CAI/CID) o denuncia sinistro — dinamica, danni, veicoli",
+      "references": [
+        {
+          "title": "ANIA — Modulo CAI/CID",
+          "url": "https://www.ania.it/it/sala-stampa/focus-on/focus-on-constatazione-amichevole-incidente",
+          "type": "documentation"
+        },
+        {
+          "title": "Art. 143 Codice delle Assicurazioni — Denuncia sinistro",
+          "url": "https://www.ivass.it/normativa/nazionale/primaria/index.html",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -471,7 +516,19 @@
     {
       "id": "doc-identita",
       "name": "Documento d'Identità",
-      "description": "Documento di riconoscimento dell'assicurato (CI, Passaporto, Patente)",
+      "description": "Documento di riconoscimento (CI, Passaporto, Patente) per identificazione e Antiriciclaggio",
+      "references": [
+        {
+          "title": "Carta d'Identità Elettronica (CIE)",
+          "url": "https://www.cartaidentita.interno.gov.it/",
+          "type": "documentation"
+        },
+        {
+          "title": "Adeguata verifica — D.Lgs. 231/2007",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2007-11-21;231",
+          "type": "regulation"
+        }
+      ],
       "isArrayExtraction": true,
       "jsonSchema": {
         "type": "object",
@@ -522,7 +579,25 @@
           },
           "indirizzoDiResidenza": {
             "type": "string",
-            "description": "Indirizzo completo di residenza"
+            "description": "Indirizzo completo di residenza — formato: Via/Piazza Nome Numero, CAP Città (Provincia)"
+          },
+          "statoCivile": {
+            "type": "string",
+            "description": "Stato civile",
+            "enum": [
+              "celibe",
+              "nubile",
+              "coniugato",
+              "coniugata",
+              "vedovo",
+              "vedova",
+              "divorziato",
+              "divorziata",
+              "separato",
+              "separata",
+              null
+            ],
+            "nullable": true
           }
         },
         "required": [
@@ -542,6 +617,13 @@
       "id": "doc-fattura-riparazione",
       "name": "Fattura di Riparazione",
       "description": "Fattura dell'officina/carrozzeria per riparazione danni",
+      "references": [
+        {
+          "title": "FatturaPA — Formato Fattura Elettronica",
+          "url": "https://www.fatturapa.gov.it/it/norme-e-regole/documentazione-fatturapa/",
+          "type": "specification"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -654,6 +736,13 @@
       "id": "doc-libretto",
       "name": "Libretto di Circolazione",
       "description": "Carta di circolazione del veicolo assicurato",
+      "references": [
+        {
+          "title": "Motorizzazione Civile — Carta di Circolazione",
+          "url": "https://www.mit.gov.it/temi/trasporti/motorizzazione",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -724,6 +813,13 @@
       "id": "doc-perizia-danni",
       "name": "Perizia Danni",
       "description": "Perizia tecnica dei danni — importo, descrizione danni, perito",
+      "references": [
+        {
+          "title": "Art. 148 Codice delle Assicurazioni — Perizia",
+          "url": "https://www.ivass.it/normativa/nazionale/primaria/index.html",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -798,6 +894,18 @@
       "id": "doc-polizza",
       "name": "Polizza Assicurativa",
       "description": "Contratto di assicurazione — tutti i rami (RCA, vita, casa, infortuni, RC professionale)",
+      "references": [
+        {
+          "title": "IVASS — Codice delle Assicurazioni Private",
+          "url": "https://www.ivass.it/normativa/nazionale/primaria/index.html",
+          "type": "regulation"
+        },
+        {
+          "title": "ANIA — Associazione Nazionale Imprese Assicuratrici",
+          "url": "https://www.ania.it/",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -1078,6 +1186,13 @@
       "id": "doc-tessera-sanitaria",
       "name": "Tessera Sanitaria",
       "description": "Tessera sanitaria / Codice Fiscale — conferma CF e dati anagrafici",
+      "references": [
+        {
+          "title": "Agenzia delle Entrate — Tessera Sanitaria",
+          "url": "https://sistemats1.sanita.finanze.it/portale/tessera-sanitaria",
+          "type": "documentation"
+        }
+      ],
       "isArrayExtraction": true,
       "jsonSchema": {
         "type": "object",
@@ -1114,9 +1229,18 @@
             "type": "string",
             "description": "Comune di nascita"
           },
+          "provincia": {
+            "type": "string",
+            "description": "Sigla provincia di nascita"
+          },
           "dataScadenza": {
             "type": "string",
             "description": "Data di scadenza",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "dataEmissione": {
+            "type": "string",
+            "description": "Data di emissione",
             "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
           }
         },

@@ -8,6 +8,16 @@
 
 // ─── Document Types ─────────────────────────────────────────────────────────
 
+/** Official reference link for a document type */
+export interface DocumentReference {
+    /** Display label (e.g. 'Agenzia delle Entrate — Modello F24') */
+    title: string;
+    /** Full URL to the reference */
+    url: string;
+    /** Content type hint for UI rendering */
+    type?: 'documentation' | 'schema' | 'regulation' | 'specification';
+}
+
 /**
  * Defines a type of document that can be processed by the system.
  * Each document type has a JSON schema that specifies what data
@@ -28,6 +38,8 @@ export interface DocumentTypeDef {
      * (e.g. an ID document listing multiple people).
      */
     isArrayExtraction?: boolean;
+    /** Official references — government docs, XML/JSON schemas, regulatory links */
+    references?: DocumentReference[];
 }
 
 // ─── Entity Types ───────────────────────────────────────────────────────────

@@ -8,6 +8,18 @@
       "id": "doc-isee",
       "name": "Attestazione ISEE",
       "description": "Attestazione ISEE — indicatore della situazione economica equivalente",
+      "references": [
+        {
+          "title": "INPS — ISEE",
+          "url": "https://www.inps.it/it/it/dettaglio-scheda.schede-servizio-strumento.schede-servizi.isee-indicatore-della-situazione-economica-equivalente-50498.isee-indicatore-della-situazione-economica-equivalente.html",
+          "type": "documentation"
+        },
+        {
+          "title": "DSU — Modulo e istruzioni",
+          "url": "https://servizi2.inps.it/servizi/CircMessStworker/VisualizzaDoc.aspx?inpsdoc=Circolare%20numero%20137%20del%2007-10-2016.htm",
+          "type": "specification"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -88,6 +100,18 @@
       "id": "doc-bilancio",
       "name": "Bilancio d'Esercizio",
       "description": "Bilancio annuale: stato patrimoniale, conto economico, nota integrativa",
+      "references": [
+        {
+          "title": "Codice Civile Art. 2423–2435 — Bilancio",
+          "url": "https://www.gazzettaufficiale.it/atto/serie_generale/caricaArticolo?art.versione=3&art.idGruppo=262&art.flagTipoArticolo=2&art.codiceRedazionale=042U0262&art.idArticolo=2423&art.idSottoArticolo=1&art.idSottoArticolo1=10&art.dataPubblicazioneGazzetta=1942-04-04&art.progressivo=0",
+          "type": "regulation"
+        },
+        {
+          "title": "XBRL Italia — Tassonomia Bilanci",
+          "url": "https://www.xbrl.org/jurisdictions/italy/",
+          "type": "schema"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -148,6 +172,13 @@
       "id": "doc-busta-paga",
       "name": "Busta Paga / Cedolino",
       "description": "Cedolino paga mensile — lordo, netto, ritenute, contributi",
+      "references": [
+        {
+          "title": "INPS — Contributi e aliquote",
+          "url": "https://www.inps.it/it/it/dettaglio-scheda.schede-servizio-strumento.schede-servizi.contribuzione-obbligatoria-50498.contribuzione-obbligatoria.html",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -235,6 +266,18 @@
       "id": "doc-cu",
       "name": "Certificazione Unica (CU)",
       "description": "Certificazione Unica rilasciata dal datore di lavoro / committente",
+      "references": [
+        {
+          "title": "Agenzia delle Entrate — Certificazione Unica",
+          "url": "https://www.agenziaentrate.gov.it/portale/web/guest/cu-certificazione-unica",
+          "type": "documentation"
+        },
+        {
+          "title": "Specifiche tecniche CU (tracciato record)",
+          "url": "https://www.agenziaentrate.gov.it/portale/web/guest/cu-certificazione-unica/specifiche-tecniche-cu",
+          "type": "specification"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -333,6 +376,18 @@
       "id": "doc-contratto-lavoro",
       "name": "Contratto di Lavoro",
       "description": "Contratto di lavoro dipendente — CCNL, livello, RAL",
+      "references": [
+        {
+          "title": "Ministero del Lavoro — Tipologie contrattuali",
+          "url": "https://www.lavoro.gov.it/temi-e-priorita/rapporti-di-lavoro-e-relazioni-industriali/focus-on/tipologie-contrattuali",
+          "type": "regulation"
+        },
+        {
+          "title": "Archivio CCNL — CNEL",
+          "url": "https://www.cnel.it/Archivio-Contratti",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -440,7 +495,19 @@
     {
       "id": "doc-identita",
       "name": "Documento d'Identità",
-      "description": "Documento di riconoscimento del cliente (CI, Passaporto, Patente)",
+      "description": "Documento di riconoscimento (CI, Passaporto, Patente) per identificazione e Antiriciclaggio",
+      "references": [
+        {
+          "title": "Carta d'Identità Elettronica (CIE)",
+          "url": "https://www.cartaidentita.interno.gov.it/",
+          "type": "documentation"
+        },
+        {
+          "title": "Adeguata verifica — D.Lgs. 231/2007",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2007-11-21;231",
+          "type": "regulation"
+        }
+      ],
       "isArrayExtraction": true,
       "jsonSchema": {
         "type": "object",
@@ -491,7 +558,25 @@
           },
           "indirizzoDiResidenza": {
             "type": "string",
-            "description": "Indirizzo completo di residenza"
+            "description": "Indirizzo completo di residenza — formato: Via/Piazza Nome Numero, CAP Città (Provincia)"
+          },
+          "statoCivile": {
+            "type": "string",
+            "description": "Stato civile",
+            "enum": [
+              "celibe",
+              "nubile",
+              "coniugato",
+              "coniugata",
+              "vedovo",
+              "vedova",
+              "divorziato",
+              "divorziata",
+              "separato",
+              "separata",
+              null
+            ],
+            "nullable": true
           }
         },
         "required": [
@@ -511,6 +596,13 @@
       "id": "doc-estratto-conto",
       "name": "Estratto Conto Bancario",
       "description": "Estratto conto bancario — saldo, movimenti, periodo",
+      "references": [
+        {
+          "title": "Banca d'Italia — Trasparenza bancaria",
+          "url": "https://www.bancaditalia.it/compiti/vigilanza/normativa/archivio-norme/disposizioni/trasparenza/index.html",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -567,6 +659,23 @@
       "id": "doc-fattura",
       "name": "Fattura",
       "description": "Fattura attiva o passiva — dati emittente, destinatario, imponibile, IVA",
+      "references": [
+        {
+          "title": "FatturaPA — Specifiche tecniche",
+          "url": "https://www.fatturapa.gov.it/it/norme-e-regole/documentazione-fatturapa/",
+          "type": "specification"
+        },
+        {
+          "title": "FatturaPA XML Schema (SDI)",
+          "url": "https://www.fatturapa.gov.it/it/norme-e-regole/documentazione-fatturapa/formato-fatturapa/",
+          "type": "schema"
+        },
+        {
+          "title": "Agenzia delle Entrate — Fatturazione Elettronica",
+          "url": "https://www.agenziaentrate.gov.it/portale/web/guest/aree-tematiche/fatturazione-elettronica",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -697,6 +806,18 @@
       "id": "doc-iva-periodica",
       "name": "Liquidazione IVA Periodica",
       "description": "Comunicazione liquidazione periodica IVA — mensile o trimestrale",
+      "references": [
+        {
+          "title": "Agenzia delle Entrate — Liquidazioni IVA",
+          "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/comunicazioni/lipe-liquidazioni-periodiche-iva",
+          "type": "documentation"
+        },
+        {
+          "title": "Specifiche tecniche LIPE (XML)",
+          "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/comunicazioni/lipe-liquidazioni-periodiche-iva/sw-compilazione-e-controllo-lipe",
+          "type": "schema"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -763,6 +884,18 @@
       "id": "doc-730",
       "name": "Modello 730",
       "description": "Dichiarazione dei redditi semplificata per lavoratori dipendenti e pensionati",
+      "references": [
+        {
+          "title": "Agenzia delle Entrate — Modello 730",
+          "url": "https://www.agenziaentrate.gov.it/portale/web/guest/modello-730",
+          "type": "documentation"
+        },
+        {
+          "title": "Istruzioni 730 (PDF)",
+          "url": "https://www.agenziaentrate.gov.it/portale/web/guest/modello-730/istruzioni-modello-730",
+          "type": "specification"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -882,6 +1015,18 @@
       "id": "doc-f24",
       "name": "Modello F24",
       "description": "Modello di pagamento unificato per imposte, contributi e premi",
+      "references": [
+        {
+          "title": "Agenzia delle Entrate — Modello F24",
+          "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/pagamenti/f24",
+          "type": "documentation"
+        },
+        {
+          "title": "Tabella codici tributo",
+          "url": "https://www.agenziaentrate.gov.it/portale/web/guest/codici-tributo",
+          "type": "specification"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -964,6 +1109,13 @@
       "id": "doc-redditi-pf",
       "name": "Modello Redditi PF",
       "description": "Dichiarazione dei redditi per persone fisiche con P.IVA o redditi complessi",
+      "references": [
+        {
+          "title": "Agenzia delle Entrate — Modello Redditi PF",
+          "url": "https://www.agenziaentrate.gov.it/portale/web/guest/modello-redditi-pf",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -1037,6 +1189,13 @@
       "id": "doc-ricevuta",
       "name": "Ricevuta / Scontrino",
       "description": "Ricevuta fiscale o scontrino per spese deducibili/detraibili",
+      "references": [
+        {
+          "title": "Agenzia delle Entrate — Corrispettivi Telematici",
+          "url": "https://www.agenziaentrate.gov.it/portale/web/guest/aree-tematiche/corrispettivi-telematici",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -1085,6 +1244,18 @@
       "id": "doc-visura-camerale",
       "name": "Visura Camerale",
       "description": "Visura della Camera di Commercio — dati societari, legale rappresentante, codice ATECO",
+      "references": [
+        {
+          "title": "Registro Imprese — Camera di Commercio",
+          "url": "https://www.registroimprese.it/",
+          "type": "documentation"
+        },
+        {
+          "title": "InfoCamere — Visure",
+          "url": "https://www.infocamere.it/visure",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -1094,7 +1265,7 @@
           },
           "partitaIva": {
             "type": "string",
-            "description": "Partita IVA — 11 cifre numeriche"
+            "description": "Partita IVA"
           },
           "codiceFiscale": {
             "type": "string",
@@ -1123,18 +1294,7 @@
           },
           "formaGiuridica": {
             "type": "string",
-            "description": "Forma giuridica",
-            "enum": [
-              "SRL",
-              "SRLS",
-              "SPA",
-              "SAS",
-              "SNC",
-              "Ditta Individuale",
-              "Cooperativa",
-              null
-            ],
-            "nullable": true
+            "description": "Forma giuridica (es. S.r.l., S.p.A., S.a.s.)"
           },
           "capitaleSociale": {
             "type": "number",
@@ -1160,6 +1320,10 @@
           "rea": {
             "type": "string",
             "description": "Numero REA"
+          },
+          "oggettoSociale": {
+            "type": "string",
+            "description": "Oggetto sociale della società"
           }
         },
         "required": [
