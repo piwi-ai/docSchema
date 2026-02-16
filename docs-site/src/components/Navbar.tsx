@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Globe, Boxes, Github } from 'lucide-react';
+import { Globe, Boxes } from 'lucide-react';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -32,14 +32,16 @@ export default function Navbar() {
                     </NavLink>
                 </div>
 
-                <a
-                    href="https://github.com/piwi-ai/docSchema"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="navbar__github"
-                >
-                    <Github size={20} />
-                </a>
+                <div className="navbar__github">
+                    <iframe
+                        src="https://ghbtns.com/github-btn.html?user=piwi-ai&repo=docSchema&type=star&count=true&size=large"
+                        frameBorder="0"
+                        scrolling="0"
+                        width="130"
+                        height="30"
+                        title="GitHub Stars"
+                    />
+                </div>
             </div>
         </nav>
     );
