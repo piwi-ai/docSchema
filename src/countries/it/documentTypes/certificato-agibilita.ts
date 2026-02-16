@@ -5,15 +5,16 @@
 import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, objectSchema, ref,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
 import { DESTINAZIONE_USO_DESC } from './ape.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const certificatoAgibilita: DocumentTypeDef = {
     id: 'doc-agibilita',
     name: 'Certificato di Agibilità',
     description: 'Attesta che l\'immobile soddisfa requisiti di sicurezza, igiene, salubrità e risparmio energetico',
     references: [
-        ref('Art. 24 D.P.R. 380/2001 — Agibilità', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:2001-06-06;380~art24', 'regulation'),
+        ref('Art. 24 D.P.R. 380/2001 — Agibilità', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:2001-06-06;380~art24', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         numeroProtocollo: text('Numero di protocollo del certificato'),

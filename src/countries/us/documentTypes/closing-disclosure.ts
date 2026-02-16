@@ -6,15 +6,16 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, dateUS, objectSchema, ref,
     currency, address,
-} from '../../../helpers/us.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const closingDisclosure: DocumentTypeDef = {
     id: 'doc-closing-disclosure',
     name: 'Closing Disclosure (CD)',
     description: 'TRID Closing Disclosure — final settlement statement with all costs and credits',
     references: [
-        ref('CFPB — Closing Disclosure Explainer', 'https://www.consumerfinance.gov/owning-a-home/closing-disclosure/', 'documentation'),
-        ref('TILA-RESPA Integrated Disclosure Rule', 'https://www.consumerfinance.gov/rules-policy/final-rules/integrated-mortgage-disclosures-under-real-estate-settlement-procedures-act-regulation-x-and-truth-lending-act-regulation-z/', 'regulation'),
+        ref('CFPB — Closing Disclosure Explainer', 'https://www.consumerfinance.gov/owning-a-home/closing-disclosure/', ReferenceType.DOCUMENTATION),
+        ref('TILA-RESPA Integrated Disclosure Rule', 'https://www.consumerfinance.gov/rules-policy/final-rules/integrated-mortgage-disclosures-under-real-estate-settlement-procedures-act-regulation-x-and-truth-lending-act-regulation-z/', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         closingDate: dateUS('Closing date'),

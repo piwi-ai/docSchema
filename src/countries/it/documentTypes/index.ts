@@ -5,6 +5,13 @@
  * to get named exports you can compose into vertical-specific arrays.
  */
 
+// ── Standard EU Document Types (factory-generated) ──────────────────────────
+export { identityCard } from './identity-card.js';
+export { passport } from './passport.js';
+export { driversLicense } from './drivers-license.js';
+export { residencePermit } from './residence-permit.js';
+
+
 // ── Common (shared across verticals) ────────────────────────────────────────
 export { identita } from './identita.js';
 export { tesseraSanitaria } from './tessera-sanitaria.js';

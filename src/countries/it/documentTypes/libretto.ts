@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, date, enumField, objectSchema, ref,
     codiceFiscale, targa, telaio,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const libretto: DocumentTypeDef = {
     id: 'doc-libretto',
     name: 'Libretto di Circolazione',
     description: 'Carta di circolazione del veicolo assicurato',
     references: [
-        ref('Motorizzazione Civile — Carta di Circolazione', 'https://www.mit.gov.it/temi/trasporti/motorizzazione', 'documentation'),
+        ref('Motorizzazione Civile — Carta di Circolazione', 'https://www.mit.gov.it/temi/trasporti/motorizzazione', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         targa: targa(), telaio: telaio(),

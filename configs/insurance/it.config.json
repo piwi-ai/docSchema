@@ -34,7 +34,7 @@
           "codiceFiscaleContraente": {
             "type": "string",
             "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
           },
           "targa": {
             "type": "string",
@@ -131,7 +131,7 @@
               "codiceFiscale": {
                 "type": "string",
                 "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
               },
               "dataNascita": {
                 "type": "string",
@@ -207,7 +207,7 @@
               "codiceFiscale": {
                 "type": "string",
                 "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
               },
               "dataNascita": {
                 "type": "string",
@@ -291,7 +291,7 @@
               "codiceFiscale": {
                 "type": "string",
                 "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
               },
               "indirizzo": {
                 "type": "string",
@@ -321,7 +321,7 @@
                 "codiceFiscale": {
                   "type": "string",
                   "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-                  "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                  "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
                 },
                 "relazione": {
                   "type": "string",
@@ -418,7 +418,7 @@
               "codiceFiscale": {
                 "type": "string",
                 "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
               },
               "compagnia": {
                 "type": "string",
@@ -544,7 +544,7 @@
           "codiceFiscale": {
             "type": "string",
             "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
           },
           "tipoDocumento": {
             "type": "string",
@@ -690,6 +690,13 @@
       "id": "doc-disdetta",
       "name": "Lettera di Disdetta",
       "description": "Comunicazione di disdetta della polizza assicurativa",
+      "references": [
+        {
+          "title": "Codice delle Assicurazioni Private — D.Lgs. 209/2005 Art. 172",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-07;209",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -700,7 +707,7 @@
           "codiceFiscaleMittente": {
             "type": "string",
             "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
           },
           "destinatario": {
             "type": "string",
@@ -796,7 +803,7 @@
           "codiceFiscaleIntestatario": {
             "type": "string",
             "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
           }
         },
         "required": [
@@ -949,7 +956,7 @@
               "codiceFiscale": {
                 "type": "string",
                 "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
               },
               "indirizzo": {
                 "type": "string",
@@ -976,7 +983,7 @@
               "codiceFiscale": {
                 "type": "string",
                 "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
               }
             },
             "required": [
@@ -1039,6 +1046,13 @@
       "id": "doc-quietanza",
       "name": "Quietanza di Premio",
       "description": "Ricevuta di pagamento del premio assicurativo",
+      "references": [
+        {
+          "title": "IVASS — Regolamento n. 40/2018 (Obblighi informativi)",
+          "url": "https://www.ivass.it/normativa/nazionale/secondaria-ivass/regolamenti/2018/n40/index.html",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -1084,6 +1098,13 @@
       "id": "doc-scheda-fabbricato",
       "name": "Scheda Fabbricato / Immobile",
       "description": "Dati dell'immobile assicurato — per polizze casa/incendio",
+      "references": [
+        {
+          "title": "Fascicolo del Fabbricato — Ordine degli Ingegneri",
+          "url": "https://www.ordineingegneri.it/",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -1101,7 +1122,7 @@
               "codiceFiscale": {
                 "type": "string",
                 "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
               }
             },
             "required": [
@@ -1208,7 +1229,7 @@
           "codiceFiscale": {
             "type": "string",
             "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
           },
           "sesso": {
             "type": "string",
@@ -1257,6 +1278,13 @@
       "id": "doc-verbale-autorita",
       "name": "Verbale Autorità",
       "description": "Verbale di Polizia Stradale, Carabinieri o Polizia Municipale",
+      "references": [
+        {
+          "title": "Codice della Strada — D.Lgs. 285/1992 Art. 11",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:1992-04-30;285",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {

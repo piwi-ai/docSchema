@@ -6,15 +6,16 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, date, enumField, objectSchema, ref,
     nome, cognome, codiceFiscale, partitaIva,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const contrattoLavoro: DocumentTypeDef = {
     id: 'doc-contratto-lavoro',
     name: 'Contratto di Lavoro',
     description: 'Contratto di lavoro dipendente — CCNL, livello, RAL',
     references: [
-        ref('Ministero del Lavoro — Tipologie contrattuali', 'https://www.lavoro.gov.it/temi-e-priorita/rapporti-di-lavoro-e-relazioni-industriali/focus-on/tipologie-contrattuali', 'regulation'),
-        ref('Archivio CCNL — CNEL', 'https://www.cnel.it/Archivio-Contratti', 'documentation'),
+        ref('Ministero del Lavoro — Tipologie contrattuali', 'https://www.lavoro.gov.it/temi-e-priorita/rapporti-di-lavoro-e-relazioni-industriali/focus-on/tipologie-contrattuali', ReferenceType.REGULATION),
+        ref('Archivio CCNL — CNEL', 'https://www.cnel.it/Archivio-Contratti', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         datore: objectSchema({

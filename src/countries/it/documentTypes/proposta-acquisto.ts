@@ -6,7 +6,8 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, objectSchema, arrayOfObjects, ref,
     nome, cognome, codiceFiscale, statoCivile,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 const semplicePersonaProps = { nome: nome(), cognome: cognome(), codiceFiscale: codiceFiscale(), statoCivile: statoCivile() };
 const semplicePersonaReq = ['nome', 'cognome', 'codiceFiscale'];
@@ -16,7 +17,7 @@ export const propostaAcquisto: DocumentTypeDef = {
     name: 'Proposta di Acquisto',
     description: 'Proposta irrevocabile d\'acquisto',
     references: [
-        ref('Art. 1326 Codice Civile — Proposta e accettazione', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1326', 'regulation'),
+        ref('Art. 1326 Codice Civile — Proposta e accettazione', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1326', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         proponenti: arrayOfObjects(semplicePersonaProps, semplicePersonaReq, 'Elenco di tutti i proponenti/acquirenti nella proposta'),

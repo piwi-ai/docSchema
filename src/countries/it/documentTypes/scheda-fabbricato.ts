@@ -6,12 +6,20 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, enumField, objectSchema,
     nome, cognome, codiceFiscale,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const schedaFabbricato: DocumentTypeDef = {
     id: 'doc-scheda-fabbricato',
     name: 'Scheda Fabbricato / Immobile',
     description: "Dati dell'immobile assicurato — per polizze casa/incendio",
+    references: [
+        {
+            title: 'Fascicolo del Fabbricato — Ordine degli Ingegneri',
+            url: 'https://www.ordineingegneri.it/',
+            type: ReferenceType.DOCUMENTATION,
+        },
+    ],
     jsonSchema: objectSchema({
         proprietario: objectSchema({
             nome: nome(), cognome: cognome(), codiceFiscale: codiceFiscale(),

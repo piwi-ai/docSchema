@@ -6,15 +6,16 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, objectSchema, arrayOfObjects, ref,
     codiceFiscale,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const dichiarazioneSuccessione: DocumentTypeDef = {
     id: 'doc-successione',
     name: 'Dichiarazione di Successione',
     description: "Denuncia di successione presentata all'Agenzia delle Entrate, richiesta quando l'immobile proviene da eredità",
     references: [
-        ref('Agenzia delle Entrate — Dichiarazione di Successione', 'https://www.agenziaentrate.gov.it/portale/web/guest/schede/dichiarazioni/dichiarazione-di-successione', 'documentation'),
-        ref('D.Lgs. 346/1990 — Imposta sulle successioni', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:1990-10-31;346', 'regulation'),
+        ref('Agenzia delle Entrate — Dichiarazione di Successione', 'https://www.agenziaentrate.gov.it/portale/web/guest/schede/dichiarazioni/dichiarazione-di-successione', ReferenceType.DOCUMENTATION),
+        ref('D.Lgs. 346/1990 — Imposta sulle successioni', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:1990-10-31;346', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         defunto: text('Nome e cognome del defunto'),

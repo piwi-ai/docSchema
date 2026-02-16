@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, objectSchema, ref,
     nome, cognome, codiceFiscale,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const bustaPaga: DocumentTypeDef = {
     id: 'doc-busta-paga',
     name: 'Busta Paga / Cedolino',
     description: 'Cedolino paga mensile — lordo, netto, ritenute, contributi',
     references: [
-        ref('INPS — Contributi e aliquote', 'https://www.inps.it/it/it/dettaglio-scheda.schede-servizio-strumento.schede-servizi.contribuzione-obbligatoria-50498.contribuzione-obbligatoria.html', 'documentation'),
+        ref('INPS — Contributi e aliquote', 'https://www.inps.it/it/it/dettaglio-scheda.schede-servizio-strumento.schede-servizi.contribuzione-obbligatoria-50498.contribuzione-obbligatoria.html', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         datore: text('Denominazione del datore di lavoro'),

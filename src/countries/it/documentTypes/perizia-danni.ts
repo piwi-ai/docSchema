@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, date, enumField, objectSchema, ref,
     targa,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const periziaDanni: DocumentTypeDef = {
     id: 'doc-perizia-danni',
     name: 'Perizia Danni',
     description: 'Perizia tecnica dei danni — importo, descrizione danni, perito',
     references: [
-        ref('Art. 148 Codice delle Assicurazioni — Perizia', 'https://www.ivass.it/normativa/nazionale/primaria/index.html', 'regulation'),
+        ref('Art. 148 Codice delle Assicurazioni — Perizia', 'https://www.ivass.it/normativa/nazionale/primaria/index.html', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         numeroSinistro: text('Numero sinistro di riferimento'),

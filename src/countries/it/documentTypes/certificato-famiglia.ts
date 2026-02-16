@@ -6,7 +6,8 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, objectSchema, arrayOfObjects, ref,
     codiceFiscale,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 const RELAZIONE_FAMILIARE_DESC = 'Relazione familiare (es. intestatario, coniuge, convivente, figlio/a, padre, madre, fratello/sorella, nipote)';
 
@@ -15,7 +16,7 @@ export const certificatoFamiglia: DocumentTypeDef = {
     name: 'Certificato di Stato di Famiglia',
     description: 'Certificato anagrafico che attesta la composizione del nucleo familiare, utile per verifiche sul regime patrimoniale',
     references: [
-        ref('Ministero dell\'Interno — Servizi demografici', 'https://dait.interno.gov.it/servizi-demografici', 'documentation'),
+        ref('Ministero dell\'Interno — Servizi demografici', 'https://dait.interno.gov.it/servizi-demografici', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         intestatario: text("Nome e cognome dell'intestatario del nucleo familiare"),

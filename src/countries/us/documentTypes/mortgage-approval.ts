@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, dateUS, enumField, objectSchema, ref,
     currency, address,
-} from '../../../helpers/us.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const mortgageApproval: DocumentTypeDef = {
     id: 'doc-mortgage-approval',
     name: 'Mortgage Approval / Commitment Letter',
     description: 'Lender commitment or pre-approval letter for mortgage financing',
     references: [
-        ref('CFPB — Loan Estimate Explainer', 'https://www.consumerfinance.gov/owning-a-home/loan-estimate/', 'documentation'),
+        ref('CFPB — Loan Estimate Explainer', 'https://www.consumerfinance.gov/owning-a-home/loan-estimate/', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         lender: text('Lender / bank name'),

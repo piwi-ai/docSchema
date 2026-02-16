@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, date, objectSchema, ref,
     nome, cognome, codiceFiscale,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const certificatoMedico: DocumentTypeDef = {
     id: 'doc-certificato-medico',
     name: 'Certificato Medico',
     description: 'Certificato medico per lesioni da sinistro o infortunio coperto da polizza',
     references: [
-        ref('Art. 139 Codice delle Assicurazioni — Danno biologico', 'https://www.ivass.it/normativa/nazionale/primaria/index.html', 'regulation'),
+        ref('Art. 139 Codice delle Assicurazioni — Danno biologico', 'https://www.ivass.it/normativa/nazionale/primaria/index.html', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         paziente: objectSchema({

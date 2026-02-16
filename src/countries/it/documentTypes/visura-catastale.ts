@@ -6,8 +6,9 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, enumField, objectSchema, arrayOfObjects, ref,
     nome, cognome, codiceFiscale,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
 import { CATEGORIA_CATASTALE_VALUES } from './atto-provenienza.js';
+import { ReferenceType } from '../../../constants.js';
 
 const VISURA_LUOGO_DESC = "Città e dopo inserisci la sigla della provincia calcolata così:  Se la città è una di queste usa la sua sigla: Barletta-Andria-Trani (BT) Bolzano (BZ) Caltanissetta (CL) Campobasso (CB) Caserta (CE) Chieti (CH) Crotone (KR) Forlì-Cesena (FC) Lecco (LC) Mantova (MN) Massa-Carrara (MS) Messina (ME) Monza e della Brianza (MB) Parma (PR) Perugia (PG) Pesaro e Urbino (PU) Piacenza (PC) Pistoia (PT) Potenza (PZ) Ragusa (RG) Reggio Calabria (RC) Roma (RM) Siracusa (SR) Sud Sardegna (SU) Trapani (TP) Trieste (TS) Vibo Valentia (VV), se è un'altra città crea la sigla con le prime due lettere del nome della città, possono essere più intestati identificati da un numero progressivo, separali con il numero progressivo seguito da \\\\\"-\\\\\"";
 
@@ -16,8 +17,8 @@ export const visuraCatastale: DocumentTypeDef = {
     name: 'Visura Catastale',
     description: 'Stato attuale dell\'immobile in Catasto. Può essere un fabbricato (con categoria, rendita, consistenza) o un terreno (con qualità, classe, superficie, redditi).',
     references: [
-        ref('Agenzia delle Entrate — Consultazione dati catastali', 'https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/visura-catastale', 'documentation'),
-        ref('Sister — Servizi catastali online', 'https://sister.agenziaentrate.gov.it/', 'documentation'),
+        ref('Agenzia delle Entrate — Consultazione dati catastali', 'https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/visura-catastale', ReferenceType.DOCUMENTATION),
+        ref('Sister — Servizi catastali online', 'https://sister.agenziaentrate.gov.it/', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         foglio: text('Foglio catastale'),

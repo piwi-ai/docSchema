@@ -5,14 +5,15 @@
 import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, date, objectSchema, ref,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const periziaBancaria: DocumentTypeDef = {
     id: 'doc-perizia-bancaria',
     name: 'Perizia Bancaria',
     description: 'Perizia estimativa dell\'immobile richiesta dalla banca per la concessione del mutuo',
     references: [
-        ref('ABI — Linee guida valuazione immobiliare', 'https://www.abi.it/', 'specification'),
+        ref('ABI — Linee guida valuazione immobiliare', 'https://www.abi.it/', ReferenceType.SPECIFICATION),
     ],
     jsonSchema: objectSchema({
         perito: text('Nome e cognome del perito incaricato'),

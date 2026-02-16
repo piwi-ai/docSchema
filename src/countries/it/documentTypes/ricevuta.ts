@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, date, enumField, objectSchema, ref,
     partitaIva,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const ricevuta: DocumentTypeDef = {
     id: 'doc-ricevuta',
     name: 'Ricevuta / Scontrino',
     description: 'Ricevuta fiscale o scontrino per spese deducibili/detraibili',
     references: [
-        ref('Agenzia delle Entrate — Corrispettivi Telematici', 'https://www.agenziaentrate.gov.it/portale/web/guest/aree-tematiche/corrispettivi-telematici', 'documentation'),
+        ref('Agenzia delle Entrate — Corrispettivi Telematici', 'https://www.agenziaentrate.gov.it/portale/web/guest/aree-tematiche/corrispettivi-telematici', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         data: date('Data della ricevuta/scontrino'),

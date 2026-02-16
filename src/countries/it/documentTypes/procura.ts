@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, enumField, objectSchema, ref,
     nome, cognome, codiceFiscale,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const procura: DocumentTypeDef = {
     id: 'doc-procura',
     name: 'Procura',
     description: 'Atto notarile che conferisce il potere di rappresentanza per compiere atti per conto di un\'altra persona',
     references: [
-        ref('Art. 1392 Codice Civile — Forma della procura', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1392', 'regulation'),
+        ref('Art. 1392 Codice Civile — Forma della procura', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1392', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         nomeMandante: nome(), cognomeMandante: cognome(),

@@ -230,6 +230,13 @@
       "id": "doc-contact",
       "name": "Contact Information",
       "description": "Phone, email, and mailing address for a party",
+      "references": [
+        {
+          "title": "FTC — Privacy and Data Security",
+          "url": "https://www.ftc.gov/business-guidance/privacy-security",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {

@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, enumField, objectSchema, ref,
     nome, cognome, codiceFiscale, partitaIva,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const redditiPf: DocumentTypeDef = {
     id: 'doc-redditi-pf',
     name: 'Modello Redditi PF',
     description: 'Dichiarazione dei redditi per persone fisiche con P.IVA o redditi complessi',
     references: [
-        ref('Agenzia delle Entrate — Modello Redditi PF', 'https://www.agenziaentrate.gov.it/portale/web/guest/modello-redditi-pf', 'documentation'),
+        ref('Agenzia delle Entrate — Modello Redditi PF', 'https://www.agenziaentrate.gov.it/portale/web/guest/modello-redditi-pf', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         anno: num('Anno fiscale di riferimento'),

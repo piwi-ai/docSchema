@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, objectSchema, arrayOfObjects, ref,
     nome, cognome, codiceFiscale,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const statoFamiglia: DocumentTypeDef = {
     id: 'doc-stato-famiglia',
     name: 'Certificato Stato Famiglia',
     description: 'Certificato stato di famiglia — per polizze vita e beneficiari',
     references: [
-        ref('Ministero dell\'Interno — Servizi demografici', 'https://dait.interno.gov.it/servizi-demografici', 'documentation'),
+        ref('Ministero dell\'Interno — Servizi demografici', 'https://dait.interno.gov.it/servizi-demografici', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         intestatario: objectSchema({

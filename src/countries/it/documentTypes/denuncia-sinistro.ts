@@ -6,15 +6,16 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, enumField, objectSchema, ref,
     codiceFiscale, targa,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const denunciaSinistro: DocumentTypeDef = {
     id: 'doc-denuncia-sinistro',
     name: 'Denuncia Sinistro / CID',
     description: 'Constatazione amichevole (CAI/CID) o denuncia sinistro — dinamica, danni, veicoli',
     references: [
-        ref('ANIA — Modulo CAI/CID', 'https://www.ania.it/it/sala-stampa/focus-on/focus-on-constatazione-amichevole-incidente', 'documentation'),
-        ref('Art. 143 Codice delle Assicurazioni — Denuncia sinistro', 'https://www.ivass.it/normativa/nazionale/primaria/index.html', 'regulation'),
+        ref('ANIA — Modulo CAI/CID', 'https://www.ania.it/it/sala-stampa/focus-on/focus-on-constatazione-amichevole-incidente', ReferenceType.DOCUMENTATION),
+        ref('Art. 143 Codice delle Assicurazioni — Denuncia sinistro', 'https://www.ivass.it/normativa/nazionale/primaria/index.html', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         numeroSinistro: text('Numero sinistro assegnato dalla compagnia (se già presente)'),

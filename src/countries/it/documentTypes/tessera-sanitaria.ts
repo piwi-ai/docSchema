@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, enumField, objectSchema, ref,
     nome, cognome, codiceFiscale,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const tesseraSanitaria: DocumentTypeDef = {
     id: 'doc-tessera-sanitaria',
     name: 'Tessera Sanitaria',
     description: 'Tessera sanitaria / Codice Fiscale — conferma CF e dati anagrafici',
     references: [
-        ref('Agenzia delle Entrate — Tessera Sanitaria', 'https://sistemats1.sanita.finanze.it/portale/tessera-sanitaria', 'documentation'),
+        ref('Agenzia delle Entrate — Tessera Sanitaria', 'https://sistemats1.sanita.finanze.it/portale/tessera-sanitaria', ReferenceType.DOCUMENTATION),
     ],
     isArrayExtraction: true,
     jsonSchema: objectSchema({

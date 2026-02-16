@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, date, enumField, objectSchema, ref,
     targa,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const revisione: DocumentTypeDef = {
     id: 'doc-revisione',
     name: 'Certificato di Revisione',
     description: 'Esito della revisione ministeriale del veicolo',
     references: [
-        ref('Portale dell\'Automobilista — Revisione', 'https://www.ilportaledellautomobilista.it/web/portale-automobilista/revisioni', 'documentation'),
+        ref('Portale dell\'Automobilista — Revisione', 'https://www.ilportaledellautomobilista.it/web/portale-automobilista/revisioni', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         targa: targa(),

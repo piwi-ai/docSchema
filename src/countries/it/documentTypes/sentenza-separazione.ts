@@ -5,14 +5,15 @@
 import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, enumField, objectSchema, ref,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const sentenzaSeparazione: DocumentTypeDef = {
     id: 'doc-separazione',
     name: 'Sentenza di Separazione/Divorzio',
     description: 'Provvedimento giudiziario di separazione legale o divorzio, rilevante per la determinazione dei diritti patrimoniali sull\'immobile',
     references: [
-        ref('Art. 150–158 Codice Civile — Separazione', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art150', 'regulation'),
+        ref('Art. 150–158 Codice Civile — Separazione', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art150', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         tribunale: text('Tribunale competente che ha emesso la sentenza'),

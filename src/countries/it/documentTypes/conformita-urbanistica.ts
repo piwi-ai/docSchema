@@ -5,14 +5,15 @@
 import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, objectSchema, ref,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const conformitaUrbanistica: DocumentTypeDef = {
     id: 'doc-conformita-urbanistica',
     name: 'Conformità Urbanistica ed Edilizia',
     description: 'Relazione tecnica che attesta la corrispondenza tra lo stato di fatto dell\'immobile e i titoli abilitativi depositati in Comune',
     references: [
-        ref('D.P.R. 380/2001 — Testo Unico Edilizia', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:2001-06-06;380', 'regulation'),
+        ref('D.P.R. 380/2001 — Testo Unico Edilizia', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:2001-06-06;380', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         tecnico: text('Nome del tecnico abilitato (architetto, ingegnere, geometra)'),

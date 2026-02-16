@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, date, enumField, objectSchema, ref,
     codiceFiscale,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const deliberaMutuo: DocumentTypeDef = {
     id: 'doc-delibera-mutuo',
     name: 'Delibera di Mutuo',
     description: 'Lettera di delibera della banca che conferma l\'approvazione del mutuo ipotecario',
     references: [
-        ref('Banca d\'Italia — Trasparenza bancaria', 'https://www.bancaditalia.it/compiti/vigilanza/normativa/archivio-norme/disposizioni/trasparenza/index.html', 'regulation'),
+        ref('Banca d\'Italia — Trasparenza bancaria', 'https://www.bancaditalia.it/compiti/vigilanza/normativa/archivio-norme/disposizioni/trasparenza/index.html', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         banca: text('Nome della banca o istituto di credito'),

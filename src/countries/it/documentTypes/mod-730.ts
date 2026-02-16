@@ -6,15 +6,16 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, date, enumField, objectSchema, arrayOfObjects, ref,
     nome, cognome, codiceFiscale,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const mod730: DocumentTypeDef = {
     id: 'doc-730',
     name: 'Modello 730',
     description: 'Dichiarazione dei redditi semplificata per lavoratori dipendenti e pensionati',
     references: [
-        ref('Agenzia delle Entrate — Modello 730', 'https://www.agenziaentrate.gov.it/portale/web/guest/modello-730', 'documentation'),
-        ref('Istruzioni 730 (PDF)', 'https://www.agenziaentrate.gov.it/portale/web/guest/modello-730/istruzioni-modello-730', 'specification'),
+        ref('Agenzia delle Entrate — Modello 730', 'https://www.agenziaentrate.gov.it/portale/web/guest/modello-730', ReferenceType.DOCUMENTATION),
+        ref('Istruzioni 730 (PDF)', 'https://www.agenziaentrate.gov.it/portale/web/guest/modello-730/istruzioni-modello-730', ReferenceType.SPECIFICATION),
     ],
     jsonSchema: objectSchema({
         anno: num('Anno fiscale di riferimento'),

@@ -6,15 +6,16 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, dateUS, enumField, objectSchema, ref,
     firstName, lastName, ssn, currency, address,
-} from '../../../helpers/us.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const mortgageApplication: DocumentTypeDef = {
     id: 'doc-mortgage-application',
     name: 'Mortgage Application (1003)',
     description: 'Uniform Residential Loan Application (URLA / 1003)',
     references: [
-        ref('Fannie Mae Form 1003 — URLA', 'https://singlefamily.fanniemae.com/originating-underwriting/uniform-residential-loan-application', 'specification'),
-        ref('CFPB — Applying for a Mortgage', 'https://www.consumerfinance.gov/owning-a-home/process/apply/', 'documentation'),
+        ref('Fannie Mae Form 1003 — URLA', 'https://singlefamily.fanniemae.com/originating-underwriting/uniform-residential-loan-application', ReferenceType.SPECIFICATION),
+        ref('CFPB — Applying for a Mortgage', 'https://www.consumerfinance.gov/owning-a-home/process/apply/', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         borrower: objectSchema({

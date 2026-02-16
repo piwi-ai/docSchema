@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, objectSchema, ref,
     nome, cognome, codiceFiscale,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const certificatoResidenza: DocumentTypeDef = {
     id: 'doc-residenza',
     name: 'Certificato di Residenza',
     description: 'Certificato anagrafico che attesta la residenza attuale, richiesto quando l\'indirizzo sull\'identità differisce dalla residenza corrente',
     references: [
-        ref('ANPR — Anagrafe Nazionale Popolazione Residente', 'https://www.anagrafenazionale.interno.it/', 'documentation'),
+        ref('ANPR — Anagrafe Nazionale Popolazione Residente', 'https://www.anagrafenazionale.interno.it/', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         nome: nome(),

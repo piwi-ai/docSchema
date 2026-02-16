@@ -6,12 +6,20 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, objectSchema,
     firstName, lastName, address,
-} from '../../../helpers/us.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const contact: DocumentTypeDef = {
     id: 'doc-contact',
     name: 'Contact Information',
     description: 'Phone, email, and mailing address for a party',
+    references: [
+        {
+            title: 'FTC — Privacy and Data Security',
+            url: 'https://www.ftc.gov/business-guidance/privacy-security',
+            type: ReferenceType.DOCUMENTATION,
+        },
+    ],
     jsonSchema: objectSchema({
         firstName: firstName(), lastName: lastName(),
         phone: text('Primary phone number'),

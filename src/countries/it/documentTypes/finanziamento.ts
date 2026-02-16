@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, objectSchema, ref,
     codiceFiscale, targa,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const finanziamento: DocumentTypeDef = {
     id: 'doc-finanziamento',
     name: 'Contratto di Finanziamento',
     description: 'Contratto di finanziamento per acquisto veicolo (prestito, leasing)',
     references: [
-        ref('Banca d\'Italia — Credito ai consumatori', 'https://www.bancaditalia.it/compiti/vigilanza/normativa/archivio-norme/disposizioni/trasparenza/index.html', 'regulation'),
+        ref('Banca d\'Italia — Credito ai consumatori', 'https://www.bancaditalia.it/compiti/vigilanza/normativa/archivio-norme/disposizioni/trasparenza/index.html', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         finanziaria: text('Nome della finanziaria / banca'),

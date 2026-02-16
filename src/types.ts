@@ -15,7 +15,7 @@ export interface DocumentReference {
     /** Full URL to the reference */
     url: string;
     /** Content type hint for UI rendering */
-    type?: 'documentation' | 'schema' | 'regulation' | 'specification';
+    type?: import('./constants.js').ReferenceType;
 }
 
 /**

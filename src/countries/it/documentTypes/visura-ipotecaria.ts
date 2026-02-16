@@ -5,7 +5,8 @@
 import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, objectSchema, arrayOfObjects, ref,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 const TIPO_FORMALITA_DESC = 'Tipo di formalità (es. compravendita, ipoteca volontaria, ipoteca giudiziale, ipoteca legale, pignoramento, sequestro conservativo, successione ereditaria, donazione, trascrizione, servitù, cancellazione, annotazione)';
 
@@ -14,8 +15,8 @@ export const visuraIpotecaria: DocumentTypeDef = {
     name: 'Visura Ipotecaria',
     description: 'Ispezione ipotecaria che riporta la situazione giuridica dell\'immobile: proprietà, ipoteche, pignoramenti e vincoli',
     references: [
-        ref('Agenzia delle Entrate — Ispezione ipotecaria', 'https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/ispezione-ipotecaria', 'documentation'),
-        ref('Conservatoria dei Registri Immobiliari', 'https://sister.agenziaentrate.gov.it/', 'documentation'),
+        ref('Agenzia delle Entrate — Ispezione ipotecaria', 'https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/ispezione-ipotecaria', ReferenceType.DOCUMENTATION),
+        ref('Conservatoria dei Registri Immobiliari', 'https://sister.agenziaentrate.gov.it/', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         tipoFormalita: text(TIPO_FORMALITA_DESC),

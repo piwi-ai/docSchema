@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, date, objectSchema, ref,
     nome, cognome, codiceFiscale, statoCivile, targa, telaio,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const attoVendita: DocumentTypeDef = {
     id: 'doc-atto-vendita',
     name: 'Atto di Vendita / Passaggio di Proprietà',
     description: 'Contratto di compravendita veicolo con dati delle parti e del veicolo',
     references: [
-        ref('ACI — Passaggio di proprietà', 'https://www.aci.it/i-servizi/guide-utili/guida-pratiche-auto/passaggio-di-proprieta.html', 'documentation'),
+        ref('ACI — Passaggio di proprietà', 'https://www.aci.it/i-servizi/guide-utili/guida-pratiche-auto/passaggio-di-proprieta.html', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         venditore: objectSchema({

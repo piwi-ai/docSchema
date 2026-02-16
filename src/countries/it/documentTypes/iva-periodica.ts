@@ -6,15 +6,16 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, objectSchema, ref,
     partitaIva,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const ivaPeriodica: DocumentTypeDef = {
     id: 'doc-iva-periodica',
     name: 'Liquidazione IVA Periodica',
     description: 'Comunicazione liquidazione periodica IVA — mensile o trimestrale',
     references: [
-        ref('Agenzia delle Entrate — Liquidazioni IVA', 'https://www.agenziaentrate.gov.it/portale/web/guest/schede/comunicazioni/lipe-liquidazioni-periodiche-iva', 'documentation'),
-        ref('Specifiche tecniche LIPE (XML)', 'https://www.agenziaentrate.gov.it/portale/web/guest/schede/comunicazioni/lipe-liquidazioni-periodiche-iva/sw-compilazione-e-controllo-lipe', 'schema'),
+        ref('Agenzia delle Entrate — Liquidazioni IVA', 'https://www.agenziaentrate.gov.it/portale/web/guest/schede/comunicazioni/lipe-liquidazioni-periodiche-iva', ReferenceType.DOCUMENTATION),
+        ref('Specifiche tecniche LIPE (XML)', 'https://www.agenziaentrate.gov.it/portale/web/guest/schede/comunicazioni/lipe-liquidazioni-periodiche-iva/sw-compilazione-e-controllo-lipe', ReferenceType.SCHEMA),
     ],
     jsonSchema: objectSchema({
         contribuente: objectSchema({

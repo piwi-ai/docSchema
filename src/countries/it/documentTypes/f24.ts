@@ -5,15 +5,16 @@
 import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, date, objectSchema, arrayOfObjects, ref,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const f24: DocumentTypeDef = {
     id: 'doc-f24',
     name: 'Modello F24',
     description: 'Modello di pagamento unificato per imposte, contributi e premi',
     references: [
-        ref('Agenzia delle Entrate — Modello F24', 'https://www.agenziaentrate.gov.it/portale/web/guest/schede/pagamenti/f24', 'documentation'),
-        ref('Tabella codici tributo', 'https://www.agenziaentrate.gov.it/portale/web/guest/codici-tributo', 'specification'),
+        ref('Agenzia delle Entrate — Modello F24', 'https://www.agenziaentrate.gov.it/portale/web/guest/schede/pagamenti/f24', ReferenceType.DOCUMENTATION),
+        ref('Tabella codici tributo', 'https://www.agenziaentrate.gov.it/portale/web/guest/codici-tributo', ReferenceType.SPECIFICATION),
     ],
     jsonSchema: objectSchema({
         contribuente: objectSchema({
