@@ -1,0 +1,102 @@
+{
+  "id": "doc-residence-permit",
+  "name": "Residence Permit",
+  "description": "Residence Permit — Sweden",
+  "references": [
+    {
+      "title": "Migrationsverket",
+      "url": "https://www.migrationsverket.se/English/Private-individuals.html",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Förnamn"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Efternamn"
+      },
+      "permitNumber": {
+        "type": "string",
+        "description": "Permit number"
+      },
+      "permitType": {
+        "type": "string",
+        "description": "Permit type",
+        "enum": [
+          "Temporary",
+          "Permanent",
+          "Long-term",
+          "Student",
+          "Work",
+          "Family",
+          null
+        ],
+        "nullable": true
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Medborgarskap"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Födelsedatum",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Födelseort"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Kön",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Utfärdandedatum",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Giltighetstid",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Utfärdande myndighet"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Adress"
+      },
+      "remarks": {
+        "type": "string",
+        "description": "Remarks / Annotations"
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "permitNumber",
+      "permitType",
+      "nationality",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

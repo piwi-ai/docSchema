@@ -1,0 +1,61 @@
+{
+  "id": "doc-conformita-urbanistica",
+  "name": "Conformità Urbanistica ed Edilizia",
+  "description": "Relazione tecnica che attesta la corrispondenza tra lo stato di fatto dell'immobile e i titoli abilitativi depositati in Comune",
+  "references": [
+    {
+      "title": "D.P.R. 380/2001 — Testo Unico Edilizia",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:2001-06-06;380",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "tecnico": {
+        "type": "string",
+        "description": "Nome del tecnico abilitato (architetto, ingegnere, geometra)"
+      },
+      "dataRelazione": {
+        "type": "string",
+        "description": "Data della relazione in formato europeo DD.MM.YYYY",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "indirizzo": {
+        "type": "string",
+        "description": "Indirizzo completo dell'immobile"
+      },
+      "foglio": {
+        "type": "string"
+      },
+      "particella": {
+        "type": "string"
+      },
+      "subalterno": {
+        "type": "string"
+      },
+      "titoliAbilitativi": {
+        "type": "string",
+        "description": "Elenco dei titoli edilizi (licenza edilizia, concessione, permesso di costruire, SCIA, CILA)"
+      },
+      "esito": {
+        "type": "string",
+        "description": "Esito della verifica (es. conforme, non conforme, conforme con riserva, conforme con prescrizioni)"
+      },
+      "difformita": {
+        "type": "string",
+        "description": "Descrizione di eventuali difformità riscontrate — copiare TESTUALMENTE dal documento"
+      },
+      "condoni": {
+        "type": "string",
+        "description": "Eventuali domande di condono edilizio presentate — copiare TESTUALMENTE dal documento"
+      }
+    },
+    "required": [
+      "tecnico",
+      "dataRelazione",
+      "indirizzo",
+      "esito"
+    ]
+  }
+}

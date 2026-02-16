@@ -3,10 +3,7 @@
  * Used by: car-dealership.
  */
 import type { DocumentTypeDef } from '../../../types.js';
-import {
-    text, num, date, enumField, objectSchema,
-    targa,
-} from '../helpers.js';
+import { text, num, date, enumField, objectSchema, targa } from '../helpers.js';
 import { ReferenceType } from '../../../constants.js';
 
 export const garanzia: DocumentTypeDef = {
@@ -20,13 +17,16 @@ export const garanzia: DocumentTypeDef = {
             type: ReferenceType.REGULATION,
         },
     ],
-    jsonSchema: objectSchema({
-        tipoGaranzia: enumField('Tipo garanzia', ['legale', 'convenzionale', 'estesa']),
-        durataMesi: num('Durata garanzia in mesi'),
-        kmLimite: num('Limite chilometrico della garanzia'),
-        copertura: text('Descrizione della copertura (motore, cambio, elettronica, ecc.)'),
-        esclusioni: text('Eventuali esclusioni dalla garanzia'),
-        targa: targa(),
-        dataDecorrenza: date('Data decorrenza garanzia'),
-    }, ['tipoGaranzia', 'durataMesi', 'targa']),
+    jsonSchema: objectSchema(
+        {
+            tipoGaranzia: enumField('Tipo garanzia', ['legale', 'convenzionale', 'estesa']),
+            durataMesi: num('Durata garanzia in mesi'),
+            kmLimite: num('Limite chilometrico della garanzia'),
+            copertura: text('Descrizione della copertura (motore, cambio, elettronica, ecc.)'),
+            esclusioni: text('Eventuali esclusioni dalla garanzia'),
+            targa: targa(),
+            dataDecorrenza: date('Data decorrenza garanzia'),
+        },
+        ['tipoGaranzia', 'durataMesi', 'targa'],
+    ),
 };

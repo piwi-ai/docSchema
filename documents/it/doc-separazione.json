@@ -1,0 +1,65 @@
+{
+  "id": "doc-separazione",
+  "name": "Sentenza di Separazione/Divorzio",
+  "description": "Provvedimento giudiziario di separazione legale o divorzio, rilevante per la determinazione dei diritti patrimoniali sull'immobile",
+  "references": [
+    {
+      "title": "Art. 150–158 Codice Civile — Separazione",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art150",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "tribunale": {
+        "type": "string",
+        "description": "Tribunale competente che ha emesso la sentenza"
+      },
+      "numeroSentenza": {
+        "type": "string",
+        "description": "Numero di ruolo/sentenza"
+      },
+      "dataSentenza": {
+        "type": "string",
+        "description": "Data della sentenza in formato europeo DD.MM.YYYY",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "coniuge1": {
+        "type": "string",
+        "description": "Nome e cognome del primo coniuge"
+      },
+      "coniuge2": {
+        "type": "string",
+        "description": "Nome e cognome del secondo coniuge"
+      },
+      "tipoProvvedimento": {
+        "type": "string",
+        "description": "Tipo di provvedimento",
+        "enum": [
+          "separazione consensuale",
+          "separazione giudiziale",
+          "divorzio",
+          null
+        ],
+        "nullable": true
+      },
+      "disposizioniPatrimoniali": {
+        "type": "string",
+        "description": "Disposizioni relative ai beni immobili — copiare TESTUALMENTE dal documento, senza riformulare o riassumere (es. assegnazione casa coniugale)"
+      },
+      "passaggioInGiudicato": {
+        "type": "string",
+        "description": "Data di passaggio in giudicato in formato europeo DD.MM.YYYY",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      }
+    },
+    "required": [
+      "tribunale",
+      "dataSentenza",
+      "coniuge1",
+      "coniuge2",
+      "tipoProvvedimento"
+    ]
+  }
+}

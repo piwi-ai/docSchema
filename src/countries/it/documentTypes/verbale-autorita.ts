@@ -3,10 +3,7 @@
  * Used by: insurance.
  */
 import type { DocumentTypeDef } from '../../../types.js';
-import {
-    text, date, enumField, objectSchema, arrayOfObjects,
-    targa,
-} from '../helpers.js';
+import { text, date, enumField, objectSchema, arrayOfObjects, targa } from '../helpers.js';
 import { ReferenceType } from '../../../constants.js';
 
 export const verbaleAutorita: DocumentTypeDef = {
@@ -20,16 +17,24 @@ export const verbaleAutorita: DocumentTypeDef = {
             type: ReferenceType.REGULATION,
         },
     ],
-    jsonSchema: objectSchema({
-        autorita: text('Autorità che ha redatto il verbale'),
-        dataVerbale: date('Data del verbale'),
-        luogo: text("Luogo dell'intervento"),
-        numeroVerbale: text('Numero protocollo verbale'),
-        veicoliCoinvolti: arrayOfObjects({
-            targa: targa(), conducente: text('Nome e cognome del conducente'),
-        }, ['targa'], 'Veicoli coinvolti'),
-        contravvenzioni: text('Eventuali contravvenzioni contestate'),
-        rilievi: text("Rilievi e osservazioni dell'autorità — copia VERBATIM"),
-        feriti: enumField('Feriti segnalati', ['sì', 'no']),
-    }, ['autorita', 'dataVerbale', 'luogo']),
+    jsonSchema: objectSchema(
+        {
+            autorita: text('Autorità che ha redatto il verbale'),
+            dataVerbale: date('Data del verbale'),
+            luogo: text("Luogo dell'intervento"),
+            numeroVerbale: text('Numero protocollo verbale'),
+            veicoliCoinvolti: arrayOfObjects(
+                {
+                    targa: targa(),
+                    conducente: text('Nome e cognome del conducente'),
+                },
+                ['targa'],
+                'Veicoli coinvolti',
+            ),
+            contravvenzioni: text('Eventuali contravvenzioni contestate'),
+            rilievi: text("Rilievi e osservazioni dell'autorità — copia VERBATIM"),
+            feriti: enumField('Feriti segnalati', ['sì', 'no']),
+        },
+        ['autorita', 'dataVerbale', 'luogo'],
+    ),
 };

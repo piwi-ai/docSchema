@@ -176,10 +176,21 @@ export const DRIVERS_LICENSE_REQUIRED_FIELDS = [
 
 /** EU driving license categories per Directive 2006/126/EC */
 export const EU_LICENSE_CATEGORIES = [
-    'AM', 'A1', 'A2', 'A',
-    'B1', 'B', 'BE',
-    'C1', 'C1E', 'C', 'CE',
-    'D1', 'D1E', 'D', 'DE',
+    'AM',
+    'A1',
+    'A2',
+    'A',
+    'B1',
+    'B',
+    'BE',
+    'C1',
+    'C1E',
+    'C',
+    'CE',
+    'D1',
+    'D1E',
+    'D',
+    'DE',
 ];
 
 /**
@@ -213,6 +224,4 @@ export const RESIDENCE_PERMIT_REQUIRED_FIELDS = [
 ] as const;
 
 /** Common EU residence permit types */
-export const EU_PERMIT_TYPES = [
-    'Temporary', 'Permanent', 'Long-term', 'Student', 'Work', 'Family',
-];
+export const EU_PERMIT_TYPES = ['Temporary', 'Permanent', 'Long-term', 'Student', 'Work', 'Family'];

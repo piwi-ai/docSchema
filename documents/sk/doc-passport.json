@@ -1,0 +1,85 @@
+{
+  "id": "doc-passport",
+  "name": "Passport",
+  "description": "Passport — Slovakia",
+  "references": [
+    {
+      "title": "MINV — Cestovné pasy",
+      "url": "https://www.minv.sk/?cestovne-pasy",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Meno"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Priezvisko"
+      },
+      "passportNumber": {
+        "type": "string",
+        "description": "Passport number"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Štátna príslušnosť"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Dátum narodenia",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Miesto narodenia"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Pohlavie",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Dátum vydania",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Platnosť do",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Vydal"
+      },
+      "issuingCountry": {
+        "type": "string",
+        "description": "Issuing country / Code"
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "passportNumber",
+      "nationality",
+      "dateOfBirth",
+      "sex",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

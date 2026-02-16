@@ -1,0 +1,93 @@
+{
+  "id": "doc-identity-card",
+  "name": "Identity Document",
+  "description": "Identity document (ID Card, Passport, Driver License)",
+  "references": [
+    {
+      "title": "Ministry of Interior — ID Card",
+      "url": "https://www.mvcr.cz/mvcren/article/identity-cards.aspx",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Jméno"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Příjmení"
+      },
+      "personalId": {
+        "type": "string",
+        "description": "Personal ID number / Rodné číslo",
+        "pattern": "^\\d{6}/?\\d{3,4}$"
+      },
+      "documentType": {
+        "type": "string",
+        "description": "Document type / Typ dokumentu"
+      },
+      "documentNumber": {
+        "type": "string",
+        "description": "Document number / Číslo dokumentu"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Datum vydání",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Platnost do",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Vydal"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Místo narození"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Datum narození",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Adresa"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Státní příslušnost"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Pohlaví",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "personalId",
+      "documentType",
+      "documentNumber",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

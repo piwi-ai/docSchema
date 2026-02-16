@@ -1,0 +1,85 @@
+{
+  "id": "doc-passport",
+  "name": "Passport",
+  "description": "Passport — Slovenia",
+  "references": [
+    {
+      "title": "Gov.si — Potni list",
+      "url": "https://www.gov.si/teme/potni-list/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Ime"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Priimek"
+      },
+      "passportNumber": {
+        "type": "string",
+        "description": "Passport number"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Državljanstvo"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Datum rojstva",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Kraj rojstva"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Spol",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Datum izdaje",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Velja do",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Izdajatelj"
+      },
+      "issuingCountry": {
+        "type": "string",
+        "description": "Issuing country / Code"
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "passportNumber",
+      "nationality",
+      "dateOfBirth",
+      "sex",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

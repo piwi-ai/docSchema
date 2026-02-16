@@ -4,8 +4,15 @@
  */
 import type { DocumentTypeDef } from '../../../types.js';
 import {
-    text, num, date, enumField, objectSchema, arrayOfObjects, ref,
-    codiceFiscale, targa,
+    text,
+    num,
+    date,
+    enumField,
+    objectSchema,
+    arrayOfObjects,
+    ref,
+    codiceFiscale,
+    targa,
 } from '../helpers.js';
 import { ReferenceType } from '../../../constants.js';
 
@@ -14,23 +21,42 @@ export const attestatoRischio: DocumentTypeDef = {
     name: 'Attestato di Rischio',
     description: 'Attestato di rischio RCA — classe di merito, sinistri pregressi',
     references: [
-        ref('IVASS — Attestato di Rischio', 'https://www.ivass.it/consumatori/sos-assicurati/attestato-rischio/index.html', ReferenceType.DOCUMENTATION),
-        ref('Regolamento IVASS n. 9/2015', 'https://www.ivass.it/normativa/nazionale/secondaria-ivass/regolamenti/2015/n9/', ReferenceType.REGULATION),
+        ref(
+            'IVASS — Attestato di Rischio',
+            'https://www.ivass.it/consumatori/sos-assicurati/attestato-rischio/index.html',
+            ReferenceType.DOCUMENTATION,
+        ),
+        ref(
+            'Regolamento IVASS n. 9/2015',
+            'https://www.ivass.it/normativa/nazionale/secondaria-ivass/regolamenti/2015/n9/',
+            ReferenceType.REGULATION,
+        ),
     ],
-    jsonSchema: objectSchema({
-        compagnia: text('Compagnia assicurativa emittente'),
-        contraente: text('Nome e cognome del contraente'),
-        codiceFiscaleContraente: codiceFiscale(),
-        targa: targa(),
-        classeMeritoProvenienza: text('Classe di merito CU provenienza'),
-        classeMeritoAssegnazione: text('Classe di merito CU assegnazione'),
-        sinistri: arrayOfObjects({
-            anno: num('Anno del sinistro'),
-            responsabilita: enumField('Tipo responsabilità', ['principale', 'paritaria', 'nessuna']),
-            tipo: text('Tipo sinistro (cose, persone)'),
-            importo: num('Importo liquidato in Euro'),
-        }, ['anno', 'responsabilita'], 'Tabella sinistri ultimi 5 anni'),
-        anniAssicurazione: num('Anni di osservazione assicurativa'),
-        dataEmissione: date('Data emissione attestato'),
-    }, ['compagnia', 'contraente', 'targa', 'classeMeritoProvenienza', 'classeMeritoAssegnazione']),
+    jsonSchema: objectSchema(
+        {
+            compagnia: text('Compagnia assicurativa emittente'),
+            contraente: text('Nome e cognome del contraente'),
+            codiceFiscaleContraente: codiceFiscale(),
+            targa: targa(),
+            classeMeritoProvenienza: text('Classe di merito CU provenienza'),
+            classeMeritoAssegnazione: text('Classe di merito CU assegnazione'),
+            sinistri: arrayOfObjects(
+                {
+                    anno: num('Anno del sinistro'),
+                    responsabilita: enumField('Tipo responsabilità', [
+                        'principale',
+                        'paritaria',
+                        'nessuna',
+                    ]),
+                    tipo: text('Tipo sinistro (cose, persone)'),
+                    importo: num('Importo liquidato in Euro'),
+                },
+                ['anno', 'responsabilita'],
+                'Tabella sinistri ultimi 5 anni',
+            ),
+            anniAssicurazione: num('Anni di osservazione assicurativa'),
+            dataEmissione: date('Data emissione attestato'),
+        },
+        ['compagnia', 'contraente', 'targa', 'classeMeritoProvenienza', 'classeMeritoAssegnazione'],
+    ),
 };

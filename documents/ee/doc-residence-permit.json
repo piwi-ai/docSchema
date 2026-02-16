@@ -1,0 +1,102 @@
+{
+  "id": "doc-residence-permit",
+  "name": "Residence Permit",
+  "description": "Residence Permit — Estonia",
+  "references": [
+    {
+      "title": "PBGB — Residence",
+      "url": "https://www.politsei.ee/en/instructions/applying-for-a-residence-permit-for-a-third-country-national",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Eesnimi"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Perekonnanimi"
+      },
+      "permitNumber": {
+        "type": "string",
+        "description": "Permit number"
+      },
+      "permitType": {
+        "type": "string",
+        "description": "Permit type",
+        "enum": [
+          "Temporary",
+          "Permanent",
+          "Long-term",
+          "Student",
+          "Work",
+          "Family",
+          null
+        ],
+        "nullable": true
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Kodakondsus"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Sünniaeg",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Sünnikoht"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Sugu",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Väljaandmise kuupäev",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Kehtiv kuni",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Väljaandja"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Aadress"
+      },
+      "remarks": {
+        "type": "string",
+        "description": "Remarks / Annotations"
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "permitNumber",
+      "permitType",
+      "nationality",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

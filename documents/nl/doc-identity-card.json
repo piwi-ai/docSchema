@@ -1,0 +1,93 @@
+{
+  "id": "doc-identity-card",
+  "name": "Identity Document",
+  "description": "Identity document (ID Card, Passport, Driver License)",
+  "references": [
+    {
+      "title": "Rijksoverheid — Identiteitskaart",
+      "url": "https://www.rijksoverheid.nl/onderwerpen/paspoort-en-identiteitskaart/vraag-en-antwoord/wat-is-het-verschil-tussen-een-paspoort-en-een-identiteitskaart",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Voornamen"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Achternaam"
+      },
+      "personalId": {
+        "type": "string",
+        "description": "Personal ID number / BSN",
+        "pattern": "^\\d{9}$"
+      },
+      "documentType": {
+        "type": "string",
+        "description": "Document type / Soort document"
+      },
+      "documentNumber": {
+        "type": "string",
+        "description": "Document number / Documentnummer"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Datum van afgifte",
+        "pattern": "^\\d{2}-\\d{2}-\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Geldig tot",
+        "pattern": "^\\d{2}-\\d{2}-\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Autoriteit"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Geboorteplaats"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Geboortedatum",
+        "pattern": "^\\d{2}-\\d{2}-\\d{4}$"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Adres"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Nationaliteit"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Geslacht",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "personalId",
+      "documentType",
+      "documentNumber",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

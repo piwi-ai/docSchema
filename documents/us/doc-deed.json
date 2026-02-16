@@ -1,0 +1,102 @@
+{
+  "id": "doc-deed",
+  "name": "Deed",
+  "description": "Property deed — warranty deed, quitclaim deed, special warranty deed",
+  "references": [
+    {
+      "title": "ALTA — Deed Standards",
+      "url": "https://www.alta.org/",
+      "type": "specification"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "deedType": {
+        "type": "string",
+        "description": "Type of deed",
+        "enum": [
+          "General Warranty",
+          "Special Warranty",
+          "Quitclaim",
+          "Bargain and Sale",
+          "Grant Deed",
+          null
+        ],
+        "nullable": true
+      },
+      "grantor": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "description": "Full legal name of grantor (seller)"
+          },
+          "address": {
+            "type": "string",
+            "description": "Grantor's address"
+          }
+        },
+        "required": [
+          "fullName"
+        ]
+      },
+      "grantee": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "description": "Full legal name of grantee (buyer)"
+          },
+          "vestingType": {
+            "type": "string",
+            "description": "Vesting / How title is held (e.g. tenants in common, joint tenants)"
+          },
+          "address": {
+            "type": "string",
+            "description": "Grantee's address"
+          }
+        },
+        "required": [
+          "fullName"
+        ]
+      },
+      "legalDescription": {
+        "type": "string",
+        "description": "Full legal description of the property (metes and bounds, lot/block, or plat reference)"
+      },
+      "propertyAddress": {
+        "type": "string",
+        "description": "Property street address"
+      },
+      "parcelNumber": {
+        "type": "string",
+        "description": "Assessor Parcel Number (APN) or Tax ID number"
+      },
+      "consideration": {
+        "type": "number",
+        "description": "Consideration / purchase price (USD, numbers only, no dollar sign)"
+      },
+      "recordingDate": {
+        "type": "string",
+        "description": "Date deed was recorded",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "county": {
+        "type": "string",
+        "description": "County where deed is recorded"
+      },
+      "bookPage": {
+        "type": "string",
+        "description": "Recording book and page number (e.g. Book 1234, Page 567)"
+      }
+    },
+    "required": [
+      "deedType",
+      "grantor",
+      "grantee",
+      "legalDescription",
+      "propertyAddress"
+    ]
+  }
+}

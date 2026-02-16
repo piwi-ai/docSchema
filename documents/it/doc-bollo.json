@@ -1,0 +1,44 @@
+{
+  "id": "doc-bollo",
+  "name": "Attestazione Pagamento Bollo",
+  "description": "Ricevuta pagamento tassa automobilistica",
+  "references": [
+    {
+      "title": "ACI — Bollo Auto",
+      "url": "https://www.aci.it/i-servizi/servizi-online/bollo-auto.html",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "targa": {
+        "type": "string",
+        "description": "Numero di targa del veicolo (es. AB123CD)"
+      },
+      "anno": {
+        "type": "number",
+        "description": "Anno di riferimento del bollo"
+      },
+      "importo": {
+        "type": "number",
+        "description": "Importo pagato in Euro"
+      },
+      "dataScadenza": {
+        "type": "string",
+        "description": "Data scadenza del bollo",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "dataPagamento": {
+        "type": "string",
+        "description": "Data del pagamento",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      }
+    },
+    "required": [
+      "targa",
+      "anno",
+      "importo"
+    ]
+  }
+}

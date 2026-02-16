@@ -1,13 +1,13 @@
-import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
-import Landing from '../pages/Landing'
+import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import Landing from '../pages/Landing';
 
 function renderWithRouter() {
     return render(
         <MemoryRouter>
             <Landing />
-        </MemoryRouter>
+        </MemoryRouter>,
     );
 }
 
@@ -21,7 +21,7 @@ describe('Landing', () => {
         renderWithRouter();
         // Stats labels are inside .hero__stat-label spans
         const statLabels = document.querySelectorAll('.hero__stat-label');
-        const labels = Array.from(statLabels).map(el => el.textContent);
+        const labels = Array.from(statLabels).map((el) => el.textContent);
         expect(labels).toContain('Verticals');
         expect(labels).toContain('Document Types');
         expect(labels).toContain('Entity Types');
@@ -31,7 +31,7 @@ describe('Landing', () => {
     it('renders all three feature cards', () => {
         renderWithRouter();
         const titles = document.querySelectorAll('.feature-card__title');
-        const texts = Array.from(titles).map(el => el.textContent);
+        const texts = Array.from(titles).map((el) => el.textContent);
         expect(texts).toContain('Document Types');
         expect(texts).toContain('Entity Types');
         expect(texts).toContain('Conditional Logic');

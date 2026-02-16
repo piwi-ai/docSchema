@@ -8,10 +8,22 @@
  */
 import type { DocumentTypeDef } from '../../../types.js';
 import {
-    identita, tesseraSanitaria, contatto, procura, visuraCamerale,
-    librettoCircolazione, certificatoProprieta, visuraPra,
-    attoVendita, bollo, assicurazioneRca, revisione,
-    finanziamento, permuta, garanzia, schedaTecnica,
+    identita,
+    tesseraSanitaria,
+    contatto,
+    procura,
+    visuraCamerale,
+    librettoCircolazione,
+    certificatoProprieta,
+    visuraPra,
+    attoVendita,
+    bollo,
+    assicurazioneRca,
+    revisione,
+    finanziamento,
+    permuta,
+    garanzia,
+    schedaTecnica,
 } from '../../../countries/it/documentTypes/index.js';
 
 // ─── Document IDs ───────────────────────────────────────────────────────────

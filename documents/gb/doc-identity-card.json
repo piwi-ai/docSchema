@@ -1,0 +1,93 @@
+{
+  "id": "doc-identity-card",
+  "name": "Identity Document",
+  "description": "Identity document (ID Card, Passport, Driver License)",
+  "references": [
+    {
+      "title": "GOV.UK — Identity documents",
+      "url": "https://www.gov.uk/identity-checks-for-employers/accepted-documents",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Given name"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Surname"
+      },
+      "personalId": {
+        "type": "string",
+        "description": "Personal ID number / National Insurance Number",
+        "pattern": "^[A-Z]{2}\\d{6}[A-D]$"
+      },
+      "documentType": {
+        "type": "string",
+        "description": "Document type"
+      },
+      "documentNumber": {
+        "type": "string",
+        "description": "Document number"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "personalId",
+      "documentType",
+      "documentNumber",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

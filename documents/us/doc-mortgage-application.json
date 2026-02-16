@@ -1,0 +1,145 @@
+{
+  "id": "doc-mortgage-application",
+  "name": "Mortgage Application (1003)",
+  "description": "Uniform Residential Loan Application (URLA / 1003)",
+  "references": [
+    {
+      "title": "Fannie Mae Form 1003 — URLA",
+      "url": "https://singlefamily.fanniemae.com/originating-underwriting/uniform-residential-loan-application",
+      "type": "specification"
+    },
+    {
+      "title": "CFPB — Applying for a Mortgage",
+      "url": "https://www.consumerfinance.gov/owning-a-home/process/apply/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "borrower": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "First name (given name)"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Last name (surname / family name)"
+          },
+          "ssn": {
+            "type": "string",
+            "description": "Social Security Number — 9 digits, format XXX-XX-XXXX (extract with dashes)",
+            "pattern": "^\\d{3}-\\d{2}-\\d{4}$"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "description": "Date of birth",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+          },
+          "currentAddress": {
+            "type": "string",
+            "description": "Current address"
+          },
+          "employer": {
+            "type": "string",
+            "description": "Current employer name"
+          },
+          "jobTitle": {
+            "type": "string",
+            "description": "Job title / position"
+          },
+          "yearsEmployed": {
+            "type": "number",
+            "description": "Years at current employer"
+          },
+          "monthlyIncome": {
+            "type": "number",
+            "description": "Gross monthly income (USD, numbers only, no dollar sign)"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "ssn"
+        ]
+      },
+      "coBorrower": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "First name (given name)"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Last name (surname / family name)"
+          },
+          "ssn": {
+            "type": "string",
+            "description": "Social Security Number — 9 digits, format XXX-XX-XXXX (extract with dashes)",
+            "pattern": "^\\d{3}-\\d{2}-\\d{4}$"
+          },
+          "monthlyIncome": {
+            "type": "number",
+            "description": "Gross monthly income (USD, numbers only, no dollar sign)"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName"
+        ]
+      },
+      "propertyAddress": {
+        "type": "string",
+        "description": "Subject property address"
+      },
+      "loanAmount": {
+        "type": "number",
+        "description": "Requested loan amount (USD, numbers only, no dollar sign)"
+      },
+      "loanType": {
+        "type": "string",
+        "description": "Loan type",
+        "enum": [
+          "conventional",
+          "FHA",
+          "VA",
+          "USDA",
+          null
+        ],
+        "nullable": true
+      },
+      "loanPurpose": {
+        "type": "string",
+        "description": "Loan purpose",
+        "enum": [
+          "purchase",
+          "refinance",
+          "construction",
+          null
+        ],
+        "nullable": true
+      },
+      "loanTerm": {
+        "type": "number",
+        "description": "Loan term (years)"
+      },
+      "totalAssets": {
+        "type": "number",
+        "description": "Total assets declared (USD, numbers only, no dollar sign)"
+      },
+      "totalLiabilities": {
+        "type": "number",
+        "description": "Total liabilities / debts (USD, numbers only, no dollar sign)"
+      }
+    },
+    "required": [
+      "borrower",
+      "propertyAddress",
+      "loanAmount",
+      "loanType"
+    ]
+  }
+}

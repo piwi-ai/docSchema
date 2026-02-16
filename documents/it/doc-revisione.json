@@ -1,0 +1,55 @@
+{
+  "id": "doc-revisione",
+  "name": "Certificato di Revisione",
+  "description": "Esito della revisione ministeriale del veicolo",
+  "references": [
+    {
+      "title": "Portale dell'Automobilista — Revisione",
+      "url": "https://www.ilportaledellautomobilista.it/web/portale-automobilista/revisioni",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "targa": {
+        "type": "string",
+        "description": "Numero di targa del veicolo (es. AB123CD)"
+      },
+      "dataRevisione": {
+        "type": "string",
+        "description": "Data della revisione",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "esito": {
+        "type": "string",
+        "description": "Esito della revisione",
+        "enum": [
+          "REGOLARE",
+          "RIPETERE",
+          "SOSPESO",
+          null
+        ],
+        "nullable": true
+      },
+      "kmRevisione": {
+        "type": "number",
+        "description": "Chilometraggio alla revisione"
+      },
+      "scadenzaProssimaRevisione": {
+        "type": "string",
+        "description": "Data scadenza prossima revisione",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "centroRevisione": {
+        "type": "string",
+        "description": "Denominazione del centro revisione"
+      }
+    },
+    "required": [
+      "targa",
+      "dataRevisione",
+      "esito"
+    ]
+  }
+}

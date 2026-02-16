@@ -1,0 +1,145 @@
+{
+  "id": "doc-polizza",
+  "name": "Polizza Assicurativa",
+  "description": "Contratto di assicurazione — tutti i rami (RCA, vita, casa, infortuni, RC professionale)",
+  "references": [
+    {
+      "title": "IVASS — Codice delle Assicurazioni Private",
+      "url": "https://www.ivass.it/normativa/nazionale/primaria/index.html",
+      "type": "regulation"
+    },
+    {
+      "title": "ANIA — Associazione Nazionale Imprese Assicuratrici",
+      "url": "https://www.ania.it/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "compagnia": {
+        "type": "string",
+        "description": "Compagnia assicurativa"
+      },
+      "numeroPolizza": {
+        "type": "string",
+        "description": "Numero polizza"
+      },
+      "ramo": {
+        "type": "string",
+        "description": "Ramo assicurativo",
+        "enum": [
+          "RCA",
+          "vita",
+          "casa",
+          "infortuni",
+          "RC professionale",
+          "salute",
+          "furto/incendio",
+          "kasko",
+          "trasporti",
+          "altro",
+          null
+        ],
+        "nullable": true
+      },
+      "contraente": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo del contraente"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale"
+        ]
+      },
+      "assicurato": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale"
+        ]
+      },
+      "targa": {
+        "type": "string",
+        "description": "Numero di targa del veicolo (es. AB123CD)"
+      },
+      "premioAnnuo": {
+        "type": "number",
+        "description": "Premio annuo totale in Euro"
+      },
+      "premioSemestrale": {
+        "type": "number",
+        "description": "Premio semestrale in Euro (se frazionato)"
+      },
+      "decorrenza": {
+        "type": "string",
+        "description": "Data decorrenza copertura",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "scadenza": {
+        "type": "string",
+        "description": "Data scadenza copertura",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "massimale": {
+        "type": "string",
+        "description": "Massimale di copertura (es. Euro 6.450.000)"
+      },
+      "franchigia": {
+        "type": "string",
+        "description": "Eventuale franchigia o scoperto"
+      },
+      "garanzie": {
+        "type": "string",
+        "description": "Elenco garanzie incluse (separare con virgola)"
+      },
+      "beneficiario": {
+        "type": "string",
+        "description": "Beneficiario designato (per polizze vita)"
+      }
+    },
+    "required": [
+      "compagnia",
+      "numeroPolizza",
+      "ramo",
+      "contraente",
+      "premioAnnuo",
+      "decorrenza",
+      "scadenza"
+    ]
+  }
+}

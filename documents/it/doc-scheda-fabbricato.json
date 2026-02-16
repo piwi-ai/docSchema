@@ -1,0 +1,109 @@
+{
+  "id": "doc-scheda-fabbricato",
+  "name": "Scheda Fabbricato / Immobile",
+  "description": "Dati dell'immobile assicurato — per polizze casa/incendio",
+  "references": [
+    {
+      "title": "Fascicolo del Fabbricato — Ordine degli Ingegneri",
+      "url": "https://www.ordineingegneri.it/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "proprietario": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale"
+        ]
+      },
+      "indirizzo": {
+        "type": "string",
+        "description": "Indirizzo completo dell'immobile"
+      },
+      "comune": {
+        "type": "string",
+        "description": "Comune"
+      },
+      "provincia": {
+        "type": "string",
+        "description": "Provincia"
+      },
+      "tipoImmobile": {
+        "type": "string",
+        "description": "Tipo immobile",
+        "enum": [
+          "appartamento",
+          "villa",
+          "villetta a schiera",
+          "ufficio",
+          "negozio",
+          "capannone",
+          "altro",
+          null
+        ],
+        "nullable": true
+      },
+      "superficie": {
+        "type": "number",
+        "description": "Superficie in mq"
+      },
+      "annoCostruzione": {
+        "type": "number",
+        "description": "Anno di costruzione"
+      },
+      "valoreRicostruzione": {
+        "type": "number",
+        "description": "Valore di ricostruzione a nuovo in Euro"
+      },
+      "valoreContenuto": {
+        "type": "number",
+        "description": "Valore del contenuto assicurato in Euro"
+      },
+      "sistemaAllarme": {
+        "type": "string",
+        "description": "Sistema di allarme presente",
+        "enum": [
+          "sì",
+          "no",
+          null
+        ],
+        "nullable": true
+      },
+      "pianterreno": {
+        "type": "string",
+        "description": "Al pianterreno",
+        "enum": [
+          "sì",
+          "no",
+          null
+        ],
+        "nullable": true
+      }
+    },
+    "required": [
+      "proprietario",
+      "indirizzo",
+      "tipoImmobile",
+      "superficie"
+    ]
+  }
+}

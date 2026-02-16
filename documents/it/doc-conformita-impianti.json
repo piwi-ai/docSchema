@@ -1,0 +1,64 @@
+{
+  "id": "doc-conformita-impianti",
+  "name": "Certificazione Conformità Impianti",
+  "description": "Dichiarazioni di conformità degli impianti (elettrico, idraulico, gas, riscaldamento) ai sensi del DM 37/2008",
+  "references": [
+    {
+      "title": "DM 37/2008 — Sicurezza impianti",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.ministeriale:2008-01-22;37",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "tipoImpianto": {
+        "type": "string",
+        "description": "Tipo di impianto certificato (es. elettrico, idraulico, gas, riscaldamento, climatizzazione, ascensore, elettrico e termoidraulico)"
+      },
+      "impresaInstallatrice": {
+        "type": "string",
+        "description": "Ragione sociale dell'impresa installatrice"
+      },
+      "responsabileTecnico": {
+        "type": "string",
+        "description": "Nome del responsabile tecnico"
+      },
+      "dataRilascio": {
+        "type": "string",
+        "description": "Data di rilascio della dichiarazione in formato europeo DD.MM.YYYY",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "numeroProtocollo": {
+        "type": "string",
+        "description": "Numero di protocollo della dichiarazione"
+      },
+      "indirizzo": {
+        "type": "string",
+        "description": "Indirizzo dell'immobile"
+      },
+      "foglio": {
+        "type": "string",
+        "description": "Foglio catastale, se presente"
+      },
+      "particella": {
+        "type": "string",
+        "description": "Particella catastale, se presente"
+      },
+      "subalterno": {
+        "type": "string",
+        "description": "Subalterno, se presente"
+      },
+      "normativaRiferimento": {
+        "type": "string",
+        "description": "Normativa di riferimento (es. DM 37/2008, CEI 64-8)"
+      }
+    },
+    "required": [
+      "tipoImpianto",
+      "impresaInstallatrice",
+      "dataRilascio",
+      "indirizzo"
+    ]
+  }
+}

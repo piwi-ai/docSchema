@@ -1,0 +1,93 @@
+{
+  "id": "doc-identity-card",
+  "name": "Identity Document",
+  "description": "Identity document (ID Card, Passport, Driver License)",
+  "references": [
+    {
+      "title": "BMI — Personalausweis",
+      "url": "https://www.personalausweisportal.de/Webs/PA/DE/buergerinnen-und-buerger/der-personalausweis/der-personalausweis-node.html",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Vorname"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Nachname"
+      },
+      "personalId": {
+        "type": "string",
+        "description": "Personal ID number / Steuer-ID / Ausweisnummer",
+        "pattern": "^\\d{11}$"
+      },
+      "documentType": {
+        "type": "string",
+        "description": "Document type / Dokumentart"
+      },
+      "documentNumber": {
+        "type": "string",
+        "description": "Document number / Dokumentennummer"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Ausstellungsdatum",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Gültig bis",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Ausstellende Behörde"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Geburtsort"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Geburtsdatum",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Anschrift"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Staatsangehörigkeit"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Geschlecht",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "personalId",
+      "documentType",
+      "documentNumber",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

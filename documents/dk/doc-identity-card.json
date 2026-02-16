@@ -1,0 +1,93 @@
+{
+  "id": "doc-identity-card",
+  "name": "Identity Document",
+  "description": "Identity document (ID Card, Passport, Driver License)",
+  "references": [
+    {
+      "title": "Borger.dk — Legitimationskort",
+      "url": "https://www.borger.dk/samfund-og-rettigheder/Folkeregister-og-cpr/legitimationskort",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Fornavn"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Efternavn"
+      },
+      "personalId": {
+        "type": "string",
+        "description": "Personal ID number / CPR-nummer",
+        "pattern": "^\\d{6}-?\\d{4}$"
+      },
+      "documentType": {
+        "type": "string",
+        "description": "Document type / Dokumenttype"
+      },
+      "documentNumber": {
+        "type": "string",
+        "description": "Document number / Dokumentnummer"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Udstedelsesdato",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Udløbsdato",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Udstedende myndighed"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Fødested"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Fødselsdato",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Adresse"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Nationalitet"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Køn",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "personalId",
+      "documentType",
+      "documentNumber",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

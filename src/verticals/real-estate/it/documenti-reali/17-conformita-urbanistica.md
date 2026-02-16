@@ -10,37 +10,40 @@ Relazione tecnica redatta da un professionista abilitato (architetto, ingegnere,
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `tecnico` | string | ✅ | Nome del tecnico abilitato |
-| `dataRelazione` | date DD.MM.YYYY | ✅ | Data della relazione |
-| `indirizzo` | string | ✅ | Indirizzo completo dell'immobile |
-| `foglio` | string | | Foglio catastale |
-| `particella` | string | | Particella catastale |
-| `subalterno` | string | | Subalterno |
-| `titoliAbilitativi` | string | | Elenco dei titoli edilizi (licenza, concessione, permesso, SCIA, CILA) |
-| `esito` | enum | ✅ | conforme \| non conforme \| conforme con riserva |
-| `difformita` | string | | Descrizione delle eventuali difformità riscontrate |
-| `condoni` | string | | Eventuali domande di condono edilizio presentate |
+| Campo               | Tipo            | Obbligatorio | Descrizione                                                            |
+| ------------------- | --------------- | :----------: | ---------------------------------------------------------------------- |
+| `tecnico`           | string          |      ✅      | Nome del tecnico abilitato                                             |
+| `dataRelazione`     | date DD.MM.YYYY |      ✅      | Data della relazione                                                   |
+| `indirizzo`         | string          |      ✅      | Indirizzo completo dell'immobile                                       |
+| `foglio`            | string          |              | Foglio catastale                                                       |
+| `particella`        | string          |              | Particella catastale                                                   |
+| `subalterno`        | string          |              | Subalterno                                                             |
+| `titoliAbilitativi` | string          |              | Elenco dei titoli edilizi (licenza, concessione, permesso, SCIA, CILA) |
+| `esito`             | enum            |      ✅      | conforme \| non conforme \| conforme con riserva                       |
+| `difformita`        | string          |              | Descrizione delle eventuali difformità riscontrate                     |
+| `condoni`           | string          |              | Eventuali domande di condono edilizio presentate                       |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "tecnico": { "type": "string" },
-    "dataRelazione": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
-    "indirizzo": { "type": "string" },
-    "foglio": { "type": "string" },
-    "particella": { "type": "string" },
-    "subalterno": { "type": "string" },
-    "titoliAbilitativi": { "type": "string" },
-    "esito": { "type": "string", "enum": ["conforme", "non conforme", "conforme con riserva", null] },
-    "difformita": { "type": "string" },
-    "condoni": { "type": "string" }
-  },
-  "required": ["tecnico", "dataRelazione", "indirizzo", "esito"]
+    "type": "object",
+    "properties": {
+        "tecnico": { "type": "string" },
+        "dataRelazione": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
+        "indirizzo": { "type": "string" },
+        "foglio": { "type": "string" },
+        "particella": { "type": "string" },
+        "subalterno": { "type": "string" },
+        "titoliAbilitativi": { "type": "string" },
+        "esito": {
+            "type": "string",
+            "enum": ["conforme", "non conforme", "conforme con riserva", null]
+        },
+        "difformita": { "type": "string" },
+        "condoni": { "type": "string" }
+    },
+    "required": ["tecnico", "dataRelazione", "indirizzo", "esito"]
 }
 ```
 

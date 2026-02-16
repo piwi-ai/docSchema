@@ -10,33 +10,36 @@ Estratto dell'atto di matrimonio rilasciato dal Comune di celebrazione. È un do
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `coniuge1` | string | ✅ | Nome e cognome del primo coniuge |
-| `coniuge2` | string | ✅ | Nome e cognome del secondo coniuge |
-| `dataMatrimonio` | date DD.MM.YYYY | ✅ | Data di celebrazione del matrimonio |
-| `luogoMatrimonio` | string | ✅ | Comune di celebrazione |
-| `regimePatrimoniale` | enum | ✅ | comunione dei beni \| separazione dei beni |
-| `annotazioni` | string | | Annotazioni marginali (separazione, divorzio, convenzioni patrimoniali) |
-| `comuneRegistrazione` | string | | Comune dove è stato registrato l'atto |
-| `parte` | string | | Parte e numero dell'atto |
+| Campo                 | Tipo            | Obbligatorio | Descrizione                                                             |
+| --------------------- | --------------- | :----------: | ----------------------------------------------------------------------- |
+| `coniuge1`            | string          |      ✅      | Nome e cognome del primo coniuge                                        |
+| `coniuge2`            | string          |      ✅      | Nome e cognome del secondo coniuge                                      |
+| `dataMatrimonio`      | date DD.MM.YYYY |      ✅      | Data di celebrazione del matrimonio                                     |
+| `luogoMatrimonio`     | string          |      ✅      | Comune di celebrazione                                                  |
+| `regimePatrimoniale`  | enum            |      ✅      | comunione dei beni \| separazione dei beni                              |
+| `annotazioni`         | string          |              | Annotazioni marginali (separazione, divorzio, convenzioni patrimoniali) |
+| `comuneRegistrazione` | string          |              | Comune dove è stato registrato l'atto                                   |
+| `parte`               | string          |              | Parte e numero dell'atto                                                |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "coniuge1": { "type": "string" },
-    "coniuge2": { "type": "string" },
-    "dataMatrimonio": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
-    "luogoMatrimonio": { "type": "string" },
-    "regimePatrimoniale": { "type": "string", "enum": ["comunione dei beni", "separazione dei beni", null] },
-    "annotazioni": { "type": "string" },
-    "comuneRegistrazione": { "type": "string" },
-    "parte": { "type": "string" }
-  },
-  "required": ["coniuge1", "coniuge2", "dataMatrimonio", "luogoMatrimonio", "regimePatrimoniale"]
+    "type": "object",
+    "properties": {
+        "coniuge1": { "type": "string" },
+        "coniuge2": { "type": "string" },
+        "dataMatrimonio": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
+        "luogoMatrimonio": { "type": "string" },
+        "regimePatrimoniale": {
+            "type": "string",
+            "enum": ["comunione dei beni", "separazione dei beni", null]
+        },
+        "annotazioni": { "type": "string" },
+        "comuneRegistrazione": { "type": "string" },
+        "parte": { "type": "string" }
+    },
+    "required": ["coniuge1", "coniuge2", "dataMatrimonio", "luogoMatrimonio", "regimePatrimoniale"]
 }
 ```
 

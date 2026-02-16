@@ -1,0 +1,102 @@
+{
+  "id": "doc-drivers-license",
+  "name": "Driver's License",
+  "description": "Driver's License — Italy",
+  "references": [
+    {
+      "title": "Il Portale dell'Automobilista",
+      "url": "https://www.ilportaledellautomobilista.it/web/portale-automobilista/home",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Nome"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Cognome"
+      },
+      "licenseNumber": {
+        "type": "string",
+        "description": "License number"
+      },
+      "categories": {
+        "type": "string",
+        "description": "License categories (EU Directive 2006/126/EC)",
+        "enum": [
+          "AM",
+          "A1",
+          "A2",
+          "A",
+          "B1",
+          "B",
+          "BE",
+          "C1",
+          "C1E",
+          "C",
+          "CE",
+          "D1",
+          "D1E",
+          "D",
+          "DE",
+          null
+        ],
+        "nullable": true
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Data di nascita",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Luogo di nascita"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Data di emissione",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Data di scadenza",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Rilasciato da"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Indirizzo di residenza"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Nazionalità"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Sesso",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "licenseNumber",
+      "categories",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

@@ -11,7 +11,6 @@ export { passport } from './passport.js';
 export { driversLicense } from './drivers-license.js';
 export { residencePermit } from './residence-permit.js';
 
-
 // ── Common (shared across verticals) ────────────────────────────────────────
 export { identita } from './identita.js';
 export { tesseraSanitaria } from './tessera-sanitaria.js';

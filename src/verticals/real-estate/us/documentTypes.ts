@@ -9,12 +9,20 @@
  */
 import type { DocumentTypeDef } from '../../../types.js';
 import {
-    driversLicense, contact,
-    purchaseAgreement, deed, closingDisclosure,
-    titleReport, titleInsurance,
-    inspectionReport, appraisal,
-    mortgageApplication, mortgageApproval,
-    hoaDocs, taxRecord, survey,
+    driversLicense,
+    contact,
+    purchaseAgreement,
+    deed,
+    closingDisclosure,
+    titleReport,
+    titleInsurance,
+    inspectionReport,
+    appraisal,
+    mortgageApplication,
+    mortgageApproval,
+    hoaDocs,
+    taxRecord,
+    survey,
 } from '../../../countries/us/documentTypes/index.js';
 
 // ─── Document IDs ───────────────────────────────────────────────────────────

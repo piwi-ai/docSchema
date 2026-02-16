@@ -1,0 +1,85 @@
+{
+  "id": "doc-passport",
+  "name": "Passport",
+  "description": "Passport — Portugal",
+  "references": [
+    {
+      "title": "PEP — Passaporte",
+      "url": "https://www.pep.pt/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Nome próprio"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Apelido"
+      },
+      "passportNumber": {
+        "type": "string",
+        "description": "Passport number"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Nacionalidade"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Data de nascimento",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Local de nascimento"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Sexo",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Data de emissão",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Data de validade",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Entidade emissora"
+      },
+      "issuingCountry": {
+        "type": "string",
+        "description": "Issuing country / Code"
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "passportNumber",
+      "nationality",
+      "dateOfBirth",
+      "sex",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "id": "doc-residence-permit",
+  "name": "Residence Permit",
+  "description": "Residence Permit — Iceland",
+  "references": [
+    {
+      "title": "Directorate of Immigration",
+      "url": "https://island.is/en/o/directorate-of-immigration",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Fornafn"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Eftirnafn"
+      },
+      "permitNumber": {
+        "type": "string",
+        "description": "Permit number"
+      },
+      "permitType": {
+        "type": "string",
+        "description": "Permit type",
+        "enum": [
+          "Temporary",
+          "Permanent",
+          "Long-term",
+          "Student",
+          "Work",
+          "Family",
+          null
+        ],
+        "nullable": true
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Ríkisfang"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Fæðingardagur",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Fæðingarstaður"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Kyn",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Útgáfudagur",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Gildir til",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Útgefandi"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Heimilisfang"
+      },
+      "remarks": {
+        "type": "string",
+        "description": "Remarks / Annotations"
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "permitNumber",
+      "permitType",
+      "nationality",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

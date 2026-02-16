@@ -1,0 +1,85 @@
+{
+  "id": "doc-passport",
+  "name": "Passport",
+  "description": "Passport — Poland",
+  "references": [
+    {
+      "title": "Gov.pl — Paszport",
+      "url": "https://www.gov.pl/web/gov/paszport-informacje",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Imię"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Nazwisko"
+      },
+      "passportNumber": {
+        "type": "string",
+        "description": "Passport number"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Obywatelstwo"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Data urodzenia",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Miejsce urodzenia"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Płeć",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Data wydania",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Data ważności",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Organ wydający"
+      },
+      "issuingCountry": {
+        "type": "string",
+        "description": "Issuing country / Code"
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "passportNumber",
+      "nationality",
+      "dateOfBirth",
+      "sex",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

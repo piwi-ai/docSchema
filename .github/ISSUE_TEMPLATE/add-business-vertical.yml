@@ -1,53 +1,53 @@
 name: "\U0001F3E2 Add Business Vertical"
 description: Propose a new business vertical (industry)
-title: "[Vertical] "
-labels: ["enhancement", "vertical"]
+title: '[Vertical] '
+labels: ['enhancement', 'vertical']
 body:
-  - type: input
-    id: vertical-name
-    attributes:
-      label: Vertical Name
-      description: "Business vertical name in kebab-case"
-      placeholder: "e.g. law-firm, medical, logistics"
-    validations:
-      required: true
-  - type: dropdown
-    id: country
-    attributes:
-      label: Initial Country
-      options:
-        - Italy (IT)
-        - United States (US)
-        - Germany (DE)
-        - France (FR)
-        - Spain (ES)
-        - Other
-    validations:
-      required: true
-  - type: textarea
-    id: document-types
-    attributes:
-      label: Document Types
-      description: "List the main document types in this vertical"
-      placeholder: |
-        1. Court Filing — legal filings and motions
-        2. Contract — client agreements
-        3. Power of Attorney — delegation documents
-    validations:
-      required: true
-  - type: textarea
-    id: entity-types
-    attributes:
-      label: Entity Types
-      description: "What real-world entities are tracked across documents?"
-      placeholder: |
-        - Client (person) — tracked across contracts and filings
-        - Case (thing) — links all documents for a legal case
-  - type: textarea
-    id: business-rules
-    attributes:
-      label: Business Rules
-      description: "Any cross-document validation or conditional logic"
-      placeholder: |
-        - If client is a minor, require guardian authorization
-        - If contract value > €50k, require notarized copy
+    - type: input
+      id: vertical-name
+      attributes:
+          label: Vertical Name
+          description: 'Business vertical name in kebab-case'
+          placeholder: 'e.g. law-firm, medical, logistics'
+      validations:
+          required: true
+    - type: dropdown
+      id: country
+      attributes:
+          label: Initial Country
+          options:
+              - Italy (IT)
+              - United States (US)
+              - Germany (DE)
+              - France (FR)
+              - Spain (ES)
+              - Other
+      validations:
+          required: true
+    - type: textarea
+      id: document-types
+      attributes:
+          label: Document Types
+          description: 'List the main document types in this vertical'
+          placeholder: |
+              1. Court Filing — legal filings and motions
+              2. Contract — client agreements
+              3. Power of Attorney — delegation documents
+      validations:
+          required: true
+    - type: textarea
+      id: entity-types
+      attributes:
+          label: Entity Types
+          description: 'What real-world entities are tracked across documents?'
+          placeholder: |
+              - Client (person) — tracked across contracts and filings
+              - Case (thing) — links all documents for a legal case
+    - type: textarea
+      id: business-rules
+      attributes:
+          label: Business Rules
+          description: 'Any cross-document validation or conditional logic'
+          placeholder: |
+              - If client is a minor, require guardian authorization
+              - If contract value > €50k, require notarized copy

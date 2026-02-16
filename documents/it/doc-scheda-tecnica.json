@@ -1,0 +1,53 @@
+{
+  "id": "doc-scheda-tecnica",
+  "name": "Scheda Tecnica Veicolo",
+  "description": "Scheda tecnica/commerciale del veicolo con optionals e allestimento",
+  "references": [
+    {
+      "title": "EU Reg. 2018/858 — Type Approval",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32018R0858",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "marca": {
+        "type": "string",
+        "description": "Marca"
+      },
+      "modello": {
+        "type": "string",
+        "description": "Modello"
+      },
+      "allestimento": {
+        "type": "string",
+        "description": "Livello di allestimento (es. Lounge, Sport, Executive)"
+      },
+      "annoModello": {
+        "type": "number",
+        "description": "Anno modello"
+      },
+      "coloreEsterno": {
+        "type": "string",
+        "description": "Colore carrozzeria"
+      },
+      "coloreInterno": {
+        "type": "string",
+        "description": "Colore e materiale interni"
+      },
+      "optionals": {
+        "type": "string",
+        "description": "Lista optionals inclusi (separati da virgola)"
+      },
+      "prezzoListino": {
+        "type": "number",
+        "description": "Prezzo di listino in Euro"
+      }
+    },
+    "required": [
+      "marca",
+      "modello"
+    ]
+  }
+}

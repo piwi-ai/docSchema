@@ -1,0 +1,63 @@
+{
+  "id": "doc-estratto-conto",
+  "name": "Estratto Conto Bancario",
+  "description": "Estratto conto bancario — saldo, movimenti, periodo",
+  "references": [
+    {
+      "title": "Banca d'Italia — Trasparenza bancaria",
+      "url": "https://www.bancaditalia.it/compiti/vigilanza/normativa/archivio-norme/disposizioni/trasparenza/index.html",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "banca": {
+        "type": "string",
+        "description": "Nome della banca"
+      },
+      "iban": {
+        "type": "string",
+        "description": "Codice IBAN"
+      },
+      "intestatario": {
+        "type": "string",
+        "description": "Intestatario del conto"
+      },
+      "codiceFiscaleIntestatario": {
+        "type": "string",
+        "description": "Codice fiscale / P.IVA dell'intestatario"
+      },
+      "periodo": {
+        "type": "string",
+        "description": "Periodo di riferimento (es. 01.01.2025 - 31.03.2025)"
+      },
+      "saldoIniziale": {
+        "type": "number",
+        "description": "Saldo iniziale del periodo in Euro"
+      },
+      "saldoFinale": {
+        "type": "number",
+        "description": "Saldo finale del periodo in Euro"
+      },
+      "giacenzaMedia": {
+        "type": "number",
+        "description": "Giacenza media nel periodo in Euro"
+      },
+      "totaleEntrate": {
+        "type": "number",
+        "description": "Totale entrate nel periodo in Euro"
+      },
+      "totaleUscite": {
+        "type": "number",
+        "description": "Totale uscite nel periodo in Euro"
+      }
+    },
+    "required": [
+      "banca",
+      "iban",
+      "intestatario",
+      "saldoFinale"
+    ]
+  }
+}

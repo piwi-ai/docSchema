@@ -1,0 +1,120 @@
+{
+  "id": "doc-contratto-lavoro",
+  "name": "Contratto di Lavoro",
+  "description": "Contratto di lavoro dipendente — CCNL, livello, RAL",
+  "references": [
+    {
+      "title": "Ministero del Lavoro — Tipologie contrattuali",
+      "url": "https://www.lavoro.gov.it/temi-e-priorita/rapporti-di-lavoro-e-relazioni-industriali/focus-on/tipologie-contrattuali",
+      "type": "regulation"
+    },
+    {
+      "title": "Archivio CCNL — CNEL",
+      "url": "https://www.cnel.it/Archivio-Contratti",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "datore": {
+        "type": "object",
+        "properties": {
+          "denominazione": {
+            "type": "string",
+            "description": "Ragione sociale del datore"
+          },
+          "partitaIva": {
+            "type": "string",
+            "description": "Partita IVA — 11 cifre numeriche"
+          },
+          "sedeLegale": {
+            "type": "string",
+            "description": "Sede legale"
+          }
+        },
+        "required": [
+          "denominazione"
+        ]
+      },
+      "dipendente": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+          },
+          "dataNascita": {
+            "type": "string",
+            "description": "Data di nascita",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale"
+        ]
+      },
+      "ccnl": {
+        "type": "string",
+        "description": "CCNL applicato (es. Commercio, Metalmeccanico, Studi Professionali)"
+      },
+      "livello": {
+        "type": "string",
+        "description": "Livello contrattuale (es. 3, 4, Q)"
+      },
+      "qualifica": {
+        "type": "string",
+        "description": "Qualifica/mansione"
+      },
+      "tipoContratto": {
+        "type": "string",
+        "description": "Tipo contratto",
+        "enum": [
+          "indeterminato",
+          "determinato",
+          "apprendistato",
+          "somministrazione",
+          "collaborazione",
+          null
+        ],
+        "nullable": true
+      },
+      "dataAssunzione": {
+        "type": "string",
+        "description": "Data di assunzione",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "dataScadenza": {
+        "type": "string",
+        "description": "Data scadenza (per contratti a termine)",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "ral": {
+        "type": "number",
+        "description": "Retribuzione Annua Lorda (RAL) in Euro"
+      },
+      "oreLavoroSettimanali": {
+        "type": "number",
+        "description": "Ore settimanali di lavoro"
+      }
+    },
+    "required": [
+      "datore",
+      "dipendente",
+      "ccnl",
+      "tipoContratto",
+      "dataAssunzione"
+    ]
+  }
+}

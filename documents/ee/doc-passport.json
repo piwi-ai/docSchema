@@ -1,0 +1,85 @@
+{
+  "id": "doc-passport",
+  "name": "Passport",
+  "description": "Passport — Estonia",
+  "references": [
+    {
+      "title": "PBGB — Passport",
+      "url": "https://www.politsei.ee/en/instructions/applying-for-a-passport-for-an-adult",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Eesnimi"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Perekonnanimi"
+      },
+      "passportNumber": {
+        "type": "string",
+        "description": "Passport number"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Kodakondsus"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Sünniaeg",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Sünnikoht"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Sugu",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Väljaandmise kuupäev",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Kehtiv kuni",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Väljaandja"
+      },
+      "issuingCountry": {
+        "type": "string",
+        "description": "Issuing country / Code"
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "passportNumber",
+      "nationality",
+      "dateOfBirth",
+      "sex",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

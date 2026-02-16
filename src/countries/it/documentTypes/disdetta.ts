@@ -3,10 +3,7 @@
  * Used by: insurance.
  */
 import type { DocumentTypeDef } from '../../../types.js';
-import {
-    text, date, objectSchema,
-    codiceFiscale,
-} from '../helpers.js';
+import { text, date, objectSchema, codiceFiscale } from '../helpers.js';
 import { ReferenceType } from '../../../constants.js';
 
 export const disdetta: DocumentTypeDef = {
@@ -20,13 +17,16 @@ export const disdetta: DocumentTypeDef = {
             type: ReferenceType.REGULATION,
         },
     ],
-    jsonSchema: objectSchema({
-        mittente: text('Nome e cognome / ragione sociale del mittente'),
-        codiceFiscaleMittente: codiceFiscale(),
-        destinatario: text('Compagnia assicurativa destinataria'),
-        numeroPolizza: text('Numero polizza da disdettare'),
-        dataEffettoDisdetta: date('Data effetto della disdetta'),
-        motivo: text('Motivo della disdetta (se dichiarato)'),
-        dataLettera: date('Data della lettera'),
-    }, ['mittente', 'numeroPolizza', 'dataEffettoDisdetta']),
+    jsonSchema: objectSchema(
+        {
+            mittente: text('Nome e cognome / ragione sociale del mittente'),
+            codiceFiscaleMittente: codiceFiscale(),
+            destinatario: text('Compagnia assicurativa destinataria'),
+            numeroPolizza: text('Numero polizza da disdettare'),
+            dataEffettoDisdetta: date('Data effetto della disdetta'),
+            motivo: text('Motivo della disdetta (se dichiarato)'),
+            dataLettera: date('Data della lettera'),
+        },
+        ['mittente', 'numeroPolizza', 'dataEffettoDisdetta'],
+    ),
 };

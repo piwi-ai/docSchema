@@ -10,41 +10,51 @@ Contratto di mutuo ipotecario stipulato dal notaio contestualmente (o immediatam
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `banca` | string | ✅ | Nome della banca o istituto di credito |
-| `mutuatario` | string | ✅ | Nome e cognome del mutuatario |
-| `codiceFiscaleMutuatario` | string (pattern CF) | ✅ | Codice Fiscale del mutuatario |
-| `importoMutuo` | number | ✅ | Importo del mutuo erogato in Euro |
-| `durataAnni` | number | | Durata del mutuo in anni |
-| `tassoInteresse` | string | | Tasso di interesse e percentuale |
-| `tipoTasso` | enum | | fisso \| variabile \| misto |
-| `rataMensile` | number | | Importo rata mensile in Euro |
-| `notaio` | string | ✅ | Nome e cognome del notaio rogante |
-| `dataStipula` | date DD.MM.YYYY | ✅ | Data di stipula |
-| `numeroRepertorio` | string | | Numero di repertorio |
-| `ipoteca` | string | | Grado e importo dell'ipoteca iscritta |
+| Campo                     | Tipo                | Obbligatorio | Descrizione                            |
+| ------------------------- | ------------------- | :----------: | -------------------------------------- |
+| `banca`                   | string              |      ✅      | Nome della banca o istituto di credito |
+| `mutuatario`              | string              |      ✅      | Nome e cognome del mutuatario          |
+| `codiceFiscaleMutuatario` | string (pattern CF) |      ✅      | Codice Fiscale del mutuatario          |
+| `importoMutuo`            | number              |      ✅      | Importo del mutuo erogato in Euro      |
+| `durataAnni`              | number              |              | Durata del mutuo in anni               |
+| `tassoInteresse`          | string              |              | Tasso di interesse e percentuale       |
+| `tipoTasso`               | enum                |              | fisso \| variabile \| misto            |
+| `rataMensile`             | number              |              | Importo rata mensile in Euro           |
+| `notaio`                  | string              |      ✅      | Nome e cognome del notaio rogante      |
+| `dataStipula`             | date DD.MM.YYYY     |      ✅      | Data di stipula                        |
+| `numeroRepertorio`        | string              |              | Numero di repertorio                   |
+| `ipoteca`                 | string              |              | Grado e importo dell'ipoteca iscritta  |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "banca": { "type": "string" },
-    "mutuatario": { "type": "string" },
-    "codiceFiscaleMutuatario": { "type": "string", "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$" },
-    "importoMutuo": { "type": "number" },
-    "durataAnni": { "type": "number" },
-    "tassoInteresse": { "type": "string" },
-    "tipoTasso": { "type": "string", "enum": ["fisso", "variabile", "misto", null] },
-    "rataMensile": { "type": "number" },
-    "notaio": { "type": "string" },
-    "dataStipula": { "type": "string", "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$" },
-    "numeroRepertorio": { "type": "string" },
-    "ipoteca": { "type": "string" }
-  },
-  "required": ["banca", "mutuatario", "codiceFiscaleMutuatario", "importoMutuo", "dataStipula", "notaio"]
+    "type": "object",
+    "properties": {
+        "banca": { "type": "string" },
+        "mutuatario": { "type": "string" },
+        "codiceFiscaleMutuatario": {
+            "type": "string",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+        },
+        "importoMutuo": { "type": "number" },
+        "durataAnni": { "type": "number" },
+        "tassoInteresse": { "type": "string" },
+        "tipoTasso": { "type": "string", "enum": ["fisso", "variabile", "misto", null] },
+        "rataMensile": { "type": "number" },
+        "notaio": { "type": "string" },
+        "dataStipula": { "type": "string", "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$" },
+        "numeroRepertorio": { "type": "string" },
+        "ipoteca": { "type": "string" }
+    },
+    "required": [
+        "banca",
+        "mutuatario",
+        "codiceFiscaleMutuatario",
+        "importoMutuo",
+        "dataStipula",
+        "notaio"
+    ]
 }
 ```
 

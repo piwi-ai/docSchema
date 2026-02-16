@@ -23,7 +23,7 @@ const ALL_CONFIGS: BusinessConfiguration[] = [
 
 // ─── Per-Config Structural Tests ────────────────────────────────────────────
 
-describe.each(ALL_CONFIGS.map(c => [c.name, c] as const))('%s', (_name, config) => {
+describe.each(ALL_CONFIGS.map((c) => [c.name, c] as const))('%s', (_name, config) => {
     it('has a non-empty id, name, and description', () => {
         expect(config.id).toBeTruthy();
         expect(config.name).toBeTruthy();
@@ -42,17 +42,16 @@ describe.each(ALL_CONFIGS.map(c => [c.name, c] as const))('%s', (_name, config) 
         expect(config.entityTypes.length).toBeGreaterThan(0);
     });
 
-
     // ── Document Types ────────────────────────────────────────────────────
 
     describe('document types', () => {
         it('all have unique IDs', () => {
-            const ids = config.documentTypes.map(dt => dt.id);
+            const ids = config.documentTypes.map((dt) => dt.id);
             expect(new Set(ids).size).toBe(ids.length);
         });
 
         it('all have unique names', () => {
-            const names = config.documentTypes.map(dt => dt.name);
+            const names = config.documentTypes.map((dt) => dt.name);
             expect(new Set(names).size).toBe(names.length);
         });
 
@@ -80,12 +79,12 @@ describe.each(ALL_CONFIGS.map(c => [c.name, c] as const))('%s', (_name, config) 
 
     describe('entity types', () => {
         it('all have unique IDs', () => {
-            const ids = config.entityTypes.map(et => et.id);
+            const ids = config.entityTypes.map((et) => et.id);
             expect(new Set(ids).size).toBe(ids.length);
         });
 
         it('all have unique names', () => {
-            const names = config.entityTypes.map(et => et.name);
+            const names = config.entityTypes.map((et) => et.name);
             expect(new Set(names).size).toBe(names.length);
         });
 
@@ -97,7 +96,7 @@ describe.each(ALL_CONFIGS.map(c => [c.name, c] as const))('%s', (_name, config) 
         });
 
         it('all dataSources reference valid document type IDs', () => {
-            const docIds = new Set(config.documentTypes.map(dt => dt.id));
+            const docIds = new Set(config.documentTypes.map((dt) => dt.id));
             for (const et of config.entityTypes) {
                 for (const ds of et.dataSources ?? []) {
                     expect(docIds.has(ds.docTypeId)).toBe(true);
@@ -106,7 +105,7 @@ describe.each(ALL_CONFIGS.map(c => [c.name, c] as const))('%s', (_name, config) 
         });
 
         it('all conditionalRequirements reference valid document type IDs', () => {
-            const docIds = new Set(config.documentTypes.map(dt => dt.id));
+            const docIds = new Set(config.documentTypes.map((dt) => dt.id));
             for (const et of config.entityTypes) {
                 for (const cr of et.conditionalRequirements ?? []) {
                     expect(docIds.has(cr.docTypeId)).toBe(true);
@@ -134,24 +133,23 @@ describe.each(ALL_CONFIGS.map(c => [c.name, c] as const))('%s', (_name, config) 
 
         it('at least one dataSource can create entity', () => {
             for (const et of config.entityTypes) {
-                const hasCreator = (et.dataSources ?? []).some(ds => ds.canCreateEntity);
+                const hasCreator = (et.dataSources ?? []).some((ds) => ds.canCreateEntity);
                 expect(hasCreator).toBe(true);
             }
         });
     });
-
 });
 
 // ── Cross-Config Tests ──────────────────────────────────────────────────────
 
 describe('cross-config consistency', () => {
     it('all configs have unique IDs', () => {
-        const ids = ALL_CONFIGS.map(c => c.id);
+        const ids = ALL_CONFIGS.map((c) => c.id);
         expect(new Set(ids).size).toBe(ids.length);
     });
 
     it('all configs have unique names', () => {
-        const names = ALL_CONFIGS.map(c => c.name);
+        const names = ALL_CONFIGS.map((c) => c.name);
         expect(new Set(names).size).toBe(names.length);
     });
 });

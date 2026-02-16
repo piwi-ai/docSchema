@@ -1,0 +1,93 @@
+{
+  "id": "doc-identity-card",
+  "name": "Identity Document",
+  "description": "Identity document (ID Card, Passport, Driver License)",
+  "references": [
+    {
+      "title": "MUP — Osobna iskaznica",
+      "url": "https://mup.gov.hr/osobna-iskaznica-eoi/328",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Ime"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Prezime"
+      },
+      "personalId": {
+        "type": "string",
+        "description": "Personal ID number / OIB",
+        "pattern": "^\\d{11}$"
+      },
+      "documentType": {
+        "type": "string",
+        "description": "Document type / Vrsta dokumenta"
+      },
+      "documentNumber": {
+        "type": "string",
+        "description": "Document number / Broj dokumenta"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Datum izdavanja",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Vrijedi do",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Izdao"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Mjesto rođenja"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Datum rođenja",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Adresa"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Državljanstvo"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Spol",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "personalId",
+      "documentType",
+      "documentNumber",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

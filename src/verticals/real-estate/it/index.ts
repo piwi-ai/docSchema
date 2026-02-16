@@ -14,7 +14,8 @@ export { DOC_IDS, ENTITY_IDS };
 export const realEstateItConfig: BusinessConfiguration = {
     id: 'REAL-ESTATE-IT-DEFAULT',
     name: 'Agenzia Immobiliare Italia',
-    description: 'Configurazione per gestione documenti agenzia immobiliare — compravendita, locazione, documenti catastali e notarili',
+    description:
+        'Configurazione per gestione documenti agenzia immobiliare — compravendita, locazione, documenti catastali e notarili',
     schemaVersion: 1,
     documentTypes,
     entityTypes,

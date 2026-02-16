@@ -1,5 +1,5 @@
-import { Heart } from 'lucide-react'
-import './Footer.css'
+import { Heart } from 'lucide-react';
+import './Footer.css';
 
 export default function Footer() {
     return (
@@ -21,5 +21,5 @@ export default function Footer() {
                 </p>
             </div>
         </footer>
-    )
+    );
 }

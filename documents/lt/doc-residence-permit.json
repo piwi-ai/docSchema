@@ -1,0 +1,102 @@
+{
+  "id": "doc-residence-permit",
+  "name": "Residence Permit",
+  "description": "Residence Permit — Lithuania",
+  "references": [
+    {
+      "title": "Migration Department",
+      "url": "https://migracija.lrv.lt/en/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Vardas"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Pavardė"
+      },
+      "permitNumber": {
+        "type": "string",
+        "description": "Permit number"
+      },
+      "permitType": {
+        "type": "string",
+        "description": "Permit type",
+        "enum": [
+          "Temporary",
+          "Permanent",
+          "Long-term",
+          "Student",
+          "Work",
+          "Family",
+          null
+        ],
+        "nullable": true
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Pilietybė"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Gimimo data",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Gimimo vieta"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Lytis",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Išdavimo data",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Galioja iki",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Išdavusi institucija"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Adresas"
+      },
+      "remarks": {
+        "type": "string",
+        "description": "Remarks / Annotations"
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "permitNumber",
+      "permitType",
+      "nationality",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

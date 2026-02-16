@@ -1,0 +1,102 @@
+{
+  "id": "doc-drivers-license",
+  "name": "Driver's License",
+  "description": "Driver's License — Czech Republic",
+  "references": [
+    {
+      "title": "Ministry of Transport",
+      "url": "https://www.mdcr.cz/?lang=en-GB",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Jméno"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Příjmení"
+      },
+      "licenseNumber": {
+        "type": "string",
+        "description": "License number"
+      },
+      "categories": {
+        "type": "string",
+        "description": "License categories (EU Directive 2006/126/EC)",
+        "enum": [
+          "AM",
+          "A1",
+          "A2",
+          "A",
+          "B1",
+          "B",
+          "BE",
+          "C1",
+          "C1E",
+          "C",
+          "CE",
+          "D1",
+          "D1E",
+          "D",
+          "DE",
+          null
+        ],
+        "nullable": true
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Datum narození",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Místo narození"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Datum vydání",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Platnost do",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Vydal"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Adresa"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Státní příslušnost"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Pohlaví",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "licenseNumber",
+      "categories",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

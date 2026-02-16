@@ -1,0 +1,147 @@
+{
+  "id": "doc-atto-vendita",
+  "name": "Atto di Vendita / Passaggio di Proprietà",
+  "description": "Contratto di compravendita veicolo con dati delle parti e del veicolo",
+  "references": [
+    {
+      "title": "ACI — Passaggio di proprietà",
+      "url": "https://www.aci.it/i-servizi/guide-utili/guida-pratiche-auto/passaggio-di-proprieta.html",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "venditore": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo di residenza del venditore"
+          },
+          "statoCivile": {
+            "type": "string",
+            "description": "Stato civile",
+            "enum": [
+              "celibe",
+              "nubile",
+              "coniugato",
+              "coniugata",
+              "vedovo",
+              "vedova",
+              "divorziato",
+              "divorziata",
+              "separato",
+              "separata",
+              null
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale"
+        ]
+      },
+      "acquirente": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo di residenza dell'acquirente"
+          },
+          "statoCivile": {
+            "type": "string",
+            "description": "Stato civile",
+            "enum": [
+              "celibe",
+              "nubile",
+              "coniugato",
+              "coniugata",
+              "vedovo",
+              "vedova",
+              "divorziato",
+              "divorziata",
+              "separato",
+              "separata",
+              null
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale"
+        ]
+      },
+      "targa": {
+        "type": "string",
+        "description": "Numero di targa del veicolo (es. AB123CD)"
+      },
+      "telaio": {
+        "type": "string",
+        "description": "Numero di telaio / VIN (Vehicle Identification Number) — 17 caratteri alfanumerici"
+      },
+      "marca": {
+        "type": "string",
+        "description": "Marca del veicolo"
+      },
+      "modello": {
+        "type": "string",
+        "description": "Modello del veicolo"
+      },
+      "prezzo": {
+        "type": "number",
+        "description": "Prezzo di vendita in Euro"
+      },
+      "dataVendita": {
+        "type": "string",
+        "description": "Data di stipula dell'atto",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "km": {
+        "type": "number",
+        "description": "Chilometraggio dichiarato al momento della vendita"
+      },
+      "modalitaPagamento": {
+        "type": "string",
+        "description": "Modalità di pagamento (contanti, bonifico, finanziamento, ecc.)"
+      }
+    },
+    "required": [
+      "venditore",
+      "acquirente",
+      "targa",
+      "prezzo",
+      "dataVendita"
+    ]
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "id": "doc-busta-paga",
+  "name": "Busta Paga / Cedolino",
+  "description": "Cedolino paga mensile — lordo, netto, ritenute, contributi",
+  "references": [
+    {
+      "title": "INPS — Contributi e aliquote",
+      "url": "https://www.inps.it/it/it/dettaglio-scheda.schede-servizio-strumento.schede-servizi.contribuzione-obbligatoria-50498.contribuzione-obbligatoria.html",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "datore": {
+        "type": "string",
+        "description": "Denominazione del datore di lavoro"
+      },
+      "dipendente": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale"
+        ]
+      },
+      "mese": {
+        "type": "string",
+        "description": "Mese di competenza (es. Gennaio 2025)"
+      },
+      "anno": {
+        "type": "number",
+        "description": "Anno di competenza"
+      },
+      "retribuzioneLorda": {
+        "type": "number",
+        "description": "Retribuzione lorda del mese in Euro"
+      },
+      "contributiInps": {
+        "type": "number",
+        "description": "Contributi INPS a carico dipendente in Euro"
+      },
+      "irpefLorda": {
+        "type": "number",
+        "description": "IRPEF lorda in Euro"
+      },
+      "detrazioni": {
+        "type": "number",
+        "description": "Detrazioni d'imposta in Euro"
+      },
+      "irpefNetta": {
+        "type": "number",
+        "description": "IRPEF netta in Euro"
+      },
+      "retribuzioneNetta": {
+        "type": "number",
+        "description": "Retribuzione netta (netto in busta) in Euro"
+      },
+      "tfr": {
+        "type": "number",
+        "description": "Quota TFR maturata nel mese in Euro"
+      },
+      "oreLavorate": {
+        "type": "number",
+        "description": "Ore lavorate nel mese"
+      },
+      "oreAssenza": {
+        "type": "number",
+        "description": "Ore di assenza (ferie, malattia, ecc.)"
+      }
+    },
+    "required": [
+      "dipendente",
+      "mese",
+      "retribuzioneLorda",
+      "retribuzioneNetta"
+    ]
+  }
+}

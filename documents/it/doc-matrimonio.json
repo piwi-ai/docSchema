@@ -1,0 +1,68 @@
+{
+  "id": "doc-matrimonio",
+  "name": "Estratto Atto di Matrimonio",
+  "description": "Estratto dell'atto di matrimonio o certificato di stato libero, richiesto dal notaio per verificare il regime patrimoniale",
+  "references": [
+    {
+      "title": "Ministero dell'Interno — Servizi demografici",
+      "url": "https://dait.interno.gov.it/servizi-demografici",
+      "type": "documentation"
+    },
+    {
+      "title": "Art. 159 Codice Civile — Regime patrimoniale",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art159",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "coniuge1": {
+        "type": "string",
+        "description": "Nome e cognome del primo coniuge"
+      },
+      "coniuge2": {
+        "type": "string",
+        "description": "Nome e cognome del secondo coniuge"
+      },
+      "dataMatrimonio": {
+        "type": "string",
+        "description": "Data di celebrazione del matrimonio in formato europeo DD.MM.YYYY",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "luogoMatrimonio": {
+        "type": "string",
+        "description": "Comune di celebrazione"
+      },
+      "regimePatrimoniale": {
+        "type": "string",
+        "description": "Regime patrimoniale scelto",
+        "enum": [
+          "comunione dei beni",
+          "separazione dei beni",
+          null
+        ],
+        "nullable": true
+      },
+      "annotazioni": {
+        "type": "string",
+        "description": "Annotazioni marginali — copiare TESTUALMENTE dal documento (es. separazione, divorzio, convenzioni patrimoniali)"
+      },
+      "comuneRegistrazione": {
+        "type": "string",
+        "description": "Comune dove è stato registrato l'atto"
+      },
+      "parte": {
+        "type": "string",
+        "description": "Parte e numero dell'atto"
+      }
+    },
+    "required": [
+      "coniuge1",
+      "coniuge2",
+      "dataMatrimonio",
+      "luogoMatrimonio",
+      "regimePatrimoniale"
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "id": "doc-bilancio",
+  "name": "Bilancio d'Esercizio",
+  "description": "Bilancio annuale: stato patrimoniale, conto economico, nota integrativa",
+  "references": [
+    {
+      "title": "Codice Civile Art. 2423–2435 — Bilancio",
+      "url": "https://www.gazzettaufficiale.it/atto/serie_generale/caricaArticolo?art.versione=3&art.idGruppo=262&art.flagTipoArticolo=2&art.codiceRedazionale=042U0262&art.idArticolo=2423&art.idSottoArticolo=1&art.idSottoArticolo1=10&art.dataPubblicazioneGazzetta=1942-04-04&art.progressivo=0",
+      "type": "regulation"
+    },
+    {
+      "title": "XBRL Italia — Tassonomia Bilanci",
+      "url": "https://www.xbrl.org/jurisdictions/italy/",
+      "type": "schema"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "ragioneSociale": {
+        "type": "string",
+        "description": "Ragione sociale"
+      },
+      "partitaIva": {
+        "type": "string",
+        "description": "Partita IVA — 11 cifre numeriche"
+      },
+      "esercizio": {
+        "type": "string",
+        "description": "Periodo di esercizio (es. 01.01.2025 - 31.12.2025)"
+      },
+      "anno": {
+        "type": "number",
+        "description": "Anno di competenza"
+      },
+      "fatturato": {
+        "type": "number",
+        "description": "Ricavi / fatturato in Euro"
+      },
+      "costiProduzione": {
+        "type": "number",
+        "description": "Costi della produzione in Euro"
+      },
+      "utileEsercizio": {
+        "type": "number",
+        "description": "Utile (o perdita) d'esercizio in Euro"
+      },
+      "totaleAttivo": {
+        "type": "number",
+        "description": "Totale attivo stato patrimoniale in Euro"
+      },
+      "totalePassivo": {
+        "type": "number",
+        "description": "Totale passivo stato patrimoniale in Euro"
+      },
+      "patrimonioNetto": {
+        "type": "number",
+        "description": "Patrimonio netto in Euro"
+      },
+      "risultatoOperativo": {
+        "type": "number",
+        "description": "Risultato operativo (EBIT) in Euro"
+      }
+    },
+    "required": [
+      "ragioneSociale",
+      "anno",
+      "fatturato",
+      "utileEsercizio"
+    ]
+  }
+}

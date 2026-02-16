@@ -8,5 +8,6 @@ import { createCountryHelpers } from '../../factories/country-helpers.factory.js
 
 const helpers = createCountryHelpers(EU_COUNTRIES['lu']);
 
-export const { text, num, enumField, email, datePattern, objectSchema, arrayOfObjects, ref } = helpers;
+export const { text, num, enumField, email, datePattern, objectSchema, arrayOfObjects, ref } =
+    helpers;
 export const { date, firstName, lastName, personalId, vat } = helpers;

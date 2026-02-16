@@ -121,9 +121,12 @@ export function getStats() {
     const totalDocTypes = verticals.reduce((sum, v) => sum + v.config.documentTypes.length, 0);
     const totalEntityTypes = verticals.reduce((sum, v) => sum + v.config.entityTypes.length, 0);
     const totalFields = verticals.reduce((sum, v) => {
-        return sum + v.config.documentTypes.reduce((dSum, dt) => {
-            return dSum + Object.keys(dt.jsonSchema.properties).length;
-        }, 0);
+        return (
+            sum +
+            v.config.documentTypes.reduce((dSum, dt) => {
+                return dSum + Object.keys(dt.jsonSchema.properties).length;
+            }, 0)
+        );
     }, 0);
     return { totalDocTypes, totalEntityTypes, totalFields, totalVerticals: verticals.length };
 }

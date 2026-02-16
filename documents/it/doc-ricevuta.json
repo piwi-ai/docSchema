@@ -1,0 +1,55 @@
+{
+  "id": "doc-ricevuta",
+  "name": "Ricevuta / Scontrino",
+  "description": "Ricevuta fiscale o scontrino per spese deducibili/detraibili",
+  "references": [
+    {
+      "title": "Agenzia delle Entrate — Corrispettivi Telematici",
+      "url": "https://www.agenziaentrate.gov.it/portale/web/guest/aree-tematiche/corrispettivi-telematici",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "string",
+        "description": "Data della ricevuta/scontrino",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "esercente": {
+        "type": "string",
+        "description": "Nome/ragione sociale dell'esercente"
+      },
+      "partitaIva": {
+        "type": "string",
+        "description": "Partita IVA — 11 cifre numeriche"
+      },
+      "importo": {
+        "type": "number",
+        "description": "Importo totale in Euro"
+      },
+      "descrizione": {
+        "type": "string",
+        "description": "Descrizione della spesa"
+      },
+      "tipoPagamento": {
+        "type": "string",
+        "description": "Tipo pagamento",
+        "enum": [
+          "contanti",
+          "carta",
+          "bonifico",
+          "assegno",
+          null
+        ],
+        "nullable": true
+      }
+    },
+    "required": [
+      "data",
+      "importo",
+      "descrizione"
+    ]
+  }
+}

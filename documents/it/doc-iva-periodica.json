@@ -1,0 +1,78 @@
+{
+  "id": "doc-iva-periodica",
+  "name": "Liquidazione IVA Periodica",
+  "description": "Comunicazione liquidazione periodica IVA — mensile o trimestrale",
+  "references": [
+    {
+      "title": "Agenzia delle Entrate — Liquidazioni IVA",
+      "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/comunicazioni/lipe-liquidazioni-periodiche-iva",
+      "type": "documentation"
+    },
+    {
+      "title": "Specifiche tecniche LIPE (XML)",
+      "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/comunicazioni/lipe-liquidazioni-periodiche-iva/sw-compilazione-e-controllo-lipe",
+      "type": "schema"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "contribuente": {
+        "type": "object",
+        "properties": {
+          "denominazione": {
+            "type": "string",
+            "description": "Denominazione / ragione sociale"
+          },
+          "partitaIva": {
+            "type": "string",
+            "description": "Partita IVA — 11 cifre numeriche"
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice fiscale"
+          }
+        },
+        "required": [
+          "partitaIva"
+        ]
+      },
+      "anno": {
+        "type": "number",
+        "description": "Anno di riferimento"
+      },
+      "periodo": {
+        "type": "string",
+        "description": "Periodo: mese o trimestre (es. T1, T2, Gennaio, ecc.)"
+      },
+      "ivaEsigibile": {
+        "type": "number",
+        "description": "IVA a debito (sulle vendite) in Euro"
+      },
+      "ivaDetratta": {
+        "type": "number",
+        "description": "IVA a credito (sugli acquisti) in Euro"
+      },
+      "ivaVersata": {
+        "type": "number",
+        "description": "IVA versata nel periodo in Euro"
+      },
+      "saldo": {
+        "type": "number",
+        "description": "Saldo IVA (debito se positivo, credito se negativo) in Euro"
+      },
+      "creditoPrecedente": {
+        "type": "number",
+        "description": "Credito periodo precedente in Euro"
+      }
+    },
+    "required": [
+      "contribuente",
+      "anno",
+      "periodo",
+      "ivaEsigibile",
+      "ivaDetratta",
+      "saldo"
+    ]
+  }
+}

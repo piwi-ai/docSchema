@@ -24,14 +24,10 @@ export const pivaMatch = (): MatchFieldConfig[] => [
 ];
 
 /** Match by anno (fiscal year) */
-export const annoMatch = (): MatchFieldConfig[] => [
-    { field: F.ANNO, fuzzyThreshold: 0 },
-];
+export const annoMatch = (): MatchFieldConfig[] => [{ field: F.ANNO, fuzzyThreshold: 0 }];
 
 /** Match by targa (vehicle plate only — insurance) */
-export const targaMatch = (): MatchFieldConfig[] => [
-    { field: F.TARGA, fuzzyThreshold: 0 },
-];
+export const targaMatch = (): MatchFieldConfig[] => [{ field: F.TARGA, fuzzyThreshold: 0 }];
 
 /** Match by targa + telaio (vehicle plate + chassis — car-dealership) */
 export const targaTelaioMatch = (): MatchFieldConfig[] => [
@@ -59,11 +55,7 @@ export const catastoMatch = (): MatchFieldConfig[] => [
 // ─── Field-mapping shorthand ────────────────────────────────────────────────
 
 /** Shorthand for creating a field mapping entry */
-export const fm = (
-    sourceField: string,
-    targetField: string,
-    matchFields?: MatchFieldConfig[],
-) => ({
+export const fm = (sourceField: string, targetField: string, matchFields?: MatchFieldConfig[]) => ({
     sourceField,
     targetField,
     ...(matchFields ? { matchFields } : {}),

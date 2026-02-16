@@ -1,0 +1,98 @@
+{
+  "id": "doc-successione",
+  "name": "Dichiarazione di Successione",
+  "description": "Denuncia di successione presentata all'Agenzia delle Entrate, richiesta quando l'immobile proviene da eredità",
+  "references": [
+    {
+      "title": "Agenzia delle Entrate — Dichiarazione di Successione",
+      "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/dichiarazioni/dichiarazione-di-successione",
+      "type": "documentation"
+    },
+    {
+      "title": "D.Lgs. 346/1990 — Imposta sulle successioni",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:1990-10-31;346",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "defunto": {
+        "type": "string",
+        "description": "Nome e cognome del defunto"
+      },
+      "codiceFiscaleDefunto": {
+        "type": "string",
+        "description": "Codice Fiscale del defunto — per cross-reference con certificato di morte (extract without spaces)",
+        "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+      },
+      "dataDecesso": {
+        "type": "string",
+        "description": "Data del decesso in formato europeo DD.MM.YYYY",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "dataPresentazione": {
+        "type": "string",
+        "description": "Data di presentazione della dichiarazione in formato europeo DD.MM.YYYY",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "protocollo": {
+        "type": "string",
+        "description": "Numero di protocollo Agenzia delle Entrate (es. SUC/2021/FI/12345)"
+      },
+      "eredi": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "nome": {
+              "type": "string"
+            },
+            "cognome": {
+              "type": "string"
+            },
+            "codiceFiscale": {
+              "type": "string"
+            },
+            "quotaEreditaria": {
+              "type": "string",
+              "description": "Quota di eredità (es. 1/2, 1/3)"
+            },
+            "rapportoParentela": {
+              "type": "string",
+              "description": "Rapporto di parentela con il defunto (es. coniuge, figlio, fratello)"
+            }
+          },
+          "required": [
+            "nome",
+            "cognome",
+            "codiceFiscale",
+            "quotaEreditaria"
+          ]
+        }
+      },
+      "foglio": {
+        "type": "string"
+      },
+      "particella": {
+        "type": "string"
+      },
+      "subalterno": {
+        "type": "string"
+      },
+      "volumeAtti": {
+        "type": "string",
+        "description": "Volume e numero di registrazione"
+      }
+    },
+    "required": [
+      "defunto",
+      "dataDecesso",
+      "dataPresentazione",
+      "eredi",
+      "foglio",
+      "particella",
+      "subalterno"
+    ]
+  }
+}

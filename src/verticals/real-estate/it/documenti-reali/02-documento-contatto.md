@@ -10,37 +10,37 @@ Recapiti e indirizzi del cliente per comunicazioni e notifiche legali. Include d
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `nome` | string | ✅ | Nome |
-| `cognome` | string | ✅ | Cognome |
-| `telefonoCellulare` | string | ✅ | Numero di cellulare principale |
-| `telefonoFisso` | string | | Eventuale numero fisso/ufficio |
-| `email` | string (email) | ✅ | Indirizzo email ordinario |
-| `pec` | string (email) | | Posta Elettronica Certificata |
-| `indirizzoResidenza` | string | ✅ | Via/Piazza e numero civico |
-| `cittaResidenza` | string | | Comune di residenza |
-| `cap` | string | | Codice Avviamento Postale |
-| `provincia` | string | | Sigla Provincia (es. MI, RM) |
+| Campo                | Tipo           | Obbligatorio | Descrizione                    |
+| -------------------- | -------------- | :----------: | ------------------------------ |
+| `nome`               | string         |      ✅      | Nome                           |
+| `cognome`            | string         |      ✅      | Cognome                        |
+| `telefonoCellulare`  | string         |      ✅      | Numero di cellulare principale |
+| `telefonoFisso`      | string         |              | Eventuale numero fisso/ufficio |
+| `email`              | string (email) |      ✅      | Indirizzo email ordinario      |
+| `pec`                | string (email) |              | Posta Elettronica Certificata  |
+| `indirizzoResidenza` | string         |      ✅      | Via/Piazza e numero civico     |
+| `cittaResidenza`     | string         |              | Comune di residenza            |
+| `cap`                | string         |              | Codice Avviamento Postale      |
+| `provincia`          | string         |              | Sigla Provincia (es. MI, RM)   |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "nome": { "type": "string" },
-    "cognome": { "type": "string" },
-    "telefonoCellulare": { "type": "string" },
-    "telefonoFisso": { "type": "string" },
-    "email": { "type": "string", "format": "email" },
-    "pec": { "type": "string", "format": "email" },
-    "indirizzoResidenza": { "type": "string" },
-    "cittaResidenza": { "type": "string" },
-    "cap": { "type": "string" },
-    "provincia": { "type": "string" }
-  },
-  "required": ["nome", "cognome", "telefonoCellulare", "email", "indirizzoResidenza"]
+    "type": "object",
+    "properties": {
+        "nome": { "type": "string" },
+        "cognome": { "type": "string" },
+        "telefonoCellulare": { "type": "string" },
+        "telefonoFisso": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "pec": { "type": "string", "format": "email" },
+        "indirizzoResidenza": { "type": "string" },
+        "cittaResidenza": { "type": "string" },
+        "cap": { "type": "string" },
+        "provincia": { "type": "string" }
+    },
+    "required": ["nome", "cognome", "telefonoCellulare", "email", "indirizzoResidenza"]
 }
 ```
 

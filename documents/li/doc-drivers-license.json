@@ -1,0 +1,102 @@
+{
+  "id": "doc-drivers-license",
+  "name": "Driver's License",
+  "description": "Driver's License — Liechtenstein",
+  "references": [
+    {
+      "title": "LLV — Führerausweis",
+      "url": "https://www.llv.li/de/privatpersonen/reisen-und-verkehr/fuehrerausweis",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Vorname"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Nachname"
+      },
+      "licenseNumber": {
+        "type": "string",
+        "description": "License number"
+      },
+      "categories": {
+        "type": "string",
+        "description": "License categories (EU Directive 2006/126/EC)",
+        "enum": [
+          "AM",
+          "A1",
+          "A2",
+          "A",
+          "B1",
+          "B",
+          "BE",
+          "C1",
+          "C1E",
+          "C",
+          "CE",
+          "D1",
+          "D1E",
+          "D",
+          "DE",
+          null
+        ],
+        "nullable": true
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Geburtsdatum",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Geburtsort"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Ausstellungsdatum",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Gültig bis",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Ausstellende Behörde"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Anschrift"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Staatsangehörigkeit"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Geschlecht",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "licenseNumber",
+      "categories",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

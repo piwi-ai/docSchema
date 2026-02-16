@@ -19,31 +19,39 @@
 // ─── Field Primitives ───────────────────────────────────────────────────────
 
 /** Simple text/string field */
-export const text = (desc = '') =>
-    ({ type: 'string' as const, description: desc });
+export const text = (desc = '') => ({ type: 'string' as const, description: desc });
 
 /** Number field */
-export const num = (desc = '') =>
-    ({ type: 'number' as const, description: desc });
+export const num = (desc = '') => ({ type: 'number' as const, description: desc });
 
 /** String field with enum constraint — includes null to avoid forcing the AI to pick a value */
-export const enumField = (desc: string, values: string[]) =>
-    ({ type: 'string' as const, description: desc, enum: [...values, null], nullable: true });
+export const enumField = (desc: string, values: string[]) => ({
+    type: 'string' as const,
+    description: desc,
+    enum: [...values, null],
+    nullable: true,
+});
 
 /** Email field */
-export const email = (desc = '') =>
-    ({ type: 'string' as const, format: 'email' as const, description: desc });
+export const email = (desc = '') => ({
+    type: 'string' as const,
+    format: 'email' as const,
+    description: desc,
+});
 
 /** String with date pattern (generic — caller provides format description) */
-export const datePattern = (desc: string) =>
-    ({ type: 'string' as const, description: desc, pattern: '^\\d{2}[./]\\d{2}[./]\\d{4}$' });
+export const datePattern = (desc: string) => ({
+    type: 'string' as const,
+    description: desc,
+    pattern: '^\\d{2}[./]\\d{2}[./]\\d{4}$',
+});
 
 // ─── Structure Builders ─────────────────────────────────────────────────────
 
 /** Build a JSON schema object (type: "object" wrapper) */
 export function objectSchema(
     properties: Record<string, unknown>,
-    required: string[]
+    required: string[],
 ): Record<string, unknown> {
     return { type: 'object', properties, required };
 }
@@ -52,7 +60,7 @@ export function objectSchema(
 export function arrayOfObjects(
     properties: Record<string, unknown>,
     required: string[],
-    description?: string
+    description?: string,
 ): Record<string, unknown> {
     return {
         type: 'array',
@@ -70,4 +78,3 @@ type RefType = NonNullable<DocumentReference['type']>;
 /** Create a typed DocumentReference (preserves literal type inference) */
 export const ref = (title: string, url: string, type?: RefType): DocumentReference =>
     type ? { title, url, type } : { title, url };
-

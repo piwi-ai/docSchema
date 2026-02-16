@@ -1,0 +1,93 @@
+{
+  "id": "doc-identity-card",
+  "name": "Identity Document",
+  "description": "Identity document (ID Card, Passport, Driver License)",
+  "references": [
+    {
+      "title": "Identità Malta — ID Cards",
+      "url": "https://identita.gov.mt/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Isem"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Kunjom"
+      },
+      "personalId": {
+        "type": "string",
+        "description": "Personal ID number / Numru tal-karta tal-identità",
+        "pattern": "^\\d{1,7}[A-Z]$"
+      },
+      "documentType": {
+        "type": "string",
+        "description": "Document type / Tip ta' dokument"
+      },
+      "documentNumber": {
+        "type": "string",
+        "description": "Document number / Numru tad-dokument"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Data tal-ħruġ",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Data ta' skadenza",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Awtorità li ħarġet"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Post tat-twelid"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Data tat-twelid",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Indirizz"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Nazzjonalità"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Sess",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "personalId",
+      "documentType",
+      "documentNumber",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

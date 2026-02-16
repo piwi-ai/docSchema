@@ -1,0 +1,92 @@
+{
+  "id": "doc-isee",
+  "name": "Attestazione ISEE",
+  "description": "Attestazione ISEE — indicatore della situazione economica equivalente",
+  "references": [
+    {
+      "title": "INPS — ISEE",
+      "url": "https://www.inps.it/it/it/dettaglio-scheda.schede-servizio-strumento.schede-servizi.isee-indicatore-della-situazione-economica-equivalente-50498.isee-indicatore-della-situazione-economica-equivalente.html",
+      "type": "documentation"
+    },
+    {
+      "title": "DSU — Modulo e istruzioni",
+      "url": "https://servizi2.inps.it/servizi/CircMessStworker/VisualizzaDoc.aspx?inpsdoc=Circolare%20numero%20137%20del%2007-10-2016.htm",
+      "type": "specification"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "anno": {
+        "type": "number",
+        "description": "Anno di riferimento"
+      },
+      "dichiarante": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale"
+        ]
+      },
+      "valoreIsee": {
+        "type": "number",
+        "description": "Valore ISEE in Euro"
+      },
+      "valoreIse": {
+        "type": "number",
+        "description": "Valore ISE in Euro"
+      },
+      "patrimonioMob": {
+        "type": "number",
+        "description": "Patrimonio mobiliare totale in Euro"
+      },
+      "patrimonioImm": {
+        "type": "number",
+        "description": "Patrimonio immobiliare totale in Euro"
+      },
+      "redditoNucleoFamiliare": {
+        "type": "number",
+        "description": "Reddito complessivo del nucleo familiare in Euro"
+      },
+      "numComponenti": {
+        "type": "number",
+        "description": "Numero componenti nucleo familiare"
+      },
+      "scalaDiEquivalenza": {
+        "type": "number",
+        "description": "Scala di equivalenza"
+      },
+      "dataRilascio": {
+        "type": "string",
+        "description": "Data di rilascio attestazione",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "validita": {
+        "type": "string",
+        "description": "Data di scadenza validità",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      }
+    },
+    "required": [
+      "anno",
+      "dichiarante",
+      "valoreIsee"
+    ]
+  }
+}

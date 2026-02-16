@@ -1,0 +1,95 @@
+{
+  "id": "doc-visura-ipotecaria",
+  "name": "Visura Ipotecaria",
+  "description": "Ispezione ipotecaria che riporta la situazione giuridica dell'immobile: proprietà, ipoteche, pignoramenti e vincoli",
+  "references": [
+    {
+      "title": "Agenzia delle Entrate — Ispezione ipotecaria",
+      "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/ispezione-ipotecaria",
+      "type": "documentation"
+    },
+    {
+      "title": "Conservatoria dei Registri Immobiliari",
+      "url": "https://sister.agenziaentrate.gov.it/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "tipoFormalita": {
+        "type": "string",
+        "description": "Tipo di formalità (es. compravendita, ipoteca volontaria, ipoteca giudiziale, ipoteca legale, pignoramento, sequestro conservativo, successione ereditaria, donazione, trascrizione, servitù, cancellazione, annotazione)"
+      },
+      "dataRegistrazione": {
+        "type": "string",
+        "description": "Data di registrazione in formato europeo DD.MM.YYYY",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "numeroRegistrazione": {
+        "type": "string",
+        "description": "Numero di registro (Registro Generale e Registro Particolare)"
+      },
+      "soggetti": {
+        "type": "array",
+        "description": "Soggetti coinvolti nella formalità",
+        "items": {
+          "type": "object",
+          "properties": {
+            "nome": {
+              "type": "string"
+            },
+            "cognome": {
+              "type": "string"
+            },
+            "codiceFiscale": {
+              "type": "string"
+            },
+            "ruolo": {
+              "type": "string",
+              "description": "Ruolo del soggetto (es. proprietario, creditore, debitore, garante, dante causa, avente causa)"
+            }
+          },
+          "required": [
+            "nome",
+            "cognome",
+            "codiceFiscale",
+            "ruolo"
+          ]
+        }
+      },
+      "foglio": {
+        "type": "string",
+        "description": "Foglio catastale dell'immobile"
+      },
+      "particella": {
+        "type": "string",
+        "description": "Particella catastale dell'immobile"
+      },
+      "subalterno": {
+        "type": "string",
+        "description": "Subalterno dell'immobile"
+      },
+      "indirizzo": {
+        "type": "string",
+        "description": "Indirizzo dell'immobile, se presente"
+      },
+      "importo": {
+        "type": "string",
+        "description": "Importo dell'ipoteca o del credito, se applicabile"
+      },
+      "note": {
+        "type": "string",
+        "description": "Note o annotazioni aggiuntive — copiare TESTUALMENTE dal documento (es. cancellazione, restrizione). Se non ci sono note, restituire stringa vuota. NON scrivere frasi come \"Nessuna ipoteca\" o \"Nessun vincolo\"."
+      }
+    },
+    "required": [
+      "tipoFormalita",
+      "dataRegistrazione",
+      "numeroRegistrazione",
+      "soggetti",
+      "foglio",
+      "particella"
+    ]
+  }
+}

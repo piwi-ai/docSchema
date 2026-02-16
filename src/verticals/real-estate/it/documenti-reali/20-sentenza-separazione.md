@@ -10,33 +10,36 @@ Provvedimento giudiziario di separazione legale o divorzio emesso dal Tribunale 
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `tribunale` | string | ✅ | Tribunale competente che ha emesso la sentenza |
-| `numeroSentenza` | string | | Numero di ruolo/sentenza |
-| `dataSentenza` | date DD.MM.YYYY | ✅ | Data della sentenza/omologazione |
-| `coniuge1` | string | ✅ | Nome e cognome del primo coniuge |
-| `coniuge2` | string | ✅ | Nome e cognome del secondo coniuge |
-| `tipoProvvedimento` | enum | ✅ | separazione consensuale \| separazione giudiziale \| divorzio |
-| `disposizioniPatrimoniali` | string | | Disposizioni relative ai beni immobili (es. assegnazione casa coniugale) |
-| `passaggioInGiudicato` | date DD.MM.YYYY | | Data di passaggio in giudicato |
+| Campo                      | Tipo            | Obbligatorio | Descrizione                                                              |
+| -------------------------- | --------------- | :----------: | ------------------------------------------------------------------------ |
+| `tribunale`                | string          |      ✅      | Tribunale competente che ha emesso la sentenza                           |
+| `numeroSentenza`           | string          |              | Numero di ruolo/sentenza                                                 |
+| `dataSentenza`             | date DD.MM.YYYY |      ✅      | Data della sentenza/omologazione                                         |
+| `coniuge1`                 | string          |      ✅      | Nome e cognome del primo coniuge                                         |
+| `coniuge2`                 | string          |      ✅      | Nome e cognome del secondo coniuge                                       |
+| `tipoProvvedimento`        | enum            |      ✅      | separazione consensuale \| separazione giudiziale \| divorzio            |
+| `disposizioniPatrimoniali` | string          |              | Disposizioni relative ai beni immobili (es. assegnazione casa coniugale) |
+| `passaggioInGiudicato`     | date DD.MM.YYYY |              | Data di passaggio in giudicato                                           |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "tribunale": { "type": "string" },
-    "numeroSentenza": { "type": "string" },
-    "dataSentenza": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
-    "coniuge1": { "type": "string" },
-    "coniuge2": { "type": "string" },
-    "tipoProvvedimento": { "type": "string", "enum": ["separazione consensuale", "separazione giudiziale", "divorzio", null] },
-    "disposizioniPatrimoniali": { "type": "string" },
-    "passaggioInGiudicato": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" }
-  },
-  "required": ["tribunale", "dataSentenza", "coniuge1", "coniuge2", "tipoProvvedimento"]
+    "type": "object",
+    "properties": {
+        "tribunale": { "type": "string" },
+        "numeroSentenza": { "type": "string" },
+        "dataSentenza": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
+        "coniuge1": { "type": "string" },
+        "coniuge2": { "type": "string" },
+        "tipoProvvedimento": {
+            "type": "string",
+            "enum": ["separazione consensuale", "separazione giudiziale", "divorzio", null]
+        },
+        "disposizioniPatrimoniali": { "type": "string" },
+        "passaggioInGiudicato": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" }
+    },
+    "required": ["tribunale", "dataSentenza", "coniuge1", "coniuge2", "tipoProvvedimento"]
 }
 ```
 

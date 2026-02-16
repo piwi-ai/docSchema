@@ -10,31 +10,42 @@ Dichiarazione di Conformità (DiCo) rilasciata dall'impresa installatrice che at
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `tipoImpianto` | enum | ✅ | elettrico \| idraulico \| gas \| riscaldamento \| climatizzazione \| ascensore |
-| `impresaInstallatrice` | string | ✅ | Ragione sociale dell'impresa installatrice |
-| `responsabileTecnico` | string | | Nome del responsabile tecnico |
-| `dataRilascio` | date DD.MM.YYYY | ✅ | Data di rilascio della dichiarazione |
-| `numeroProtocollo` | string | | Numero di protocollo |
-| `indirizzo` | string | ✅ | Indirizzo dell'immobile |
-| `normativaRiferimento` | string | | Normativa di riferimento (es. DM 37/2008, CEI 64-8, UNI 7129) |
+| Campo                  | Tipo            | Obbligatorio | Descrizione                                                                    |
+| ---------------------- | --------------- | :----------: | ------------------------------------------------------------------------------ |
+| `tipoImpianto`         | enum            |      ✅      | elettrico \| idraulico \| gas \| riscaldamento \| climatizzazione \| ascensore |
+| `impresaInstallatrice` | string          |      ✅      | Ragione sociale dell'impresa installatrice                                     |
+| `responsabileTecnico`  | string          |              | Nome del responsabile tecnico                                                  |
+| `dataRilascio`         | date DD.MM.YYYY |      ✅      | Data di rilascio della dichiarazione                                           |
+| `numeroProtocollo`     | string          |              | Numero di protocollo                                                           |
+| `indirizzo`            | string          |      ✅      | Indirizzo dell'immobile                                                        |
+| `normativaRiferimento` | string          |              | Normativa di riferimento (es. DM 37/2008, CEI 64-8, UNI 7129)                  |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "tipoImpianto": { "type": "string", "enum": ["elettrico", "idraulico", "gas", "riscaldamento", "climatizzazione", "ascensore", null] },
-    "impresaInstallatrice": { "type": "string" },
-    "responsabileTecnico": { "type": "string" },
-    "dataRilascio": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
-    "numeroProtocollo": { "type": "string" },
-    "indirizzo": { "type": "string" },
-    "normativaRiferimento": { "type": "string" }
-  },
-  "required": ["tipoImpianto", "impresaInstallatrice", "dataRilascio", "indirizzo"]
+    "type": "object",
+    "properties": {
+        "tipoImpianto": {
+            "type": "string",
+            "enum": [
+                "elettrico",
+                "idraulico",
+                "gas",
+                "riscaldamento",
+                "climatizzazione",
+                "ascensore",
+                null
+            ]
+        },
+        "impresaInstallatrice": { "type": "string" },
+        "responsabileTecnico": { "type": "string" },
+        "dataRilascio": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
+        "numeroProtocollo": { "type": "string" },
+        "indirizzo": { "type": "string" },
+        "normativaRiferimento": { "type": "string" }
+    },
+    "required": ["tipoImpianto", "impresaInstallatrice", "dataRilascio", "indirizzo"]
 }
 ```
 

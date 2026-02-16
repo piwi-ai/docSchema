@@ -1,0 +1,73 @@
+{
+  "id": "doc-survey",
+  "name": "Property Survey / Plat Map",
+  "description": "ALTA/NSPS land survey showing boundaries, improvements, and easements",
+  "references": [
+    {
+      "title": "ALTA/NSPS Land Title Survey Standards",
+      "url": "https://www.alta.org/land-survey-standards/",
+      "type": "specification"
+    },
+    {
+      "title": "NSPS — National Society of Professional Surveyors",
+      "url": "https://www.nsps.us.com/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "surveyor": {
+        "type": "string",
+        "description": "Surveyor name and license number"
+      },
+      "surveyDate": {
+        "type": "string",
+        "description": "Date of survey",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "propertyAddress": {
+        "type": "string",
+        "description": "Property address"
+      },
+      "parcelNumber": {
+        "type": "string",
+        "description": "Assessor Parcel Number (APN) or Tax ID number"
+      },
+      "lotSize": {
+        "type": "string",
+        "description": "Lot size / area (in acres or sq ft)"
+      },
+      "legalDescription": {
+        "type": "string",
+        "description": "Legal description from survey"
+      },
+      "boundaryDescription": {
+        "type": "string",
+        "description": "Property boundary details / metes and bounds"
+      },
+      "improvements": {
+        "type": "string",
+        "description": "Improvements shown (buildings, fences, driveways)"
+      },
+      "easements": {
+        "type": "string",
+        "description": "Easements identified"
+      },
+      "encroachments": {
+        "type": "string",
+        "description": "Any encroachments identified"
+      },
+      "floodZone": {
+        "type": "string",
+        "description": "FEMA flood zone designation (if shown)"
+      }
+    },
+    "required": [
+      "surveyor",
+      "surveyDate",
+      "propertyAddress",
+      "lotSize"
+    ]
+  }
+}

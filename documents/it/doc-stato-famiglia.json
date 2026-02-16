@@ -1,0 +1,93 @@
+{
+  "id": "doc-stato-famiglia",
+  "name": "Certificato Stato Famiglia",
+  "description": "Certificato stato di famiglia — per polizze vita e beneficiari",
+  "references": [
+    {
+      "title": "Ministero dell'Interno — Servizi demografici",
+      "url": "https://dait.interno.gov.it/servizi-demografici",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "intestatario": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo di residenza"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale"
+        ]
+      },
+      "componenti": {
+        "type": "array",
+        "description": "Componenti del nucleo familiare",
+        "items": {
+          "type": "object",
+          "properties": {
+            "nome": {
+              "type": "string",
+              "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+            },
+            "cognome": {
+              "type": "string",
+              "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+            },
+            "codiceFiscale": {
+              "type": "string",
+              "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+              "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+            },
+            "relazione": {
+              "type": "string",
+              "description": "Relazione con l'intestatario (coniuge, figlio, ecc.)"
+            },
+            "dataNascita": {
+              "type": "string",
+              "description": "Data di nascita",
+              "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+            }
+          },
+          "required": [
+            "nome",
+            "cognome",
+            "relazione"
+          ]
+        }
+      },
+      "dataRilascio": {
+        "type": "string",
+        "description": "Data di rilascio del certificato",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "comune": {
+        "type": "string",
+        "description": "Comune che ha rilasciato il certificato"
+      }
+    },
+    "required": [
+      "intestatario",
+      "componenti"
+    ]
+  }
+}

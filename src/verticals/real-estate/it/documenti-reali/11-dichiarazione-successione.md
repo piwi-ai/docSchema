@@ -10,49 +10,57 @@ Atto fiscale presentato dagli eredi all'Agenzia delle Entrate entro 12 mesi dall
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `defunto` | string | ✅ | Nome e cognome del defunto (de cuius) |
-| `dataDecesso` | date DD.MM.YYYY | ✅ | Data del decesso |
-| `dataPresentazione` | string | ✅ | Data di presentazione all'Agenzia delle Entrate |
-| `eredi` | array di oggetti | ✅ | Elenco degli eredi |
-| `eredi[].nome` | string | ✅ | Nome dell'erede |
-| `eredi[].cognome` | string | ✅ | Cognome dell'erede |
-| `eredi[].codiceFiscale` | string | ✅ | Codice Fiscale dell'erede |
-| `eredi[].quotaEreditaria` | string | ✅ | Quota di eredità (es. 1/2, 1/3, 1/1) |
-| `foglio` | string | ✅ | Foglio catastale dell'immobile ereditato |
-| `particella` | string | ✅ | Particella catastale |
-| `subalterno` | string | ✅ | Subalterno |
-| `volumeAtti` | string | | Volume e numero di registrazione |
+| Campo                     | Tipo             | Obbligatorio | Descrizione                                     |
+| ------------------------- | ---------------- | :----------: | ----------------------------------------------- |
+| `defunto`                 | string           |      ✅      | Nome e cognome del defunto (de cuius)           |
+| `dataDecesso`             | date DD.MM.YYYY  |      ✅      | Data del decesso                                |
+| `dataPresentazione`       | string           |      ✅      | Data di presentazione all'Agenzia delle Entrate |
+| `eredi`                   | array di oggetti |      ✅      | Elenco degli eredi                              |
+| `eredi[].nome`            | string           |      ✅      | Nome dell'erede                                 |
+| `eredi[].cognome`         | string           |      ✅      | Cognome dell'erede                              |
+| `eredi[].codiceFiscale`   | string           |      ✅      | Codice Fiscale dell'erede                       |
+| `eredi[].quotaEreditaria` | string           |      ✅      | Quota di eredità (es. 1/2, 1/3, 1/1)            |
+| `foglio`                  | string           |      ✅      | Foglio catastale dell'immobile ereditato        |
+| `particella`              | string           |      ✅      | Particella catastale                            |
+| `subalterno`              | string           |      ✅      | Subalterno                                      |
+| `volumeAtti`              | string           |              | Volume e numero di registrazione                |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "defunto": { "type": "string" },
-    "dataDecesso": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
-    "dataPresentazione": { "type": "string" },
-    "eredi": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "nome": { "type": "string" },
-          "cognome": { "type": "string" },
-          "codiceFiscale": { "type": "string" },
-          "quotaEreditaria": { "type": "string" }
+    "type": "object",
+    "properties": {
+        "defunto": { "type": "string" },
+        "dataDecesso": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
+        "dataPresentazione": { "type": "string" },
+        "eredi": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "nome": { "type": "string" },
+                    "cognome": { "type": "string" },
+                    "codiceFiscale": { "type": "string" },
+                    "quotaEreditaria": { "type": "string" }
+                },
+                "required": ["nome", "cognome", "codiceFiscale", "quotaEreditaria"]
+            }
         },
-        "required": ["nome", "cognome", "codiceFiscale", "quotaEreditaria"]
-      }
+        "foglio": { "type": "string" },
+        "particella": { "type": "string" },
+        "subalterno": { "type": "string" },
+        "volumeAtti": { "type": "string" }
     },
-    "foglio": { "type": "string" },
-    "particella": { "type": "string" },
-    "subalterno": { "type": "string" },
-    "volumeAtti": { "type": "string" }
-  },
-  "required": ["defunto", "dataDecesso", "dataPresentazione", "eredi", "foglio", "particella", "subalterno"]
+    "required": [
+        "defunto",
+        "dataDecesso",
+        "dataPresentazione",
+        "eredi",
+        "foglio",
+        "particella",
+        "subalterno"
+    ]
 }
 ```
 

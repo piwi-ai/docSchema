@@ -14,7 +14,8 @@ export { DOC_IDS, ENTITY_IDS };
 export const accountantItConfig: BusinessConfiguration = {
     id: 'ACCOUNTANT-IT-DEFAULT',
     name: 'Commercialista / Studio Tributarista Italia',
-    description: 'Configurazione per gestione documenti studio commercialista — fatture, dichiarazioni, F24, bilanci, CU, buste paga',
+    description:
+        'Configurazione per gestione documenti studio commercialista — fatture, dichiarazioni, F24, bilanci, CU, buste paga',
     schemaVersion: 1,
     documentTypes,
     entityTypes,

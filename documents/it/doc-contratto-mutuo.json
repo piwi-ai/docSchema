@@ -1,0 +1,82 @@
+{
+  "id": "doc-contratto-mutuo",
+  "name": "Contratto di Mutuo",
+  "description": "Contratto di mutuo ipotecario stipulato contestualmente al rogito",
+  "references": [
+    {
+      "title": "Art. 1813–1822 Codice Civile — Mutuo",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1813",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "banca": {
+        "type": "string",
+        "description": "Nome della banca o istituto di credito"
+      },
+      "mutuatario": {
+        "type": "string",
+        "description": "Nome e cognome del mutuatario"
+      },
+      "codiceFiscaleMutuatario": {
+        "type": "string",
+        "description": "Codice Fiscale del mutuatario (extract without spaces)",
+        "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+      },
+      "importoMutuo": {
+        "type": "number",
+        "description": "Importo del mutuo erogato in Euro"
+      },
+      "durataAnni": {
+        "type": "number",
+        "description": "Durata del mutuo in anni"
+      },
+      "tassoInteresse": {
+        "type": "string",
+        "description": "Tasso di interesse e percentuale"
+      },
+      "tipoTasso": {
+        "type": "string",
+        "description": "Tipo di tasso",
+        "enum": [
+          "fisso",
+          "variabile",
+          "misto",
+          null
+        ],
+        "nullable": true
+      },
+      "rataMensile": {
+        "type": "number",
+        "description": "Importo rata mensile in Euro"
+      },
+      "notaio": {
+        "type": "string",
+        "description": "Nome e cognome del notaio rogante"
+      },
+      "dataStipula": {
+        "type": "string",
+        "description": "Data di stipula in formato europeo DD.MM.YYYY",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "numeroRepertorio": {
+        "type": "string",
+        "description": "Numero di repertorio"
+      },
+      "ipoteca": {
+        "type": "string",
+        "description": "Grado e importo dell'ipoteca iscritta"
+      }
+    },
+    "required": [
+      "banca",
+      "mutuatario",
+      "codiceFiscaleMutuatario",
+      "importoMutuo",
+      "dataStipula",
+      "notaio"
+    ]
+  }
+}

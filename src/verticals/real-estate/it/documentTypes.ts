@@ -10,18 +10,38 @@
 import type { DocumentTypeDef } from '../../../types.js';
 import {
     // Common
-    identita, tesseraSanitaria, contatto, procura, visuraCamerale,
+    identita,
+    tesseraSanitaria,
+    contatto,
+    procura,
+    visuraCamerale,
     // Real-estate specific
-    attoProvenienza, contrattoPrelim, propostaAcquisto,
-    visuraCatastale, planimetria, ape,
-    certificatoMorte, dichiarazioneSuccessione, accettazioneEredita,
-    certificatoFamiglia, visuraIpotecaria, certificatoAgibilita,
-    estrattoMatrimonio, conformitaUrbanistica, conformitaImpianti,
-    documentazioneCondominiale, sentenzaSeparazione,
+    attoProvenienza,
+    contrattoPrelim,
+    propostaAcquisto,
+    visuraCatastale,
+    planimetria,
+    ape,
+    certificatoMorte,
+    dichiarazioneSuccessione,
+    accettazioneEredita,
+    certificatoFamiglia,
+    visuraIpotecaria,
+    certificatoAgibilita,
+    estrattoMatrimonio,
+    conformitaUrbanistica,
+    conformitaImpianti,
+    documentazioneCondominiale,
+    sentenzaSeparazione,
     // Bank loan
-    deliberaMutuo, periziaBancaria, contrattoMutuo, mezziPagamento,
+    deliberaMutuo,
+    periziaBancaria,
+    contrattoMutuo,
+    mezziPagamento,
     // Optional / situational
-    certificatoResidenza, certificatoCDU, permessoSoggiorno,
+    certificatoResidenza,
+    certificatoCDU,
+    permessoSoggiorno,
 } from '../../../countries/it/documentTypes/index.js';
 
 // ─── Document Type IDs ──────────────────────────────────────────────────────

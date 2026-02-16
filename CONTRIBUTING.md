@@ -6,14 +6,14 @@ Thank you for your interest in contributing! DocSchema aims to become the univer
 
 ## Ways to Contribute
 
-| Contribution | Difficulty | Impact |
-|-------------|:----------:|:------:|
-| Add a document type to an existing vertical | 🟢 Easy | ⭐⭐ |
-| Add a country variant (e.g., German helpers) | 🟡 Medium | ⭐⭐⭐ |
-| Add a new business vertical | 🟡 Medium | ⭐⭐⭐ |
-| Improve extraction prompts | 🟢 Easy | ⭐⭐ |
-| Fix a JSON Schema pattern/regex | 🟢 Easy | ⭐ |
-| Propose a spec change | 🔴 Hard | ⭐⭐⭐⭐ |
+| Contribution                                 | Difficulty |  Impact  |
+| -------------------------------------------- | :--------: | :------: |
+| Add a document type to an existing vertical  |  🟢 Easy   |   ⭐⭐   |
+| Add a country variant (e.g., German helpers) | 🟡 Medium  |  ⭐⭐⭐  |
+| Add a new business vertical                  | 🟡 Medium  |  ⭐⭐⭐  |
+| Improve extraction prompts                   |  🟢 Easy   |   ⭐⭐   |
+| Fix a JSON Schema pattern/regex              |  🟢 Easy   |    ⭐    |
+| Propose a spec change                        |  🔴 Hard   | ⭐⭐⭐⭐ |
 
 ---
 
@@ -27,22 +27,37 @@ Create `src/helpers/{cc}.ts` where `{cc}` is the [ISO 3166-1 alpha-2](https://en
 // src/helpers/de.ts — German field helpers
 
 // Re-export universal primitives
-export { text, num, enumField, email, datePattern, objectSchema, arrayOfObjects } from './schema.js';
+export {
+    text,
+    num,
+    enumField,
+    email,
+    datePattern,
+    objectSchema,
+    arrayOfObjects,
+} from './schema.js';
 
 // German date format: DD.MM.YYYY
-export const datumDE = (desc = 'Datum im Format TT.MM.JJJJ') =>
-    ({ type: 'string' as const, description: desc, pattern: '^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$' });
+export const datumDE = (desc = 'Datum im Format TT.MM.JJJJ') => ({
+    type: 'string' as const,
+    description: desc,
+    pattern: '^\\\\d{2}\\\\.\\\\d{2}\\\\.\\\\d{4}$',
+});
 
 // German person fields
-export const vorname = (desc = 'Vorname') =>
-    ({ type: 'string' as const, description: desc });
+export const vorname = (desc = 'Vorname') => ({ type: 'string' as const, description: desc });
 
-export const nachname = (desc = 'Nachname / Familienname') =>
-    ({ type: 'string' as const, description: desc });
+export const nachname = (desc = 'Nachname / Familienname') => ({
+    type: 'string' as const,
+    description: desc,
+});
 
 // German tax ID (Steueridentifikationsnummer) — 11 digits
-export const steuerID = (desc = 'Steueridentifikationsnummer — 11-stellig') =>
-    ({ type: 'string' as const, description: desc, pattern: '^\\\\d{11}$' });
+export const steuerID = (desc = 'Steueridentifikationsnummer — 11-stellig') => ({
+    type: 'string' as const,
+    description: desc,
+    pattern: '^\\\\d{11}$',
+});
 ```
 
 ### 2. Key conventions
@@ -67,11 +82,11 @@ Examples: `src/verticals/law-firm/us/`, `src/verticals/medical/de/`
 
 ### 2. Create three files
 
-| File | Purpose |
-|------|---------|
-| `documentTypes.ts` | Document type definitions with JSON Schema extraction instructions |
-| `entityTypes.ts` | Entity definitions with data sources, field mappings, and conditional requirements |
-| `index.ts` | Assemble and export the `BusinessConfiguration` |
+| File               | Purpose                                                                            |
+| ------------------ | ---------------------------------------------------------------------------------- |
+| `documentTypes.ts` | Document type definitions with JSON Schema extraction instructions                 |
+| `entityTypes.ts`   | Entity definitions with data sources, field mappings, and conditional requirements |
+| `index.ts`         | Assemble and export the `BusinessConfiguration`                                    |
 
 ### 3. Document Types (`documentTypes.ts`)
 
@@ -90,16 +105,20 @@ export const documentTypes: DocumentTypeDef[] = [
         id: DOC_IDS.CONTRACT,
         name: 'Contract',
         description: 'Legal contract or agreement',
-        jsonSchema: objectSchema({
-            title: text('Contract title'),
-            effectiveDate: dateUS('Effective date'),
-            parties: text('Names of contracting parties'),
-        }, ['title', 'effectiveDate', 'parties']),
+        jsonSchema: objectSchema(
+            {
+                title: text('Contract title'),
+                effectiveDate: dateUS('Effective date'),
+                parties: text('Names of contracting parties'),
+            },
+            ['title', 'effectiveDate', 'parties'],
+        ),
     },
 ];
 ```
 
 **Rules:**
+
 - Document IDs MUST use the `doc-` prefix and lowercase kebab-case
 - Always export a `DOC_IDS` const object
 - Use the country's field helpers — never raw `{ type: 'string' }`
@@ -136,7 +155,11 @@ export const entityTypes: EntityTypeDef[] = [
                 enabled: true,
                 canCreateEntity: true,
                 fieldMappings: [
-                    { sourceField: 'clientName', targetField: 'firstName', matchFields: NAME_MATCH },
+                    {
+                        sourceField: 'clientName',
+                        targetField: 'firstName',
+                        matchFields: NAME_MATCH,
+                    },
                 ],
             },
         ],
@@ -146,6 +169,7 @@ export const entityTypes: EntityTypeDef[] = [
 ```
 
 **Rules:**
+
 - Entity IDs MUST use the `entity-` prefix
 - Always export an `ENTITY_IDS` const object
 - Define shared match field patterns as constants (e.g., `CF_NOME_COGNOME`)
@@ -154,7 +178,7 @@ export const entityTypes: EntityTypeDef[] = [
 
 ### 5. Conditional Requirements
 
-Conditional requirements implement **IF-THEN** business logic. Example: *"If marital status is 'widowed', require a death certificate."*
+Conditional requirements implement **IF-THEN** business logic. Example: _"If marital status is 'widowed', require a death certificate."_
 
 ```typescript
 conditionalRequirements: [
@@ -234,9 +258,9 @@ All generated configs are validated against `docschema.schema.json`. Before subm
 2. **Implement** following the patterns above
 3. **Test**: `npm run generate && npm test`
 4. **Submit** a PR with:
-   - What vertical/country you're adding
-   - How many document types and entity types
-   - Any conditional requirements (the interesting business logic)
+    - What vertical/country you're adding
+    - How many document types and entity types
+    - Any conditional requirements (the interesting business logic)
 5. A maintainer will review for spec compliance and merge
 
 ---
@@ -244,6 +268,7 @@ All generated configs are validated against `docschema.schema.json`. Before subm
 ## Questions?
 
 Open a [GitHub Discussion](https://github.com/piwi-ai/docSchema/discussions) for:
+
 - **RFC proposals** — changes to the spec or type system
 - **Help wanted** — questions about implementation patterns
 - **Show & tell** — share your vertical with the community

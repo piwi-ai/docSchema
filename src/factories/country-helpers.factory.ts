@@ -7,8 +7,14 @@
  */
 import type { CountryMeta } from '../country-registry.js';
 import {
-    text, num, enumField, email, datePattern,
-    objectSchema, arrayOfObjects, ref,
+    text,
+    num,
+    enumField,
+    email,
+    datePattern,
+    objectSchema,
+    arrayOfObjects,
+    ref,
 } from '../helpers/schema.js';
 
 /**
@@ -21,7 +27,14 @@ import {
 export function createCountryHelpers(meta: CountryMeta) {
     return {
         // Universal (re-exported)
-        text, num, enumField, email, datePattern, objectSchema, arrayOfObjects, ref,
+        text,
+        num,
+        enumField,
+        email,
+        datePattern,
+        objectSchema,
+        arrayOfObjects,
+        ref,
 
         // Country-specific
         date: (desc?: string) => ({

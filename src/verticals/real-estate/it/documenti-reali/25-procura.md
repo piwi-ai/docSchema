@@ -10,39 +10,54 @@ Atto notarile con cui una persona (mandante) conferisce a un'altra (mandatario) 
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `nomeMandante` | string | ✅ | Nome del mandante (la persona rappresentata) |
-| `cognomeMandante` | string | ✅ | Cognome del mandante |
-| `codiceFiscaleMandante` | string (pattern CF) | ✅ | Codice Fiscale del mandante |
-| `nomeMandatario` | string | ✅ | Nome del mandatario (il rappresentante) |
-| `cognomeMandatario` | string | ✅ | Cognome del mandatario |
-| `codiceFiscaleMandatario` | string (pattern CF) | ✅ | Codice Fiscale del mandatario |
-| `tipoProcura` | enum | ✅ | speciale \| generale |
-| `oggettoDelega` | string | | Oggetto specifico della delega (es. vendita dell'immobile sito in...) |
-| `notaio` | string | | Notaio che ha autenticato la procura |
-| `dataAtto` | date DD.MM.YYYY | ✅ | Data dell'atto |
-| `numeroRepertorio` | string | | Numero di repertorio |
+| Campo                     | Tipo                | Obbligatorio | Descrizione                                                           |
+| ------------------------- | ------------------- | :----------: | --------------------------------------------------------------------- |
+| `nomeMandante`            | string              |      ✅      | Nome del mandante (la persona rappresentata)                          |
+| `cognomeMandante`         | string              |      ✅      | Cognome del mandante                                                  |
+| `codiceFiscaleMandante`   | string (pattern CF) |      ✅      | Codice Fiscale del mandante                                           |
+| `nomeMandatario`          | string              |      ✅      | Nome del mandatario (il rappresentante)                               |
+| `cognomeMandatario`       | string              |      ✅      | Cognome del mandatario                                                |
+| `codiceFiscaleMandatario` | string (pattern CF) |      ✅      | Codice Fiscale del mandatario                                         |
+| `tipoProcura`             | enum                |      ✅      | speciale \| generale                                                  |
+| `oggettoDelega`           | string              |              | Oggetto specifico della delega (es. vendita dell'immobile sito in...) |
+| `notaio`                  | string              |              | Notaio che ha autenticato la procura                                  |
+| `dataAtto`                | date DD.MM.YYYY     |      ✅      | Data dell'atto                                                        |
+| `numeroRepertorio`        | string              |              | Numero di repertorio                                                  |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "nomeMandante": { "type": "string" },
-    "cognomeMandante": { "type": "string" },
-    "codiceFiscaleMandante": { "type": "string", "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$" },
-    "nomeMandatario": { "type": "string" },
-    "cognomeMandatario": { "type": "string" },
-    "codiceFiscaleMandatario": { "type": "string", "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$" },
-    "tipoProcura": { "type": "string", "enum": ["speciale", "generale", null] },
-    "oggettoDelega": { "type": "string" },
-    "notaio": { "type": "string" },
-    "dataAtto": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
-    "numeroRepertorio": { "type": "string" }
-  },
-  "required": ["nomeMandante", "cognomeMandante", "codiceFiscaleMandante", "nomeMandatario", "cognomeMandatario", "codiceFiscaleMandatario", "tipoProcura", "dataAtto"]
+    "type": "object",
+    "properties": {
+        "nomeMandante": { "type": "string" },
+        "cognomeMandante": { "type": "string" },
+        "codiceFiscaleMandante": {
+            "type": "string",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+        },
+        "nomeMandatario": { "type": "string" },
+        "cognomeMandatario": { "type": "string" },
+        "codiceFiscaleMandatario": {
+            "type": "string",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+        },
+        "tipoProcura": { "type": "string", "enum": ["speciale", "generale", null] },
+        "oggettoDelega": { "type": "string" },
+        "notaio": { "type": "string" },
+        "dataAtto": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
+        "numeroRepertorio": { "type": "string" }
+    },
+    "required": [
+        "nomeMandante",
+        "cognomeMandante",
+        "codiceFiscaleMandante",
+        "nomeMandatario",
+        "cognomeMandatario",
+        "codiceFiscaleMandatario",
+        "tipoProcura",
+        "dataAtto"
+    ]
 }
 ```
 

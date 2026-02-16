@@ -1,0 +1,126 @@
+{
+  "id": "doc-ape",
+  "name": "APE - Certificato Energetico",
+  "description": "Efficienza energetica obbligatoria per annunci e rogito",
+  "references": [
+    {
+      "title": "ENEA — Attestato di Prestazione Energetica",
+      "url": "https://www.efficienzaenergetica.enea.it/",
+      "type": "documentation"
+    },
+    {
+      "title": "D.Lgs. 192/2005 — Rendimento energetico nell'edilizia",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-08-19;192",
+      "type": "regulation"
+    },
+    {
+      "title": "SIAPE — Sistema Informativo APE",
+      "url": "https://siape.enea.it/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "classeEnergetica": {
+        "type": "string",
+        "description": "Classe energetica dell'immobile",
+        "enum": [
+          "A4",
+          "A3",
+          "A2",
+          "A1",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          null
+        ],
+        "nullable": true
+      },
+      "indiceEpgl": {
+        "type": "number",
+        "description": "Consumo energetico"
+      },
+      "codiceIdentificativo": {
+        "type": "string"
+      },
+      "validoFinoA": {
+        "type": "string",
+        "description": "Data di validità in formato europeo DD/MM/YYYY",
+        "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$"
+      },
+      "regione": {
+        "type": "string"
+      },
+      "comune": {
+        "type": "string"
+      },
+      "indirizzo": {
+        "type": "string"
+      },
+      "piano": {
+        "type": "string"
+      },
+      "interno": {
+        "type": "string"
+      },
+      "comuneCatastale": {
+        "type": "string"
+      },
+      "sezione": {
+        "type": "string"
+      },
+      "foglio": {
+        "type": "string"
+      },
+      "particella": {
+        "type": "string"
+      },
+      "subalterni": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "destinazioneUso": {
+        "type": "string",
+        "description": "Destinazione d'uso dell'immobile (es. residenziale, ufficio, commerciale, industriale, agricolo, magazzino, autorimessa)"
+      },
+      "oggettoAttestato": {
+        "type": "string",
+        "description": "Oggetto dell'attestato"
+      },
+      "dataScadenza": {
+        "type": "string",
+        "description": "Data di scadenza in formato europeo DD/MM/YYYY",
+        "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$"
+      },
+      "codiceUnivoco": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "classeEnergetica",
+      "indiceEpgl",
+      "codiceIdentificativo",
+      "validoFinoA",
+      "regione",
+      "comune",
+      "indirizzo",
+      "piano",
+      "interno",
+      "comuneCatastale",
+      "sezione",
+      "foglio",
+      "particella",
+      "subalterni",
+      "destinazioneUso",
+      "oggettoAttestato",
+      "dataScadenza",
+      "codiceUnivoco"
+    ]
+  }
+}

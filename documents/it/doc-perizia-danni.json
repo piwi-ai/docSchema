@@ -1,0 +1,81 @@
+{
+  "id": "doc-perizia-danni",
+  "name": "Perizia Danni",
+  "description": "Perizia tecnica dei danni — importo, descrizione danni, perito",
+  "references": [
+    {
+      "title": "Art. 148 Codice delle Assicurazioni — Perizia",
+      "url": "https://www.ivass.it/normativa/nazionale/primaria/index.html",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "numeroSinistro": {
+        "type": "string",
+        "description": "Numero sinistro di riferimento"
+      },
+      "perito": {
+        "type": "string",
+        "description": "Nome e cognome del perito"
+      },
+      "studioPeritale": {
+        "type": "string",
+        "description": "Studio peritale incaricato"
+      },
+      "targa": {
+        "type": "string",
+        "description": "Numero di targa del veicolo (es. AB123CD)"
+      },
+      "dataPerizia": {
+        "type": "string",
+        "description": "Data della perizia",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "danni": {
+        "type": "string",
+        "description": "Descrizione dettagliata dei danni riscontrati"
+      },
+      "importoRiparazione": {
+        "type": "number",
+        "description": "Importo stimato per la riparazione in Euro"
+      },
+      "importoLiquidazione": {
+        "type": "number",
+        "description": "Importo proposto per la liquidazione in Euro"
+      },
+      "demolizione": {
+        "type": "string",
+        "description": "Veicolo da demolire",
+        "enum": [
+          "sì",
+          "no",
+          null
+        ],
+        "nullable": true
+      },
+      "valoreAntesinistro": {
+        "type": "number",
+        "description": "Valore del veicolo ante-sinistro in Euro"
+      },
+      "fotografieAllegate": {
+        "type": "string",
+        "description": "Fotografie allegate",
+        "enum": [
+          "sì",
+          "no",
+          null
+        ],
+        "nullable": true
+      }
+    },
+    "required": [
+      "numeroSinistro",
+      "perito",
+      "targa",
+      "danni",
+      "importoRiparazione"
+    ]
+  }
+}

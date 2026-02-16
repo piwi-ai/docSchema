@@ -1,0 +1,93 @@
+{
+  "id": "doc-identity-card",
+  "name": "Identity Document",
+  "description": "Identity document (ID Card, Passport, Driver License)",
+  "references": [
+    {
+      "title": "ADIC — Identity Cards",
+      "url": "https://adic.lrv.lt/en/identity-documents/identity-card",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Vardas"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Pavardė"
+      },
+      "personalId": {
+        "type": "string",
+        "description": "Personal ID number / Asmens kodas",
+        "pattern": "^\\d{11}$"
+      },
+      "documentType": {
+        "type": "string",
+        "description": "Document type / Dokumento tipas"
+      },
+      "documentNumber": {
+        "type": "string",
+        "description": "Document number / Dokumento numeris"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Išdavimo data",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Galioja iki",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Išdavusi institucija"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Gimimo vieta"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Gimimo data",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Adresas"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Pilietybė"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Lytis",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "personalId",
+      "documentType",
+      "documentNumber",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

@@ -8,9 +8,7 @@
 import type { DocumentTypeDef } from '../types.js';
 import type { CountryMeta } from '../country-registry.js';
 import { objectSchema, text, enumField } from '../helpers/schema.js';
-import {
-    DocTypeId, SEX_VALUES, PassportField, PASSPORT_REQUIRED_FIELDS,
-} from '../constants.js';
+import { DocTypeId, SEX_VALUES, PassportField, PASSPORT_REQUIRED_FIELDS } from '../constants.js';
 
 /**
  * Create a standard passport document type for a given country.
@@ -32,19 +30,22 @@ export function createPassport(meta: CountryMeta): DocumentTypeDef {
         name: 'Passport',
         description: `Passport — ${meta.name}`,
         references: meta.documentReferences.passport,
-        jsonSchema: objectSchema({
-            [PassportField.FIRST_NAME]: { type: 'string', description: labels.firstName },
-            [PassportField.LAST_NAME]: { type: 'string', description: labels.lastName },
-            [PassportField.PASSPORT_NUMBER]: text('Passport number'),
-            [PassportField.NATIONALITY]: text(labels.nationality),
-            [PassportField.DATE_OF_BIRTH]: dateField(labels.dateOfBirth),
-            [PassportField.PLACE_OF_BIRTH]: text(labels.placeOfBirth),
-            [PassportField.SEX]: enumField(labels.sex, SEX_VALUES),
-            [PassportField.ISSUE_DATE]: dateField(labels.issueDate),
-            [PassportField.EXPIRATION_DATE]: dateField(labels.expirationDate),
-            [PassportField.ISSUING_AUTHORITY]: text(labels.issuingAuthority),
-            [PassportField.ISSUING_COUNTRY]: text('Issuing country / Code'),
-            [PassportField.MRZ]: text(labels.mrz),
-        }, [...PASSPORT_REQUIRED_FIELDS]),
+        jsonSchema: objectSchema(
+            {
+                [PassportField.FIRST_NAME]: { type: 'string', description: labels.firstName },
+                [PassportField.LAST_NAME]: { type: 'string', description: labels.lastName },
+                [PassportField.PASSPORT_NUMBER]: text('Passport number'),
+                [PassportField.NATIONALITY]: text(labels.nationality),
+                [PassportField.DATE_OF_BIRTH]: dateField(labels.dateOfBirth),
+                [PassportField.PLACE_OF_BIRTH]: text(labels.placeOfBirth),
+                [PassportField.SEX]: enumField(labels.sex, SEX_VALUES),
+                [PassportField.ISSUE_DATE]: dateField(labels.issueDate),
+                [PassportField.EXPIRATION_DATE]: dateField(labels.expirationDate),
+                [PassportField.ISSUING_AUTHORITY]: text(labels.issuingAuthority),
+                [PassportField.ISSUING_COUNTRY]: text('Issuing country / Code'),
+                [PassportField.MRZ]: text(labels.mrz),
+            },
+            [...PASSPORT_REQUIRED_FIELDS],
+        ),
     };
 }

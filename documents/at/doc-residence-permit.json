@@ -1,0 +1,102 @@
+{
+  "id": "doc-residence-permit",
+  "name": "Residence Permit",
+  "description": "Residence Permit — Austria",
+  "references": [
+    {
+      "title": "Oesterreich.gv.at — Aufenthaltstitel",
+      "url": "https://www.oesterreich.gv.at/themen/leben_in_oesterreich/aufenthalt.html",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Vorname"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Nachname"
+      },
+      "permitNumber": {
+        "type": "string",
+        "description": "Permit number"
+      },
+      "permitType": {
+        "type": "string",
+        "description": "Permit type",
+        "enum": [
+          "Temporary",
+          "Permanent",
+          "Long-term",
+          "Student",
+          "Work",
+          "Family",
+          null
+        ],
+        "nullable": true
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Staatsangehörigkeit"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Geburtsdatum",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Geburtsort"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Geschlecht",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Ausstellungsdatum",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Gültig bis",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Ausstellende Behörde"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Anschrift"
+      },
+      "remarks": {
+        "type": "string",
+        "description": "Remarks / Annotations"
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "permitNumber",
+      "permitType",
+      "nationality",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "id": "doc-identity-card",
+  "name": "Identity Document",
+  "description": "Identity document (ID Card, Passport, Driver License)",
+  "references": [
+    {
+      "title": "ePortugal — Cartão de Cidadão",
+      "url": "https://eportugal.gov.pt/servicos/pedir-o-cartao-de-cidadao",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Nome próprio"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Apelido"
+      },
+      "personalId": {
+        "type": "string",
+        "description": "Personal ID number / NIF",
+        "pattern": "^\\d{9}$"
+      },
+      "documentType": {
+        "type": "string",
+        "description": "Document type / Tipo de documento"
+      },
+      "documentNumber": {
+        "type": "string",
+        "description": "Document number / Número do documento"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Data de emissão",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Data de validade",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Entidade emissora"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Local de nascimento"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Data de nascimento",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Morada"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Nacionalidade"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Sexo",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "personalId",
+      "documentType",
+      "documentNumber",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

@@ -8,6 +8,18 @@
       "id": "doc-attestato-rischio",
       "name": "Attestato di Rischio",
       "description": "Attestato di rischio RCA — classe di merito, sinistri pregressi",
+      "references": [
+        {
+          "title": "IVASS — Attestato di Rischio",
+          "url": "https://www.ivass.it/consumatori/sos-assicurati/attestato-rischio/index.html",
+          "type": "documentation"
+        },
+        {
+          "title": "Regolamento IVASS n. 9/2015",
+          "url": "https://www.ivass.it/normativa/nazionale/secondaria-ivass/regolamenti/2015/n9/",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -22,7 +34,7 @@
           "codiceFiscaleContraente": {
             "type": "string",
             "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
           },
           "targa": {
             "type": "string",
@@ -95,6 +107,13 @@
       "id": "doc-certificato-morte",
       "name": "Certificato di Morte",
       "description": "Certificato di morte — per liquidazione polizza vita caso morte",
+      "references": [
+        {
+          "title": "Ministero dell'Interno — Servizi demografici",
+          "url": "https://dait.interno.gov.it/servizi-demografici",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -112,7 +131,7 @@
               "codiceFiscale": {
                 "type": "string",
                 "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
               },
               "dataNascita": {
                 "type": "string",
@@ -164,6 +183,13 @@
       "id": "doc-certificato-medico",
       "name": "Certificato Medico",
       "description": "Certificato medico per lesioni da sinistro o infortunio coperto da polizza",
+      "references": [
+        {
+          "title": "Art. 139 Codice delle Assicurazioni — Danno biologico",
+          "url": "https://www.ivass.it/normativa/nazionale/primaria/index.html",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -181,7 +207,7 @@
               "codiceFiscale": {
                 "type": "string",
                 "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
               },
               "dataNascita": {
                 "type": "string",
@@ -241,6 +267,13 @@
       "id": "doc-stato-famiglia",
       "name": "Certificato Stato Famiglia",
       "description": "Certificato stato di famiglia — per polizze vita e beneficiari",
+      "references": [
+        {
+          "title": "Ministero dell'Interno — Servizi demografici",
+          "url": "https://dait.interno.gov.it/servizi-demografici",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -258,7 +291,7 @@
               "codiceFiscale": {
                 "type": "string",
                 "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
               },
               "indirizzo": {
                 "type": "string",
@@ -288,7 +321,7 @@
                 "codiceFiscale": {
                   "type": "string",
                   "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-                  "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                  "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
                 },
                 "relazione": {
                   "type": "string",
@@ -327,6 +360,18 @@
       "id": "doc-denuncia-sinistro",
       "name": "Denuncia Sinistro / CID",
       "description": "Constatazione amichevole (CAI/CID) o denuncia sinistro — dinamica, danni, veicoli",
+      "references": [
+        {
+          "title": "ANIA — Modulo CAI/CID",
+          "url": "https://www.ania.it/it/sala-stampa/focus-on/focus-on-constatazione-amichevole-incidente",
+          "type": "documentation"
+        },
+        {
+          "title": "Art. 143 Codice delle Assicurazioni — Denuncia sinistro",
+          "url": "https://www.ivass.it/normativa/nazionale/primaria/index.html",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -373,7 +418,7 @@
               "codiceFiscale": {
                 "type": "string",
                 "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
               },
               "compagnia": {
                 "type": "string",
@@ -471,7 +516,19 @@
     {
       "id": "doc-identita",
       "name": "Documento d'Identità",
-      "description": "Documento di riconoscimento dell'assicurato (CI, Passaporto, Patente)",
+      "description": "Documento di riconoscimento (CI, Passaporto, Patente) per identificazione e Antiriciclaggio",
+      "references": [
+        {
+          "title": "Carta d'Identità Elettronica (CIE)",
+          "url": "https://www.cartaidentita.interno.gov.it/",
+          "type": "documentation"
+        },
+        {
+          "title": "Adeguata verifica — D.Lgs. 231/2007",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2007-11-21;231",
+          "type": "regulation"
+        }
+      ],
       "isArrayExtraction": true,
       "jsonSchema": {
         "type": "object",
@@ -487,7 +544,7 @@
           "codiceFiscale": {
             "type": "string",
             "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
           },
           "tipoDocumento": {
             "type": "string",
@@ -522,7 +579,25 @@
           },
           "indirizzoDiResidenza": {
             "type": "string",
-            "description": "Indirizzo completo di residenza"
+            "description": "Indirizzo completo di residenza — formato: Via/Piazza Nome Numero, CAP Città (Provincia)"
+          },
+          "statoCivile": {
+            "type": "string",
+            "description": "Stato civile",
+            "enum": [
+              "celibe",
+              "nubile",
+              "coniugato",
+              "coniugata",
+              "vedovo",
+              "vedova",
+              "divorziato",
+              "divorziata",
+              "separato",
+              "separata",
+              null
+            ],
+            "nullable": true
           }
         },
         "required": [
@@ -542,6 +617,13 @@
       "id": "doc-fattura-riparazione",
       "name": "Fattura di Riparazione",
       "description": "Fattura dell'officina/carrozzeria per riparazione danni",
+      "references": [
+        {
+          "title": "FatturaPA — Formato Fattura Elettronica",
+          "url": "https://www.fatturapa.gov.it/it/norme-e-regole/documentazione-fatturapa/",
+          "type": "specification"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -608,6 +690,13 @@
       "id": "doc-disdetta",
       "name": "Lettera di Disdetta",
       "description": "Comunicazione di disdetta della polizza assicurativa",
+      "references": [
+        {
+          "title": "Codice delle Assicurazioni Private — D.Lgs. 209/2005 Art. 172",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-07;209",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -618,7 +707,7 @@
           "codiceFiscaleMittente": {
             "type": "string",
             "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
           },
           "destinatario": {
             "type": "string",
@@ -654,6 +743,13 @@
       "id": "doc-libretto",
       "name": "Libretto di Circolazione",
       "description": "Carta di circolazione del veicolo assicurato",
+      "references": [
+        {
+          "title": "Motorizzazione Civile — Carta di Circolazione",
+          "url": "https://www.mit.gov.it/temi/trasporti/motorizzazione",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -707,7 +803,7 @@
           "codiceFiscaleIntestatario": {
             "type": "string",
             "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
           }
         },
         "required": [
@@ -724,6 +820,13 @@
       "id": "doc-perizia-danni",
       "name": "Perizia Danni",
       "description": "Perizia tecnica dei danni — importo, descrizione danni, perito",
+      "references": [
+        {
+          "title": "Art. 148 Codice delle Assicurazioni — Perizia",
+          "url": "https://www.ivass.it/normativa/nazionale/primaria/index.html",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -798,6 +901,18 @@
       "id": "doc-polizza",
       "name": "Polizza Assicurativa",
       "description": "Contratto di assicurazione — tutti i rami (RCA, vita, casa, infortuni, RC professionale)",
+      "references": [
+        {
+          "title": "IVASS — Codice delle Assicurazioni Private",
+          "url": "https://www.ivass.it/normativa/nazionale/primaria/index.html",
+          "type": "regulation"
+        },
+        {
+          "title": "ANIA — Associazione Nazionale Imprese Assicuratrici",
+          "url": "https://www.ania.it/",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -841,7 +956,7 @@
               "codiceFiscale": {
                 "type": "string",
                 "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
               },
               "indirizzo": {
                 "type": "string",
@@ -868,7 +983,7 @@
               "codiceFiscale": {
                 "type": "string",
                 "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
               }
             },
             "required": [
@@ -931,6 +1046,13 @@
       "id": "doc-quietanza",
       "name": "Quietanza di Premio",
       "description": "Ricevuta di pagamento del premio assicurativo",
+      "references": [
+        {
+          "title": "IVASS — Regolamento n. 40/2018 (Obblighi informativi)",
+          "url": "https://www.ivass.it/normativa/nazionale/secondaria-ivass/regolamenti/2018/n40/index.html",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -976,6 +1098,13 @@
       "id": "doc-scheda-fabbricato",
       "name": "Scheda Fabbricato / Immobile",
       "description": "Dati dell'immobile assicurato — per polizze casa/incendio",
+      "references": [
+        {
+          "title": "Fascicolo del Fabbricato — Ordine degli Ingegneri",
+          "url": "https://www.ordineingegneri.it/",
+          "type": "documentation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {
@@ -993,7 +1122,7 @@
               "codiceFiscale": {
                 "type": "string",
                 "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-                "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
               }
             },
             "required": [
@@ -1078,6 +1207,13 @@
       "id": "doc-tessera-sanitaria",
       "name": "Tessera Sanitaria",
       "description": "Tessera sanitaria / Codice Fiscale — conferma CF e dati anagrafici",
+      "references": [
+        {
+          "title": "Agenzia delle Entrate — Tessera Sanitaria",
+          "url": "https://sistemats1.sanita.finanze.it/portale/tessera-sanitaria",
+          "type": "documentation"
+        }
+      ],
       "isArrayExtraction": true,
       "jsonSchema": {
         "type": "object",
@@ -1093,7 +1229,7 @@
           "codiceFiscale": {
             "type": "string",
             "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
-            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
           },
           "sesso": {
             "type": "string",
@@ -1114,9 +1250,18 @@
             "type": "string",
             "description": "Comune di nascita"
           },
+          "provincia": {
+            "type": "string",
+            "description": "Sigla provincia di nascita"
+          },
           "dataScadenza": {
             "type": "string",
             "description": "Data di scadenza",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "dataEmissione": {
+            "type": "string",
+            "description": "Data di emissione",
             "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
           }
         },
@@ -1133,6 +1278,13 @@
       "id": "doc-verbale-autorita",
       "name": "Verbale Autorità",
       "description": "Verbale di Polizia Stradale, Carabinieri o Polizia Municipale",
+      "references": [
+        {
+          "title": "Codice della Strada — D.Lgs. 285/1992 Art. 11",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:1992-04-30;285",
+          "type": "regulation"
+        }
+      ],
       "jsonSchema": {
         "type": "object",
         "properties": {

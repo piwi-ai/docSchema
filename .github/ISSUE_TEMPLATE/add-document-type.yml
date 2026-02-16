@@ -1,55 +1,55 @@
 name: "\U0001F4C4 Add Document Type"
 description: Propose a new document type for an existing vertical
-title: "[DocType] "
-labels: ["enhancement", "document-type"]
+title: '[DocType] '
+labels: ['enhancement', 'document-type']
 body:
-  - type: dropdown
-    id: country
-    attributes:
-      label: Country
-      options:
-        - Italy (IT)
-        - United States (US)
-        - Germany (DE)
-        - France (FR)
-        - Spain (ES)
-        - Other
-    validations:
-      required: true
-  - type: dropdown
-    id: vertical
-    attributes:
-      label: Business Vertical
-      options:
-        - Real Estate
-        - Accountant
-        - Car Dealership
-        - Insurance
-        - Other (specify below)
-    validations:
-      required: true
-  - type: input
-    id: doc-name
-    attributes:
-      label: Document Name
-      description: "Human-readable name (e.g., 'Certificato di Morte', 'W-2 Tax Form')"
-      placeholder: "e.g. Drivers License"
-    validations:
-      required: true
-  - type: textarea
-    id: fields
-    attributes:
-      label: Extractable Fields
-      description: "List the fields an AI should extract from this document"
-      placeholder: |
-        - firstName (string) — Given name
-        - lastName (string) — Family name
-        - dateOfBirth (date) — MM/DD/YYYY
-        - licenseNumber (string) — State-issued ID number
-    validations:
-      required: true
-  - type: textarea
-    id: context
-    attributes:
-      label: Additional Context
-      description: "Any business rules, conditional requirements, or entity mappings"
+    - type: dropdown
+      id: country
+      attributes:
+          label: Country
+          options:
+              - Italy (IT)
+              - United States (US)
+              - Germany (DE)
+              - France (FR)
+              - Spain (ES)
+              - Other
+      validations:
+          required: true
+    - type: dropdown
+      id: vertical
+      attributes:
+          label: Business Vertical
+          options:
+              - Real Estate
+              - Accountant
+              - Car Dealership
+              - Insurance
+              - Other (specify below)
+      validations:
+          required: true
+    - type: input
+      id: doc-name
+      attributes:
+          label: Document Name
+          description: "Human-readable name (e.g., 'Certificato di Morte', 'W-2 Tax Form')"
+          placeholder: 'e.g. Drivers License'
+      validations:
+          required: true
+    - type: textarea
+      id: fields
+      attributes:
+          label: Extractable Fields
+          description: 'List the fields an AI should extract from this document'
+          placeholder: |
+              - firstName (string) — Given name
+              - lastName (string) — Family name
+              - dateOfBirth (date) — MM/DD/YYYY
+              - licenseNumber (string) — State-issued ID number
+      validations:
+          required: true
+    - type: textarea
+      id: context
+      attributes:
+          label: Additional Context
+          description: 'Any business rules, conditional requirements, or entity mappings'

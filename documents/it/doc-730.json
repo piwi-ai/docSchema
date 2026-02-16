@@ -1,0 +1,131 @@
+{
+  "id": "doc-730",
+  "name": "Modello 730",
+  "description": "Dichiarazione dei redditi semplificata per lavoratori dipendenti e pensionati",
+  "references": [
+    {
+      "title": "Agenzia delle Entrate — Modello 730",
+      "url": "https://www.agenziaentrate.gov.it/portale/web/guest/modello-730",
+      "type": "documentation"
+    },
+    {
+      "title": "Istruzioni 730 (PDF)",
+      "url": "https://www.agenziaentrate.gov.it/portale/web/guest/modello-730/istruzioni-modello-730",
+      "type": "specification"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "anno": {
+        "type": "number",
+        "description": "Anno fiscale di riferimento"
+      },
+      "contribuente": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+          },
+          "dataNascita": {
+            "type": "string",
+            "description": "Data di nascita",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale"
+        ]
+      },
+      "redditoComplessivo": {
+        "type": "number",
+        "description": "Reddito complessivo in Euro"
+      },
+      "impostaNetta": {
+        "type": "number",
+        "description": "Imposta netta in Euro"
+      },
+      "detrazioni": {
+        "type": "number",
+        "description": "Totale detrazioni in Euro"
+      },
+      "risultato": {
+        "type": "string",
+        "description": "Risultato della dichiarazione",
+        "enum": [
+          "credito",
+          "debito",
+          null
+        ],
+        "nullable": true
+      },
+      "importoRimborsoDebito": {
+        "type": "number",
+        "description": "Importo rimborso o debito in Euro"
+      },
+      "quadriCompilati": {
+        "type": "string",
+        "description": "Elenco dei quadri compilati (es. A, B, C, D, E)"
+      },
+      "familiari": {
+        "type": "array",
+        "description": "Familiari a carico",
+        "items": {
+          "type": "object",
+          "properties": {
+            "nome": {
+              "type": "string",
+              "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+            },
+            "cognome": {
+              "type": "string",
+              "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+            },
+            "codiceFiscale": {
+              "type": "string",
+              "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+              "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+            },
+            "relazione": {
+              "type": "string",
+              "description": "Relazione",
+              "enum": [
+                "coniuge",
+                "figlio",
+                "altro familiare",
+                null
+              ],
+              "nullable": true
+            },
+            "percentualeCarico": {
+              "type": "number",
+              "description": "Percentuale a carico (es. 100, 50)"
+            }
+          },
+          "required": [
+            "codiceFiscale",
+            "relazione"
+          ]
+        }
+      }
+    },
+    "required": [
+      "anno",
+      "contribuente",
+      "redditoComplessivo",
+      "impostaNetta"
+    ]
+  }
+}

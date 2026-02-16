@@ -10,31 +10,31 @@ Certificato rilasciato dal Comune che attesta la destinazione urbanistica di un 
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `foglio` | string | ✅ | Foglio catastale |
-| `particella` | string | ✅ | Particella catastale |
-| `comune` | string | ✅ | Comune di ubicazione del terreno |
-| `destinazioneUrbanistica` | string | ✅ | Destinazione urbanistica (es. Zona Residenziale B2, Zona Agricola E1) |
-| `estremiPRG` | string | | Estremi del Piano Regolatore o Piano Urbanistico vigente |
-| `dataRilascio` | date DD.MM.YYYY | ✅ | Data di rilascio |
-| `validita` | string | | Validità del certificato (1 anno dalla data di rilascio) |
+| Campo                     | Tipo            | Obbligatorio | Descrizione                                                           |
+| ------------------------- | --------------- | :----------: | --------------------------------------------------------------------- |
+| `foglio`                  | string          |      ✅      | Foglio catastale                                                      |
+| `particella`              | string          |      ✅      | Particella catastale                                                  |
+| `comune`                  | string          |      ✅      | Comune di ubicazione del terreno                                      |
+| `destinazioneUrbanistica` | string          |      ✅      | Destinazione urbanistica (es. Zona Residenziale B2, Zona Agricola E1) |
+| `estremiPRG`              | string          |              | Estremi del Piano Regolatore o Piano Urbanistico vigente              |
+| `dataRilascio`            | date DD.MM.YYYY |      ✅      | Data di rilascio                                                      |
+| `validita`                | string          |              | Validità del certificato (1 anno dalla data di rilascio)              |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "foglio": { "type": "string" },
-    "particella": { "type": "string" },
-    "comune": { "type": "string" },
-    "destinazioneUrbanistica": { "type": "string" },
-    "estremiPRG": { "type": "string" },
-    "dataRilascio": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
-    "validita": { "type": "string" }
-  },
-  "required": ["foglio", "particella", "comune", "destinazioneUrbanistica", "dataRilascio"]
+    "type": "object",
+    "properties": {
+        "foglio": { "type": "string" },
+        "particella": { "type": "string" },
+        "comune": { "type": "string" },
+        "destinazioneUrbanistica": { "type": "string" },
+        "estremiPRG": { "type": "string" },
+        "dataRilascio": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
+        "validita": { "type": "string" }
+    },
+    "required": ["foglio", "particella", "comune", "destinazioneUrbanistica", "dataRilascio"]
 }
 ```
 

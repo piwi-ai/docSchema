@@ -10,41 +10,41 @@ Perizia estimativa dell'immobile redatta da un perito incaricato dalla banca (o 
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `perito` | string | ✅ | Nome e cognome del perito incaricato |
-| `dataPerizia` | date DD.MM.YYYY | ✅ | Data della perizia |
-| `indirizzo` | string | ✅ | Indirizzo completo dell'immobile periziato |
-| `foglio` | string | | Foglio catastale |
-| `particella` | string | | Particella catastale |
-| `subalterno` | string | | Subalterno |
-| `valoreStimato` | number | ✅ | Valore di stima dell'immobile in Euro |
-| `superficieCommerciale` | number | | Superficie commerciale in mq |
-| `statoConservazione` | string | | Stato di conservazione (es. buono, ottimo, da ristrutturare) |
-| `conformitaCatastale` | string | | Esito verifica conformità catastale |
-| `conformitaUrbanistica` | string | | Esito verifica conformità urbanistica |
-| `note` | string | | Note o osservazioni del perito |
+| Campo                   | Tipo            | Obbligatorio | Descrizione                                                  |
+| ----------------------- | --------------- | :----------: | ------------------------------------------------------------ |
+| `perito`                | string          |      ✅      | Nome e cognome del perito incaricato                         |
+| `dataPerizia`           | date DD.MM.YYYY |      ✅      | Data della perizia                                           |
+| `indirizzo`             | string          |      ✅      | Indirizzo completo dell'immobile periziato                   |
+| `foglio`                | string          |              | Foglio catastale                                             |
+| `particella`            | string          |              | Particella catastale                                         |
+| `subalterno`            | string          |              | Subalterno                                                   |
+| `valoreStimato`         | number          |      ✅      | Valore di stima dell'immobile in Euro                        |
+| `superficieCommerciale` | number          |              | Superficie commerciale in mq                                 |
+| `statoConservazione`    | string          |              | Stato di conservazione (es. buono, ottimo, da ristrutturare) |
+| `conformitaCatastale`   | string          |              | Esito verifica conformità catastale                          |
+| `conformitaUrbanistica` | string          |              | Esito verifica conformità urbanistica                        |
+| `note`                  | string          |              | Note o osservazioni del perito                               |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "perito": { "type": "string" },
-    "dataPerizia": { "type": "string", "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$" },
-    "indirizzo": { "type": "string" },
-    "foglio": { "type": "string" },
-    "particella": { "type": "string" },
-    "subalterno": { "type": "string" },
-    "valoreStimato": { "type": "number" },
-    "superficieCommerciale": { "type": "number" },
-    "statoConservazione": { "type": "string" },
-    "conformitaCatastale": { "type": "string" },
-    "conformitaUrbanistica": { "type": "string" },
-    "note": { "type": "string" }
-  },
-  "required": ["perito", "dataPerizia", "indirizzo", "valoreStimato"]
+    "type": "object",
+    "properties": {
+        "perito": { "type": "string" },
+        "dataPerizia": { "type": "string", "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$" },
+        "indirizzo": { "type": "string" },
+        "foglio": { "type": "string" },
+        "particella": { "type": "string" },
+        "subalterno": { "type": "string" },
+        "valoreStimato": { "type": "number" },
+        "superficieCommerciale": { "type": "number" },
+        "statoConservazione": { "type": "string" },
+        "conformitaCatastale": { "type": "string" },
+        "conformitaUrbanistica": { "type": "string" },
+        "note": { "type": "string" }
+    },
+    "required": ["perito", "dataPerizia", "indirizzo", "valoreStimato"]
 }
 ```
 
