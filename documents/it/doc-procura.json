@@ -1,0 +1,80 @@
+{
+  "id": "doc-procura",
+  "name": "Procura",
+  "description": "Atto notarile che conferisce il potere di rappresentanza per compiere atti per conto di un'altra persona",
+  "references": [
+    {
+      "title": "Art. 1392 Codice Civile — Forma della procura",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1392",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "nomeMandante": {
+        "type": "string",
+        "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+      },
+      "cognomeMandante": {
+        "type": "string",
+        "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+      },
+      "codiceFiscaleMandante": {
+        "type": "string",
+        "description": "Codice Fiscale del mandante (extract without spaces)",
+        "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+      },
+      "nomeMandatario": {
+        "type": "string",
+        "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+      },
+      "cognomeMandatario": {
+        "type": "string",
+        "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+      },
+      "codiceFiscaleMandatario": {
+        "type": "string",
+        "description": "Codice Fiscale del mandatario (extract without spaces)",
+        "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+      },
+      "tipoProcura": {
+        "type": "string",
+        "description": "Tipo di procura",
+        "enum": [
+          "speciale",
+          "generale",
+          null
+        ],
+        "nullable": true
+      },
+      "oggettoDelega": {
+        "type": "string",
+        "description": "Oggetto specifico della delega"
+      },
+      "notaio": {
+        "type": "string",
+        "description": "Notaio che ha autenticato la procura"
+      },
+      "dataAtto": {
+        "type": "string",
+        "description": "Data dell'atto in formato europeo DD.MM.YYYY",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "numeroRepertorio": {
+        "type": "string",
+        "description": "Numero di repertorio"
+      }
+    },
+    "required": [
+      "nomeMandante",
+      "cognomeMandante",
+      "codiceFiscaleMandante",
+      "nomeMandatario",
+      "cognomeMandatario",
+      "codiceFiscaleMandatario",
+      "tipoProcura",
+      "dataAtto"
+    ]
+  }
+}

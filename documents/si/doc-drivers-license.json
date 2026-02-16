@@ -1,0 +1,102 @@
+{
+  "id": "doc-drivers-license",
+  "name": "Driver's License",
+  "description": "Driver's License — Slovenia",
+  "references": [
+    {
+      "title": "Gov.si — Vozniško dovoljenje",
+      "url": "https://www.gov.si/podrocja/promet-in-energetika/cestni-promet/voznisko-dovoljenje/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Ime"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Priimek"
+      },
+      "licenseNumber": {
+        "type": "string",
+        "description": "License number"
+      },
+      "categories": {
+        "type": "string",
+        "description": "License categories (EU Directive 2006/126/EC)",
+        "enum": [
+          "AM",
+          "A1",
+          "A2",
+          "A",
+          "B1",
+          "B",
+          "BE",
+          "C1",
+          "C1E",
+          "C",
+          "CE",
+          "D1",
+          "D1E",
+          "D",
+          "DE",
+          null
+        ],
+        "nullable": true
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Datum rojstva",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Kraj rojstva"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Datum izdaje",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Velja do",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Izdajatelj"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Naslov"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Državljanstvo"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Spol",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "licenseNumber",
+      "categories",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

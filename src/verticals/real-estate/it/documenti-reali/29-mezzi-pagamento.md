@@ -10,45 +10,48 @@ Dichiarazione analitica di tutti i mezzi di pagamento utilizzati nella compraven
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `pagamenti` | array | ✅ | Elenco analitico di tutti i mezzi di pagamento |
-| `pagamenti[].tipo` | string | ✅ | Tipo di pagamento (es. assegno circolare, bonifico, mutuo fondiario) |
-| `pagamenti[].importo` | number | ✅ | Importo in Euro |
-| `pagamenti[].numeroBonifico` | string | | Numero CRO/TRN del bonifico o numero assegno |
-| `pagamenti[].bancaEmittente` | string | | Banca emittente dell'assegno o ordinante del bonifico |
-| `pagamenti[].dataPagamento` | date DD.MM.YYYY | | Data del pagamento |
-| `pagamenti[].intestatario` | string | | Intestatario del mezzo di pagamento |
-| `importoTotale` | number | ✅ | Importo totale dei pagamenti in Euro |
-| `mediatore` | string | | Nome dell'agenzia o mediatore, se presente |
-| `provvigione` | number | | Importo della provvigione del mediatore in Euro |
+| Campo                        | Tipo            | Obbligatorio | Descrizione                                                          |
+| ---------------------------- | --------------- | :----------: | -------------------------------------------------------------------- |
+| `pagamenti`                  | array           |      ✅      | Elenco analitico di tutti i mezzi di pagamento                       |
+| `pagamenti[].tipo`           | string          |      ✅      | Tipo di pagamento (es. assegno circolare, bonifico, mutuo fondiario) |
+| `pagamenti[].importo`        | number          |      ✅      | Importo in Euro                                                      |
+| `pagamenti[].numeroBonifico` | string          |              | Numero CRO/TRN del bonifico o numero assegno                         |
+| `pagamenti[].bancaEmittente` | string          |              | Banca emittente dell'assegno o ordinante del bonifico                |
+| `pagamenti[].dataPagamento`  | date DD.MM.YYYY |              | Data del pagamento                                                   |
+| `pagamenti[].intestatario`   | string          |              | Intestatario del mezzo di pagamento                                  |
+| `importoTotale`              | number          |      ✅      | Importo totale dei pagamenti in Euro                                 |
+| `mediatore`                  | string          |              | Nome dell'agenzia o mediatore, se presente                           |
+| `provvigione`                | number          |              | Importo della provvigione del mediatore in Euro                      |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "pagamenti": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "tipo": { "type": "string" },
-          "importo": { "type": "number" },
-          "numeroBonifico": { "type": "string" },
-          "bancaEmittente": { "type": "string" },
-          "dataPagamento": { "type": "string", "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$" },
-          "intestatario": { "type": "string" }
+    "type": "object",
+    "properties": {
+        "pagamenti": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "tipo": { "type": "string" },
+                    "importo": { "type": "number" },
+                    "numeroBonifico": { "type": "string" },
+                    "bancaEmittente": { "type": "string" },
+                    "dataPagamento": {
+                        "type": "string",
+                        "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$"
+                    },
+                    "intestatario": { "type": "string" }
+                },
+                "required": ["tipo", "importo"]
+            }
         },
-        "required": ["tipo", "importo"]
-      }
+        "importoTotale": { "type": "number" },
+        "mediatore": { "type": "string" },
+        "provvigione": { "type": "number" }
     },
-    "importoTotale": { "type": "number" },
-    "mediatore": { "type": "string" },
-    "provvigione": { "type": "number" }
-  },
-  "required": ["pagamenti", "importoTotale"]
+    "required": ["pagamenti", "importoTotale"]
 }
 ```
 

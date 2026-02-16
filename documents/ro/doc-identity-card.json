@@ -1,0 +1,93 @@
+{
+  "id": "doc-identity-card",
+  "name": "Identity Document",
+  "description": "Identity document (ID Card, Passport, Driver License)",
+  "references": [
+    {
+      "title": "DGEP — Carte de identitate",
+      "url": "http://depabd.mai.gov.ro/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Prenume"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Nume"
+      },
+      "personalId": {
+        "type": "string",
+        "description": "Personal ID number / CNP",
+        "pattern": "^\\d{13}$"
+      },
+      "documentType": {
+        "type": "string",
+        "description": "Document type / Tipul documentului"
+      },
+      "documentNumber": {
+        "type": "string",
+        "description": "Document number / Numărul documentului"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Data eliberării",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Data expirării",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Emis de"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Locul nașterii"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Data nașterii",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Adresa"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Cetățenie"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Sex",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "personalId",
+      "documentType",
+      "documentNumber",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

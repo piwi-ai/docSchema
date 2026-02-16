@@ -65,7 +65,7 @@ describe('Generated JSON configs', () => {
         expect(configFiles.length).toBeGreaterThan(0);
     });
 
-    describe.each(configFiles.map(f => [relative(CONFIGS_DIR, f), f]))(
+    describe.each(configFiles.map((f) => [relative(CONFIGS_DIR, f), f]))(
         '%s',
         (_relPath, filePath) => {
             let parsed: Record<string, unknown>;

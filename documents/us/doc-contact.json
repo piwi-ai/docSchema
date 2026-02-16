@@ -1,0 +1,48 @@
+{
+  "id": "doc-contact",
+  "name": "Contact Information",
+  "description": "Phone, email, and mailing address for a party",
+  "references": [
+    {
+      "title": "FTC — Privacy and Data Security",
+      "url": "https://www.ftc.gov/business-guidance/privacy-security",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name (given name)"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name (surname / family name)"
+      },
+      "phone": {
+        "type": "string",
+        "description": "Primary phone number"
+      },
+      "email": {
+        "type": "string",
+        "format": "email",
+        "description": "Email address"
+      },
+      "mailingAddress": {
+        "type": "string",
+        "description": "Mailing address (if different from residential)"
+      },
+      "currentAddress": {
+        "type": "string",
+        "description": "Current residential address"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "phone",
+      "email"
+    ]
+  }
+}

@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
-import { syntaxHighlight, getConfigFilename } from '../utils/json'
+import { describe, it, expect } from 'vitest';
+import { syntaxHighlight, getConfigFilename } from '../utils/json';
 
 describe('syntaxHighlight', () => {
     it('wraps string values with json-string class', () => {

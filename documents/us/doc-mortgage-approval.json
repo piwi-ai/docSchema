@@ -1,0 +1,79 @@
+{
+  "id": "doc-mortgage-approval",
+  "name": "Mortgage Approval / Commitment Letter",
+  "description": "Lender commitment or pre-approval letter for mortgage financing",
+  "references": [
+    {
+      "title": "CFPB — Loan Estimate Explainer",
+      "url": "https://www.consumerfinance.gov/owning-a-home/loan-estimate/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "lender": {
+        "type": "string",
+        "description": "Lender / bank name"
+      },
+      "loanOfficer": {
+        "type": "string",
+        "description": "Loan officer name"
+      },
+      "borrower": {
+        "type": "string",
+        "description": "Borrower full name"
+      },
+      "approvalDate": {
+        "type": "string",
+        "description": "Date of approval / commitment",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "approvedAmount": {
+        "type": "number",
+        "description": "Approved loan amount (USD, numbers only, no dollar sign)"
+      },
+      "interestRate": {
+        "type": "number",
+        "description": "Interest rate (%)"
+      },
+      "loanType": {
+        "type": "string",
+        "description": "Loan type",
+        "enum": [
+          "conventional",
+          "FHA",
+          "VA",
+          "USDA",
+          "jumbo",
+          null
+        ],
+        "nullable": true
+      },
+      "loanTerm": {
+        "type": "number",
+        "description": "Loan term (years)"
+      },
+      "conditions": {
+        "type": "string",
+        "description": "Conditions that must be met prior to closing"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Commitment expiration date",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "propertyAddress": {
+        "type": "string",
+        "description": "Subject property address"
+      }
+    },
+    "required": [
+      "lender",
+      "borrower",
+      "approvedAmount",
+      "interestRate",
+      "loanType"
+    ]
+  }
+}

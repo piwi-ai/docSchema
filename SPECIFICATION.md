@@ -22,19 +22,18 @@ This specification defines a portable, JSON-based format for describing business
 
 A **DocSchema configuration** is a JSON file that tells an AI system:
 
-| Question | Answered By |
-|----------|-------------|
-| What documents exist in this business? | `documentTypes[]` |
-| What data should the AI extract from each one? | `documentTypes[].jsonSchema` |
-| How do documents relate to real-world entities? | `entityTypes[].dataSources[]` |
-| When is a document conditionally required? | `entityTypes[].conditionalRequirements[]` |
-
+| Question                                        | Answered By                               |
+| ----------------------------------------------- | ----------------------------------------- |
+| What documents exist in this business?          | `documentTypes[]`                         |
+| What data should the AI extract from each one?  | `documentTypes[].jsonSchema`              |
+| How do documents relate to real-world entities? | `entityTypes[].dataSources[]`             |
+| When is a document conditionally required?      | `entityTypes[].conditionalRequirements[]` |
 
 ### Design Principles
 
 - **LLM-agnostic**: Works with any AI provider (Gemini, GPT, Claude, Llama, etc.)
 - **Country-aware**: Same document concept, localized fields and formats per country
-- **Declarative**: Configuration describes *what*, not *how* — implementations decide execution
+- **Declarative**: Configuration describes _what_, not _how_ — implementations decide execution
 - **JSON Schema native**: Extraction schemas use standard [JSON Schema](https://json-schema.org) vocabulary
 - **Zero runtime dependencies**: Pure data definitions, no libraries required
 
@@ -44,10 +43,10 @@ A **DocSchema configuration** is a JSON file that tells an AI system:
 
 ### Identifiers
 
-| Type | Prefix | Example |
-|------|--------|---------|
-| Document Type | `doc-` | `doc-fattura`, `doc-drivers-license` |
-| Entity Type | `entity-` | `entity-venditore`, `entity-buyer` |
+| Type          | Prefix    | Example                              |
+| ------------- | --------- | ------------------------------------ |
+| Document Type | `doc-`    | `doc-fattura`, `doc-drivers-license` |
+| Entity Type   | `entity-` | `entity-venditore`, `entity-buyer`   |
 
 | Configuration | `{VERTICAL}-{COUNTRY}-DEFAULT` | `REAL-ESTATE-IT-DEFAULT` |
 
@@ -109,15 +108,15 @@ The `jsonSchema` field MUST be a valid JSON Schema object with:
 
 ### Field Types
 
-| Type | JSON Schema | Description |
-|------|-------------|-------------|
-| Text | `{ "type": "string", "description": "..." }` | Free-text field |
-| Number | `{ "type": "number", "description": "..." }` | Numeric value |
-| Enum | `{ "type": "string", "enum": [...values, null], "nullable": true }` | Constrained values; `null` allows AI to skip if unsure |
-| Email | `{ "type": "string", "format": "email" }` | Email address |
-| Date | `{ "type": "string", "pattern": "..." }` | Date with country-specific pattern |
-| Nested Object | `{ "type": "object", "properties": {...}, "required": [...] }` | Grouped fields |
-| Array of Objects | `{ "type": "array", "items": { "type": "object", ... } }` | Repeated structures (e.g. line items, list of people) |
+| Type             | JSON Schema                                                         | Description                                            |
+| ---------------- | ------------------------------------------------------------------- | ------------------------------------------------------ |
+| Text             | `{ "type": "string", "description": "..." }`                        | Free-text field                                        |
+| Number           | `{ "type": "number", "description": "..." }`                        | Numeric value                                          |
+| Enum             | `{ "type": "string", "enum": [...values, null], "nullable": true }` | Constrained values; `null` allows AI to skip if unsure |
+| Email            | `{ "type": "string", "format": "email" }`                           | Email address                                          |
+| Date             | `{ "type": "string", "pattern": "..." }`                            | Date with country-specific pattern                     |
+| Nested Object    | `{ "type": "object", "properties": {...}, "required": [...] }`      | Grouped fields                                         |
+| Array of Objects | `{ "type": "array", "items": { "type": "object", ... } }`           | Repeated structures (e.g. line items, list of people)  |
 
 ### Enum Nullability Convention
 
@@ -136,10 +135,10 @@ Enum fields MUST include `null` in their enum array and set `nullable: true`. Th
 
 Date fields SHOULD include a `pattern` property with a regex enforcing the country's standard format:
 
-| Country | Format | Pattern | Example |
-|---------|--------|---------|---------|
-| Italy | DD.MM.YYYY | `^\\d{2}\\.\\d{2}\\.\\d{4}$` | `15.01.2024` |
-| US | MM/DD/YYYY | `^\\d{2}/\\d{2}/\\d{4}$` | `01/15/2024` |
+| Country | Format     | Pattern                      | Example      |
+| ------- | ---------- | ---------------------------- | ------------ |
+| Italy   | DD.MM.YYYY | `^\\d{2}\\.\\d{2}\\.\\d{4}$` | `15.01.2024` |
+| US      | MM/DD/YYYY | `^\\d{2}/\\d{2}/\\d{4}$`     | `01/15/2024` |
 
 ### Example
 
@@ -152,7 +151,11 @@ Date fields SHOULD include a `pattern` property with a regex enforcing the count
         "type": "object",
         "properties": {
             "numero": { "type": "string", "description": "Invoice number" },
-            "data": { "type": "string", "description": "Issue date DD.MM.YYYY", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
+            "data": {
+                "type": "string",
+                "description": "Issue date DD.MM.YYYY",
+                "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+            },
             "totale": { "type": "number", "description": "Total amount in EUR" },
             "righe": {
                 "type": "array",
@@ -260,7 +263,7 @@ The processing engine iterates through the array and applies match rules to dete
 
 ### Identity Resolution (Match Fields)
 
-**Match fields** define how to determine if two documents refer to the same real-world entity. The engine uses these rules to answer: *"Does this document's data belong to an existing entity, or should we create a new one?"*
+**Match fields** define how to determine if two documents refer to the same real-world entity. The engine uses these rules to answer: _"Does this document's data belong to an existing entity, or should we create a new one?"_
 
 ```typescript
 interface MatchFieldConfig {
@@ -287,6 +290,7 @@ interface MatchFieldConfig {
 #### Standard Match Field Patterns
 
 **Person matching** — Match by fiscal code + name (handles typos):
+
 ```json
 [
     { "field": "codiceFiscale", "fuzzyThreshold": 0.2 },
@@ -296,6 +300,7 @@ interface MatchFieldConfig {
 ```
 
 **Property matching** — Match by cadastral identifiers (exact):
+
 ```json
 [
     { "field": "foglio", "fuzzyThreshold": 0 },
@@ -315,16 +320,36 @@ A real estate "Seller" entity aggregates data from 9+ document types:
     "icon": "user-minus",
     "color": "#ef4444",
     "displayOrder": 0,
-    "fieldOrder": ["nome", "cognome", "codiceFiscale", "dataNascita", "statoCivile", "telefono", "email"],
+    "fieldOrder": [
+        "nome",
+        "cognome",
+        "codiceFiscale",
+        "dataNascita",
+        "statoCivile",
+        "telefono",
+        "email"
+    ],
     "dataSources": [
         {
             "docTypeId": "doc-identita",
             "isRequired": true,
             "canCreateEntity": false,
             "fieldMappings": [
-                { "sourceField": "nome", "targetField": "nome", "matchFields": [{"field": "codiceFiscale", "fuzzyThreshold": 0.2}] },
-                { "sourceField": "cognome", "targetField": "cognome", "matchFields": [{"field": "codiceFiscale", "fuzzyThreshold": 0.2}] },
-                { "sourceField": "codiceFiscale", "targetField": "codiceFiscale", "matchFields": [{"field": "codiceFiscale", "fuzzyThreshold": 0.2}] }
+                {
+                    "sourceField": "nome",
+                    "targetField": "nome",
+                    "matchFields": [{ "field": "codiceFiscale", "fuzzyThreshold": 0.2 }]
+                },
+                {
+                    "sourceField": "cognome",
+                    "targetField": "cognome",
+                    "matchFields": [{ "field": "codiceFiscale", "fuzzyThreshold": 0.2 }]
+                },
+                {
+                    "sourceField": "codiceFiscale",
+                    "targetField": "codiceFiscale",
+                    "matchFields": [{ "field": "codiceFiscale", "fuzzyThreshold": 0.2 }]
+                }
             ]
         },
         {
@@ -332,8 +357,16 @@ A real estate "Seller" entity aggregates data from 9+ document types:
             "isRequired": true,
             "canCreateEntity": true,
             "fieldMappings": [
-                { "sourceField": "acquirenti.nome", "targetField": "nome", "matchFields": [{"field": "codiceFiscale", "fuzzyThreshold": 0.2}] },
-                { "sourceField": "acquirenti.cognome", "targetField": "cognome", "matchFields": [{"field": "codiceFiscale", "fuzzyThreshold": 0.2}] }
+                {
+                    "sourceField": "acquirenti.nome",
+                    "targetField": "nome",
+                    "matchFields": [{ "field": "codiceFiscale", "fuzzyThreshold": 0.2 }]
+                },
+                {
+                    "sourceField": "acquirenti.cognome",
+                    "targetField": "cognome",
+                    "matchFields": [{ "field": "codiceFiscale", "fuzzyThreshold": 0.2 }]
+                }
             ]
         }
     ]
@@ -384,11 +417,11 @@ interface DocumentCondition {
 
 ### Operators
 
-| Operator | Behavior | Example |
-|----------|----------|---------|
-| `equals` | Exact string match | `{ "field": "tipoProvenienza", "operator": "equals", "value": "successione" }` |
-| `contains` | Substring match (case-insensitive) | `{ "field": "statoCivile", "operator": "contains", "value": "vedov" }` |
-| `exists` | Field is present and non-empty | `{ "field": "qualita", "operator": "exists" }` |
+| Operator   | Behavior                           | Example                                                                        |
+| ---------- | ---------------------------------- | ------------------------------------------------------------------------------ |
+| `equals`   | Exact string match                 | `{ "field": "tipoProvenienza", "operator": "equals", "value": "successione" }` |
+| `contains` | Substring match (case-insensitive) | `{ "field": "statoCivile", "operator": "contains", "value": "vedov" }`         |
+| `exists`   | Field is present and non-empty     | `{ "field": "qualita", "operator": "exists" }`                                 |
 
 ### OR Logic
 
@@ -398,33 +431,43 @@ When multiple conditions are specified, **any match triggers the requirement** (
 {
     "docTypeId": "doc-morte",
     "conditions": [
-        { "sourceDocTypeId": "doc-provenienza", "field": "acquirenti.statoCivile", "operator": "contains", "value": "vedov" },
-        { "sourceDocTypeId": "doc-identita", "field": "statoCivile", "operator": "contains", "value": "vedov" }
+        {
+            "sourceDocTypeId": "doc-provenienza",
+            "field": "acquirenti.statoCivile",
+            "operator": "contains",
+            "value": "vedov"
+        },
+        {
+            "sourceDocTypeId": "doc-identita",
+            "field": "statoCivile",
+            "operator": "contains",
+            "value": "vedov"
+        }
     ]
 }
 ```
 
-This means: *"Require a death certificate if EITHER the deed of provenance OR the ID document indicates the person is widowed."*
+This means: _"Require a death certificate if EITHER the deed of provenance OR the ID document indicates the person is widowed."_
 
 ### Real-World Examples
 
 #### Person-level: marital status triggers
 
-| Condition | Required Documents |
-|-----------|-------------------|
-| Marital status contains "vedov" (widowed) | Death Certificate, Family Status Certificate |
-| Marital status contains "coniugat" (married) | Marriage Certificate |
+| Condition                                        | Required Documents                              |
+| ------------------------------------------------ | ----------------------------------------------- |
+| Marital status contains "vedov" (widowed)        | Death Certificate, Family Status Certificate    |
+| Marital status contains "coniugat" (married)     | Marriage Certificate                            |
 | Marital status contains "separat" or "divorziat" | Separation/Divorce Decree, Marriage Certificate |
 
 #### Property-level: provenance triggers
 
-| Condition | Required Documents |
-|-----------|-------------------|
+| Condition                                         | Required Documents                                   |
+| ------------------------------------------------- | ---------------------------------------------------- |
 | Property acquired via `successione` (inheritance) | Declaration of Succession, Acceptance of Inheritance |
-| Property acquired via `donazione` (donation) | Family Status Certificate (20-year revocation risk) |
-| Cadastral category contains `A/` (residential) | Condominium Documentation |
-| Land parcel (field `qualita` exists) | Urbanistic Destination Certificate (CDU) |
-| Mortgage approved (field `importoMutuo` exists) | Bank Appraisal |
+| Property acquired via `donazione` (donation)      | Family Status Certificate (20-year revocation risk)  |
+| Cadastral category contains `A/` (residential)    | Condominium Documentation                            |
+| Land parcel (field `qualita` exists)              | Urbanistic Destination Certificate (CDU)             |
+| Mortgage approved (field `importoMutuo` exists)   | Bank Appraisal                                       |
 
 ### Evaluation Flow
 
@@ -489,13 +532,13 @@ interface BusinessConfiguration {
 
 ### Vertical Naming
 
-| Vertical | Country | Config ID |
-|----------|---------|-----------|
-| Accountant | Italy | `ACCOUNTANT-IT-DEFAULT` |
-| Car Dealership | Italy | `CAR-DEALERSHIP-IT-DEFAULT` |
-| Insurance | Italy | `INSURANCE-IT-DEFAULT` |
-| Real Estate | Italy | `REAL-ESTATE-IT-DEFAULT` |
-| Real Estate | US | `REAL-ESTATE-US-DEFAULT` |
+| Vertical       | Country | Config ID                   |
+| -------------- | ------- | --------------------------- |
+| Accountant     | Italy   | `ACCOUNTANT-IT-DEFAULT`     |
+| Car Dealership | Italy   | `CAR-DEALERSHIP-IT-DEFAULT` |
+| Insurance      | Italy   | `INSURANCE-IT-DEFAULT`      |
+| Real Estate    | Italy   | `REAL-ESTATE-IT-DEFAULT`    |
+| Real Estate    | US      | `REAL-ESTATE-US-DEFAULT`    |
 
 ---
 
@@ -507,14 +550,14 @@ To reduce boilerplate, the standard provides **field helper functions** organize
 
 Available for all countries:
 
-| Helper | Produces | Description |
-|--------|----------|-------------|
-| `text(desc)` | `{ "type": "string" }` | Free-text field |
-| `num(desc)` | `{ "type": "number" }` | Numeric value |
-| `enumField(desc, values)` | `{ "type": "string", "enum": [..., null] }` | Constrained values (nullable) |
-| `email(desc)` | `{ "type": "string", "format": "email" }` | Email address |
-| `objectSchema(props, required)` | `{ "type": "object", ... }` | Object wrapper |
-| `arrayOfObjects(props, required, desc?)` | `{ "type": "array", ... }` | Array of objects |
+| Helper                                   | Produces                                    | Description                   |
+| ---------------------------------------- | ------------------------------------------- | ----------------------------- |
+| `text(desc)`                             | `{ "type": "string" }`                      | Free-text field               |
+| `num(desc)`                              | `{ "type": "number" }`                      | Numeric value                 |
+| `enumField(desc, values)`                | `{ "type": "string", "enum": [..., null] }` | Constrained values (nullable) |
+| `email(desc)`                            | `{ "type": "string", "format": "email" }`   | Email address                 |
+| `objectSchema(props, required)`          | `{ "type": "object", ... }`                 | Object wrapper                |
+| `arrayOfObjects(props, required, desc?)` | `{ "type": "array", ... }`                  | Array of objects              |
 
 ### Country-Specific Helpers
 

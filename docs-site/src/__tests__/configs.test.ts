@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
-import { verticals, getStats } from '../data/configs'
+import { describe, it, expect } from 'vitest';
+import { verticals, getStats } from '../data/configs';
 
 describe('verticals', () => {
     it('should contain exactly 5 verticals', () => {
@@ -42,7 +42,7 @@ describe('verticals', () => {
     });
 
     it('slugs are unique', () => {
-        const slugs = verticals.map(v => v.slug);
+        const slugs = verticals.map((v) => v.slug);
         expect(new Set(slugs).size).toBe(slugs.length);
     });
 });

@@ -23,7 +23,7 @@ declare global {
 }
 
 function getVerticalData(slug: string): VerticalMeta | undefined {
-    return verticals.find(v => v.slug === slug);
+    return verticals.find((v) => v.slug === slug);
 }
 
 export default function WebMCP() {
@@ -37,7 +37,7 @@ export default function WebMCP() {
             description:
                 'List all DocSchema business verticals with their stats (document type count, entity type count, country, and slug identifier).',
             execute: () => {
-                return verticals.map(v => ({
+                return verticals.map((v) => ({
                     slug: v.slug,
                     name: v.vertical,
                     country: v.country,
@@ -67,7 +67,7 @@ export default function WebMCP() {
                     slug: {
                         type: 'string',
                         description: 'Vertical slug identifier, e.g. "real-estate-it"',
-                        enum: verticals.map(v => v.slug),
+                        enum: verticals.map((v) => v.slug),
                     },
                 },
                 required: ['slug'],
@@ -76,7 +76,7 @@ export default function WebMCP() {
                 const { slug } = args as { slug: string };
                 const v = getVerticalData(slug);
                 if (!v) return { error: `Vertical "${slug}" not found` };
-                return v.config.documentTypes.map(dt => ({
+                return v.config.documentTypes.map((dt) => ({
                     id: dt.id,
                     name: dt.name,
                     description: dt.description,
@@ -98,7 +98,7 @@ export default function WebMCP() {
                     slug: {
                         type: 'string',
                         description: 'Vertical slug identifier',
-                        enum: verticals.map(v => v.slug),
+                        enum: verticals.map((v) => v.slug),
                     },
                     docTypeId: {
                         type: 'string',
@@ -111,7 +111,7 @@ export default function WebMCP() {
                 const { slug, docTypeId } = args as { slug: string; docTypeId: string };
                 const v = getVerticalData(slug);
                 if (!v) return { error: `Vertical "${slug}" not found` };
-                const dt = v.config.documentTypes.find(d => d.id === docTypeId);
+                const dt = v.config.documentTypes.find((d) => d.id === docTypeId);
                 if (!dt) return { error: `Document type "${docTypeId}" not found in "${slug}"` };
                 return dt;
             },
@@ -128,7 +128,7 @@ export default function WebMCP() {
                     slug: {
                         type: 'string',
                         description: 'Vertical slug identifier',
-                        enum: verticals.map(v => v.slug),
+                        enum: verticals.map((v) => v.slug),
                     },
                 },
                 required: ['slug'],
@@ -152,7 +152,7 @@ export default function WebMCP() {
                     slug: {
                         type: 'string',
                         description: 'Vertical slug identifier',
-                        enum: verticals.map(v => v.slug),
+                        enum: verticals.map((v) => v.slug),
                     },
                 },
                 required: ['slug'],
@@ -164,7 +164,6 @@ export default function WebMCP() {
                 return v.config;
             },
         });
-
     }, []);
 
     return null; // No UI — headless tool registration

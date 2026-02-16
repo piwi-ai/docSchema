@@ -1,0 +1,76 @@
+{
+  "id": "doc-certificato-morte",
+  "name": "Certificato di Morte",
+  "description": "Certificato di morte — per liquidazione polizza vita caso morte",
+  "references": [
+    {
+      "title": "Ministero dell'Interno — Servizi demografici",
+      "url": "https://dait.interno.gov.it/servizi-demografici",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "defunto": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+          },
+          "dataNascita": {
+            "type": "string",
+            "description": "Data di nascita",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "luogoNascita": {
+            "type": "string",
+            "description": "Luogo di nascita"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale"
+        ]
+      },
+      "dataDecesso": {
+        "type": "string",
+        "description": "Data del decesso",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "luogoDecesso": {
+        "type": "string",
+        "description": "Luogo del decesso"
+      },
+      "causaDecesso": {
+        "type": "string",
+        "description": "Causa del decesso (se indicata)"
+      },
+      "comune": {
+        "type": "string",
+        "description": "Comune che ha rilasciato il certificato"
+      },
+      "dataRilascio": {
+        "type": "string",
+        "description": "Data di rilascio",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      }
+    },
+    "required": [
+      "defunto",
+      "dataDecesso",
+      "luogoDecesso"
+    ]
+  }
+}

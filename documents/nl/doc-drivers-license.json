@@ -1,0 +1,102 @@
+{
+  "id": "doc-drivers-license",
+  "name": "Driver's License",
+  "description": "Driver's License — Netherlands",
+  "references": [
+    {
+      "title": "RDW — Rijbewijs",
+      "url": "https://www.rdw.nl/particulier/voertuigen/auto/het-rijbewijs",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Voornamen"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Achternaam"
+      },
+      "licenseNumber": {
+        "type": "string",
+        "description": "License number"
+      },
+      "categories": {
+        "type": "string",
+        "description": "License categories (EU Directive 2006/126/EC)",
+        "enum": [
+          "AM",
+          "A1",
+          "A2",
+          "A",
+          "B1",
+          "B",
+          "BE",
+          "C1",
+          "C1E",
+          "C",
+          "CE",
+          "D1",
+          "D1E",
+          "D",
+          "DE",
+          null
+        ],
+        "nullable": true
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Geboortedatum",
+        "pattern": "^\\d{2}-\\d{2}-\\d{4}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Geboorteplaats"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Datum van afgifte",
+        "pattern": "^\\d{2}-\\d{2}-\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Geldig tot",
+        "pattern": "^\\d{2}-\\d{2}-\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Autoriteit"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Adres"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Nationaliteit"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Geslacht",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "licenseNumber",
+      "categories",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

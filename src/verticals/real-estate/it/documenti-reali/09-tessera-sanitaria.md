@@ -10,35 +10,48 @@ Documento rilasciato dal Ministero dell'Economia che contiene il Codice Fiscale 
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `codiceFiscale` | string (CF) | ✅ | Codice Fiscale (riportato sia in chiaro che nel codice a barre) |
-| `cognome` | string | ✅ | Cognome |
-| `nome` | string | ✅ | Nome |
-| `sesso` | enum | ✅ | `M` \| `F` |
-| `luogoDiNascita` | string | ✅ | Comune di nascita |
-| `provincia` | string | ✅ | Sigla provincia |
-| `dataDiNascita` | date DD.MM.YYYY | ✅ | Data di nascita |
-| `dataDiScadenza` | date DD.MM.YYYY | ✅ | Data di scadenza della tessera |
-| `dataEmissione` | date DD.MM.YYYY | ✅ | Data di emissione |
+| Campo            | Tipo            | Obbligatorio | Descrizione                                                     |
+| ---------------- | --------------- | :----------: | --------------------------------------------------------------- |
+| `codiceFiscale`  | string (CF)     |      ✅      | Codice Fiscale (riportato sia in chiaro che nel codice a barre) |
+| `cognome`        | string          |      ✅      | Cognome                                                         |
+| `nome`           | string          |      ✅      | Nome                                                            |
+| `sesso`          | enum            |      ✅      | `M` \| `F`                                                      |
+| `luogoDiNascita` | string          |      ✅      | Comune di nascita                                               |
+| `provincia`      | string          |      ✅      | Sigla provincia                                                 |
+| `dataDiNascita`  | date DD.MM.YYYY |      ✅      | Data di nascita                                                 |
+| `dataDiScadenza` | date DD.MM.YYYY |      ✅      | Data di scadenza della tessera                                  |
+| `dataEmissione`  | date DD.MM.YYYY |      ✅      | Data di emissione                                               |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "codiceFiscale": { "type": "string", "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$" },
-    "cognome": { "type": "string" },
-    "nome": { "type": "string" },
-    "sesso": { "type": "string", "enum": ["M", "F", null] },
-    "luogoDiNascita": { "type": "string" },
-    "provincia": { "type": "string" },
-    "dataDiNascita": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
-    "dataDiScadenza": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
-    "dataEmissione": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" }
-  },
-  "required": ["codiceFiscale", "cognome", "nome", "sesso", "luogoDiNascita", "provincia", "dataDiNascita", "dataDiScadenza", "dataEmissione"]
+    "type": "object",
+    "properties": {
+        "codiceFiscale": {
+            "type": "string",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+        },
+        "cognome": { "type": "string" },
+        "nome": { "type": "string" },
+        "sesso": { "type": "string", "enum": ["M", "F", null] },
+        "luogoDiNascita": { "type": "string" },
+        "provincia": { "type": "string" },
+        "dataDiNascita": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
+        "dataDiScadenza": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
+        "dataEmissione": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" }
+    },
+    "required": [
+        "codiceFiscale",
+        "cognome",
+        "nome",
+        "sesso",
+        "luogoDiNascita",
+        "provincia",
+        "dataDiNascita",
+        "dataDiScadenza",
+        "dataEmissione"
+    ]
 }
 ```
 

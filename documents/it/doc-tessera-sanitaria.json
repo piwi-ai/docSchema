@@ -1,0 +1,71 @@
+{
+  "id": "doc-tessera-sanitaria",
+  "name": "Tessera Sanitaria",
+  "description": "Tessera sanitaria / Codice Fiscale — conferma CF e dati anagrafici",
+  "references": [
+    {
+      "title": "Agenzia delle Entrate — Tessera Sanitaria",
+      "url": "https://sistemats1.sanita.finanze.it/portale/tessera-sanitaria",
+      "type": "documentation"
+    }
+  ],
+  "isArrayExtraction": true,
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "nome": {
+        "type": "string",
+        "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+      },
+      "cognome": {
+        "type": "string",
+        "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+      },
+      "codiceFiscale": {
+        "type": "string",
+        "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+        "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+      },
+      "sesso": {
+        "type": "string",
+        "description": "Sesso",
+        "enum": [
+          "M",
+          "F",
+          null
+        ],
+        "nullable": true
+      },
+      "dataNascita": {
+        "type": "string",
+        "description": "Data di nascita",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "luogoNascita": {
+        "type": "string",
+        "description": "Comune di nascita"
+      },
+      "provincia": {
+        "type": "string",
+        "description": "Sigla provincia di nascita"
+      },
+      "dataScadenza": {
+        "type": "string",
+        "description": "Data di scadenza",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "dataEmissione": {
+        "type": "string",
+        "description": "Data di emissione",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      }
+    },
+    "required": [
+      "nome",
+      "cognome",
+      "codiceFiscale",
+      "sesso",
+      "dataNascita"
+    ]
+  }
+}

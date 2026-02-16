@@ -1,0 +1,93 @@
+{
+  "id": "doc-identity-card",
+  "name": "Identity Document",
+  "description": "Identity document (ID Card, Passport, Driver License)",
+  "references": [
+    {
+      "title": "Service-Public.fr — Carte d'identité",
+      "url": "https://www.service-public.fr/particuliers/vosdroits/N358",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Prénom"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Nom"
+      },
+      "personalId": {
+        "type": "string",
+        "description": "Personal ID number / Numéro de sécurité sociale (NIR)",
+        "pattern": "^[12]\\d{12}\\d{2}$"
+      },
+      "documentType": {
+        "type": "string",
+        "description": "Document type / Type de document"
+      },
+      "documentNumber": {
+        "type": "string",
+        "description": "Document number / Numéro du document"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Date de délivrance",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Date d'expiration",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Autorité de délivrance"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Lieu de naissance"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Date de naissance",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Adresse"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Nationalité"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Sexe",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "personalId",
+      "documentType",
+      "documentNumber",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

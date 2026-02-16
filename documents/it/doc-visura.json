@@ -1,0 +1,189 @@
+{
+  "id": "doc-visura",
+  "name": "Visura Catastale",
+  "description": "Stato attuale dell'immobile in Catasto. Può essere un fabbricato (con categoria, rendita, consistenza) o un terreno (con qualità, classe, superficie, redditi).",
+  "references": [
+    {
+      "title": "Agenzia delle Entrate — Consultazione dati catastali",
+      "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/visura-catastale",
+      "type": "documentation"
+    },
+    {
+      "title": "Sister — Servizi catastali online",
+      "url": "https://sister.agenziaentrate.gov.it/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "foglio": {
+        "type": "string",
+        "description": "Foglio catastale"
+      },
+      "particella": {
+        "type": "string",
+        "description": "Particella catastale"
+      },
+      "subalterno": {
+        "type": "string",
+        "description": "Subalterno"
+      },
+      "sezione": {
+        "type": "string",
+        "description": "Sezione catastale (es. ABBIATEGUAZZONE, può essere vuoto)"
+      },
+      "comuneCatastale": {
+        "type": "string",
+        "description": "Comune catastale con codice — copia ESATTAMENTE come scritto (es. TRADATE (L319B))"
+      },
+      "indirizzoCatastale": {
+        "type": "string",
+        "description": "Indirizzo dell'immobile se presente"
+      },
+      "piano": {
+        "type": "string",
+        "description": "Piano dell'immobile — solo il numero o codice (es. S1, T, 1, 2). NON aggiungere descrizioni come \"Secondo\" o \"Piano Terra\""
+      },
+      "categoriaCatastale": {
+        "type": "string",
+        "description": "Categoria catastale (es. A/2, A/10, C/6) — solo per fabbricati",
+        "enum": [
+          "A/1",
+          "A/2",
+          "A/3",
+          "A/4",
+          "A/5",
+          "A/6",
+          "A/7",
+          "A/8",
+          "A/9",
+          "A/10",
+          "A/11",
+          "B/1",
+          "B/2",
+          "B/3",
+          "B/4",
+          "B/5",
+          "B/6",
+          "B/7",
+          "B/8",
+          "C/1",
+          "C/2",
+          "C/3",
+          "C/4",
+          "C/5",
+          "C/6",
+          "C/7",
+          "D/1",
+          "D/2",
+          "D/3",
+          "D/4",
+          "D/5",
+          "D/6",
+          "D/7",
+          "D/8",
+          "D/9",
+          "D/10",
+          "E/1",
+          "E/2",
+          "E/3",
+          "E/4",
+          "E/5",
+          "E/6",
+          "E/7",
+          "E/8",
+          "E/9",
+          "F/1",
+          "F/2",
+          "F/3",
+          "F/4",
+          "F/5",
+          null
+        ],
+        "nullable": true
+      },
+      "classe": {
+        "type": "string",
+        "description": "Classe catastale (numero)"
+      },
+      "renditaCatastale": {
+        "type": "number",
+        "description": "Rendita catastale in Euro — solo per fabbricati"
+      },
+      "consistenza": {
+        "type": "string",
+        "description": "Consistenza: vani per abitazioni, mq per altre categorie"
+      },
+      "qualita": {
+        "type": "string",
+        "description": "Qualità colturale del terreno (es. SEMIN ARBOR, PRATO, VIGNETO) — solo per terreni"
+      },
+      "superficie": {
+        "type": "string",
+        "description": "Superficie totale in mq"
+      },
+      "superficieEscluseAreeScoperte": {
+        "type": "string",
+        "description": "Superficie totale escluse aree scoperte in mq"
+      },
+      "redditoDominicale": {
+        "type": "number",
+        "description": "Reddito dominicale in Euro — solo per terreni"
+      },
+      "redditoAgrario": {
+        "type": "number",
+        "description": "Reddito agrario in Euro — solo per terreni"
+      },
+      "intestatiCatastali": {
+        "type": "array",
+        "description": "Elenco degli intestatari catastali con diritti e quote",
+        "items": {
+          "type": "object",
+          "properties": {
+            "cognome": {
+              "type": "string",
+              "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+            },
+            "nome": {
+              "type": "string",
+              "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+            },
+            "codiceFiscale": {
+              "type": "string",
+              "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+              "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+            },
+            "dataNascita": {
+              "type": "string",
+              "description": "Data di nascita in formato DD/MM/YYYY"
+            },
+            "luogoNascita": {
+              "type": "string",
+              "description": "Città e dopo inserisci la sigla della provincia calcolata così:  Se la città è una di queste usa la sua sigla: Barletta-Andria-Trani (BT) Bolzano (BZ) Caltanissetta (CL) Campobasso (CB) Caserta (CE) Chieti (CH) Crotone (KR) Forlì-Cesena (FC) Lecco (LC) Mantova (MN) Massa-Carrara (MS) Messina (ME) Monza e della Brianza (MB) Parma (PR) Perugia (PG) Pesaro e Urbino (PU) Piacenza (PC) Pistoia (PT) Potenza (PZ) Ragusa (RG) Reggio Calabria (RC) Roma (RM) Siracusa (SR) Sud Sardegna (SU) Trapani (TP) Trieste (TS) Vibo Valentia (VV), se è un'altra città crea la sigla con le prime due lettere del nome della città, possono essere più intestati identificati da un numero progressivo, separali con il numero progressivo seguito da \\\\\"-\\\\\""
+            },
+            "diritto": {
+              "type": "string",
+              "description": "Tipo di diritto e quota (es. Proprietà per 1/1, Proprietà per 1/2, Nuda proprietà per 1/1, Usufrutto per 1/1)"
+            }
+          },
+          "required": [
+            "cognome",
+            "nome",
+            "codiceFiscale",
+            "dataNascita",
+            "luogoNascita",
+            "diritto"
+          ]
+        }
+      }
+    },
+    "required": [
+      "foglio",
+      "particella",
+      "subalterno",
+      "comuneCatastale",
+      "intestatiCatastali"
+    ]
+  }
+}

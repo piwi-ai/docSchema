@@ -3,9 +3,7 @@
  * Used by: car-dealership.
  */
 import type { DocumentTypeDef } from '../../../types.js';
-import {
-    text, num, objectSchema,
-} from '../helpers.js';
+import { text, num, objectSchema } from '../helpers.js';
 import { ReferenceType } from '../../../constants.js';
 
 export const schedaTecnica: DocumentTypeDef = {
@@ -19,13 +17,17 @@ export const schedaTecnica: DocumentTypeDef = {
             type: ReferenceType.REGULATION,
         },
     ],
-    jsonSchema: objectSchema({
-        marca: text('Marca'), modello: text('Modello'),
-        allestimento: text('Livello di allestimento (es. Lounge, Sport, Executive)'),
-        annoModello: num('Anno modello'),
-        coloreEsterno: text('Colore carrozzeria'),
-        coloreInterno: text('Colore e materiale interni'),
-        optionals: text('Lista optionals inclusi (separati da virgola)'),
-        prezzoListino: num('Prezzo di listino in Euro'),
-    }, ['marca', 'modello']),
+    jsonSchema: objectSchema(
+        {
+            marca: text('Marca'),
+            modello: text('Modello'),
+            allestimento: text('Livello di allestimento (es. Lounge, Sport, Executive)'),
+            annoModello: num('Anno modello'),
+            coloreEsterno: text('Colore carrozzeria'),
+            coloreInterno: text('Colore e materiale interni'),
+            optionals: text('Lista optionals inclusi (separati da virgola)'),
+            prezzoListino: num('Prezzo di listino in Euro'),
+        },
+        ['marca', 'modello'],
+    ),
 };

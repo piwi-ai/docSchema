@@ -1,0 +1,68 @@
+{
+  "id": "doc-title-insurance",
+  "name": "Title Insurance Policy",
+  "description": "Title insurance commitment or policy (owner's or lender's)",
+  "references": [
+    {
+      "title": "ALTA — Policy Forms",
+      "url": "https://www.alta.org/policy-forms/",
+      "type": "specification"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "insurer": {
+        "type": "string",
+        "description": "Title insurance company"
+      },
+      "policyNumber": {
+        "type": "string",
+        "description": "Policy or commitment number"
+      },
+      "policyType": {
+        "type": "string",
+        "description": "Policy type",
+        "enum": [
+          "owner's",
+          "lender's",
+          "both",
+          null
+        ],
+        "nullable": true
+      },
+      "coverageAmount": {
+        "type": "number",
+        "description": "Coverage amount (USD, numbers only, no dollar sign)"
+      },
+      "premium": {
+        "type": "number",
+        "description": "Premium amount (USD, numbers only, no dollar sign)"
+      },
+      "insuredParty": {
+        "type": "string",
+        "description": "Name of insured party"
+      },
+      "effectiveDate": {
+        "type": "string",
+        "description": "Effective date",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "propertyAddress": {
+        "type": "string",
+        "description": "Insured property address"
+      },
+      "exceptions": {
+        "type": "string",
+        "description": "Policy exceptions and exclusions"
+      }
+    },
+    "required": [
+      "insurer",
+      "policyType",
+      "coverageAmount",
+      "insuredParty",
+      "propertyAddress"
+    ]
+  }
+}

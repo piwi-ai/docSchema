@@ -1,0 +1,94 @@
+{
+  "id": "doc-f24",
+  "name": "Modello F24",
+  "description": "Modello di pagamento unificato per imposte, contributi e premi",
+  "references": [
+    {
+      "title": "Agenzia delle Entrate — Modello F24",
+      "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/pagamenti/f24",
+      "type": "documentation"
+    },
+    {
+      "title": "Tabella codici tributo",
+      "url": "https://www.agenziaentrate.gov.it/portale/web/guest/codici-tributo",
+      "type": "specification"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "contribuente": {
+        "type": "object",
+        "properties": {
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice fiscale del contribuente"
+          },
+          "denominazione": {
+            "type": "string",
+            "description": "Cognome e nome o ragione sociale"
+          }
+        },
+        "required": [
+          "codiceFiscale"
+        ]
+      },
+      "dataVersamento": {
+        "type": "string",
+        "description": "Data del versamento",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "tributi": {
+        "type": "array",
+        "description": "Elenco tributi/contributi versati",
+        "items": {
+          "type": "object",
+          "properties": {
+            "sezione": {
+              "type": "string",
+              "description": "Sezione (Erario, Regioni, IMU, INPS, ecc.)"
+            },
+            "codiceTributo": {
+              "type": "string",
+              "description": "Codice tributo (es. 4001, 3844, 1040)"
+            },
+            "rateazione": {
+              "type": "string",
+              "description": "Rateazione/regione/prov./mese rif."
+            },
+            "annoRiferimento": {
+              "type": "string",
+              "description": "Anno di riferimento"
+            },
+            "importoDebito": {
+              "type": "number",
+              "description": "Importo a debito in Euro"
+            },
+            "importoCredito": {
+              "type": "number",
+              "description": "Importo a credito in Euro"
+            }
+          },
+          "required": [
+            "codiceTributo",
+            "importoDebito"
+          ]
+        }
+      },
+      "totaleVersato": {
+        "type": "number",
+        "description": "Totale versato in Euro"
+      },
+      "banca": {
+        "type": "string",
+        "description": "Banca/Posta delegata al pagamento"
+      }
+    },
+    "required": [
+      "contribuente",
+      "dataVersamento",
+      "tributi",
+      "totaleVersato"
+    ]
+  }
+}

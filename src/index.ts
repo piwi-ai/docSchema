@@ -26,12 +26,21 @@ export type {
 
 // ─── Constants & Enums ──────────────────────────────────────────────────────
 export {
-    DateFormat, DATE_PATTERNS, Sex, SEX_VALUES,
+    DateFormat,
+    DATE_PATTERNS,
+    Sex,
+    SEX_VALUES,
     DocTypeId,
-    IdentityField, IDENTITY_REQUIRED_FIELDS,
-    PassportField, PASSPORT_REQUIRED_FIELDS,
-    DriversLicenseField, DRIVERS_LICENSE_REQUIRED_FIELDS, EU_LICENSE_CATEGORIES,
-    ResidencePermitField, RESIDENCE_PERMIT_REQUIRED_FIELDS, EU_PERMIT_TYPES,
+    IdentityField,
+    IDENTITY_REQUIRED_FIELDS,
+    PassportField,
+    PASSPORT_REQUIRED_FIELDS,
+    DriversLicenseField,
+    DRIVERS_LICENSE_REQUIRED_FIELDS,
+    EU_LICENSE_CATEGORIES,
+    ResidencePermitField,
+    RESIDENCE_PERMIT_REQUIRED_FIELDS,
+    EU_PERMIT_TYPES,
 } from './constants.js';
 
 // ─── Country Registry & Factories ───────────────────────────────────────────
@@ -79,7 +88,6 @@ export * as seHelpers from './countries/se/helpers.js';
 export * as siHelpers from './countries/si/helpers.js';
 export * as skHelpers from './countries/sk/helpers.js';
 
-
 // ─── Country Document Definitions ──────────────────────────────────────────
 export * as atDocs from './countries/at/documentTypes/index.js';
 export * as beDocs from './countries/be/documentTypes/index.js';
@@ -118,7 +126,11 @@ export * as skDocs from './countries/sk/documentTypes/index.js';
 export { accountantItConfig } from './verticals/accountant/it/index.js';
 export { carDealershipItConfig } from './verticals/car-dealership/it/index.js';
 export { insuranceItConfig } from './verticals/insurance/it/index.js';
-export { realEstateItConfig, DOC_IDS as realEstateItDocIds, ENTITY_IDS as realEstateItEntityIds } from './verticals/real-estate/it/index.js';
+export {
+    realEstateItConfig,
+    DOC_IDS as realEstateItDocIds,
+    ENTITY_IDS as realEstateItEntityIds,
+} from './verticals/real-estate/it/index.js';
 export { realEstateUsConfig } from './verticals/real-estate/us/index.js';
 
 // ─── Convenience: all configs in one array ──────────────────────────────────
@@ -137,4 +149,3 @@ export const allConfigurations: BusinessConfiguration[] = [
     realEstateItConfig,
     realEstateUsConfig,
 ];
-

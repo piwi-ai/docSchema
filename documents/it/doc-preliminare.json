@@ -1,0 +1,141 @@
+{
+  "id": "doc-preliminare",
+  "name": "Contratto Preliminare",
+  "description": "Compromesso di compravendita",
+  "references": [
+    {
+      "title": "Art. 1351 Codice Civile — Contratto preliminare",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1351",
+      "type": "regulation"
+    },
+    {
+      "title": "Agenzia delle Entrate — Registrazione preliminare",
+      "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/registrazione/registrazione-preliminare",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "acquirenti": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "nome": {
+              "type": "string",
+              "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+            },
+            "cognome": {
+              "type": "string",
+              "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+            },
+            "codiceFiscale": {
+              "type": "string",
+              "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+              "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+            },
+            "statoCivile": {
+              "type": "string",
+              "description": "Stato civile",
+              "enum": [
+                "celibe",
+                "nubile",
+                "coniugato",
+                "coniugata",
+                "vedovo",
+                "vedova",
+                "divorziato",
+                "divorziata",
+                "separato",
+                "separata",
+                null
+              ],
+              "nullable": true
+            }
+          },
+          "required": [
+            "nome",
+            "cognome",
+            "codiceFiscale"
+          ]
+        }
+      },
+      "venditori": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "nome": {
+              "type": "string",
+              "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+            },
+            "cognome": {
+              "type": "string",
+              "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+            },
+            "codiceFiscale": {
+              "type": "string",
+              "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+              "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+            },
+            "statoCivile": {
+              "type": "string",
+              "description": "Stato civile",
+              "enum": [
+                "celibe",
+                "nubile",
+                "coniugato",
+                "coniugata",
+                "vedovo",
+                "vedova",
+                "divorziato",
+                "divorziata",
+                "separato",
+                "separata",
+                null
+              ],
+              "nullable": true
+            }
+          },
+          "required": [
+            "nome",
+            "cognome",
+            "codiceFiscale"
+          ]
+        }
+      },
+      "prezzo": {
+        "type": "number"
+      },
+      "dataStipula": {
+        "type": "string",
+        "description": "Data di stipula in formato europeo DD/MM/YYYY",
+        "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$"
+      },
+      "caparra": {
+        "type": "number",
+        "description": "Importo della caparra confirmatoria in Euro"
+      },
+      "dataRogito": {
+        "type": "string",
+        "description": "Data prevista per il rogito definitivo in formato europeo DD/MM/YYYY",
+        "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$"
+      },
+      "mediatore": {
+        "type": "string",
+        "description": "Nome dell'agenzia immobiliare o del mediatore (Art. 35 D.Lgs. 223/2006)"
+      },
+      "modalitaPagamento": {
+        "type": "string",
+        "description": "Modalità di pagamento previste"
+      }
+    },
+    "required": [
+      "acquirenti",
+      "venditori",
+      "prezzo",
+      "dataStipula"
+    ]
+  }
+}

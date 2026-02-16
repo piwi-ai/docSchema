@@ -1,0 +1,62 @@
+{
+  "id": "doc-agibilita",
+  "name": "Certificato di Agibilità",
+  "description": "Attesta che l'immobile soddisfa requisiti di sicurezza, igiene, salubrità e risparmio energetico",
+  "references": [
+    {
+      "title": "Art. 24 D.P.R. 380/2001 — Agibilità",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:2001-06-06;380~art24",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "numeroProtocollo": {
+        "type": "string",
+        "description": "Numero di protocollo del certificato"
+      },
+      "dataRilascio": {
+        "type": "string",
+        "description": "Data di rilascio in formato europeo DD.MM.YYYY",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "comuneRilascio": {
+        "type": "string",
+        "description": "Comune che ha rilasciato il certificato"
+      },
+      "richiedente": {
+        "type": "string",
+        "description": "Nome e cognome del richiedente"
+      },
+      "indirizzo": {
+        "type": "string",
+        "description": "Indirizzo completo dell'immobile"
+      },
+      "foglio": {
+        "type": "string"
+      },
+      "particella": {
+        "type": "string"
+      },
+      "subalterno": {
+        "type": "string"
+      },
+      "destinazioneUso": {
+        "type": "string",
+        "description": "Destinazione d'uso dell'immobile (es. residenziale, ufficio, commerciale, industriale, agricolo, magazzino, autorimessa)"
+      },
+      "tecnicoAsseverante": {
+        "type": "string",
+        "description": "Nome del tecnico che ha asseverato la conformità"
+      }
+    },
+    "required": [
+      "numeroProtocollo",
+      "dataRilascio",
+      "comuneRilascio",
+      "indirizzo",
+      "destinazioneUso"
+    ]
+  }
+}

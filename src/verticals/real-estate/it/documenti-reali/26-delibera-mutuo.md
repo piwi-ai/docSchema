@@ -10,39 +10,42 @@ Lettera ufficiale della banca o istituto di credito che conferma l'approvazione 
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `banca` | string | ✅ | Nome della banca o istituto di credito |
-| `filiale` | string | | Filiale o agenzia |
-| `mutuatario` | string | ✅ | Nome e cognome del mutuatario |
-| `codiceFiscaleMutuatario` | string (pattern CF) | ✅ | Codice Fiscale del mutuatario |
-| `importoMutuo` | number | ✅ | Importo del mutuo deliberato in Euro |
-| `durataAnni` | number | | Durata del mutuo in anni |
-| `tassoInteresse` | string | | Tasso di interesse e percentuale |
-| `tipoTasso` | enum | | fisso \| variabile \| misto |
-| `dataDelibera` | date DD.MM.YYYY | ✅ | Data della delibera |
-| `validitaDelibera` | string | | Validità temporale della delibera (es. 6 mesi) |
-| `condizioniSospensive` | string | | Eventuali condizioni sospensive (es. ipoteca di primo grado) |
+| Campo                     | Tipo                | Obbligatorio | Descrizione                                                  |
+| ------------------------- | ------------------- | :----------: | ------------------------------------------------------------ |
+| `banca`                   | string              |      ✅      | Nome della banca o istituto di credito                       |
+| `filiale`                 | string              |              | Filiale o agenzia                                            |
+| `mutuatario`              | string              |      ✅      | Nome e cognome del mutuatario                                |
+| `codiceFiscaleMutuatario` | string (pattern CF) |      ✅      | Codice Fiscale del mutuatario                                |
+| `importoMutuo`            | number              |      ✅      | Importo del mutuo deliberato in Euro                         |
+| `durataAnni`              | number              |              | Durata del mutuo in anni                                     |
+| `tassoInteresse`          | string              |              | Tasso di interesse e percentuale                             |
+| `tipoTasso`               | enum                |              | fisso \| variabile \| misto                                  |
+| `dataDelibera`            | date DD.MM.YYYY     |      ✅      | Data della delibera                                          |
+| `validitaDelibera`        | string              |              | Validità temporale della delibera (es. 6 mesi)               |
+| `condizioniSospensive`    | string              |              | Eventuali condizioni sospensive (es. ipoteca di primo grado) |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "banca": { "type": "string" },
-    "filiale": { "type": "string" },
-    "mutuatario": { "type": "string" },
-    "codiceFiscaleMutuatario": { "type": "string", "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$" },
-    "importoMutuo": { "type": "number" },
-    "durataAnni": { "type": "number" },
-    "tassoInteresse": { "type": "string" },
-    "tipoTasso": { "type": "string", "enum": ["fisso", "variabile", "misto", null] },
-    "dataDelibera": { "type": "string", "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$" },
-    "validitaDelibera": { "type": "string" },
-    "condizioniSospensive": { "type": "string" }
-  },
-  "required": ["banca", "mutuatario", "codiceFiscaleMutuatario", "importoMutuo", "dataDelibera"]
+    "type": "object",
+    "properties": {
+        "banca": { "type": "string" },
+        "filiale": { "type": "string" },
+        "mutuatario": { "type": "string" },
+        "codiceFiscaleMutuatario": {
+            "type": "string",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+        },
+        "importoMutuo": { "type": "number" },
+        "durataAnni": { "type": "number" },
+        "tassoInteresse": { "type": "string" },
+        "tipoTasso": { "type": "string", "enum": ["fisso", "variabile", "misto", null] },
+        "dataDelibera": { "type": "string", "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$" },
+        "validitaDelibera": { "type": "string" },
+        "condizioniSospensive": { "type": "string" }
+    },
+    "required": ["banca", "mutuatario", "codiceFiscaleMutuatario", "importoMutuo", "dataDelibera"]
 }
 ```
 

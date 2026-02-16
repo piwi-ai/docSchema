@@ -1,0 +1,85 @@
+{
+  "id": "doc-passport",
+  "name": "Passport",
+  "description": "Passport — Malta",
+  "references": [
+    {
+      "title": "Identità Malta — Passports",
+      "url": "https://identita.gov.mt/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Isem"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Kunjom"
+      },
+      "passportNumber": {
+        "type": "string",
+        "description": "Passport number"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Nazzjonalità"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Data tat-twelid",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Post tat-twelid"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Sess",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Data tal-ħruġ",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Data ta' skadenza",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Awtorità li ħarġet"
+      },
+      "issuingCountry": {
+        "type": "string",
+        "description": "Issuing country / Code"
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "passportNumber",
+      "nationality",
+      "dateOfBirth",
+      "sex",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

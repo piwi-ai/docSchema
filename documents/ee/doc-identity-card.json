@@ -1,0 +1,93 @@
+{
+  "id": "doc-identity-card",
+  "name": "Identity Document",
+  "description": "Identity document (ID Card, Passport, Driver License)",
+  "references": [
+    {
+      "title": "PBGB — ID Card",
+      "url": "https://www.politsei.ee/en/instructions/applying-for-an-id-card-for-an-adult",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Eesnimi"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Perekonnanimi"
+      },
+      "personalId": {
+        "type": "string",
+        "description": "Personal ID number / Isikukood",
+        "pattern": "^\\d{11}$"
+      },
+      "documentType": {
+        "type": "string",
+        "description": "Document type / Dokumendi liik"
+      },
+      "documentNumber": {
+        "type": "string",
+        "description": "Document number / Dokumendi number"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Väljaandmise kuupäev",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Kehtiv kuni",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Väljaandja"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Sünnikoht"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Sünniaeg",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Aadress"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Kodakondsus"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Sugu",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "personalId",
+      "documentType",
+      "documentNumber",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "id": "doc-cu",
+  "name": "Certificazione Unica (CU)",
+  "description": "Certificazione Unica rilasciata dal datore di lavoro / committente",
+  "references": [
+    {
+      "title": "Agenzia delle Entrate — Certificazione Unica",
+      "url": "https://www.agenziaentrate.gov.it/portale/web/guest/cu-certificazione-unica",
+      "type": "documentation"
+    },
+    {
+      "title": "Specifiche tecniche CU (tracciato record)",
+      "url": "https://www.agenziaentrate.gov.it/portale/web/guest/cu-certificazione-unica/specifiche-tecniche-cu",
+      "type": "specification"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "anno": {
+        "type": "number",
+        "description": "Anno di riferimento dei redditi"
+      },
+      "datoreLavoro": {
+        "type": "object",
+        "properties": {
+          "denominazione": {
+            "type": "string",
+            "description": "Denominazione/ragione sociale del datore"
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice fiscale del datore"
+          },
+          "partitaIva": {
+            "type": "string",
+            "description": "Partita IVA — 11 cifre numeriche"
+          }
+        },
+        "required": [
+          "denominazione",
+          "codiceFiscale"
+        ]
+      },
+      "percipiente": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+          },
+          "dataNascita": {
+            "type": "string",
+            "description": "Data di nascita",
+            "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+          },
+          "comuneNascita": {
+            "type": "string",
+            "description": "Comune di nascita"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale"
+        ]
+      },
+      "redditoLordo": {
+        "type": "number",
+        "description": "Reddito lordo in Euro"
+      },
+      "ritenuteFiscali": {
+        "type": "number",
+        "description": "Ritenute fiscali operate in Euro"
+      },
+      "addizionaleRegionale": {
+        "type": "number",
+        "description": "Addizionale regionale in Euro"
+      },
+      "addizionaleComunale": {
+        "type": "number",
+        "description": "Addizionale comunale in Euro"
+      },
+      "contributiPrevidenziali": {
+        "type": "number",
+        "description": "Contributi previdenziali trattenuti in Euro"
+      },
+      "giorniLavorati": {
+        "type": "number",
+        "description": "Numero giorni di lavoro"
+      }
+    },
+    "required": [
+      "anno",
+      "datoreLavoro",
+      "percipiente",
+      "redditoLordo",
+      "ritenuteFiscali"
+    ]
+  }
+}

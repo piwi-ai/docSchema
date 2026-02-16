@@ -3,9 +3,7 @@
  * Used by: real-estate.
  */
 import type { DocumentTypeDef } from '../../../types.js';
-import {
-    text, objectSchema, ref, datePattern,
-} from '../helpers.js';
+import { text, objectSchema, ref, datePattern } from '../helpers.js';
 import { ReferenceType } from '../../../constants.js';
 
 export const planimetria: DocumentTypeDef = {
@@ -13,14 +11,21 @@ export const planimetria: DocumentTypeDef = {
     name: 'Planimetria Catastale',
     description: 'Dati identificativi della scheda grafica',
     references: [
-        ref('Agenzia delle Entrate — Planimetria catastale', 'https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/visura-catastale', ReferenceType.DOCUMENTATION),
+        ref(
+            'Agenzia delle Entrate — Planimetria catastale',
+            'https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/visura-catastale',
+            ReferenceType.DOCUMENTATION,
+        ),
     ],
-    jsonSchema: objectSchema({
-        foglio: { type: 'string' },
-        particella: { type: 'string' },
-        subalterno: { type: 'string' },
-        protocollo: { type: 'string' },
-        dataProtocollo: datePattern('Data del protocollo in formato europeo DD/MM/YYYY'),
-        scala: text('Scala della planimetria (es. 1:100, 1:200, 1:50, 1:500)'),
-    }, ['foglio', 'particella', 'subalterno', 'protocollo', 'dataProtocollo', 'scala']),
+    jsonSchema: objectSchema(
+        {
+            foglio: { type: 'string' },
+            particella: { type: 'string' },
+            subalterno: { type: 'string' },
+            protocollo: { type: 'string' },
+            dataProtocollo: datePattern('Data del protocollo in formato europeo DD/MM/YYYY'),
+            scala: text('Scala della planimetria (es. 1:100, 1:200, 1:50, 1:500)'),
+        },
+        ['foglio', 'particella', 'subalterno', 'protocollo', 'dataProtocollo', 'scala'],
+    ),
 };

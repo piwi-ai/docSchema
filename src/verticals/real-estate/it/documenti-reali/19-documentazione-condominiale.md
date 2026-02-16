@@ -10,35 +10,42 @@ Dichiarazione dell'amministratore di condominio che attesta la situazione dell'u
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `amministratore` | string | ✅ | Nome/ragione sociale dell'amministratore |
-| `condominio` | string | ✅ | Denominazione del condominio |
-| `indirizzo` | string | ✅ | Indirizzo del condominio |
-| `unitaImmobiliare` | string | ✅ | Identificazione dell'unità (es. Scala A, Piano 3, Int. 5) |
-| `quoteRegolari` | enum | ✅ | Le quote condominiali sono regolarmente pagate: sì \| no |
-| `importoArretrati` | string | | Eventuali arretrati dovuti |
-| `speseStraodinarie` | string | | Spese straordinarie deliberate o in corso |
-| `millesimi` | string | | Millesimi di proprietà dell'unità |
-| `dataRilascio` | date DD.MM.YYYY | ✅ | Data di rilascio della dichiarazione |
+| Campo               | Tipo            | Obbligatorio | Descrizione                                               |
+| ------------------- | --------------- | :----------: | --------------------------------------------------------- |
+| `amministratore`    | string          |      ✅      | Nome/ragione sociale dell'amministratore                  |
+| `condominio`        | string          |      ✅      | Denominazione del condominio                              |
+| `indirizzo`         | string          |      ✅      | Indirizzo del condominio                                  |
+| `unitaImmobiliare`  | string          |      ✅      | Identificazione dell'unità (es. Scala A, Piano 3, Int. 5) |
+| `quoteRegolari`     | enum            |      ✅      | Le quote condominiali sono regolarmente pagate: sì \| no  |
+| `importoArretrati`  | string          |              | Eventuali arretrati dovuti                                |
+| `speseStraodinarie` | string          |              | Spese straordinarie deliberate o in corso                 |
+| `millesimi`         | string          |              | Millesimi di proprietà dell'unità                         |
+| `dataRilascio`      | date DD.MM.YYYY |      ✅      | Data di rilascio della dichiarazione                      |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "amministratore": { "type": "string" },
-    "condominio": { "type": "string" },
-    "indirizzo": { "type": "string" },
-    "unitaImmobiliare": { "type": "string" },
-    "quoteRegolari": { "type": "string", "enum": ["sì", "no", null] },
-    "importoArretrati": { "type": "string" },
-    "speseStraodinarie": { "type": "string" },
-    "millesimi": { "type": "string" },
-    "dataRilascio": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" }
-  },
-  "required": ["amministratore", "condominio", "indirizzo", "unitaImmobiliare", "quoteRegolari", "dataRilascio"]
+    "type": "object",
+    "properties": {
+        "amministratore": { "type": "string" },
+        "condominio": { "type": "string" },
+        "indirizzo": { "type": "string" },
+        "unitaImmobiliare": { "type": "string" },
+        "quoteRegolari": { "type": "string", "enum": ["sì", "no", null] },
+        "importoArretrati": { "type": "string" },
+        "speseStraodinarie": { "type": "string" },
+        "millesimi": { "type": "string" },
+        "dataRilascio": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" }
+    },
+    "required": [
+        "amministratore",
+        "condominio",
+        "indirizzo",
+        "unitaImmobiliare",
+        "quoteRegolari",
+        "dataRilascio"
+    ]
 }
 ```
 

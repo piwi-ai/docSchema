@@ -1,0 +1,85 @@
+{
+  "id": "doc-passport",
+  "name": "Passport",
+  "description": "Passport — United Kingdom",
+  "references": [
+    {
+      "title": "GOV.UK — Passports",
+      "url": "https://www.gov.uk/browse/abroad/passports",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Given name"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Surname"
+      },
+      "passportNumber": {
+        "type": "string",
+        "description": "Passport number"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority"
+      },
+      "issuingCountry": {
+        "type": "string",
+        "description": "Issuing country / Code"
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "passportNumber",
+      "nationality",
+      "dateOfBirth",
+      "sex",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

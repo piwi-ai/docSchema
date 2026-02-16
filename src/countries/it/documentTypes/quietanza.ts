@@ -3,9 +3,7 @@
  * Used by: insurance.
  */
 import type { DocumentTypeDef } from '../../../types.js';
-import {
-    text, num, date, objectSchema,
-} from '../helpers.js';
+import { text, num, date, objectSchema } from '../helpers.js';
 import { ReferenceType } from '../../../constants.js';
 
 export const quietanza: DocumentTypeDef = {
@@ -19,13 +17,16 @@ export const quietanza: DocumentTypeDef = {
             type: ReferenceType.REGULATION,
         },
     ],
-    jsonSchema: objectSchema({
-        compagnia: text('Compagnia assicurativa'),
-        numeroPolizza: text('Numero polizza'),
-        contraente: text('Nome e cognome del contraente'),
-        importo: num('Importo pagato in Euro'),
-        dataPagamento: date('Data del pagamento'),
-        periodoRiferimento: text('Periodo di copertura (es. 01.01.2025 - 01.01.2026)'),
-        modalitaPagamento: text('Modalità di pagamento'),
-    }, ['compagnia', 'numeroPolizza', 'importo', 'dataPagamento']),
+    jsonSchema: objectSchema(
+        {
+            compagnia: text('Compagnia assicurativa'),
+            numeroPolizza: text('Numero polizza'),
+            contraente: text('Nome e cognome del contraente'),
+            importo: num('Importo pagato in Euro'),
+            dataPagamento: date('Data del pagamento'),
+            periodoRiferimento: text('Periodo di copertura (es. 01.01.2025 - 01.01.2026)'),
+            modalitaPagamento: text('Modalità di pagamento'),
+        },
+        ['compagnia', 'numeroPolizza', 'importo', 'dataPagamento'],
+    ),
 };

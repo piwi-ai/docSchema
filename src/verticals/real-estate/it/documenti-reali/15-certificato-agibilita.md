@@ -10,37 +10,56 @@ Certificato rilasciato dal Comune che attesta che l'immobile rispetta i requisit
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `numeroProtocollo` | string | ✅ | Numero di protocollo del certificato/SCA |
-| `dataRilascio` | date DD.MM.YYYY | ✅ | Data di rilascio |
-| `comuneRilascio` | string | ✅ | Comune che ha rilasciato il certificato |
-| `richiedente` | string | | Nome e cognome del richiedente |
-| `indirizzo` | string | ✅ | Indirizzo completo dell'immobile |
-| `foglio` | string | | Foglio catastale |
-| `particella` | string | | Particella catastale |
-| `subalterno` | string | | Subalterno |
-| `destinazioneUso` | enum | ✅ | residenziale \| ufficio \| commerciale \| industriale \| agricolo \| magazzino \| autorimessa \| altro |
-| `tecnicoAsseverante` | string | | Nome del tecnico che ha asseverato la conformità |
+| Campo                | Tipo            | Obbligatorio | Descrizione                                                                                            |
+| -------------------- | --------------- | :----------: | ------------------------------------------------------------------------------------------------------ |
+| `numeroProtocollo`   | string          |      ✅      | Numero di protocollo del certificato/SCA                                                               |
+| `dataRilascio`       | date DD.MM.YYYY |      ✅      | Data di rilascio                                                                                       |
+| `comuneRilascio`     | string          |      ✅      | Comune che ha rilasciato il certificato                                                                |
+| `richiedente`        | string          |              | Nome e cognome del richiedente                                                                         |
+| `indirizzo`          | string          |      ✅      | Indirizzo completo dell'immobile                                                                       |
+| `foglio`             | string          |              | Foglio catastale                                                                                       |
+| `particella`         | string          |              | Particella catastale                                                                                   |
+| `subalterno`         | string          |              | Subalterno                                                                                             |
+| `destinazioneUso`    | enum            |      ✅      | residenziale \| ufficio \| commerciale \| industriale \| agricolo \| magazzino \| autorimessa \| altro |
+| `tecnicoAsseverante` | string          |              | Nome del tecnico che ha asseverato la conformità                                                       |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "numeroProtocollo": { "type": "string" },
-    "dataRilascio": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
-    "comuneRilascio": { "type": "string" },
-    "richiedente": { "type": "string" },
-    "indirizzo": { "type": "string" },
-    "foglio": { "type": "string" },
-    "particella": { "type": "string" },
-    "subalterno": { "type": "string" },
-    "destinazioneUso": { "type": "string", "enum": ["residenziale", "ufficio", "commerciale", "industriale", "agricolo", "magazzino", "autorimessa", "altro", null] },
-    "tecnicoAsseverante": { "type": "string" }
-  },
-  "required": ["numeroProtocollo", "dataRilascio", "comuneRilascio", "indirizzo", "destinazioneUso"]
+    "type": "object",
+    "properties": {
+        "numeroProtocollo": { "type": "string" },
+        "dataRilascio": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
+        "comuneRilascio": { "type": "string" },
+        "richiedente": { "type": "string" },
+        "indirizzo": { "type": "string" },
+        "foglio": { "type": "string" },
+        "particella": { "type": "string" },
+        "subalterno": { "type": "string" },
+        "destinazioneUso": {
+            "type": "string",
+            "enum": [
+                "residenziale",
+                "ufficio",
+                "commerciale",
+                "industriale",
+                "agricolo",
+                "magazzino",
+                "autorimessa",
+                "altro",
+                null
+            ]
+        },
+        "tecnicoAsseverante": { "type": "string" }
+    },
+    "required": [
+        "numeroProtocollo",
+        "dataRilascio",
+        "comuneRilascio",
+        "indirizzo",
+        "destinazioneUso"
+    ]
 }
 ```
 

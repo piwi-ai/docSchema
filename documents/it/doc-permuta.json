@@ -1,0 +1,53 @@
+{
+  "id": "doc-permuta",
+  "name": "Dichiarazione di Permuta",
+  "description": "Dichiarazione relativa al veicolo ritirato in permuta",
+  "references": [
+    {
+      "title": "Codice Civile Art. 1552 — Permuta",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "targaRitirato": {
+        "type": "string",
+        "description": "Numero di targa del veicolo (es. AB123CD)"
+      },
+      "marcaRitirato": {
+        "type": "string",
+        "description": "Marca del veicolo ritirato"
+      },
+      "modelloRitirato": {
+        "type": "string",
+        "description": "Modello del veicolo ritirato"
+      },
+      "kmRitirato": {
+        "type": "number",
+        "description": "Chilometraggio del veicolo ritirato"
+      },
+      "valorePermuta": {
+        "type": "number",
+        "description": "Valore riconosciuto per la permuta in Euro"
+      },
+      "proprietarioRitirato": {
+        "type": "string",
+        "description": "Nome e cognome proprietario del veicolo ritirato"
+      },
+      "codiceFiscaleProprietario": {
+        "type": "string",
+        "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+        "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+      }
+    },
+    "required": [
+      "targaRitirato",
+      "marcaRitirato",
+      "modelloRitirato",
+      "valorePermuta",
+      "proprietarioRitirato"
+    ]
+  }
+}

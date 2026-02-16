@@ -1,14 +1,14 @@
-import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { MemoryRouter } from 'react-router-dom'
-import Explorer from '../pages/Explorer'
+import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
+import Explorer from '../pages/Explorer';
 
 function renderExplorer() {
     return render(
         <MemoryRouter>
             <Explorer />
-        </MemoryRouter>
+        </MemoryRouter>,
     );
 }
 
@@ -52,9 +52,7 @@ describe('Explorer', () => {
 
         // Click the first document card header
         const headers = screen.getAllByRole('button');
-        const docCardHeader = headers.find(btn =>
-            btn.classList.contains('doc-card__header')
-        );
+        const docCardHeader = headers.find((btn) => btn.classList.contains('doc-card__header'));
         expect(docCardHeader).toBeDefined();
 
         if (docCardHeader) {

@@ -10,29 +10,29 @@ Rappresentazione grafica in scala (1:100 o 1:200) dell'unità immobiliare deposi
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `foglio` | string | ✅ | Foglio catastale |
-| `particella` | string | ✅ | Particella catastale |
-| `subalterno` | string | ✅ | Subalterno |
-| `protocollo` | string | ✅ | Numero di protocollo della scheda |
-| `dataProtocollo` | date | ✅ | Data di protocollazione |
-| `scala` | enum | ✅ | `1:100` \| `1:200` |
+| Campo            | Tipo   | Obbligatorio | Descrizione                       |
+| ---------------- | ------ | :----------: | --------------------------------- |
+| `foglio`         | string |      ✅      | Foglio catastale                  |
+| `particella`     | string |      ✅      | Particella catastale              |
+| `subalterno`     | string |      ✅      | Subalterno                        |
+| `protocollo`     | string |      ✅      | Numero di protocollo della scheda |
+| `dataProtocollo` | date   |      ✅      | Data di protocollazione           |
+| `scala`          | enum   |      ✅      | `1:100` \| `1:200`                |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "foglio": { "type": "string" },
-    "particella": { "type": "string" },
-    "subalterno": { "type": "string" },
-    "protocollo": { "type": "string" },
-    "dataProtocollo": { "type": "string", "pattern": "" },
-    "scala": { "type": "string", "enum": ["1:100", "1:200", null] }
-  },
-  "required": ["foglio", "particella", "subalterno", "protocollo", "dataProtocollo", "scala"]
+    "type": "object",
+    "properties": {
+        "foglio": { "type": "string" },
+        "particella": { "type": "string" },
+        "subalterno": { "type": "string" },
+        "protocollo": { "type": "string" },
+        "dataProtocollo": { "type": "string", "pattern": "" },
+        "scala": { "type": "string", "enum": ["1:100", "1:200", null] }
+    },
+    "required": ["foglio", "particella", "subalterno", "protocollo", "dataProtocollo", "scala"]
 }
 ```
 

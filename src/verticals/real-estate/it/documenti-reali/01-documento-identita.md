@@ -11,41 +11,69 @@ Documento di identificazione personale richiesto dal notaio per l'identificazion
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `nome` | string | ✅ | Nome (first name) |
-| `cognome` | string | ✅ | Cognome (surname) |
-| `codiceFiscale` | string (pattern CF) | ✅ | Codice Fiscale 16 caratteri alfanumerici |
-| `tipoDocumento` | enum | ✅ | `Carta D'Identita` \| `Passaporto` |
-| `numeroDocumento` | string | ✅ | Numero identificativo del documento |
-| `dataEmissione` | date DD.MM.YYYY | ✅ | Data di emissione |
-| `dataScadenza` | date DD.MM.YYYY | ✅ | Data di scadenza — documento deve essere in corso di validità |
-| `rilasciatoDa` | string | | Autorità emittente (es. Comune di Roma, Questura di Milano) |
-| `luogoNascita` | string | ✅ | Città e sigla provincia — formato: "Milano (MI)" |
-| `indirizzoDiResidenza` | string | | Indirizzo completo di residenza |
-| `dataNascita` | date DD.MM.YYYY | ✅ | Data di nascita |
-| `statoCivile` | enum | | celibe/nubile/coniugato/a/vedovo/a/divorziato/a/separato/a |
+| Campo                  | Tipo                | Obbligatorio | Descrizione                                                   |
+| ---------------------- | ------------------- | :----------: | ------------------------------------------------------------- |
+| `nome`                 | string              |      ✅      | Nome (first name)                                             |
+| `cognome`              | string              |      ✅      | Cognome (surname)                                             |
+| `codiceFiscale`        | string (pattern CF) |      ✅      | Codice Fiscale 16 caratteri alfanumerici                      |
+| `tipoDocumento`        | enum                |      ✅      | `Carta D'Identita` \| `Passaporto`                            |
+| `numeroDocumento`      | string              |      ✅      | Numero identificativo del documento                           |
+| `dataEmissione`        | date DD.MM.YYYY     |      ✅      | Data di emissione                                             |
+| `dataScadenza`         | date DD.MM.YYYY     |      ✅      | Data di scadenza — documento deve essere in corso di validità |
+| `rilasciatoDa`         | string              |              | Autorità emittente (es. Comune di Roma, Questura di Milano)   |
+| `luogoNascita`         | string              |      ✅      | Città e sigla provincia — formato: "Milano (MI)"              |
+| `indirizzoDiResidenza` | string              |              | Indirizzo completo di residenza                               |
+| `dataNascita`          | date DD.MM.YYYY     |      ✅      | Data di nascita                                               |
+| `statoCivile`          | enum                |              | celibe/nubile/coniugato/a/vedovo/a/divorziato/a/separato/a    |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "nome": { "type": "string" },
-    "cognome": { "type": "string" },
-    "codiceFiscale": { "type": "string", "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$" },
-    "tipoDocumento": { "type": "string", "enum": ["Carta D'Identita", "Passaporto", null] },
-    "numeroDocumento": { "type": "string" },
-    "dataEmissione": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
-    "dataScadenza": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
-    "rilasciatoDa": { "type": "string" },
-    "luogoNascita": { "type": "string" },
-    "indirizzoDiResidenza": { "type": "string" },
-    "dataNascita": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
-    "statoCivile": { "type": "string", "enum": ["celibe", "nubile", "coniugato", "coniugata", "vedovo", "vedova", "divorziato", "divorziata", "separato", "separata", null] }
-  },
-  "required": ["nome", "cognome", "codiceFiscale", "tipoDocumento", "numeroDocumento", "dataEmissione", "dataScadenza", "luogoNascita", "dataNascita"]
+    "type": "object",
+    "properties": {
+        "nome": { "type": "string" },
+        "cognome": { "type": "string" },
+        "codiceFiscale": {
+            "type": "string",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+        },
+        "tipoDocumento": { "type": "string", "enum": ["Carta D'Identita", "Passaporto", null] },
+        "numeroDocumento": { "type": "string" },
+        "dataEmissione": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
+        "dataScadenza": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
+        "rilasciatoDa": { "type": "string" },
+        "luogoNascita": { "type": "string" },
+        "indirizzoDiResidenza": { "type": "string" },
+        "dataNascita": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
+        "statoCivile": {
+            "type": "string",
+            "enum": [
+                "celibe",
+                "nubile",
+                "coniugato",
+                "coniugata",
+                "vedovo",
+                "vedova",
+                "divorziato",
+                "divorziata",
+                "separato",
+                "separata",
+                null
+            ]
+        }
+    },
+    "required": [
+        "nome",
+        "cognome",
+        "codiceFiscale",
+        "tipoDocumento",
+        "numeroDocumento",
+        "dataEmissione",
+        "dataScadenza",
+        "luogoNascita",
+        "dataNascita"
+    ]
 }
 ```
 

@@ -1,0 +1,77 @@
+{
+  "id": "doc-delibera-mutuo",
+  "name": "Delibera di Mutuo",
+  "description": "Lettera di delibera della banca che conferma l'approvazione del mutuo ipotecario",
+  "references": [
+    {
+      "title": "Banca d'Italia — Trasparenza bancaria",
+      "url": "https://www.bancaditalia.it/compiti/vigilanza/normativa/archivio-norme/disposizioni/trasparenza/index.html",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "banca": {
+        "type": "string",
+        "description": "Nome della banca o istituto di credito"
+      },
+      "filiale": {
+        "type": "string",
+        "description": "Filiale o agenzia"
+      },
+      "mutuatario": {
+        "type": "string",
+        "description": "Nome e cognome del mutuatario"
+      },
+      "codiceFiscaleMutuatario": {
+        "type": "string",
+        "description": "Codice Fiscale del mutuatario (extract without spaces)",
+        "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+      },
+      "importoMutuo": {
+        "type": "number",
+        "description": "Importo del mutuo deliberato in Euro"
+      },
+      "durataAnni": {
+        "type": "number",
+        "description": "Durata del mutuo in anni"
+      },
+      "tassoInteresse": {
+        "type": "string",
+        "description": "Tasso di interesse (fisso, variabile, misto) e percentuale"
+      },
+      "tipoTasso": {
+        "type": "string",
+        "description": "Tipo di tasso",
+        "enum": [
+          "fisso",
+          "variabile",
+          "misto",
+          null
+        ],
+        "nullable": true
+      },
+      "dataDelibera": {
+        "type": "string",
+        "description": "Data della delibera in formato europeo DD.MM.YYYY",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "validitaDelibera": {
+        "type": "string",
+        "description": "Validità temporale della delibera (es. 6 mesi)"
+      },
+      "condizioniSospensive": {
+        "type": "string",
+        "description": "Eventuali condizioni sospensive (es. ipoteca di primo grado)"
+      }
+    },
+    "required": [
+      "banca",
+      "mutuatario",
+      "codiceFiscaleMutuatario",
+      "importoMutuo",
+      "dataDelibera"
+    ]
+  }
+}

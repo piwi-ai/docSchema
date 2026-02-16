@@ -1,0 +1,73 @@
+{
+  "id": "doc-condominiale",
+  "name": "Documentazione Condominiale",
+  "description": "Dichiarazione dell'amministratore di condominio sulle spese e regolamento condominiale",
+  "references": [
+    {
+      "title": "Art. 1117–1139 Codice Civile — Condominio",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1117",
+      "type": "regulation"
+    },
+    {
+      "title": "L. 220/2012 — Riforma del condominio",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2012-12-11;220",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "amministratore": {
+        "type": "string",
+        "description": "Nome e cognome o ragione sociale dell'amministratore"
+      },
+      "condominio": {
+        "type": "string",
+        "description": "Denominazione del condominio"
+      },
+      "indirizzo": {
+        "type": "string",
+        "description": "Indirizzo del condominio"
+      },
+      "unitaImmobiliare": {
+        "type": "string",
+        "description": "Identificazione dell'unità immobiliare (es. Scala A, Piano 3, Int. 5)"
+      },
+      "quoteRegolari": {
+        "type": "string",
+        "description": "Le quote condominiali sono regolarmente pagate",
+        "enum": [
+          "sì",
+          "no",
+          null
+        ],
+        "nullable": true
+      },
+      "importoArretrati": {
+        "type": "string",
+        "description": "Eventuali arretrati dovuti"
+      },
+      "speseStraodinarie": {
+        "type": "string",
+        "description": "Spese straordinarie deliberate o in corso"
+      },
+      "millesimi": {
+        "type": "string",
+        "description": "Millesimi di proprietà dell'unità"
+      },
+      "dataRilascio": {
+        "type": "string",
+        "description": "Data di rilascio della dichiarazione in formato europeo DD.MM.YYYY",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      }
+    },
+    "required": [
+      "amministratore",
+      "condominio",
+      "indirizzo",
+      "unitaImmobiliare",
+      "quoteRegolari",
+      "dataRilascio"
+    ]
+  }
+}

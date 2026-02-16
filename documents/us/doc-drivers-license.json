@@ -1,0 +1,86 @@
+{
+  "id": "doc-drivers-license",
+  "name": "Driver's License / Government ID",
+  "description": "Government-issued identification: Driver's License, Passport, or State ID",
+  "references": [
+    {
+      "title": "REAL ID Act — DHS",
+      "url": "https://www.dhs.gov/real-id",
+      "type": "regulation"
+    }
+  ],
+  "isArrayExtraction": true,
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name (given name)"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name (surname / family name)"
+      },
+      "middleName": {
+        "type": "string",
+        "description": "Middle name (if present)"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "idType": {
+        "type": "string",
+        "description": "Type of identification",
+        "enum": [
+          "Driver's License",
+          "Passport",
+          "State ID",
+          null
+        ],
+        "nullable": true
+      },
+      "idNumber": {
+        "type": "string",
+        "description": "ID / License number"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "issuingState": {
+        "type": "string",
+        "description": "Issuing state (2-letter abbreviation, e.g. CA, NY, TX)"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address as printed on ID"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex",
+        "enum": [
+          "M",
+          "F",
+          null
+        ],
+        "nullable": true
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "dateOfBirth",
+      "idType",
+      "idNumber",
+      "expirationDate"
+    ]
+  }
+}

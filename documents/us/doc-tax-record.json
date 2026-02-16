@@ -1,0 +1,70 @@
+{
+  "id": "doc-tax-record",
+  "name": "Property Tax Record",
+  "description": "County property tax records — assessed value, tax amounts, payment status",
+  "references": [
+    {
+      "title": "IRS — Property Tax Deduction",
+      "url": "https://www.irs.gov/taxtopics/tc503",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "parcelNumber": {
+        "type": "string",
+        "description": "Assessor Parcel Number (APN) or Tax ID number"
+      },
+      "propertyAddress": {
+        "type": "string",
+        "description": "Property address"
+      },
+      "owner": {
+        "type": "string",
+        "description": "Property owner name per tax records"
+      },
+      "assessedValue": {
+        "type": "number",
+        "description": "Total assessed value (USD, numbers only, no dollar sign)"
+      },
+      "landValue": {
+        "type": "number",
+        "description": "Assessed land value (USD, numbers only, no dollar sign)"
+      },
+      "improvementValue": {
+        "type": "number",
+        "description": "Assessed improvement value (USD, numbers only, no dollar sign)"
+      },
+      "annualTax": {
+        "type": "number",
+        "description": "Annual property tax amount (USD, numbers only, no dollar sign)"
+      },
+      "taxYear": {
+        "type": "number",
+        "description": "Tax year"
+      },
+      "paymentStatus": {
+        "type": "string",
+        "description": "Payment status",
+        "enum": [
+          "current",
+          "delinquent",
+          "paid in full",
+          null
+        ],
+        "nullable": true
+      },
+      "exemptions": {
+        "type": "string",
+        "description": "Homestead or other exemptions applied"
+      }
+    },
+    "required": [
+      "parcelNumber",
+      "propertyAddress",
+      "assessedValue",
+      "annualTax"
+    ]
+  }
+}

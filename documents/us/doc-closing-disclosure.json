@@ -1,0 +1,109 @@
+{
+  "id": "doc-closing-disclosure",
+  "name": "Closing Disclosure (CD)",
+  "description": "TRID Closing Disclosure — final settlement statement with all costs and credits",
+  "references": [
+    {
+      "title": "CFPB — Closing Disclosure Explainer",
+      "url": "https://www.consumerfinance.gov/owning-a-home/closing-disclosure/",
+      "type": "documentation"
+    },
+    {
+      "title": "TILA-RESPA Integrated Disclosure Rule",
+      "url": "https://www.consumerfinance.gov/rules-policy/final-rules/integrated-mortgage-disclosures-under-real-estate-settlement-procedures-act-regulation-x-and-truth-lending-act-regulation-z/",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "closingDate": {
+        "type": "string",
+        "description": "Closing date",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "propertyAddress": {
+        "type": "string",
+        "description": "Property address"
+      },
+      "seller": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Seller full name"
+          },
+          "address": {
+            "type": "string",
+            "description": "Seller's address"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "buyer": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Buyer full name"
+          },
+          "address": {
+            "type": "string",
+            "description": "Buyer's address"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "salePrice": {
+        "type": "number",
+        "description": "Sale price (USD, numbers only, no dollar sign)"
+      },
+      "totalClosingCosts": {
+        "type": "number",
+        "description": "Total closing costs (USD, numbers only, no dollar sign)"
+      },
+      "buyerClosingCosts": {
+        "type": "number",
+        "description": "Buyer's total closing costs (USD, numbers only, no dollar sign)"
+      },
+      "sellerClosingCosts": {
+        "type": "number",
+        "description": "Seller's total closing costs (USD, numbers only, no dollar sign)"
+      },
+      "loanAmount": {
+        "type": "number",
+        "description": "Loan amount (USD, numbers only, no dollar sign)"
+      },
+      "interestRate": {
+        "type": "number",
+        "description": "Interest rate (%)"
+      },
+      "monthlyPayment": {
+        "type": "number",
+        "description": "Monthly principal & interest payment (USD, numbers only, no dollar sign)"
+      },
+      "cashToClose": {
+        "type": "number",
+        "description": "Cash to close from buyer (USD, numbers only, no dollar sign)"
+      },
+      "sellerProceeds": {
+        "type": "number",
+        "description": "Net proceeds to seller (USD, numbers only, no dollar sign)"
+      },
+      "prorations": {
+        "type": "string",
+        "description": "Tax and insurance prorations"
+      }
+    },
+    "required": [
+      "closingDate",
+      "propertyAddress",
+      "salePrice",
+      "totalClosingCosts"
+    ]
+  }
+}

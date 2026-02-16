@@ -1,0 +1,67 @@
+{
+  "id": "doc-title-report",
+  "name": "Title Report / Title Search",
+  "description": "Preliminary title report or title abstract showing ownership history and encumbrances",
+  "references": [
+    {
+      "title": "ALTA — Title Insurance Forms",
+      "url": "https://www.alta.org/policy-forms/",
+      "type": "specification"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "titleCompany": {
+        "type": "string",
+        "description": "Title company name"
+      },
+      "effectiveDate": {
+        "type": "string",
+        "description": "Effective date of the title search",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "currentOwner": {
+        "type": "string",
+        "description": "Current title holder / vested owner"
+      },
+      "propertyAddress": {
+        "type": "string",
+        "description": "Subject property address"
+      },
+      "parcelNumber": {
+        "type": "string",
+        "description": "Assessor Parcel Number (APN) or Tax ID number"
+      },
+      "legalDescription": {
+        "type": "string",
+        "description": "Legal description of the property"
+      },
+      "liens": {
+        "type": "string",
+        "description": "Outstanding liens (mortgages, tax liens, judgment liens)"
+      },
+      "easements": {
+        "type": "string",
+        "description": "Easements and rights of way"
+      },
+      "encumbrances": {
+        "type": "string",
+        "description": "Other encumbrances or restrictions"
+      },
+      "taxes": {
+        "type": "string",
+        "description": "Property tax status (current, delinquent, amounts)"
+      },
+      "exceptions": {
+        "type": "string",
+        "description": "Schedule B exceptions from coverage"
+      }
+    },
+    "required": [
+      "titleCompany",
+      "currentOwner",
+      "propertyAddress"
+    ]
+  }
+}

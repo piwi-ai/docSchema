@@ -3,10 +3,7 @@
  * Used by: insurance.
  */
 import type { DocumentTypeDef } from '../../../types.js';
-import {
-    text, date, objectSchema, ref,
-    nome, cognome, codiceFiscale,
-} from '../helpers.js';
+import { text, date, objectSchema, ref, nome, cognome, codiceFiscale } from '../helpers.js';
 import { ReferenceType } from '../../../constants.js';
 
 export const certificatoMorteInsurance: DocumentTypeDef = {
@@ -14,18 +11,30 @@ export const certificatoMorteInsurance: DocumentTypeDef = {
     name: 'Certificato di Morte',
     description: 'Certificato di morte — per liquidazione polizza vita caso morte',
     references: [
-        ref('Ministero dell\'Interno — Servizi demografici', 'https://dait.interno.gov.it/servizi-demografici', ReferenceType.DOCUMENTATION),
+        ref(
+            "Ministero dell'Interno — Servizi demografici",
+            'https://dait.interno.gov.it/servizi-demografici',
+            ReferenceType.DOCUMENTATION,
+        ),
     ],
-    jsonSchema: objectSchema({
-        defunto: objectSchema({
-            nome: nome(), cognome: cognome(), codiceFiscale: codiceFiscale(),
-            dataNascita: date('Data di nascita'),
-            luogoNascita: text('Luogo di nascita'),
-        }, ['nome', 'cognome', 'codiceFiscale']),
-        dataDecesso: date('Data del decesso'),
-        luogoDecesso: text('Luogo del decesso'),
-        causaDecesso: text('Causa del decesso (se indicata)'),
-        comune: text('Comune che ha rilasciato il certificato'),
-        dataRilascio: date('Data di rilascio'),
-    }, ['defunto', 'dataDecesso', 'luogoDecesso']),
+    jsonSchema: objectSchema(
+        {
+            defunto: objectSchema(
+                {
+                    nome: nome(),
+                    cognome: cognome(),
+                    codiceFiscale: codiceFiscale(),
+                    dataNascita: date('Data di nascita'),
+                    luogoNascita: text('Luogo di nascita'),
+                },
+                ['nome', 'cognome', 'codiceFiscale'],
+            ),
+            dataDecesso: date('Data del decesso'),
+            luogoDecesso: text('Luogo del decesso'),
+            causaDecesso: text('Causa del decesso (se indicata)'),
+            comune: text('Comune che ha rilasciato il certificato'),
+            dataRilascio: date('Data di rilascio'),
+        },
+        ['defunto', 'dataDecesso', 'luogoDecesso'],
+    ),
 };

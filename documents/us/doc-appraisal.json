@@ -1,0 +1,113 @@
+{
+  "id": "doc-appraisal",
+  "name": "Appraisal Report",
+  "description": "Property appraisal — market value determination for lending",
+  "references": [
+    {
+      "title": "USPAP — Uniform Standards of Professional Appraisal Practice",
+      "url": "https://www.appraisalfoundation.org/imis/TAF/Standards/Appraisal_Standards/Uniform_Standards_of_Professional_Appraisal_Practice/TAF/USPAP.aspx",
+      "type": "specification"
+    },
+    {
+      "title": "Fannie Mae Form 1004 (Uniform Residential Appraisal Report)",
+      "url": "https://singlefamily.fanniemae.com/originating-underwriting/appraisal-valuation",
+      "type": "specification"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "appraiser": {
+        "type": "string",
+        "description": "Appraiser name and license number"
+      },
+      "appraisalDate": {
+        "type": "string",
+        "description": "Date of appraisal",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "propertyAddress": {
+        "type": "string",
+        "description": "Subject property address"
+      },
+      "appraisedValue": {
+        "type": "number",
+        "description": "Appraised market value (USD, numbers only, no dollar sign)"
+      },
+      "squareFootage": {
+        "type": "number",
+        "description": "Gross living area (sq ft)"
+      },
+      "lotSize": {
+        "type": "string",
+        "description": "Lot size (acres or sq ft)"
+      },
+      "yearBuilt": {
+        "type": "number",
+        "description": "Year built"
+      },
+      "bedrooms": {
+        "type": "number",
+        "description": "Number of bedrooms"
+      },
+      "bathrooms": {
+        "type": "number",
+        "description": "Number of bathrooms"
+      },
+      "condition": {
+        "type": "string",
+        "description": "Overall condition",
+        "enum": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          null
+        ],
+        "nullable": true
+      },
+      "comparables": {
+        "type": "array",
+        "description": "Comparable sales used in valuation",
+        "items": {
+          "type": "object",
+          "properties": {
+            "address": {
+              "type": "string",
+              "description": "Comparable property address"
+            },
+            "salePrice": {
+              "type": "number",
+              "description": "Sale price (USD, numbers only, no dollar sign)"
+            },
+            "saleDate": {
+              "type": "string",
+              "description": "Sale date",
+              "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+            },
+            "squareFootage": {
+              "type": "number",
+              "description": "Square footage"
+            }
+          },
+          "required": [
+            "address",
+            "salePrice"
+          ]
+        }
+      },
+      "approachesUsed": {
+        "type": "string",
+        "description": "Valuation approaches used (Sales Comparison, Cost, Income)"
+      }
+    },
+    "required": [
+      "appraiser",
+      "appraisalDate",
+      "propertyAddress",
+      "appraisedValue"
+    ]
+  }
+}

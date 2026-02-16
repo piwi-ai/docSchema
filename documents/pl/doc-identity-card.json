@@ -1,0 +1,93 @@
+{
+  "id": "doc-identity-card",
+  "name": "Identity Document",
+  "description": "Identity document (ID Card, Passport, Driver License)",
+  "references": [
+    {
+      "title": "Gov.pl — Dowód osobisty",
+      "url": "https://www.gov.pl/web/gov/dowod-osobisty-informacje",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Imię"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Nazwisko"
+      },
+      "personalId": {
+        "type": "string",
+        "description": "Personal ID number / PESEL",
+        "pattern": "^\\d{11}$"
+      },
+      "documentType": {
+        "type": "string",
+        "description": "Document type / Rodzaj dokumentu"
+      },
+      "documentNumber": {
+        "type": "string",
+        "description": "Document number / Numer dokumentu"
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Data wydania",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Data ważności",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Organ wydający"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Miejsce urodzenia"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Data urodzenia",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Adres zameldowania"
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Obywatelstwo"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Płeć",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "personalId",
+      "documentType",
+      "documentNumber",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

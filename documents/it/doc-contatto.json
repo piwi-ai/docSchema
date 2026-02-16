@@ -1,0 +1,66 @@
+{
+  "id": "doc-contatto",
+  "name": "Documento di Contatto",
+  "description": "Recapiti e indirizzi del cliente per comunicazioni e notifiche legali",
+  "references": [
+    {
+      "title": "ANPR — Anagrafe Nazionale Popolazione Residente",
+      "url": "https://www.anagrafenazionale.interno.it/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "nome": {
+        "type": "string",
+        "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+      },
+      "cognome": {
+        "type": "string",
+        "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+      },
+      "telefonoCellulare": {
+        "type": "string",
+        "description": "Numero di cellulare principale"
+      },
+      "telefonoFisso": {
+        "type": "string",
+        "description": "Eventuale numero fisso/ufficio"
+      },
+      "email": {
+        "type": "string",
+        "format": "email",
+        "description": "Indirizzo email"
+      },
+      "pec": {
+        "type": "string",
+        "format": "email",
+        "description": "Posta Elettronica Certificata"
+      },
+      "indirizzoResidenza": {
+        "type": "string",
+        "description": "Via/Piazza e numero civico"
+      },
+      "cittaResidenza": {
+        "type": "string",
+        "description": "Comune di residenza"
+      },
+      "cap": {
+        "type": "string",
+        "description": "Codice Avviamento Postale"
+      },
+      "provincia": {
+        "type": "string",
+        "description": "Sigla Provincia (es. MI, RM)"
+      }
+    },
+    "required": [
+      "nome",
+      "cognome",
+      "telefonoCellulare",
+      "email",
+      "indirizzoResidenza"
+    ]
+  }
+}

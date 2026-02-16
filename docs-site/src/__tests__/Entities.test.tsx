@@ -1,14 +1,14 @@
-import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { MemoryRouter } from 'react-router-dom'
-import Entities from '../pages/Entities'
+import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
+import Entities from '../pages/Entities';
 
 function renderEntities() {
     return render(
         <MemoryRouter>
             <Entities />
-        </MemoryRouter>
+        </MemoryRouter>,
     );
 }
 
@@ -35,9 +35,7 @@ describe('Entities', () => {
         renderEntities();
 
         const headers = screen.getAllByRole('button');
-        const entityHeader = headers.find(btn =>
-            btn.classList.contains('entity-card__header')
-        );
+        const entityHeader = headers.find((btn) => btn.classList.contains('entity-card__header'));
         expect(entityHeader).toBeDefined();
 
         if (entityHeader) {

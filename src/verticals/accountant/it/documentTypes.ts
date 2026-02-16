@@ -9,9 +9,20 @@
  */
 import type { DocumentTypeDef } from '../../../types.js';
 import {
-    identita, fattura, ricevuta, certificazioneUnica, mod730, redditiPf,
-    f24, visuraCamerale, bilancio, contrattoLavoro,
-    bustaPaga, estrattoConto, isee, ivaPeriodica,
+    identita,
+    fattura,
+    ricevuta,
+    certificazioneUnica,
+    mod730,
+    redditiPf,
+    f24,
+    visuraCamerale,
+    bilancio,
+    contrattoLavoro,
+    bustaPaga,
+    estrattoConto,
+    isee,
+    ivaPeriodica,
 } from '../../../countries/it/documentTypes/index.js';
 
 // ─── Document IDs ───────────────────────────────────────────────────────────

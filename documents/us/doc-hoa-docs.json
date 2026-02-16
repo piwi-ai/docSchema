@@ -1,0 +1,53 @@
+{
+  "id": "doc-hoa-docs",
+  "name": "HOA Documents",
+  "description": "Homeowners Association documents — CCRs, bylaws, financials, disclosures",
+  "references": [
+    {
+      "title": "CAI — Community Associations Institute",
+      "url": "https://www.caionline.org/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "hoaName": {
+        "type": "string",
+        "description": "HOA / community name"
+      },
+      "managementCompany": {
+        "type": "string",
+        "description": "Management company name"
+      },
+      "monthlyDues": {
+        "type": "number",
+        "description": "Monthly HOA dues (USD, numbers only, no dollar sign)"
+      },
+      "specialAssessments": {
+        "type": "string",
+        "description": "Any pending or recent special assessments"
+      },
+      "reserves": {
+        "type": "number",
+        "description": "HOA reserve fund balance (USD, numbers only, no dollar sign)"
+      },
+      "restrictions": {
+        "type": "string",
+        "description": "Key restrictions and covenants"
+      },
+      "pendingLitigation": {
+        "type": "string",
+        "description": "Any pending litigation or disputes"
+      },
+      "masterInsurance": {
+        "type": "string",
+        "description": "Master insurance policy coverage"
+      }
+    },
+    "required": [
+      "hoaName",
+      "monthlyDues"
+    ]
+  }
+}

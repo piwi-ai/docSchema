@@ -1,6 +1,6 @@
-import { NavLink } from 'react-router-dom'
-import { FileText, Database, Code2, Github } from 'lucide-react'
-import './Navbar.css'
+import { NavLink } from 'react-router-dom';
+import { Globe, Boxes, Github } from 'lucide-react';
+import './Navbar.css';
 
 export default function Navbar() {
     return (
@@ -12,17 +12,23 @@ export default function Navbar() {
                 </NavLink>
 
                 <div className="navbar__links">
-                    <NavLink to="/explore" className={({ isActive }) => `navbar__link ${isActive ? 'navbar__link--active' : ''}`}>
-                        <FileText size={16} />
-                        <span>Schemas</span>
+                    <NavLink
+                        to="/documents"
+                        className={({ isActive }) =>
+                            `navbar__link ${isActive ? 'navbar__link--active' : ''}`
+                        }
+                    >
+                        <Globe size={16} />
+                        <span>Documents</span>
                     </NavLink>
-                    <NavLink to="/entities" className={({ isActive }) => `navbar__link ${isActive ? 'navbar__link--active' : ''}`}>
-                        <Database size={16} />
-                        <span>Entities</span>
-                    </NavLink>
-                    <NavLink to="/json" className={({ isActive }) => `navbar__link ${isActive ? 'navbar__link--active' : ''}`}>
-                        <Code2 size={16} />
-                        <span>JSON</span>
+                    <NavLink
+                        to="/verticals"
+                        className={({ isActive }) =>
+                            `navbar__link ${isActive ? 'navbar__link--active' : ''}`
+                        }
+                    >
+                        <Boxes size={16} />
+                        <span>Verticals</span>
                     </NavLink>
                 </div>
 
@@ -36,5 +42,5 @@ export default function Navbar() {
                 </a>
             </div>
         </nav>
-    )
+    );
 }

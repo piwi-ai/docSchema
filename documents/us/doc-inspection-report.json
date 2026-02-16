@@ -1,0 +1,80 @@
+{
+  "id": "doc-inspection-report",
+  "name": "Home Inspection Report",
+  "description": "Professional home inspection report — structural, mechanical, plumbing, electrical",
+  "references": [
+    {
+      "title": "ASHI — Standards of Practice",
+      "url": "https://www.homeinspector.org/standards-of-practice",
+      "type": "specification"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "inspector": {
+        "type": "string",
+        "description": "Inspector name and license number"
+      },
+      "inspectionCompany": {
+        "type": "string",
+        "description": "Inspection company name"
+      },
+      "inspectionDate": {
+        "type": "string",
+        "description": "Date of inspection",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "propertyAddress": {
+        "type": "string",
+        "description": "Inspected property address"
+      },
+      "overallCondition": {
+        "type": "string",
+        "description": "Overall condition",
+        "enum": [
+          "excellent",
+          "good",
+          "fair",
+          "poor",
+          null
+        ],
+        "nullable": true
+      },
+      "majorDefects": {
+        "type": "string",
+        "description": "Major defects or safety concerns found"
+      },
+      "roofCondition": {
+        "type": "string",
+        "description": "Roof condition and estimated remaining life"
+      },
+      "foundationCondition": {
+        "type": "string",
+        "description": "Foundation / structural condition"
+      },
+      "plumbing": {
+        "type": "string",
+        "description": "Plumbing system condition"
+      },
+      "electrical": {
+        "type": "string",
+        "description": "Electrical system condition"
+      },
+      "hvac": {
+        "type": "string",
+        "description": "HVAC system condition and age"
+      },
+      "recommendations": {
+        "type": "string",
+        "description": "Recommended repairs or further inspections"
+      }
+    },
+    "required": [
+      "inspector",
+      "inspectionDate",
+      "propertyAddress",
+      "overallCondition"
+    ]
+  }
+}

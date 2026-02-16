@@ -1,0 +1,102 @@
+{
+  "id": "doc-residence-permit",
+  "name": "Residence Permit",
+  "description": "Residence Permit — Netherlands",
+  "references": [
+    {
+      "title": "IND — Residence permit",
+      "url": "https://ind.nl/en",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Voornamen"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Achternaam"
+      },
+      "permitNumber": {
+        "type": "string",
+        "description": "Permit number"
+      },
+      "permitType": {
+        "type": "string",
+        "description": "Permit type",
+        "enum": [
+          "Temporary",
+          "Permanent",
+          "Long-term",
+          "Student",
+          "Work",
+          "Family",
+          null
+        ],
+        "nullable": true
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Nationaliteit"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Geboortedatum",
+        "pattern": "^\\d{2}-\\d{2}-\\d{4}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Geboorteplaats"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Geslacht",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Datum van afgifte",
+        "pattern": "^\\d{2}-\\d{2}-\\d{4}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Geldig tot",
+        "pattern": "^\\d{2}-\\d{2}-\\d{4}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Autoriteit"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Adres"
+      },
+      "remarks": {
+        "type": "string",
+        "description": "Remarks / Annotations"
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "permitNumber",
+      "permitType",
+      "nationality",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "id": "doc-assicurazione",
+  "name": "Polizza Assicurativa RCA",
+  "description": "Certificato di assicurazione obbligatoria RC Auto",
+  "references": [
+    {
+      "title": "IVASS — Codice delle Assicurazioni",
+      "url": "https://www.ivass.it/normativa/nazionale/primaria/index.html",
+      "type": "regulation"
+    },
+    {
+      "title": "ANIA — Attestato di Rischio",
+      "url": "https://www.ania.it/",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "compagnia": {
+        "type": "string",
+        "description": "Compagnia assicurativa"
+      },
+      "numeroPolizza": {
+        "type": "string",
+        "description": "Numero polizza"
+      },
+      "targa": {
+        "type": "string",
+        "description": "Numero di targa del veicolo (es. AB123CD)"
+      },
+      "contraente": {
+        "type": "string",
+        "description": "Nome e cognome / ragione sociale del contraente"
+      },
+      "codiceFiscaleContraente": {
+        "type": "string",
+        "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+        "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+      },
+      "decorrenza": {
+        "type": "string",
+        "description": "Data decorrenza copertura",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "scadenza": {
+        "type": "string",
+        "description": "Data scadenza copertura",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "massimale": {
+        "type": "string",
+        "description": "Massimale di copertura"
+      },
+      "premio": {
+        "type": "number",
+        "description": "Premio annuale in Euro"
+      },
+      "classeMerito": {
+        "type": "string",
+        "description": "Classe di merito (classe bonus/malus)"
+      }
+    },
+    "required": [
+      "compagnia",
+      "numeroPolizza",
+      "targa",
+      "contraente",
+      "scadenza"
+    ]
+  }
+}

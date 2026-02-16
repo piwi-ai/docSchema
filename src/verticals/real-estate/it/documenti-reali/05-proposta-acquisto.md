@@ -10,34 +10,52 @@ Proposta irrevocabile d'acquisto formulata dall'acquirente al venditore, tipicam
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `proponente` | oggetto | ✅ | Dati dell'acquirente proponente |
-| `proponente.nome` | string | ✅ | Nome |
-| `proponente.cognome` | string | ✅ | Cognome |
-| `proponente.codiceFiscale` | string (CF) | ✅ | Codice Fiscale |
-| `proponente.statoCivile` | enum | | Stato civile |
-| `prezzoOfferto` | number | ✅ | Importo dell'offerta in Euro |
+| Campo                      | Tipo        | Obbligatorio | Descrizione                     |
+| -------------------------- | ----------- | :----------: | ------------------------------- |
+| `proponente`               | oggetto     |      ✅      | Dati dell'acquirente proponente |
+| `proponente.nome`          | string      |      ✅      | Nome                            |
+| `proponente.cognome`       | string      |      ✅      | Cognome                         |
+| `proponente.codiceFiscale` | string (CF) |      ✅      | Codice Fiscale                  |
+| `proponente.statoCivile`   | enum        |              | Stato civile                    |
+| `prezzoOfferto`            | number      |      ✅      | Importo dell'offerta in Euro    |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "proponente": {
-      "type": "object",
-      "properties": {
-        "nome": { "type": "string" },
-        "cognome": { "type": "string" },
-        "codiceFiscale": { "type": "string", "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$" },
-        "statoCivile": { "type": "string", "enum": ["celibe", "nubile", "coniugato", "coniugata", "vedovo", "vedova", "divorziato", "divorziata", "separato", "separata", null] }
-      },
-      "required": ["nome", "cognome", "codiceFiscale"]
+    "type": "object",
+    "properties": {
+        "proponente": {
+            "type": "object",
+            "properties": {
+                "nome": { "type": "string" },
+                "cognome": { "type": "string" },
+                "codiceFiscale": {
+                    "type": "string",
+                    "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+                },
+                "statoCivile": {
+                    "type": "string",
+                    "enum": [
+                        "celibe",
+                        "nubile",
+                        "coniugato",
+                        "coniugata",
+                        "vedovo",
+                        "vedova",
+                        "divorziato",
+                        "divorziata",
+                        "separato",
+                        "separata",
+                        null
+                    ]
+                }
+            },
+            "required": ["nome", "cognome", "codiceFiscale"]
+        },
+        "prezzoOfferto": { "type": "number" }
     },
-    "prezzoOfferto": { "type": "number" }
-  },
-  "required": ["proponente", "prezzoOfferto"]
+    "required": ["proponente", "prezzoOfferto"]
 }
 ```
 

@@ -9,7 +9,7 @@
  *
  * Usage: npm run generate
  */
-import { writeFileSync, mkdirSync, readdirSync, statSync } from 'node:fs';
+import { writeFileSync, mkdirSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -17,7 +17,9 @@ import type { BusinessConfiguration } from './types.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const VERTICALS_DIR = join(__dirname, 'verticals');
+const COUNTRIES_DIR = join(__dirname, 'countries');
 const CONFIGS_DIR = join(__dirname, '..', 'configs');
+const DOCUMENTS_DIR = join(__dirname, '..', 'documents');
 
 /**
  * Scan verticals/{business}/{country}/ directories and return
@@ -26,20 +28,22 @@ const CONFIGS_DIR = join(__dirname, '..', 'configs');
 function discoverVerticals(): Array<{ business: string; country: string; modulePath: string }> {
     const results: Array<{ business: string; country: string; modulePath: string }> = [];
 
-    for (const business of readdirSync(VERTICALS_DIR).sort()) {
-        const businessDir = join(VERTICALS_DIR, business);
-        if (!statSync(businessDir).isDirectory()) continue;
+    if (existsSync(VERTICALS_DIR)) {
+        for (const business of readdirSync(VERTICALS_DIR).sort()) {
+            const businessDir = join(VERTICALS_DIR, business);
+            if (!statSync(businessDir).isDirectory()) continue;
 
-        for (const country of readdirSync(businessDir).sort()) {
-            const countryDir = join(businessDir, country);
-            if (!statSync(countryDir).isDirectory()) continue;
+            for (const country of readdirSync(businessDir).sort()) {
+                const countryDir = join(businessDir, country);
+                if (!statSync(countryDir).isDirectory()) continue;
 
-            const indexPath = join(countryDir, 'index.ts');
-            try {
-                statSync(indexPath);
-                results.push({ business, country, modulePath: indexPath });
-            } catch {
-                // No index.ts — skip
+                const indexPath = join(countryDir, 'index.ts');
+                try {
+                    statSync(indexPath);
+                    results.push({ business, country, modulePath: indexPath });
+                } catch {
+                    // No index.ts — skip
+                }
             }
         }
     }
@@ -53,41 +57,102 @@ function discoverVerticals(): Array<{ business: string; country: string; moduleP
  */
 function findConfig(mod: Record<string, unknown>): BusinessConfiguration | null {
     for (const [key, value] of Object.entries(mod)) {
-        if (key.endsWith('Config') && value && typeof value === 'object' && 'id' in value && 'documentTypes' in value) {
+        if (
+            key.endsWith('Config') &&
+            value &&
+            typeof value === 'object' &&
+            'id' in value &&
+            'documentTypes' in value
+        ) {
             return value as BusinessConfiguration;
         }
     }
     return null;
 }
 
-// ─── Main ───────────────────────────────────────────────────────────────────
+/**
+ * Generate Document Library
+ * Scans src/countries/{country}/documentTypes/index.ts and exports all documents.
+ */
+async function generateDocumentLibrary() {
+    console.log('\n📚 Generating Document Library...');
 
-const verticals = discoverVerticals();
-console.log(`Found ${verticals.length} verticals:\n`);
+    if (!existsSync(COUNTRIES_DIR)) return;
 
-let totalBytes = 0;
+    for (const country of readdirSync(COUNTRIES_DIR).sort()) {
+        const countryDir = join(COUNTRIES_DIR, country);
+        if (!statSync(countryDir).isDirectory()) continue;
 
-for (const { business, country, modulePath } of verticals) {
-    const mod = await import(pathToFileURL(modulePath).href) as Record<string, unknown>;
-    const config = findConfig(mod);
+        const docTypesDir = join(countryDir, 'documentTypes');
+        const indexTs = join(docTypesDir, 'index.ts');
 
-    if (!config) {
-        console.warn(`  ⚠️  ${business}/${country} — no *Config export found, skipping`);
-        continue;
+        if (existsSync(indexTs)) {
+            const mod = (await import(pathToFileURL(indexTs).href)) as Record<string, unknown>;
+            const outDir = join(DOCUMENTS_DIR, country);
+            mkdirSync(outDir, { recursive: true });
+
+            let count = 0;
+            for (const [, value] of Object.entries(mod)) {
+                // Duck-type check for DocumentTypeDef
+                if (
+                    value &&
+                    typeof value === 'object' &&
+                    'id' in value &&
+                    'name' in value &&
+                    'jsonSchema' in value
+                ) {
+                    const docDef = value as { id: string };
+                    const fileName = `${docDef.id}.json`;
+                    writeFileSync(join(outDir, fileName), JSON.stringify(value, null, 2), 'utf-8');
+                    count++;
+                }
+            }
+            console.log(`  ✅ documents/${country}/ — ${count} files`);
+        }
     }
-
-    const outPath = join(CONFIGS_DIR, business, `${country}.config.json`);
-    mkdirSync(dirname(outPath), { recursive: true });
-
-    const json = JSON.stringify(config, null, 2);
-    writeFileSync(outPath, json, 'utf-8');
-    totalBytes += json.length;
-
-    console.log(
-        `  ✅ ${business}/${country}.config.json — ` +
-        `${config.documentTypes.length} doc types, ` +
-        `${config.entityTypes.length} entity types`
-    );
 }
 
-console.log(`\n🎉 Generated ${verticals.length} configs (${(totalBytes / 1024).toFixed(1)} KB) → configs/`);
+// ─── Main ───────────────────────────────────────────────────────────────────
+
+async function main() {
+    // 1. Generate Verticals
+    const verticals = discoverVerticals();
+    console.log(`Found ${verticals.length} verticals:\n`);
+
+    let totalBytes = 0;
+
+    for (const { business, country, modulePath } of verticals) {
+        const mod = (await import(pathToFileURL(modulePath).href)) as Record<string, unknown>;
+        const config = findConfig(mod);
+
+        if (!config) {
+            console.warn(`  ⚠️  ${business}/${country} — no *Config export found, skipping`);
+            continue;
+        }
+
+        const outPath = join(CONFIGS_DIR, business, `${country}.config.json`);
+        mkdirSync(dirname(outPath), { recursive: true });
+
+        const json = JSON.stringify(config, null, 2);
+        writeFileSync(outPath, json, 'utf-8');
+        totalBytes += json.length;
+
+        console.log(
+            `  ✅ ${business}/${country}.config.json — ` +
+                `${config.documentTypes.length} doc types, ` +
+                `${config.entityTypes.length} entity types`,
+        );
+    }
+
+    console.log(
+        `\n🎉 Generated ${verticals.length} configs (${(totalBytes / 1024).toFixed(1)} KB) → configs/`,
+    );
+
+    // 2. Generate Document Library
+    await generateDocumentLibrary();
+}
+
+main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+});

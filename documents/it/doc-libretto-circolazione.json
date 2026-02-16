@@ -1,0 +1,94 @@
+{
+  "id": "doc-libretto-circolazione",
+  "name": "Libretto di Circolazione",
+  "description": "Carta di circolazione del veicolo con dati tecnici e intestatario",
+  "references": [
+    {
+      "title": "Motorizzazione Civile — Carta di Circolazione",
+      "url": "https://www.mit.gov.it/temi/trasporti/motorizzazione",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "targa": {
+        "type": "string",
+        "description": "Numero di targa del veicolo (es. AB123CD)"
+      },
+      "telaio": {
+        "type": "string",
+        "description": "Numero di telaio / VIN (Vehicle Identification Number) — 17 caratteri alfanumerici"
+      },
+      "marca": {
+        "type": "string",
+        "description": "Marca del veicolo (es. FIAT, BMW, Audi)"
+      },
+      "modello": {
+        "type": "string",
+        "description": "Modello del veicolo (es. Panda, Serie 3, A4)"
+      },
+      "allestimento": {
+        "type": "string",
+        "description": "Versione/allestimento se presente"
+      },
+      "cilindrata": {
+        "type": "number",
+        "description": "Cilindrata in cc"
+      },
+      "potenzaKw": {
+        "type": "number",
+        "description": "Potenza in kW"
+      },
+      "alimentazione": {
+        "type": "string",
+        "description": "Tipo alimentazione",
+        "enum": [
+          "benzina",
+          "diesel",
+          "GPL",
+          "metano",
+          "ibrido",
+          "elettrico",
+          null
+        ],
+        "nullable": true
+      },
+      "dataImmatricolazione": {
+        "type": "string",
+        "description": "Data di prima immatricolazione",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "massamassimaKg": {
+        "type": "number",
+        "description": "Massa complessiva in kg"
+      },
+      "posti": {
+        "type": "number",
+        "description": "Numero posti a sedere"
+      },
+      "intestatario": {
+        "type": "string",
+        "description": "Nome e cognome/ragione sociale intestatario"
+      },
+      "codiceFiscaleIntestatario": {
+        "type": "string",
+        "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+        "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+      },
+      "classeAmbientale": {
+        "type": "string",
+        "description": "Classe ambientale (es. Euro 6, Euro 5)"
+      }
+    },
+    "required": [
+      "targa",
+      "telaio",
+      "marca",
+      "modello",
+      "dataImmatricolazione",
+      "intestatario",
+      "codiceFiscaleIntestatario"
+    ]
+  }
+}

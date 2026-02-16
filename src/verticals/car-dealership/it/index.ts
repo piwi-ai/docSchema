@@ -13,7 +13,8 @@ export { DOC_IDS, ENTITY_IDS };
 export const carDealershipItConfig: BusinessConfiguration = {
     id: 'CAR-DEALERSHIP-IT-DEFAULT',
     name: 'Concessionario Auto Italia',
-    description: 'Configurazione per gestione documenti concessionario auto / autosalone — passaggi di proprietà, finanziamenti, permute',
+    description:
+        'Configurazione per gestione documenti concessionario auto / autosalone — passaggi di proprietà, finanziamenti, permute',
     schemaVersion: 1,
     documentTypes,
     entityTypes,

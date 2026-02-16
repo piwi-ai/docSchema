@@ -9,8 +9,11 @@ import type { DocumentTypeDef } from '../types.js';
 import type { CountryMeta } from '../country-registry.js';
 import { objectSchema, text, enumField } from '../helpers/schema.js';
 import {
-    DocTypeId, SEX_VALUES, EU_LICENSE_CATEGORIES,
-    DriversLicenseField, DRIVERS_LICENSE_REQUIRED_FIELDS,
+    DocTypeId,
+    SEX_VALUES,
+    EU_LICENSE_CATEGORIES,
+    DriversLicenseField,
+    DRIVERS_LICENSE_REQUIRED_FIELDS,
 } from '../constants.js';
 
 /**
@@ -33,19 +36,25 @@ export function createDriversLicense(meta: CountryMeta): DocumentTypeDef {
         name: "Driver's License",
         description: `Driver's License — ${meta.name}`,
         references: meta.documentReferences.driversLicense,
-        jsonSchema: objectSchema({
-            [DriversLicenseField.FIRST_NAME]: { type: 'string', description: labels.firstName },
-            [DriversLicenseField.LAST_NAME]: { type: 'string', description: labels.lastName },
-            [DriversLicenseField.LICENSE_NUMBER]: text('License number'),
-            [DriversLicenseField.CATEGORIES]: enumField('License categories (EU Directive 2006/126/EC)', EU_LICENSE_CATEGORIES),
-            [DriversLicenseField.DATE_OF_BIRTH]: dateField(labels.dateOfBirth),
-            [DriversLicenseField.PLACE_OF_BIRTH]: text(labels.placeOfBirth),
-            [DriversLicenseField.ISSUE_DATE]: dateField(labels.issueDate),
-            [DriversLicenseField.EXPIRATION_DATE]: dateField(labels.expirationDate),
-            [DriversLicenseField.ISSUING_AUTHORITY]: text(labels.issuingAuthority),
-            [DriversLicenseField.ADDRESS]: text(labels.address),
-            [DriversLicenseField.NATIONALITY]: text(labels.nationality),
-            [DriversLicenseField.SEX]: enumField(labels.sex, SEX_VALUES),
-        }, [...DRIVERS_LICENSE_REQUIRED_FIELDS]),
+        jsonSchema: objectSchema(
+            {
+                [DriversLicenseField.FIRST_NAME]: { type: 'string', description: labels.firstName },
+                [DriversLicenseField.LAST_NAME]: { type: 'string', description: labels.lastName },
+                [DriversLicenseField.LICENSE_NUMBER]: text('License number'),
+                [DriversLicenseField.CATEGORIES]: enumField(
+                    'License categories (EU Directive 2006/126/EC)',
+                    EU_LICENSE_CATEGORIES,
+                ),
+                [DriversLicenseField.DATE_OF_BIRTH]: dateField(labels.dateOfBirth),
+                [DriversLicenseField.PLACE_OF_BIRTH]: text(labels.placeOfBirth),
+                [DriversLicenseField.ISSUE_DATE]: dateField(labels.issueDate),
+                [DriversLicenseField.EXPIRATION_DATE]: dateField(labels.expirationDate),
+                [DriversLicenseField.ISSUING_AUTHORITY]: text(labels.issuingAuthority),
+                [DriversLicenseField.ADDRESS]: text(labels.address),
+                [DriversLicenseField.NATIONALITY]: text(labels.nationality),
+                [DriversLicenseField.SEX]: enumField(labels.sex, SEX_VALUES),
+            },
+            [...DRIVERS_LICENSE_REQUIRED_FIELDS],
+        ),
     };
 }

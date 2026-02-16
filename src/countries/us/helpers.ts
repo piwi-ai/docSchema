@@ -6,23 +6,39 @@
  * firstName, lastName, ssn, ein, dateUS (MM/DD/YYYY),
  * currency, address, parcelNumber.
  */
-export { text, num, enumField, email, datePattern, objectSchema, arrayOfObjects, ref } from '../../helpers/schema.js';
+export {
+    text,
+    num,
+    enumField,
+    email,
+    datePattern,
+    objectSchema,
+    arrayOfObjects,
+    ref,
+} from '../../helpers/schema.js';
 
 // ─── US Date ────────────────────────────────────────────────────────────────
 
 /** Date field (US MM/DD/YYYY format) */
-export const dateUS = (desc = 'Date in MM/DD/YYYY format') =>
-    ({ type: 'string' as const, description: desc, pattern: '^\\d{2}/\\d{2}/\\d{4}$' });
+export const dateUS = (desc = 'Date in MM/DD/YYYY format') => ({
+    type: 'string' as const,
+    description: desc,
+    pattern: '^\\d{2}/\\d{2}/\\d{4}$',
+});
 
 // ─── US Person Fields ───────────────────────────────────────────────────────
 
 /** First name field (US) */
-export const firstName = (desc = 'First name (given name)') =>
-    ({ type: 'string' as const, description: desc });
+export const firstName = (desc = 'First name (given name)') => ({
+    type: 'string' as const,
+    description: desc,
+});
 
 /** Last name field (US) */
-export const lastName = (desc = 'Last name (surname / family name)') =>
-    ({ type: 'string' as const, description: desc });
+export const lastName = (desc = 'Last name (surname / family name)') => ({
+    type: 'string' as const,
+    description: desc,
+});
 
 /** US Social Security Number */
 export const ssn = () => ({
@@ -32,8 +48,10 @@ export const ssn = () => ({
 });
 
 /** Employer Identification Number (US) */
-export const ein = (desc = 'Employer Identification Number (EIN) — format XX-XXXXXXX') =>
-    ({ type: 'string' as const, description: desc });
+export const ein = (desc = 'Employer Identification Number (EIN) — format XX-XXXXXXX') => ({
+    type: 'string' as const,
+    description: desc,
+});
 
 // ─── US Financial & Address Fields ──────────────────────────────────────────
 
@@ -44,9 +62,12 @@ export const currency = (desc: string) => ({
 });
 
 /** Full US address */
-export const address = (desc = 'Full address: Street, City, State ZIP (e.g. 123 Main St, Springfield, IL 62704)') =>
-    ({ type: 'string' as const, description: desc });
+export const address = (
+    desc = 'Full address: Street, City, State ZIP (e.g. 123 Main St, Springfield, IL 62704)',
+) => ({ type: 'string' as const, description: desc });
 
 /** US Assessor Parcel Number */
-export const parcelNumber = (desc = 'Assessor Parcel Number (APN) or Tax ID number') =>
-    ({ type: 'string' as const, description: desc });
+export const parcelNumber = (desc = 'Assessor Parcel Number (APN) or Tax ID number') => ({
+    type: 'string' as const,
+    description: desc,
+});

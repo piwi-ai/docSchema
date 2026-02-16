@@ -14,7 +14,10 @@ import { createDriversLicense } from '../src/factories/drivers-license.factory';
 import { createResidencePermit } from '../src/factories/residence-permit.factory';
 import { createCountryHelpers } from '../src/factories/country-helpers.factory';
 import {
-    DocTypeId, PassportField, DriversLicenseField, ResidencePermitField,
+    DocTypeId,
+    PassportField,
+    DriversLicenseField,
+    ResidencePermitField,
 } from '../src/constants';
 
 // ─── Registry Integrity ─────────────────────────────────────────────────────
@@ -45,10 +48,20 @@ describe('country registry', () => {
 
     it('all countries have complete identity card labels', () => {
         const requiredKeys = [
-            'firstName', 'lastName', 'personalId', 'documentType',
-            'documentNumber', 'issueDate', 'expirationDate',
-            'issuingAuthority', 'placeOfBirth', 'dateOfBirth',
-            'address', 'nationality', 'sex', 'mrz',
+            'firstName',
+            'lastName',
+            'personalId',
+            'documentType',
+            'documentNumber',
+            'issueDate',
+            'expirationDate',
+            'issuingAuthority',
+            'placeOfBirth',
+            'dateOfBirth',
+            'address',
+            'nationality',
+            'sex',
+            'mrz',
         ];
         for (const code of ALL_COUNTRY_CODES) {
             const labels = EU_COUNTRIES[code].identityCardLabels;
@@ -67,7 +80,7 @@ describe('country registry', () => {
 
 // ─── Identity Card Schema Tests ─────────────────────────────────────────────
 
-describe.each(ALL_COUNTRY_CODES.map(cc => [cc, EU_COUNTRIES[cc].name] as const))(
+describe.each(ALL_COUNTRY_CODES.map((cc) => [cc, EU_COUNTRIES[cc].name] as const))(
     'identity-card: %s (%s)',
     (code) => {
         const meta = EU_COUNTRIES[code];
@@ -140,12 +153,12 @@ describe.each(ALL_COUNTRY_CODES.map(cc => [cc, EU_COUNTRIES[cc].name] as const))
                 expect(re.test('abc')).toBe(false);
             }
         });
-    }
+    },
 );
 
 // ─── Country Helpers Tests ──────────────────────────────────────────────────
 
-describe.each(ALL_COUNTRY_CODES.map(cc => [cc, EU_COUNTRIES[cc].name] as const))(
+describe.each(ALL_COUNTRY_CODES.map((cc) => [cc, EU_COUNTRIES[cc].name] as const))(
     'helpers: %s (%s)',
     (code) => {
         const meta = EU_COUNTRIES[code];
@@ -183,12 +196,12 @@ describe.each(ALL_COUNTRY_CODES.map(cc => [cc, EU_COUNTRIES[cc].name] as const))
             expect(typeof h.objectSchema).toBe('function');
             expect(typeof h.arrayOfObjects).toBe('function');
         });
-    }
+    },
 );
 
 // ─── Passport Schema Tests ──────────────────────────────────────────────────
 
-describe.each(ALL_COUNTRY_CODES.map(cc => [cc, EU_COUNTRIES[cc].name] as const))(
+describe.each(ALL_COUNTRY_CODES.map((cc) => [cc, EU_COUNTRIES[cc].name] as const))(
     'passport: %s (%s)',
     (code) => {
         const meta = EU_COUNTRIES[code];
@@ -227,13 +240,13 @@ describe.each(ALL_COUNTRY_CODES.map(cc => [cc, EU_COUNTRIES[cc].name] as const))
             expect(sex.enum).toContain('F');
             expect(sex.enum).toContain('X');
         });
-    }
+    },
 );
 
 // ─── Driver's License Schema Tests ──────────────────────────────────────────
 
-describe.each(ALL_COUNTRY_CODES.map(cc => [cc, EU_COUNTRIES[cc].name] as const))(
-    "drivers-license: %s (%s)",
+describe.each(ALL_COUNTRY_CODES.map((cc) => [cc, EU_COUNTRIES[cc].name] as const))(
+    'drivers-license: %s (%s)',
     (code) => {
         const meta = EU_COUNTRIES[code];
         const dl = createDriversLicense(meta);
@@ -269,12 +282,12 @@ describe.each(ALL_COUNTRY_CODES.map(cc => [cc, EU_COUNTRIES[cc].name] as const))
                 expect(props).toContain(req);
             }
         });
-    }
+    },
 );
 
 // ─── Residence Permit Schema Tests ──────────────────────────────────────────
 
-describe.each(ALL_COUNTRY_CODES.map(cc => [cc, EU_COUNTRIES[cc].name] as const))(
+describe.each(ALL_COUNTRY_CODES.map((cc) => [cc, EU_COUNTRIES[cc].name] as const))(
     'residence-permit: %s (%s)',
     (code) => {
         const meta = EU_COUNTRIES[code];
@@ -313,5 +326,5 @@ describe.each(ALL_COUNTRY_CODES.map(cc => [cc, EU_COUNTRIES[cc].name] as const))
                 expect(props).toContain(req);
             }
         });
-    }
+    },
 );

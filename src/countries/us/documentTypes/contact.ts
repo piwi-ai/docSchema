@@ -3,10 +3,7 @@
  * Used by: real-estate.
  */
 import type { DocumentTypeDef } from '../../../types.js';
-import {
-    text, objectSchema,
-    firstName, lastName, address,
-} from '../helpers.js';
+import { text, objectSchema, firstName, lastName, address } from '../helpers.js';
 import { ReferenceType } from '../../../constants.js';
 
 export const contact: DocumentTypeDef = {
@@ -20,11 +17,15 @@ export const contact: DocumentTypeDef = {
             type: ReferenceType.DOCUMENTATION,
         },
     ],
-    jsonSchema: objectSchema({
-        firstName: firstName(), lastName: lastName(),
-        phone: text('Primary phone number'),
-        email: { type: 'string', format: 'email', description: 'Email address' },
-        mailingAddress: address('Mailing address (if different from residential)'),
-        currentAddress: address('Current residential address'),
-    }, ['firstName', 'lastName', 'phone', 'email']),
+    jsonSchema: objectSchema(
+        {
+            firstName: firstName(),
+            lastName: lastName(),
+            phone: text('Primary phone number'),
+            email: { type: 'string', format: 'email', description: 'Email address' },
+            mailingAddress: address('Mailing address (if different from residential)'),
+            currentAddress: address('Current residential address'),
+        },
+        ['firstName', 'lastName', 'phone', 'email'],
+    ),
 };

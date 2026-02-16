@@ -1,0 +1,147 @@
+{
+  "id": "doc-fattura",
+  "name": "Fattura",
+  "description": "Fattura attiva o passiva — dati emittente, destinatario, imponibile, IVA",
+  "references": [
+    {
+      "title": "FatturaPA — Specifiche tecniche",
+      "url": "https://www.fatturapa.gov.it/it/norme-e-regole/documentazione-fatturapa/",
+      "type": "specification"
+    },
+    {
+      "title": "FatturaPA XML Schema (SDI)",
+      "url": "https://www.fatturapa.gov.it/it/norme-e-regole/documentazione-fatturapa/formato-fatturapa/",
+      "type": "schema"
+    },
+    {
+      "title": "Agenzia delle Entrate — Fatturazione Elettronica",
+      "url": "https://www.agenziaentrate.gov.it/portale/web/guest/aree-tematiche/fatturazione-elettronica",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "numero": {
+        "type": "string",
+        "description": "Numero fattura"
+      },
+      "data": {
+        "type": "string",
+        "description": "Data di emissione fattura",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "emittente": {
+        "type": "object",
+        "properties": {
+          "ragioneSociale": {
+            "type": "string",
+            "description": "Ragione sociale o nome dell'emittente"
+          },
+          "partitaIva": {
+            "type": "string",
+            "description": "Partita IVA — 11 cifre numeriche"
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice fiscale dell'emittente"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo dell'emittente"
+          }
+        },
+        "required": [
+          "ragioneSociale",
+          "partitaIva"
+        ]
+      },
+      "destinatario": {
+        "type": "object",
+        "properties": {
+          "ragioneSociale": {
+            "type": "string",
+            "description": "Ragione sociale o nome del destinatario"
+          },
+          "partitaIva": {
+            "type": "string",
+            "description": "Partita IVA — 11 cifre numeriche"
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice fiscale del destinatario"
+          },
+          "indirizzo": {
+            "type": "string",
+            "description": "Indirizzo del destinatario"
+          }
+        },
+        "required": [
+          "ragioneSociale"
+        ]
+      },
+      "righe": {
+        "type": "array",
+        "description": "Righe della fattura",
+        "items": {
+          "type": "object",
+          "properties": {
+            "descrizione": {
+              "type": "string",
+              "description": "Descrizione del bene/servizio"
+            },
+            "quantita": {
+              "type": "number",
+              "description": "Quantità"
+            },
+            "prezzoUnitario": {
+              "type": "number",
+              "description": "Prezzo unitario in Euro"
+            },
+            "aliquotaIva": {
+              "type": "number",
+              "description": "Aliquota IVA in %"
+            },
+            "importo": {
+              "type": "number",
+              "description": "Importo totale riga in Euro"
+            }
+          },
+          "required": [
+            "descrizione",
+            "importo"
+          ]
+        }
+      },
+      "imponibile": {
+        "type": "number",
+        "description": "Totale imponibile in Euro"
+      },
+      "iva": {
+        "type": "number",
+        "description": "Totale IVA in Euro"
+      },
+      "totale": {
+        "type": "number",
+        "description": "Totale fattura in Euro"
+      },
+      "modalitaPagamento": {
+        "type": "string",
+        "description": "Modalità di pagamento"
+      },
+      "scadenzaPagamento": {
+        "type": "string",
+        "description": "Data scadenza pagamento",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      }
+    },
+    "required": [
+      "numero",
+      "data",
+      "emittente",
+      "destinatario",
+      "imponibile",
+      "totale"
+    ]
+  }
+}

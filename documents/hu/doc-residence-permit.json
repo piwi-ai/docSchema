@@ -1,0 +1,102 @@
+{
+  "id": "doc-residence-permit",
+  "name": "Residence Permit",
+  "description": "Residence Permit — Hungary",
+  "references": [
+    {
+      "title": "OIF — Residence",
+      "url": "http://www.bmbah.hu/index.php?lang=en",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "First name / Utónév"
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Last name / Vezetéknév"
+      },
+      "permitNumber": {
+        "type": "string",
+        "description": "Permit number"
+      },
+      "permitType": {
+        "type": "string",
+        "description": "Permit type",
+        "enum": [
+          "Temporary",
+          "Permanent",
+          "Long-term",
+          "Student",
+          "Work",
+          "Family",
+          null
+        ],
+        "nullable": true
+      },
+      "nationality": {
+        "type": "string",
+        "description": "Nationality / Állampolgárság"
+      },
+      "dateOfBirth": {
+        "type": "string",
+        "description": "Date of birth / Születési dátum",
+        "pattern": "^\\d{4}\\.\\d{2}\\.\\d{2}$"
+      },
+      "placeOfBirth": {
+        "type": "string",
+        "description": "Place of birth / Születési hely"
+      },
+      "sex": {
+        "type": "string",
+        "description": "Sex / Nem",
+        "enum": [
+          "M",
+          "F",
+          "X",
+          null
+        ],
+        "nullable": true
+      },
+      "issueDate": {
+        "type": "string",
+        "description": "Issue date / Kiállítás dátuma",
+        "pattern": "^\\d{4}\\.\\d{2}\\.\\d{2}$"
+      },
+      "expirationDate": {
+        "type": "string",
+        "description": "Expiration date / Érvényesség",
+        "pattern": "^\\d{4}\\.\\d{2}\\.\\d{2}$"
+      },
+      "issuingAuthority": {
+        "type": "string",
+        "description": "Issuing authority / Kiállító hatóság"
+      },
+      "address": {
+        "type": "string",
+        "description": "Residential address / Lakcím"
+      },
+      "remarks": {
+        "type": "string",
+        "description": "Remarks / Annotations"
+      },
+      "mrz": {
+        "type": "string",
+        "description": "Machine Readable Zone (MRZ)"
+      }
+    },
+    "required": [
+      "firstName",
+      "lastName",
+      "permitNumber",
+      "permitType",
+      "nationality",
+      "issueDate",
+      "expirationDate"
+    ]
+  }
+}

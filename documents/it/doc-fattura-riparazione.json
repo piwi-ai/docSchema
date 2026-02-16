@@ -1,0 +1,73 @@
+{
+  "id": "doc-fattura-riparazione",
+  "name": "Fattura di Riparazione",
+  "description": "Fattura dell'officina/carrozzeria per riparazione danni",
+  "references": [
+    {
+      "title": "FatturaPA — Formato Fattura Elettronica",
+      "url": "https://www.fatturapa.gov.it/it/norme-e-regole/documentazione-fatturapa/",
+      "type": "specification"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "officina": {
+        "type": "string",
+        "description": "Denominazione officina/carrozzeria"
+      },
+      "partitaIva": {
+        "type": "string",
+        "description": "Partita IVA officina"
+      },
+      "numero": {
+        "type": "string",
+        "description": "Numero fattura"
+      },
+      "data": {
+        "type": "string",
+        "description": "Data fattura",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "targa": {
+        "type": "string",
+        "description": "Numero di targa del veicolo (es. AB123CD)"
+      },
+      "lavorazioni": {
+        "type": "string",
+        "description": "Descrizione lavorazioni eseguite"
+      },
+      "ricambi": {
+        "type": "string",
+        "description": "Elenco ricambi utilizzati"
+      },
+      "manodopera": {
+        "type": "number",
+        "description": "Costo manodopera in Euro"
+      },
+      "costoRicambi": {
+        "type": "number",
+        "description": "Costo ricambi in Euro"
+      },
+      "imponibile": {
+        "type": "number",
+        "description": "Totale imponibile in Euro"
+      },
+      "iva": {
+        "type": "number",
+        "description": "IVA in Euro"
+      },
+      "totale": {
+        "type": "number",
+        "description": "Totale fattura in Euro"
+      }
+    },
+    "required": [
+      "officina",
+      "numero",
+      "data",
+      "targa",
+      "totale"
+    ]
+  }
+}

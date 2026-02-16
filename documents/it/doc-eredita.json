@@ -1,0 +1,61 @@
+{
+  "id": "doc-eredita",
+  "name": "Accettazione di Eredità",
+  "description": "Atto di accettazione dell'eredità trascritto in Conservatoria, necessario per la vendita di immobili ereditati",
+  "references": [
+    {
+      "title": "Art. 459–511 Codice Civile — Successioni",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art459",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "erede": {
+        "type": "string",
+        "description": "Nome e cognome dell'erede accettante"
+      },
+      "codiceFiscaleErede": {
+        "type": "string",
+        "description": "Codice Fiscale dell'erede"
+      },
+      "defunto": {
+        "type": "string",
+        "description": "Nome e cognome del defunto"
+      },
+      "tipoAccettazione": {
+        "type": "string",
+        "description": "Tipo di accettazione",
+        "enum": [
+          "pura e semplice",
+          "con beneficio d'inventario",
+          null
+        ],
+        "nullable": true
+      },
+      "dataTrascrizione": {
+        "type": "string",
+        "description": "Data di trascrizione in formato europeo DD.MM.YYYY",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "notaio": {
+        "type": "string",
+        "description": "Notaio rogante"
+      },
+      "numeroRepertorio": {
+        "type": "string"
+      },
+      "numeroTrascrizione": {
+        "type": "string",
+        "description": "Numero di trascrizione in Conservatoria"
+      }
+    },
+    "required": [
+      "erede",
+      "codiceFiscaleErede",
+      "defunto",
+      "dataTrascrizione"
+    ]
+  }
+}

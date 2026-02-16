@@ -4,8 +4,14 @@
  */
 import type { DocumentTypeDef } from '../../../types.js';
 import {
-    text, date, objectSchema, arrayOfObjects, ref,
-    nome, cognome, codiceFiscale,
+    text,
+    date,
+    objectSchema,
+    arrayOfObjects,
+    ref,
+    nome,
+    cognome,
+    codiceFiscale,
 } from '../helpers.js';
 import { ReferenceType } from '../../../constants.js';
 
@@ -14,19 +20,37 @@ export const statoFamiglia: DocumentTypeDef = {
     name: 'Certificato Stato Famiglia',
     description: 'Certificato stato di famiglia — per polizze vita e beneficiari',
     references: [
-        ref('Ministero dell\'Interno — Servizi demografici', 'https://dait.interno.gov.it/servizi-demografici', ReferenceType.DOCUMENTATION),
+        ref(
+            "Ministero dell'Interno — Servizi demografici",
+            'https://dait.interno.gov.it/servizi-demografici',
+            ReferenceType.DOCUMENTATION,
+        ),
     ],
-    jsonSchema: objectSchema({
-        intestatario: objectSchema({
-            nome: nome(), cognome: cognome(), codiceFiscale: codiceFiscale(),
-            indirizzo: text('Indirizzo di residenza'),
-        }, ['nome', 'cognome', 'codiceFiscale']),
-        componenti: arrayOfObjects({
-            nome: nome(), cognome: cognome(), codiceFiscale: codiceFiscale(),
-            relazione: text("Relazione con l'intestatario (coniuge, figlio, ecc.)"),
-            dataNascita: date('Data di nascita'),
-        }, ['nome', 'cognome', 'relazione'], 'Componenti del nucleo familiare'),
-        dataRilascio: date('Data di rilascio del certificato'),
-        comune: text('Comune che ha rilasciato il certificato'),
-    }, ['intestatario', 'componenti']),
+    jsonSchema: objectSchema(
+        {
+            intestatario: objectSchema(
+                {
+                    nome: nome(),
+                    cognome: cognome(),
+                    codiceFiscale: codiceFiscale(),
+                    indirizzo: text('Indirizzo di residenza'),
+                },
+                ['nome', 'cognome', 'codiceFiscale'],
+            ),
+            componenti: arrayOfObjects(
+                {
+                    nome: nome(),
+                    cognome: cognome(),
+                    codiceFiscale: codiceFiscale(),
+                    relazione: text("Relazione con l'intestatario (coniuge, figlio, ecc.)"),
+                    dataNascita: date('Data di nascita'),
+                },
+                ['nome', 'cognome', 'relazione'],
+                'Componenti del nucleo familiare',
+            ),
+            dataRilascio: date('Data di rilascio del certificato'),
+            comune: text('Comune che ha rilasciato il certificato'),
+        },
+        ['intestatario', 'componenti'],
+    ),
 };

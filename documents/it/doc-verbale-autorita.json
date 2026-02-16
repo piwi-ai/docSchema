@@ -1,0 +1,77 @@
+{
+  "id": "doc-verbale-autorita",
+  "name": "Verbale Autorità",
+  "description": "Verbale di Polizia Stradale, Carabinieri o Polizia Municipale",
+  "references": [
+    {
+      "title": "Codice della Strada — D.Lgs. 285/1992 Art. 11",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:1992-04-30;285",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "autorita": {
+        "type": "string",
+        "description": "Autorità che ha redatto il verbale"
+      },
+      "dataVerbale": {
+        "type": "string",
+        "description": "Data del verbale",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "luogo": {
+        "type": "string",
+        "description": "Luogo dell'intervento"
+      },
+      "numeroVerbale": {
+        "type": "string",
+        "description": "Numero protocollo verbale"
+      },
+      "veicoliCoinvolti": {
+        "type": "array",
+        "description": "Veicoli coinvolti",
+        "items": {
+          "type": "object",
+          "properties": {
+            "targa": {
+              "type": "string",
+              "description": "Numero di targa del veicolo (es. AB123CD)"
+            },
+            "conducente": {
+              "type": "string",
+              "description": "Nome e cognome del conducente"
+            }
+          },
+          "required": [
+            "targa"
+          ]
+        }
+      },
+      "contravvenzioni": {
+        "type": "string",
+        "description": "Eventuali contravvenzioni contestate"
+      },
+      "rilievi": {
+        "type": "string",
+        "description": "Rilievi e osservazioni dell'autorità — copia VERBATIM"
+      },
+      "feriti": {
+        "type": "string",
+        "description": "Feriti segnalati",
+        "enum": [
+          "sì",
+          "no",
+          null
+        ],
+        "nullable": true
+      }
+    },
+    "required": [
+      "autorita",
+      "dataVerbale",
+      "luogo"
+    ]
+  }
+}

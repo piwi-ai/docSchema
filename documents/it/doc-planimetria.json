@@ -1,0 +1,46 @@
+{
+  "id": "doc-planimetria",
+  "name": "Planimetria Catastale",
+  "description": "Dati identificativi della scheda grafica",
+  "references": [
+    {
+      "title": "Agenzia delle Entrate — Planimetria catastale",
+      "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/visura-catastale",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "foglio": {
+        "type": "string"
+      },
+      "particella": {
+        "type": "string"
+      },
+      "subalterno": {
+        "type": "string"
+      },
+      "protocollo": {
+        "type": "string"
+      },
+      "dataProtocollo": {
+        "type": "string",
+        "description": "Data del protocollo in formato europeo DD/MM/YYYY",
+        "pattern": "^\\d{2}[./]\\d{2}[./]\\d{4}$"
+      },
+      "scala": {
+        "type": "string",
+        "description": "Scala della planimetria (es. 1:100, 1:200, 1:50, 1:500)"
+      }
+    },
+    "required": [
+      "foglio",
+      "particella",
+      "subalterno",
+      "protocollo",
+      "dataProtocollo",
+      "scala"
+    ]
+  }
+}

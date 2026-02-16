@@ -1,0 +1,72 @@
+{
+  "id": "doc-perizia-bancaria",
+  "name": "Perizia Bancaria",
+  "description": "Perizia estimativa dell'immobile richiesta dalla banca per la concessione del mutuo",
+  "references": [
+    {
+      "title": "ABI — Linee guida valuazione immobiliare",
+      "url": "https://www.abi.it/",
+      "type": "specification"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "perito": {
+        "type": "string",
+        "description": "Nome e cognome del perito incaricato"
+      },
+      "dataPerizia": {
+        "type": "string",
+        "description": "Data della perizia in formato europeo DD.MM.YYYY",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "indirizzo": {
+        "type": "string",
+        "description": "Indirizzo completo dell'immobile periziato"
+      },
+      "foglio": {
+        "type": "string",
+        "description": "Foglio catastale"
+      },
+      "particella": {
+        "type": "string",
+        "description": "Particella catastale"
+      },
+      "subalterno": {
+        "type": "string",
+        "description": "Subalterno"
+      },
+      "valoreStimato": {
+        "type": "number",
+        "description": "Valore di stima dell'immobile in Euro"
+      },
+      "superficieCommerciale": {
+        "type": "number",
+        "description": "Superficie commerciale in mq"
+      },
+      "statoConservazione": {
+        "type": "string",
+        "description": "Stato di conservazione (es. buono, ottimo, da ristrutturare)"
+      },
+      "conformitaCatastale": {
+        "type": "string",
+        "description": "Esito verifica conformità catastale"
+      },
+      "conformitaUrbanistica": {
+        "type": "string",
+        "description": "Esito verifica conformità urbanistica"
+      },
+      "note": {
+        "type": "string",
+        "description": "Note o osservazioni del perito — copiare TESTUALMENTE dal documento. Se non ci sono note, restituire stringa vuota."
+      }
+    },
+    "required": [
+      "perito",
+      "dataPerizia",
+      "indirizzo",
+      "valoreStimato"
+    ]
+  }
+}

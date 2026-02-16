@@ -10,35 +10,38 @@ Certificato anagrafico rilasciato dal Comune che attesta la residenza attuale de
 
 ## Campi
 
-| Campo | Tipo | Obbligatorio | Descrizione |
-|-------|------|:---:|-------------|
-| `nome` | string | ✅ | Nome |
-| `cognome` | string | ✅ | Cognome |
-| `codiceFiscale` | string (pattern CF) | ✅ | Codice Fiscale |
-| `indirizzo` | string | ✅ | Indirizzo completo di residenza attuale |
-| `comune` | string | ✅ | Comune di residenza |
-| `provincia` | string | | Sigla Provincia (es. MI, RM) |
-| `cap` | string | | Codice Avviamento Postale |
-| `dataRilascio` | date DD.MM.YYYY | ✅ | Data di rilascio |
-| `comuneRilascio` | string | | Comune che ha rilasciato il certificato |
+| Campo            | Tipo                | Obbligatorio | Descrizione                             |
+| ---------------- | ------------------- | :----------: | --------------------------------------- |
+| `nome`           | string              |      ✅      | Nome                                    |
+| `cognome`        | string              |      ✅      | Cognome                                 |
+| `codiceFiscale`  | string (pattern CF) |      ✅      | Codice Fiscale                          |
+| `indirizzo`      | string              |      ✅      | Indirizzo completo di residenza attuale |
+| `comune`         | string              |      ✅      | Comune di residenza                     |
+| `provincia`      | string              |              | Sigla Provincia (es. MI, RM)            |
+| `cap`            | string              |              | Codice Avviamento Postale               |
+| `dataRilascio`   | date DD.MM.YYYY     |      ✅      | Data di rilascio                        |
+| `comuneRilascio` | string              |              | Comune che ha rilasciato il certificato |
 
 ## JSON Schema
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "nome": { "type": "string" },
-    "cognome": { "type": "string" },
-    "codiceFiscale": { "type": "string", "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$" },
-    "indirizzo": { "type": "string" },
-    "comune": { "type": "string" },
-    "provincia": { "type": "string" },
-    "cap": { "type": "string" },
-    "dataRilascio": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
-    "comuneRilascio": { "type": "string" }
-  },
-  "required": ["nome", "cognome", "codiceFiscale", "indirizzo", "comune", "dataRilascio"]
+    "type": "object",
+    "properties": {
+        "nome": { "type": "string" },
+        "cognome": { "type": "string" },
+        "codiceFiscale": {
+            "type": "string",
+            "pattern": "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"
+        },
+        "indirizzo": { "type": "string" },
+        "comune": { "type": "string" },
+        "provincia": { "type": "string" },
+        "cap": { "type": "string" },
+        "dataRilascio": { "type": "string", "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$" },
+        "comuneRilascio": { "type": "string" }
+    },
+    "required": ["nome", "cognome", "codiceFiscale", "indirizzo", "comune", "dataRilascio"]
 }
 ```
 

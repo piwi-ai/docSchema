@@ -1,0 +1,52 @@
+{
+  "id": "doc-quietanza",
+  "name": "Quietanza di Premio",
+  "description": "Ricevuta di pagamento del premio assicurativo",
+  "references": [
+    {
+      "title": "IVASS — Regolamento n. 40/2018 (Obblighi informativi)",
+      "url": "https://www.ivass.it/normativa/nazionale/secondaria-ivass/regolamenti/2018/n40/index.html",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "compagnia": {
+        "type": "string",
+        "description": "Compagnia assicurativa"
+      },
+      "numeroPolizza": {
+        "type": "string",
+        "description": "Numero polizza"
+      },
+      "contraente": {
+        "type": "string",
+        "description": "Nome e cognome del contraente"
+      },
+      "importo": {
+        "type": "number",
+        "description": "Importo pagato in Euro"
+      },
+      "dataPagamento": {
+        "type": "string",
+        "description": "Data del pagamento",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "periodoRiferimento": {
+        "type": "string",
+        "description": "Periodo di copertura (es. 01.01.2025 - 01.01.2026)"
+      },
+      "modalitaPagamento": {
+        "type": "string",
+        "description": "Modalità di pagamento"
+      }
+    },
+    "required": [
+      "compagnia",
+      "numeroPolizza",
+      "importo",
+      "dataPagamento"
+    ]
+  }
+}

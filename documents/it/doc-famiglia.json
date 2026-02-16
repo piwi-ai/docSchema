@@ -1,0 +1,76 @@
+{
+  "id": "doc-famiglia",
+  "name": "Certificato di Stato di Famiglia",
+  "description": "Certificato anagrafico che attesta la composizione del nucleo familiare, utile per verifiche sul regime patrimoniale",
+  "references": [
+    {
+      "title": "Ministero dell'Interno — Servizi demografici",
+      "url": "https://dait.interno.gov.it/servizi-demografici",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "intestatario": {
+        "type": "string",
+        "description": "Nome e cognome dell'intestatario del nucleo familiare"
+      },
+      "codiceFiscaleIntestatario": {
+        "type": "string",
+        "description": "Codice Fiscale dell'intestatario (extract without spaces)",
+        "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+      },
+      "indirizzo": {
+        "type": "string",
+        "description": "Indirizzo di residenza del nucleo familiare"
+      },
+      "comune": {
+        "type": "string"
+      },
+      "componenti": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "nome": {
+              "type": "string"
+            },
+            "cognome": {
+              "type": "string"
+            },
+            "codiceFiscale": {
+              "type": "string",
+              "description": "Codice Fiscale del componente, se presente"
+            },
+            "dataNascita": {
+              "type": "string"
+            },
+            "relazione": {
+              "type": "string",
+              "description": "Relazione familiare (es. intestatario, coniuge, convivente, figlio/a, padre, madre, fratello/sorella, nipote)"
+            }
+          },
+          "required": [
+            "nome",
+            "cognome",
+            "dataNascita",
+            "relazione"
+          ]
+        }
+      },
+      "dataRilascio": {
+        "type": "string",
+        "description": "Data di rilascio in formato europeo DD.MM.YYYY",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      }
+    },
+    "required": [
+      "intestatario",
+      "indirizzo",
+      "comune",
+      "componenti",
+      "dataRilascio"
+    ]
+  }
+}

@@ -14,7 +14,8 @@ export { DOC_IDS, ENTITY_IDS };
 export const realEstateUsConfig: BusinessConfiguration = {
     id: 'REAL-ESTATE-US-DEFAULT',
     name: 'US Real Estate',
-    description: 'Default configuration for US residential real estate transactions — purchase, title, mortgage, closing, and inspections',
+    description:
+        'Default configuration for US residential real estate transactions — purchase, title, mortgage, closing, and inspections',
     schemaVersion: 1,
     documentTypes,
     entityTypes,

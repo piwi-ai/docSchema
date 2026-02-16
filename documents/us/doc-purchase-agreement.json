@@ -1,0 +1,117 @@
+{
+  "id": "doc-purchase-agreement",
+  "name": "Purchase Agreement / Contract",
+  "description": "Real estate purchase and sale agreement between buyer and seller",
+  "references": [
+    {
+      "title": "NAR — Residential Purchase Agreement",
+      "url": "https://www.nar.realtor/legal",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "seller": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "First name (given name)"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Last name (surname / family name)"
+          },
+          "address": {
+            "type": "string",
+            "description": "Seller's address"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName"
+        ]
+      },
+      "buyer": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "First name (given name)"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Last name (surname / family name)"
+          },
+          "address": {
+            "type": "string",
+            "description": "Buyer's address"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName"
+        ]
+      },
+      "propertyAddress": {
+        "type": "string",
+        "description": "Subject property address"
+      },
+      "purchasePrice": {
+        "type": "number",
+        "description": "Purchase price (USD, numbers only, no dollar sign)"
+      },
+      "earnestMoney": {
+        "type": "number",
+        "description": "Earnest money deposit amount (USD, numbers only, no dollar sign)"
+      },
+      "closingDate": {
+        "type": "string",
+        "description": "Expected closing date",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      },
+      "contingencies": {
+        "type": "string",
+        "description": "List of contingencies (inspection, financing, appraisal, etc.)"
+      },
+      "financingType": {
+        "type": "string",
+        "description": "Financing type",
+        "enum": [
+          "conventional",
+          "FHA",
+          "VA",
+          "cash",
+          "other",
+          null
+        ],
+        "nullable": true
+      },
+      "sellerConcessions": {
+        "type": "number",
+        "description": "Seller concessions / credits to buyer (USD, numbers only, no dollar sign)"
+      },
+      "personalPropertyIncluded": {
+        "type": "string",
+        "description": "Personal property included (appliances, fixtures, etc.)"
+      },
+      "closingCostsSplit": {
+        "type": "string",
+        "description": "How closing costs are split between parties"
+      },
+      "executionDate": {
+        "type": "string",
+        "description": "Date contract was executed / signed",
+        "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+      }
+    },
+    "required": [
+      "seller",
+      "buyer",
+      "propertyAddress",
+      "purchasePrice",
+      "closingDate"
+    ]
+  }
+}

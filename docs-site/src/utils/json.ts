@@ -15,7 +15,7 @@ export function syntaxHighlight(json: string): string {
                 cls = 'json-null';
             }
             return `<span class="${cls}">${match}</span>`;
-        }
+        },
     );
 }
 

@@ -7,8 +7,26 @@
 import { describe, it, expect } from 'vitest';
 
 import { text, num, enumField, email, objectSchema, arrayOfObjects } from '../src/helpers/schema';
-import { date, nome, cognome, codiceFiscale, partitaIva, statoCivile, targa, telaio } from '../src/countries/it/helpers';
-import { dateUS, firstName, lastName, ssn, ein, currency, address, parcelNumber } from '../src/countries/us/helpers';
+import {
+    date,
+    nome,
+    cognome,
+    codiceFiscale,
+    partitaIva,
+    statoCivile,
+    targa,
+    telaio,
+} from '../src/countries/it/helpers';
+import {
+    dateUS,
+    firstName,
+    lastName,
+    ssn,
+    ein,
+    currency,
+    address,
+    parcelNumber,
+} from '../src/countries/us/helpers';
 
 // ─── Universal Primitives ───────────────────────────────────────────────────
 

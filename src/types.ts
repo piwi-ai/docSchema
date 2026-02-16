@@ -160,4 +160,3 @@ export interface BusinessConfiguration {
     /** Entity type definitions with aggregation and validation rules */
     entityTypes: EntityTypeDef[];
 }
-

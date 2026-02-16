@@ -1,38 +1,59 @@
-import { Link } from 'react-router-dom'
-import { FileText, Database, GitBranch, ArrowRight, Sparkles, Globe, Boxes } from 'lucide-react'
-import { getStats } from '../data/configs'
-import './Landing.css'
+import { Link } from 'react-router-dom';
+import { FileText, Database, GitBranch, ArrowRight, Sparkles, Globe, Boxes } from 'lucide-react';
+import { getStats } from '../data/configs';
+import { getDocLibraryStats } from '../data/documents';
+import './Landing.css';
 
 const stats = getStats();
+const docLibStats = getDocLibraryStats();
 
 const features = [
     {
         icon: <FileText size={28} />,
         title: 'Document Types',
         desc: 'JSON Schema definitions for every document in your business — invoices, contracts, IDs, tax forms. Any LLM can extract structured data.',
-        link: '/explore',
+        link: '/documents',
         color: 'purple',
+    },
+    {
+        icon: <Globe size={28} />,
+        title: 'Document Library',
+        desc: `${docLibStats.totalDocs} document schemas across ${docLibStats.totalCountries} countries — individual JSON files ready for any AI agent to consume.`,
+        link: '/documents',
+        color: 'green',
     },
     {
         icon: <Database size={28} />,
         title: 'Entity Types',
         desc: 'Map extracted data to real-world entities like buyers, sellers, and companies. Fuzzy matching and identity resolution built in.',
-        link: '/entities',
+        link: '/verticals',
         color: 'blue',
     },
     {
         icon: <GitBranch size={28} />,
         title: 'Conditional Logic',
         desc: 'IF-THEN rules that dynamically require documents based on entity data. Married? → Require spouse ID. Has mortgage? → Require bank statement.',
-        link: '/entities',
+        link: '/verticals',
         color: 'cyan',
     },
 ];
 
 const principles = [
-    { icon: <Sparkles size={20} />, label: 'LLM-Agnostic', desc: 'Works with Gemini, GPT, Claude, Llama, or any AI' },
-    { icon: <Globe size={20} />, label: 'Country-Aware', desc: 'Localized fields, date formats, and ID patterns per country' },
-    { icon: <Boxes size={20} />, label: 'Zero Dependencies', desc: 'Pure JSON data — no runtime libraries required' },
+    {
+        icon: <Sparkles size={20} />,
+        label: 'LLM-Agnostic',
+        desc: 'Works with Gemini, GPT, Claude, Llama, or any AI',
+    },
+    {
+        icon: <Globe size={20} />,
+        label: 'Country-Aware',
+        desc: 'Localized fields, date formats, and ID patterns per country',
+    },
+    {
+        icon: <Boxes size={20} />,
+        label: 'Zero Dependencies',
+        desc: 'Pure JSON data — no runtime libraries required',
+    },
 ];
 
 export default function Landing() {
@@ -44,15 +65,16 @@ export default function Landing() {
                 <div className="hero__content container">
                     <div className="hero__badge badge">Open Standard v1.0</div>
                     <h1 className="hero__title">
-                        AI-Readable<br />
+                        AI-Readable
+                        <br />
                         <span className="gradient-text">Document Schemas</span>
                     </h1>
                     <p className="hero__subtitle">
-                        A portable, JSON-based format for describing business documents, extraction fields,
-                        and entity relationships. Works with any AI provider.
+                        A portable, JSON-based format for describing business documents, extraction
+                        fields, and entity relationships. Works with any AI provider.
                     </p>
                     <div className="hero__actions">
-                        <Link to="/explore" className="btn btn--primary">
+                        <Link to="/documents" className="btn btn--primary">
                             Browse Schemas <ArrowRight size={16} />
                         </Link>
                         <a
@@ -68,12 +90,16 @@ export default function Landing() {
                     {/* Stats */}
                     <div className="hero__stats">
                         <div className="hero__stat">
-                            <span className="hero__stat-value">{stats.totalVerticals}</span>
-                            <span className="hero__stat-label">Verticals</span>
+                            <span className="hero__stat-value">{docLibStats.totalCountries}</span>
+                            <span className="hero__stat-label">Countries</span>
                         </div>
                         <div className="hero__stat">
-                            <span className="hero__stat-value">{stats.totalDocTypes}</span>
-                            <span className="hero__stat-label">Document Types</span>
+                            <span className="hero__stat-value">{docLibStats.totalDocs}</span>
+                            <span className="hero__stat-label">Document Schemas</span>
+                        </div>
+                        <div className="hero__stat">
+                            <span className="hero__stat-value">{stats.totalVerticals}</span>
+                            <span className="hero__stat-label">Verticals</span>
                         </div>
                         <div className="hero__stat">
                             <span className="hero__stat-value">{stats.totalEntityTypes}</span>
@@ -89,13 +115,17 @@ export default function Landing() {
 
             {/* ── Features ─────────────────────────────────── */}
             <section className="features container">
-                <h2 className="features__heading">Three Core Primitives</h2>
+                <h2 className="features__heading">Four Core Primitives</h2>
                 <p className="features__subheading">
                     Everything an AI needs to understand your documents — declaratively.
                 </p>
                 <div className="features__grid stagger">
                     {features.map((f) => (
-                        <Link to={f.link} key={f.title} className={`feature-card glass-card feature-card--${f.color}`}>
+                        <Link
+                            to={f.link}
+                            key={f.title}
+                            className={`feature-card glass-card feature-card--${f.color}`}
+                        >
                             <div className={`feature-card__icon feature-card__icon--${f.color}`}>
                                 {f.icon}
                             </div>
@@ -137,7 +167,8 @@ export default function Landing() {
                         <span className="preview__dot preview__dot--green" />
                         <span className="preview__filename">real-estate/it.config.json</span>
                     </div>
-                    <pre className="preview__code"><code>{`{
+                    <pre className="preview__code">
+                        <code>{`{
   "id": "REAL-ESTATE-IT-DEFAULT",
   "name": "Italian Real Estate",
   "schemaVersion": 1,
@@ -158,9 +189,10 @@ export default function Landing() {
     }
   ],
   "entityTypes": [ ... ]
-}`}</code></pre>
+}`}</code>
+                    </pre>
                 </div>
             </section>
         </div>
-    )
+    );
 }

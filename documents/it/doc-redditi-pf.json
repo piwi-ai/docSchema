@@ -1,0 +1,80 @@
+{
+  "id": "doc-redditi-pf",
+  "name": "Modello Redditi PF",
+  "description": "Dichiarazione dei redditi per persone fisiche con P.IVA o redditi complessi",
+  "references": [
+    {
+      "title": "Agenzia delle Entrate — Modello Redditi PF",
+      "url": "https://www.agenziaentrate.gov.it/portale/web/guest/modello-redditi-pf",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "anno": {
+        "type": "number",
+        "description": "Anno fiscale di riferimento"
+      },
+      "contribuente": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome (first name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "cognome": {
+            "type": "string",
+            "description": "Cognome (surname/family name). In Italia, l'ordine standard è: nome prima, cognome dopo (es. Mario Rossi)."
+          },
+          "codiceFiscale": {
+            "type": "string",
+            "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+            "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+          },
+          "partitaIva": {
+            "type": "string",
+            "description": "Partita IVA — 11 cifre numeriche"
+          }
+        },
+        "required": [
+          "nome",
+          "cognome",
+          "codiceFiscale"
+        ]
+      },
+      "regime": {
+        "type": "string",
+        "description": "Regime fiscale",
+        "enum": [
+          "ordinario",
+          "forfettario",
+          "semplificato",
+          null
+        ],
+        "nullable": true
+      },
+      "redditoComplessivo": {
+        "type": "number",
+        "description": "Reddito complessivo in Euro"
+      },
+      "impostaNetta": {
+        "type": "number",
+        "description": "Imposta netta in Euro"
+      },
+      "quadriCompilati": {
+        "type": "string",
+        "description": "Elenco dei quadri compilati"
+      },
+      "volumeAffari": {
+        "type": "number",
+        "description": "Volume d'affari in Euro"
+      }
+    },
+    "required": [
+      "anno",
+      "contribuente",
+      "redditoComplessivo"
+    ]
+  }
+}

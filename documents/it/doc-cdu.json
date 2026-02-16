@@ -1,0 +1,53 @@
+{
+  "id": "doc-cdu",
+  "name": "Certificato di Destinazione Urbanistica (CDU)",
+  "description": "Certificato rilasciato dal Comune che attesta la destinazione urbanistica di un terreno — obbligatorio per terreni >5000 mq (Art. 30 D.P.R. 380/2001)",
+  "references": [
+    {
+      "title": "Art. 30 D.P.R. 380/2001 — CDU",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:2001-06-06;380~art30",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "foglio": {
+        "type": "string",
+        "description": "Foglio catastale"
+      },
+      "particella": {
+        "type": "string",
+        "description": "Particella catastale"
+      },
+      "comune": {
+        "type": "string",
+        "description": "Comune di ubicazione"
+      },
+      "destinazioneUrbanistica": {
+        "type": "string",
+        "description": "Destinazione urbanistica (es. Zona Residenziale B2, Zona Agricola E1)"
+      },
+      "estremiPRG": {
+        "type": "string",
+        "description": "Estremi del Piano Regolatore o Piano Urbanistico vigente"
+      },
+      "dataRilascio": {
+        "type": "string",
+        "description": "Data di rilascio in formato europeo DD.MM.YYYY",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "validita": {
+        "type": "string",
+        "description": "Validità del certificato (1 anno dalla data di rilascio)"
+      }
+    },
+    "required": [
+      "foglio",
+      "particella",
+      "comune",
+      "destinazioneUrbanistica",
+      "dataRilascio"
+    ]
+  }
+}

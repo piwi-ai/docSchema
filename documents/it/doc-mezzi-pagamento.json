@@ -1,0 +1,71 @@
+{
+  "id": "doc-mezzi-pagamento",
+  "name": "Dichiarazione Mezzi di Pagamento",
+  "description": "Dichiarazione analitica dei mezzi di pagamento utilizzati nella compravendita (Art. 35 D.Lgs. 223/2006)",
+  "references": [
+    {
+      "title": "Art. 35 D.Lgs. 223/2006 — Tracciabilità compravendite",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2006-07-04;223~art35",
+      "type": "regulation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "pagamenti": {
+        "type": "array",
+        "description": "Elenco analitico di tutti i mezzi di pagamento",
+        "items": {
+          "type": "object",
+          "properties": {
+            "tipo": {
+              "type": "string",
+              "description": "Tipo di pagamento (es. assegno circolare, bonifico bancario, mutuo fondiario)"
+            },
+            "importo": {
+              "type": "number",
+              "description": "Importo in Euro"
+            },
+            "numeroBonifico": {
+              "type": "string",
+              "description": "Numero CRO/TRN del bonifico o numero assegno"
+            },
+            "bancaEmittente": {
+              "type": "string",
+              "description": "Banca emittente dell'assegno o ordinante del bonifico"
+            },
+            "dataPagamento": {
+              "type": "string",
+              "description": "Data del pagamento in formato europeo DD.MM.YYYY",
+              "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+            },
+            "intestatario": {
+              "type": "string",
+              "description": "Intestatario del mezzo di pagamento"
+            }
+          },
+          "required": [
+            "tipo",
+            "importo"
+          ]
+        }
+      },
+      "importoTotale": {
+        "type": "number",
+        "description": "Importo totale dei pagamenti in Euro"
+      },
+      "mediatore": {
+        "type": "string",
+        "description": "Nome dell'agenzia o mediatore, se presente"
+      },
+      "provvigione": {
+        "type": "number",
+        "description": "Importo della provvigione del mediatore in Euro"
+      }
+    },
+    "required": [
+      "pagamenti",
+      "importoTotale"
+    ]
+  }
+}

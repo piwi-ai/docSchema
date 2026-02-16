@@ -9,11 +9,21 @@
  */
 import type { DocumentTypeDef } from '../../../types.js';
 import {
-    identita, tesseraSanitaria,
-    polizza, attestatoRischio, libretto, denunciaSinistro,
-    periziaDanni, certificatoMedico, fatturaRiparazione,
-    verbaleAutorita, quietanza, disdetta,
-    statoFamiglia, certificatoMorteInsurance, schedaFabbricato,
+    identita,
+    tesseraSanitaria,
+    polizza,
+    attestatoRischio,
+    libretto,
+    denunciaSinistro,
+    periziaDanni,
+    certificatoMedico,
+    fatturaRiparazione,
+    verbaleAutorita,
+    quietanza,
+    disdetta,
+    statoFamiglia,
+    certificatoMorteInsurance,
+    schedaFabbricato,
 } from '../../../countries/it/documentTypes/index.js';
 
 // ─── Document IDs ───────────────────────────────────────────────────────────

@@ -1,0 +1,62 @@
+{
+  "id": "doc-certificato-proprieta",
+  "name": "Certificato di Proprietà (CDP)",
+  "description": "Certificato di proprietà digitale (CDPD) — attesta la titolarità del veicolo al PRA",
+  "references": [
+    {
+      "title": "ACI — Certificato di Proprietà Digitale",
+      "url": "https://www.aci.it/i-servizi/guide-utili/guida-pratiche-auto/certificato-di-proprieta.html",
+      "type": "documentation"
+    },
+    {
+      "title": "PRA — Pubblico Registro Automobilistico",
+      "url": "https://www.aci.it/i-servizi/servizi-online/pra.html",
+      "type": "documentation"
+    }
+  ],
+  "jsonSchema": {
+    "type": "object",
+    "properties": {
+      "targa": {
+        "type": "string",
+        "description": "Numero di targa del veicolo (es. AB123CD)"
+      },
+      "telaio": {
+        "type": "string",
+        "description": "Numero di telaio / VIN (Vehicle Identification Number) — 17 caratteri alfanumerici"
+      },
+      "proprietario": {
+        "type": "string",
+        "description": "Nome e cognome / ragione sociale del proprietario"
+      },
+      "codiceFiscaleProprietario": {
+        "type": "string",
+        "description": "Codice Fiscale di 16 caratteri (extract without spaces - remove all spacing if present)",
+        "pattern": "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$"
+      },
+      "dataAcquisto": {
+        "type": "string",
+        "description": "Data dell'ultima formalità di acquisto",
+        "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$"
+      },
+      "formalita": {
+        "type": "string",
+        "description": "Tipo formalità (es. compravendita, successione, prima iscrizione)"
+      },
+      "vincoli": {
+        "type": "string",
+        "description": "Eventuali vincoli annotati (fermo amministrativo, ipoteca, leasing)"
+      },
+      "note": {
+        "type": "string",
+        "description": "Annotazioni aggiuntive"
+      }
+    },
+    "required": [
+      "targa",
+      "telaio",
+      "proprietario",
+      "codiceFiscaleProprietario"
+    ]
+  }
+}
