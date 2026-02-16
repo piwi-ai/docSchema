@@ -7,7 +7,8 @@ import {
     text, num, date, enumField, objectSchema, arrayOfObjects, ref,
     nome, cognome,
     STATO_CIVILE_VALUES,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 const TIPO_PROVENIENZA_VALUES = [
     'compravendita', 'donazione', 'successione',
@@ -40,8 +41,8 @@ export const attoProvenienza: DocumentTypeDef = {
     name: 'Atto di Provenienza Notarile',
     description: 'Rogito che attesta la proprietà. Include dati venditori, acquirenti e catastali.',
     references: [
-        ref('Consiglio Nazionale del Notariato', 'https://www.notariato.it/', 'documentation'),
-        ref('Art. 2643 Codice Civile — Trascrizione', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art2643', 'regulation'),
+        ref('Consiglio Nazionale del Notariato', 'https://www.notariato.it/', ReferenceType.DOCUMENTATION),
+        ref('Art. 2643 Codice Civile — Trascrizione', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art2643', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         venditori: arrayOfObjects(venditoreAcquirenteProps, venditoreAcquirenteRequired, "Elenco di tutti i venditori nell'atto"),

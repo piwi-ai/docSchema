@@ -5,12 +5,20 @@
 import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, objectSchema,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const schedaTecnica: DocumentTypeDef = {
     id: 'doc-scheda-tecnica',
     name: 'Scheda Tecnica Veicolo',
     description: 'Scheda tecnica/commerciale del veicolo con optionals e allestimento',
+    references: [
+        {
+            title: 'EU Reg. 2018/858 — Type Approval',
+            url: 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32018R0858',
+            type: ReferenceType.REGULATION,
+        },
+    ],
     jsonSchema: objectSchema({
         marca: text('Marca'), modello: text('Modello'),
         allestimento: text('Livello di allestimento (es. Lounge, Sport, Executive)'),

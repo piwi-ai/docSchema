@@ -6,15 +6,16 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, objectSchema, ref,
     codiceFiscale, targa, telaio,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const certificatoProprieta: DocumentTypeDef = {
     id: 'doc-certificato-proprieta',
     name: 'Certificato di Proprietà (CDP)',
     description: 'Certificato di proprietà digitale (CDPD) — attesta la titolarità del veicolo al PRA',
     references: [
-        ref('ACI — Certificato di Proprietà Digitale', 'https://www.aci.it/i-servizi/guide-utili/guida-pratiche-auto/certificato-di-proprieta.html', 'documentation'),
-        ref('PRA — Pubblico Registro Automobilistico', 'https://www.aci.it/i-servizi/servizi-online/pra.html', 'documentation'),
+        ref('ACI — Certificato di Proprietà Digitale', 'https://www.aci.it/i-servizi/guide-utili/guida-pratiche-auto/certificato-di-proprieta.html', ReferenceType.DOCUMENTATION),
+        ref('PRA — Pubblico Registro Automobilistico', 'https://www.aci.it/i-servizi/servizi-online/pra.html', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         targa: targa(), telaio: telaio(),

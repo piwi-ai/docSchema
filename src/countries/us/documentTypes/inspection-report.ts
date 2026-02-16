@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, dateUS, enumField, objectSchema, ref,
     address,
-} from '../../../helpers/us.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const inspectionReport: DocumentTypeDef = {
     id: 'doc-inspection-report',
     name: 'Home Inspection Report',
     description: 'Professional home inspection report — structural, mechanical, plumbing, electrical',
     references: [
-        ref('ASHI — Standards of Practice', 'https://www.homeinspector.org/standards-of-practice', 'specification'),
+        ref('ASHI — Standards of Practice', 'https://www.homeinspector.org/standards-of-practice', ReferenceType.SPECIFICATION),
     ],
     jsonSchema: objectSchema({
         inspector: text('Inspector name and license number'),

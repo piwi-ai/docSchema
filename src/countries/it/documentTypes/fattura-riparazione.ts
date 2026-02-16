@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, date, objectSchema, ref,
     targa,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const fatturaRiparazione: DocumentTypeDef = {
     id: 'doc-fattura-riparazione',
     name: 'Fattura di Riparazione',
     description: "Fattura dell'officina/carrozzeria per riparazione danni",
     references: [
-        ref('FatturaPA — Formato Fattura Elettronica', 'https://www.fatturapa.gov.it/it/norme-e-regole/documentazione-fatturapa/', 'specification'),
+        ref('FatturaPA — Formato Fattura Elettronica', 'https://www.fatturapa.gov.it/it/norme-e-regole/documentazione-fatturapa/', ReferenceType.SPECIFICATION),
     ],
     jsonSchema: objectSchema({
         officina: text('Denominazione officina/carrozzeria'),

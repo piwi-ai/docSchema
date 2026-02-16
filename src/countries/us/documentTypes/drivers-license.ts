@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, dateUS, enumField, objectSchema, ref,
     firstName, lastName, address,
-} from '../../../helpers/us.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const driversLicense: DocumentTypeDef = {
     id: 'doc-drivers-license',
     name: "Driver's License / Government ID",
     description: "Government-issued identification: Driver's License, Passport, or State ID",
     references: [
-        ref('REAL ID Act — DHS', 'https://www.dhs.gov/real-id', 'regulation'),
+        ref('REAL ID Act — DHS', 'https://www.dhs.gov/real-id', ReferenceType.REGULATION),
     ],
     isArrayExtraction: true,
     jsonSchema: objectSchema({

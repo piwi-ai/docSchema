@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, dateUS, enumField, objectSchema, ref,
     currency, address, parcelNumber,
-} from '../../../helpers/us.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const deed: DocumentTypeDef = {
     id: 'doc-deed',
     name: 'Deed',
     description: 'Property deed — warranty deed, quitclaim deed, special warranty deed',
     references: [
-        ref('ALTA — Deed Standards', 'https://www.alta.org/', 'specification'),
+        ref('ALTA — Deed Standards', 'https://www.alta.org/', ReferenceType.SPECIFICATION),
     ],
     jsonSchema: objectSchema({
         deedType: enumField('Type of deed', ['General Warranty', 'Special Warranty', 'Quitclaim', 'Bargain and Sale', 'Grant Deed']),

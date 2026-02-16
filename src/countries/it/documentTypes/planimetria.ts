@@ -5,14 +5,15 @@
 import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, objectSchema, ref, datePattern,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const planimetria: DocumentTypeDef = {
     id: 'doc-planimetria',
     name: 'Planimetria Catastale',
     description: 'Dati identificativi della scheda grafica',
     references: [
-        ref('Agenzia delle Entrate — Planimetria catastale', 'https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/visura-catastale', 'documentation'),
+        ref('Agenzia delle Entrate — Planimetria catastale', 'https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/visura-catastale', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         foglio: { type: 'string' },

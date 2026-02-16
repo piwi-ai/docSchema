@@ -6,16 +6,17 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, date, objectSchema, arrayOfObjects, ref,
     partitaIva,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const fattura: DocumentTypeDef = {
     id: 'doc-fattura',
     name: 'Fattura',
     description: 'Fattura attiva o passiva — dati emittente, destinatario, imponibile, IVA',
     references: [
-        ref('FatturaPA — Specifiche tecniche', 'https://www.fatturapa.gov.it/it/norme-e-regole/documentazione-fatturapa/', 'specification'),
-        ref('FatturaPA XML Schema (SDI)', 'https://www.fatturapa.gov.it/it/norme-e-regole/documentazione-fatturapa/formato-fatturapa/', 'schema'),
-        ref('Agenzia delle Entrate — Fatturazione Elettronica', 'https://www.agenziaentrate.gov.it/portale/web/guest/aree-tematiche/fatturazione-elettronica', 'documentation'),
+        ref('FatturaPA — Specifiche tecniche', 'https://www.fatturapa.gov.it/it/norme-e-regole/documentazione-fatturapa/', ReferenceType.SPECIFICATION),
+        ref('FatturaPA XML Schema (SDI)', 'https://www.fatturapa.gov.it/it/norme-e-regole/documentazione-fatturapa/formato-fatturapa/', ReferenceType.SCHEMA),
+        ref('Agenzia delle Entrate — Fatturazione Elettronica', 'https://www.agenziaentrate.gov.it/portale/web/guest/aree-tematiche/fatturazione-elettronica', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         numero: text('Numero fattura'),

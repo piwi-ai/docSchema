@@ -6,7 +6,8 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     num, date, text, objectSchema, ref,
     nome, cognome, codiceFiscale, statoCivile, datePattern,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 const semplicePersonaProps = { nome: nome(), cognome: cognome(), codiceFiscale: codiceFiscale(), statoCivile: statoCivile() };
 const semplicePersonaReq = ['nome', 'cognome', 'codiceFiscale'];
@@ -16,8 +17,8 @@ export const contrattoPrelim: DocumentTypeDef = {
     name: 'Contratto Preliminare',
     description: 'Compromesso di compravendita',
     references: [
-        ref('Art. 1351 Codice Civile — Contratto preliminare', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1351', 'regulation'),
-        ref('Agenzia delle Entrate — Registrazione preliminare', 'https://www.agenziaentrate.gov.it/portale/web/guest/schede/registrazione/registrazione-preliminare', 'documentation'),
+        ref('Art. 1351 Codice Civile — Contratto preliminare', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1351', ReferenceType.REGULATION),
+        ref('Agenzia delle Entrate — Registrazione preliminare', 'https://www.agenziaentrate.gov.it/portale/web/guest/schede/registrazione/registrazione-preliminare', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         acquirenti: { type: 'array', items: { type: 'object', properties: semplicePersonaProps, required: semplicePersonaReq } },

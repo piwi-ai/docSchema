@@ -5,7 +5,8 @@
 import type { DocumentTypeDef } from '../../../types.js';
 import {
     num, text, enumField, objectSchema, ref, datePattern,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 const CLASSE_ENERGETICA_VALUES = ['A4', 'A3', 'A2', 'A1', 'B', 'C', 'D', 'E', 'F', 'G'];
 
@@ -18,9 +19,9 @@ export const ape: DocumentTypeDef = {
     name: 'APE - Certificato Energetico',
     description: 'Efficienza energetica obbligatoria per annunci e rogito',
     references: [
-        ref('ENEA — Attestato di Prestazione Energetica', 'https://www.efficienzaenergetica.enea.it/', 'documentation'),
-        ref('D.Lgs. 192/2005 — Rendimento energetico nell\'edilizia', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-08-19;192', 'regulation'),
-        ref('SIAPE — Sistema Informativo APE', 'https://siape.enea.it/', 'documentation'),
+        ref('ENEA — Attestato di Prestazione Energetica', 'https://www.efficienzaenergetica.enea.it/', ReferenceType.DOCUMENTATION),
+        ref('D.Lgs. 192/2005 — Rendimento energetico nell\'edilizia', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-08-19;192', ReferenceType.REGULATION),
+        ref('SIAPE — Sistema Informativo APE', 'https://siape.enea.it/', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         classeEnergetica: enumField('Classe energetica dell\'immobile', CLASSE_ENERGETICA_VALUES),

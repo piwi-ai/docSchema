@@ -6,15 +6,16 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, date, enumField, objectSchema, ref,
     nome, cognome, codiceFiscale, targa,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const polizza: DocumentTypeDef = {
     id: 'doc-polizza',
     name: 'Polizza Assicurativa',
     description: 'Contratto di assicurazione — tutti i rami (RCA, vita, casa, infortuni, RC professionale)',
     references: [
-        ref('IVASS — Codice delle Assicurazioni Private', 'https://www.ivass.it/normativa/nazionale/primaria/index.html', 'regulation'),
-        ref('ANIA — Associazione Nazionale Imprese Assicuratrici', 'https://www.ania.it/', 'documentation'),
+        ref('IVASS — Codice delle Assicurazioni Private', 'https://www.ivass.it/normativa/nazionale/primaria/index.html', ReferenceType.REGULATION),
+        ref('ANIA — Associazione Nazionale Imprese Assicuratrici', 'https://www.ania.it/', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         compagnia: text('Compagnia assicurativa'),

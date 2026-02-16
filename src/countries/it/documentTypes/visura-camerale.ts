@@ -6,15 +6,16 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, num, enumField, objectSchema, ref,
     codiceFiscale,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const visuraCamerale: DocumentTypeDef = {
     id: 'doc-visura-camerale',
     name: 'Visura Camerale',
     description: 'Visura della Camera di Commercio — dati societari, legale rappresentante, codice ATECO',
     references: [
-        ref('Registro Imprese — Camera di Commercio', 'https://www.registroimprese.it/', 'documentation'),
-        ref('InfoCamere — Visure', 'https://www.infocamere.it/visure', 'documentation'),
+        ref('Registro Imprese — Camera di Commercio', 'https://www.registroimprese.it/', ReferenceType.DOCUMENTATION),
+        ref('InfoCamere — Visure', 'https://www.infocamere.it/visure', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         ragioneSociale: text('Ragione sociale / denominazione'),

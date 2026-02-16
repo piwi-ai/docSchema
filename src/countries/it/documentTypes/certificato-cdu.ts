@@ -5,14 +5,15 @@
 import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, objectSchema, ref,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const certificatoCDU: DocumentTypeDef = {
     id: 'doc-cdu',
     name: 'Certificato di Destinazione Urbanistica (CDU)',
     description: 'Certificato rilasciato dal Comune che attesta la destinazione urbanistica di un terreno — obbligatorio per terreni >5000 mq (Art. 30 D.P.R. 380/2001)',
     references: [
-        ref('Art. 30 D.P.R. 380/2001 — CDU', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:2001-06-06;380~art30', 'regulation'),
+        ref('Art. 30 D.P.R. 380/2001 — CDU', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:2001-06-06;380~art30', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         foglio: text('Foglio catastale'),

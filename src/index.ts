@@ -24,41 +24,61 @@ export type {
     BusinessConfiguration,
 } from './types.js';
 
+// ─── Constants & Enums ──────────────────────────────────────────────────────
+export {
+    DateFormat, DATE_PATTERNS, Sex, SEX_VALUES,
+    DocTypeId,
+    IdentityField, IDENTITY_REQUIRED_FIELDS,
+    PassportField, PASSPORT_REQUIRED_FIELDS,
+    DriversLicenseField, DRIVERS_LICENSE_REQUIRED_FIELDS, EU_LICENSE_CATEGORIES,
+    ResidencePermitField, RESIDENCE_PERMIT_REQUIRED_FIELDS, EU_PERMIT_TYPES,
+} from './constants.js';
+
+// ─── Country Registry & Factories ───────────────────────────────────────────
+export { EU_COUNTRIES, ALL_COUNTRY_CODES, getCountry } from './country-registry.js';
+export type { CountryMeta, IdentityCardLabels } from './country-registry.js';
+export { createIdentityCard } from './factories/identity-card.factory.js';
+export { createPassport } from './factories/passport.factory.js';
+export { createDriversLicense } from './factories/drivers-license.factory.js';
+export { createResidencePermit } from './factories/residence-permit.factory.js';
+export { createCountryHelpers } from './factories/country-helpers.factory.js';
+
 // ─── Helpers (per country — re-export schema primitives from each) ──────────
 export * as schemaHelpers from './helpers/schema.js';
-export * as itHelpers from './helpers/it.js';
-export * as usHelpers from './helpers/us.js';
-export * as atHelpers from './helpers/at.js';
-export * as beHelpers from './helpers/be.js';
-export * as bgHelpers from './helpers/bg.js';
-export * as chHelpers from './helpers/ch.js';
-export * as cyHelpers from './helpers/cy.js';
-export * as czHelpers from './helpers/cz.js';
-export * as deHelpers from './helpers/de.js';
-export * as dkHelpers from './helpers/dk.js';
-export * as eeHelpers from './helpers/ee.js';
-export * as esHelpers from './helpers/es.js';
-export * as fiHelpers from './helpers/fi.js';
-export * as frHelpers from './helpers/fr.js';
-export * as gbHelpers from './helpers/gb.js';
-export * as grHelpers from './helpers/gr.js';
-export * as hrHelpers from './helpers/hr.js';
-export * as huHelpers from './helpers/hu.js';
-export * as ieHelpers from './helpers/ie.js';
-export * as isHelpers from './helpers/is.js';
-export * as liHelpers from './helpers/li.js';
-export * as ltHelpers from './helpers/lt.js';
-export * as luHelpers from './helpers/lu.js';
-export * as lvHelpers from './helpers/lv.js';
-export * as mtHelpers from './helpers/mt.js';
-export * as nlHelpers from './helpers/nl.js';
-export * as noHelpers from './helpers/no.js';
-export * as plHelpers from './helpers/pl.js';
-export * as ptHelpers from './helpers/pt.js';
-export * as roHelpers from './helpers/ro.js';
-export * as seHelpers from './helpers/se.js';
-export * as siHelpers from './helpers/si.js';
-export * as skHelpers from './helpers/sk.js';
+export * as itHelpers from './countries/it/helpers.js';
+export * as usHelpers from './countries/us/helpers.js';
+export * as atHelpers from './countries/at/helpers.js';
+export * as beHelpers from './countries/be/helpers.js';
+export * as bgHelpers from './countries/bg/helpers.js';
+export * as chHelpers from './countries/ch/helpers.js';
+export * as cyHelpers from './countries/cy/helpers.js';
+export * as czHelpers from './countries/cz/helpers.js';
+export * as deHelpers from './countries/de/helpers.js';
+export * as dkHelpers from './countries/dk/helpers.js';
+export * as eeHelpers from './countries/ee/helpers.js';
+export * as esHelpers from './countries/es/helpers.js';
+export * as fiHelpers from './countries/fi/helpers.js';
+export * as frHelpers from './countries/fr/helpers.js';
+export * as gbHelpers from './countries/gb/helpers.js';
+export * as grHelpers from './countries/gr/helpers.js';
+export * as hrHelpers from './countries/hr/helpers.js';
+export * as huHelpers from './countries/hu/helpers.js';
+export * as ieHelpers from './countries/ie/helpers.js';
+export * as isHelpers from './countries/is/helpers.js';
+export * as liHelpers from './countries/li/helpers.js';
+export * as ltHelpers from './countries/lt/helpers.js';
+export * as luHelpers from './countries/lu/helpers.js';
+export * as lvHelpers from './countries/lv/helpers.js';
+export * as mtHelpers from './countries/mt/helpers.js';
+export * as nlHelpers from './countries/nl/helpers.js';
+export * as noHelpers from './countries/no/helpers.js';
+export * as plHelpers from './countries/pl/helpers.js';
+export * as ptHelpers from './countries/pt/helpers.js';
+export * as roHelpers from './countries/ro/helpers.js';
+export * as seHelpers from './countries/se/helpers.js';
+export * as siHelpers from './countries/si/helpers.js';
+export * as skHelpers from './countries/sk/helpers.js';
+
 
 // ─── Country Document Definitions ──────────────────────────────────────────
 export * as atDocs from './countries/at/documentTypes/index.js';

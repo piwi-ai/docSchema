@@ -6,15 +6,16 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, dateUS, enumField, objectSchema, arrayOfObjects, ref,
     currency, address,
-} from '../../../helpers/us.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const appraisal: DocumentTypeDef = {
     id: 'doc-appraisal',
     name: 'Appraisal Report',
     description: 'Property appraisal — market value determination for lending',
     references: [
-        ref('USPAP — Uniform Standards of Professional Appraisal Practice', 'https://www.appraisalfoundation.org/imis/TAF/Standards/Appraisal_Standards/Uniform_Standards_of_Professional_Appraisal_Practice/TAF/USPAP.aspx', 'specification'),
-        ref('Fannie Mae Form 1004 (Uniform Residential Appraisal Report)', 'https://singlefamily.fanniemae.com/originating-underwriting/appraisal-valuation', 'specification'),
+        ref('USPAP — Uniform Standards of Professional Appraisal Practice', 'https://www.appraisalfoundation.org/imis/TAF/Standards/Appraisal_Standards/Uniform_Standards_of_Professional_Appraisal_Practice/TAF/USPAP.aspx', ReferenceType.SPECIFICATION),
+        ref('Fannie Mae Form 1004 (Uniform Residential Appraisal Report)', 'https://singlefamily.fanniemae.com/originating-underwriting/appraisal-valuation', ReferenceType.SPECIFICATION),
     ],
     jsonSchema: objectSchema({
         appraiser: text('Appraiser name and license number'),

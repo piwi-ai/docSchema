@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, enumField, objectSchema, ref,
     codiceFiscale, targa, telaio,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const visuraPra: DocumentTypeDef = {
     id: 'doc-visura-pra',
     name: 'Visura PRA',
     description: 'Visura del Pubblico Registro Automobilistico — gravami, fermi, ipoteche',
     references: [
-        ref('ACI — Visura PRA online', 'https://www.aci.it/i-servizi/servizi-online/pra.html', 'documentation'),
+        ref('ACI — Visura PRA online', 'https://www.aci.it/i-servizi/servizi-online/pra.html', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         targa: targa(), telaio: telaio(),

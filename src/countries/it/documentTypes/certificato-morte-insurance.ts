@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, objectSchema, ref,
     nome, cognome, codiceFiscale,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const certificatoMorteInsurance: DocumentTypeDef = {
     id: 'doc-certificato-morte',
     name: 'Certificato di Morte',
     description: 'Certificato di morte — per liquidazione polizza vita caso morte',
     references: [
-        ref('Ministero dell\'Interno — Servizi demografici', 'https://dait.interno.gov.it/servizi-demografici', 'documentation'),
+        ref('Ministero dell\'Interno — Servizi demografici', 'https://dait.interno.gov.it/servizi-demografici', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         defunto: objectSchema({

@@ -7,14 +7,15 @@ import {
     text, date, enumField, objectSchema, ref,
     codiceFiscale,
     STATO_CIVILE_VALUES,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const certificatoMorte: DocumentTypeDef = {
     id: 'doc-morte',
     name: 'Certificato di Morte',
     description: 'Certificato/Estratto che attesta il decesso, richiesto quando il venditore/acquirente è vedovo/a',
     references: [
-        ref('Ministero dell\'Interno — Servizi demografici', 'https://dait.interno.gov.it/servizi-demografici', 'documentation'),
+        ref('Ministero dell\'Interno — Servizi demografici', 'https://dait.interno.gov.it/servizi-demografici', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         nomeDefunto: text('Nome del defunto'),

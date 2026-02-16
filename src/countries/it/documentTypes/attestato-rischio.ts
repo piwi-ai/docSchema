@@ -6,15 +6,16 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, date, enumField, objectSchema, arrayOfObjects, ref,
     codiceFiscale, targa,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const attestatoRischio: DocumentTypeDef = {
     id: 'doc-attestato-rischio',
     name: 'Attestato di Rischio',
     description: 'Attestato di rischio RCA — classe di merito, sinistri pregressi',
     references: [
-        ref('IVASS — Attestato di Rischio', 'https://www.ivass.it/consumatori/sos-assicurati/attestato-rischio/index.html', 'documentation'),
-        ref('Regolamento IVASS n. 9/2015', 'https://www.ivass.it/normativa/nazionale/secondaria-ivass/regolamenti/2015/n9/', 'regulation'),
+        ref('IVASS — Attestato di Rischio', 'https://www.ivass.it/consumatori/sos-assicurati/attestato-rischio/index.html', ReferenceType.DOCUMENTATION),
+        ref('Regolamento IVASS n. 9/2015', 'https://www.ivass.it/normativa/nazionale/secondaria-ivass/regolamenti/2015/n9/', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         compagnia: text('Compagnia assicurativa emittente'),

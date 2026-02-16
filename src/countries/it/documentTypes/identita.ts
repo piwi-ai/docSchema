@@ -6,15 +6,16 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, enumField, objectSchema, ref,
     nome, cognome, codiceFiscale, statoCivile,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const identita: DocumentTypeDef = {
     id: 'doc-identita',
     name: "Documento d'Identità",
     description: 'Documento di riconoscimento (CI, Passaporto, Patente) per identificazione e Antiriciclaggio',
     references: [
-        ref('Carta d\'Identità Elettronica (CIE)', 'https://www.cartaidentita.interno.gov.it/', 'documentation'),
-        ref('Adeguata verifica — D.Lgs. 231/2007', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2007-11-21;231', 'regulation'),
+        ref('Carta d\'Identità Elettronica (CIE)', 'https://www.cartaidentita.interno.gov.it/', ReferenceType.DOCUMENTATION),
+        ref('Adeguata verifica — D.Lgs. 231/2007', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2007-11-21;231', ReferenceType.REGULATION),
     ],
     isArrayExtraction: true,
     jsonSchema: objectSchema({

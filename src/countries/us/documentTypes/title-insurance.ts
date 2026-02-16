@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, dateUS, enumField, objectSchema, ref,
     currency, address,
-} from '../../../helpers/us.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const titleInsurance: DocumentTypeDef = {
     id: 'doc-title-insurance',
     name: 'Title Insurance Policy',
     description: "Title insurance commitment or policy (owner's or lender's)",
     references: [
-        ref('ALTA — Policy Forms', 'https://www.alta.org/policy-forms/', 'specification'),
+        ref('ALTA — Policy Forms', 'https://www.alta.org/policy-forms/', ReferenceType.SPECIFICATION),
     ],
     jsonSchema: objectSchema({
         insurer: text('Title insurance company'),

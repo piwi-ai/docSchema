@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, objectSchema, ref,
     nome, cognome, email,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const contatto: DocumentTypeDef = {
     id: 'doc-contatto',
     name: 'Documento di Contatto',
     description: 'Recapiti e indirizzi del cliente per comunicazioni e notifiche legali',
     references: [
-        ref('ANPR — Anagrafe Nazionale Popolazione Residente', 'https://www.anagrafenazionale.interno.it/', 'documentation'),
+        ref('ANPR — Anagrafe Nazionale Popolazione Residente', 'https://www.anagrafenazionale.interno.it/', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         nome: nome(), cognome: cognome(),

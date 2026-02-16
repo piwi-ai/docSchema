@@ -5,14 +5,15 @@
 import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, date, objectSchema, arrayOfObjects, ref,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const mezziPagamento: DocumentTypeDef = {
     id: 'doc-mezzi-pagamento',
     name: 'Dichiarazione Mezzi di Pagamento',
     description: 'Dichiarazione analitica dei mezzi di pagamento utilizzati nella compravendita (Art. 35 D.Lgs. 223/2006)',
     references: [
-        ref('Art. 35 D.Lgs. 223/2006 — Tracciabilità compravendite', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2006-07-04;223~art35', 'regulation'),
+        ref('Art. 35 D.Lgs. 223/2006 — Tracciabilità compravendite', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2006-07-04;223~art35', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         pagamenti: arrayOfObjects({

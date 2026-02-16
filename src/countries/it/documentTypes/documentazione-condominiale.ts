@@ -5,15 +5,16 @@
 import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, date, enumField, objectSchema, ref,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const documentazioneCondominiale: DocumentTypeDef = {
     id: 'doc-condominiale',
     name: 'Documentazione Condominiale',
     description: 'Dichiarazione dell\'amministratore di condominio sulle spese e regolamento condominiale',
     references: [
-        ref('Art. 1117–1139 Codice Civile — Condominio', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1117', 'regulation'),
-        ref('L. 220/2012 — Riforma del condominio', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2012-12-11;220', 'regulation'),
+        ref('Art. 1117–1139 Codice Civile — Condominio', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.civile:1942-03-16;262~art1117', ReferenceType.REGULATION),
+        ref('L. 220/2012 — Riforma del condominio', 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2012-12-11;220', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         amministratore: text('Nome e cognome o ragione sociale dell\'amministratore'),

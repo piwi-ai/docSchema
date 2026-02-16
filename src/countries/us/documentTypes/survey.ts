@@ -6,15 +6,16 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, dateUS, objectSchema, ref,
     address, parcelNumber,
-} from '../../../helpers/us.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const survey: DocumentTypeDef = {
     id: 'doc-survey',
     name: 'Property Survey / Plat Map',
     description: 'ALTA/NSPS land survey showing boundaries, improvements, and easements',
     references: [
-        ref('ALTA/NSPS Land Title Survey Standards', 'https://www.alta.org/land-survey-standards/', 'specification'),
-        ref('NSPS — National Society of Professional Surveyors', 'https://www.nsps.us.com/', 'documentation'),
+        ref('ALTA/NSPS Land Title Survey Standards', 'https://www.alta.org/land-survey-standards/', ReferenceType.SPECIFICATION),
+        ref('NSPS — National Society of Professional Surveyors', 'https://www.nsps.us.com/', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         surveyor: text('Surveyor name and license number'),

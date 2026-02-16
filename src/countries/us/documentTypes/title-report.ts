@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, dateUS, objectSchema, ref,
     address, parcelNumber,
-} from '../../../helpers/us.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const titleReport: DocumentTypeDef = {
     id: 'doc-title-report',
     name: 'Title Report / Title Search',
     description: 'Preliminary title report or title abstract showing ownership history and encumbrances',
     references: [
-        ref('ALTA — Title Insurance Forms', 'https://www.alta.org/policy-forms/', 'specification'),
+        ref('ALTA — Title Insurance Forms', 'https://www.alta.org/policy-forms/', ReferenceType.SPECIFICATION),
     ],
     jsonSchema: objectSchema({
         titleCompany: text('Title company name'),

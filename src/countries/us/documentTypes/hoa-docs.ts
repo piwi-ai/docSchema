@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, objectSchema, ref,
     currency,
-} from '../../../helpers/us.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const hoaDocs: DocumentTypeDef = {
     id: 'doc-hoa-docs',
     name: 'HOA Documents',
     description: 'Homeowners Association documents — CCRs, bylaws, financials, disclosures',
     references: [
-        ref('CAI — Community Associations Institute', 'https://www.caionline.org/', 'documentation'),
+        ref('CAI — Community Associations Institute', 'https://www.caionline.org/', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         hoaName: text('HOA / community name'),

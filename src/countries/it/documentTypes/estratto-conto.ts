@@ -5,14 +5,15 @@
 import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, num, objectSchema, ref,
-} from '../../../helpers/it.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const estrattoConto: DocumentTypeDef = {
     id: 'doc-estratto-conto',
     name: 'Estratto Conto Bancario',
     description: 'Estratto conto bancario — saldo, movimenti, periodo',
     references: [
-        ref('Banca d\'Italia — Trasparenza bancaria', 'https://www.bancaditalia.it/compiti/vigilanza/normativa/archivio-norme/disposizioni/trasparenza/index.html', 'regulation'),
+        ref('Banca d\'Italia — Trasparenza bancaria', 'https://www.bancaditalia.it/compiti/vigilanza/normativa/archivio-norme/disposizioni/trasparenza/index.html', ReferenceType.REGULATION),
     ],
     jsonSchema: objectSchema({
         banca: text('Nome della banca'),

@@ -6,14 +6,15 @@ import type { DocumentTypeDef } from '../../../types.js';
 import {
     text, dateUS, enumField, objectSchema, ref,
     firstName, lastName, currency, address,
-} from '../../../helpers/us.js';
+} from '../helpers.js';
+import { ReferenceType } from '../../../constants.js';
 
 export const purchaseAgreement: DocumentTypeDef = {
     id: 'doc-purchase-agreement',
     name: 'Purchase Agreement / Contract',
     description: 'Real estate purchase and sale agreement between buyer and seller',
     references: [
-        ref('NAR — Residential Purchase Agreement', 'https://www.nar.realtor/legal', 'documentation'),
+        ref('NAR — Residential Purchase Agreement', 'https://www.nar.realtor/legal', ReferenceType.DOCUMENTATION),
     ],
     jsonSchema: objectSchema({
         seller: objectSchema({
