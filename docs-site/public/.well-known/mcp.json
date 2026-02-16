@@ -1,0 +1,153 @@
+{
+    "name": "DocSchema",
+    "description": "Open standard for AI-readable document extraction schemas. Browse 100+ document types across 33 countries and 5 business verticals.",
+    "url": "https://docschema.piwi.ai",
+    "tools": [
+        {
+            "name": "list_verticals",
+            "description": "List all DocSchema business verticals with their stats (document type count, entity type count, country, and slug identifier).",
+            "readOnly": true
+        },
+        {
+            "name": "get_stats",
+            "description": "Get aggregate statistics for the DocSchema standard: total verticals, document types, entity types, and defined fields.",
+            "readOnly": true
+        },
+        {
+            "name": "get_document_types",
+            "description": "Get all document type definitions for a specific vertical. Pass the vertical slug.",
+            "readOnly": true,
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "slug": {
+                        "type": "string",
+                        "description": "Vertical slug identifier, e.g. \"real-estate-it\"",
+                        "enum": [
+                            "accountant-it",
+                            "car-dealership-it",
+                            "insurance-it",
+                            "real-estate-it",
+                            "real-estate-us"
+                        ]
+                    }
+                },
+                "required": ["slug"]
+            }
+        },
+        {
+            "name": "get_document_schema",
+            "description": "Get the complete JSON Schema for a specific document type within a vertical.",
+            "readOnly": true,
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "slug": {
+                        "type": "string",
+                        "description": "Vertical slug identifier"
+                    },
+                    "docTypeId": {
+                        "type": "string",
+                        "description": "Document type ID, e.g. \"doc-fattura\""
+                    }
+                },
+                "required": ["slug", "docTypeId"]
+            }
+        },
+        {
+            "name": "get_entity_types",
+            "description": "Get all entity type definitions for a vertical including data sources, field mappings, and conditional requirements.",
+            "readOnly": true,
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "slug": {
+                        "type": "string",
+                        "description": "Vertical slug identifier"
+                    }
+                },
+                "required": ["slug"]
+            }
+        },
+        {
+            "name": "get_full_config",
+            "description": "Get the complete raw DocSchema configuration JSON for a vertical.",
+            "readOnly": true,
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "slug": {
+                        "type": "string",
+                        "description": "Vertical slug identifier"
+                    }
+                },
+                "required": ["slug"]
+            }
+        },
+        {
+            "name": "list_countries",
+            "description": "List all countries in the DocSchema document library with document counts, country codes, names, and flags.",
+            "readOnly": true
+        },
+        {
+            "name": "get_documents_by_country",
+            "description": "Get all document type schemas for a specific country. Pass a 2-letter ISO country code.",
+            "readOnly": true,
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "countryCode": {
+                        "type": "string",
+                        "description": "ISO 3166-1 alpha-2 country code, e.g. \"it\", \"us\", \"de\""
+                    }
+                },
+                "required": ["countryCode"]
+            }
+        },
+        {
+            "name": "search_documents",
+            "description": "Search for document types across all countries by name, description, or ID.",
+            "readOnly": true,
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Search query to match against document name, description, or ID"
+                    }
+                },
+                "required": ["query"]
+            }
+        },
+        {
+            "name": "get_document_detail",
+            "description": "Get the complete JSON Schema for a specific document from the document library.",
+            "readOnly": true,
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "countryCode": {
+                        "type": "string",
+                        "description": "ISO 3166-1 alpha-2 country code"
+                    },
+                    "docId": {
+                        "type": "string",
+                        "description": "Document type ID"
+                    }
+                },
+                "required": ["countryCode", "docId"]
+            }
+        },
+        {
+            "name": "get_doc_library_stats",
+            "description": "Get aggregate statistics for the document library: total countries and total document schemas.",
+            "readOnly": true
+        }
+    ],
+    "links": {
+        "specification": "https://docschema.piwi.ai/SPECIFICATION.md",
+        "github": "https://github.com/piwi-ai/business-schema-configurations",
+        "npm": "https://www.npmjs.com/package/@piwi.ai/business-schema-configurations",
+        "llmstxt": "https://docschema.piwi.ai/llms.txt"
+    }
+}

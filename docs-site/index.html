@@ -2,13 +2,106 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <link rel="icon" type="image/svg+xml" href="/docSchema/favicon.svg" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- ── Primary SEO ──────────────────────────────────────── -->
+        <title>DocSchema — Open Standard for AI-Readable Document Schemas</title>
         <meta
             name="description"
-            content="DocSchema — An open standard for AI-readable document schemas. Browse document types, entity types, and extraction schemas for any business vertical."
+            content="DocSchema is an open standard for AI-readable JSON schemas. Browse 100+ document types across 33 countries. WebMCP-enabled for direct AI agent integration."
         />
-        <title>DocSchema — AI Document Schema Standard</title>
+        <meta
+            name="keywords"
+            content="DocSchema, AI document schema, JSON Schema, document extraction, MCP, WebMCP, AI agents, IDP, intelligent document processing, LLM, open standard"
+        />
+        <meta name="author" content="PIWI AI" />
+        <link rel="canonical" href="https://docschema.piwi.ai/" />
+
+        <!-- ── Open Graph (Social + AI Crawlers) ────────────────── -->
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="DocSchema — AI-Readable Document Schemas" />
+        <meta
+            property="og:description"
+            content="Open standard for AI document extraction schemas. 100+ document types, 33 countries, 5 business verticals. WebMCP tools available for AI agents."
+        />
+        <meta property="og:url" content="https://docschema.piwi.ai/" />
+        <meta property="og:site_name" content="DocSchema" />
+        <meta property="og:locale" content="en_US" />
+
+        <!-- ── Twitter Card ─────────────────────────────────────── -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="DocSchema — AI-Readable Document Schemas" />
+        <meta
+            name="twitter:description"
+            content="Open standard for AI document extraction. 100+ schemas, 33 countries, WebMCP-enabled."
+        />
+
+        <!-- ── AI/GEO Discovery ─────────────────────────────────── -->
+        <link rel="mcp" href="/.well-known/mcp.json" type="application/json" />
+        <link rel="llms-txt" href="/llms.txt" type="text/plain" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+        <meta name="ai-content-type" content="structured-data-registry" />
+
+        <!-- ── JSON-LD Structured Data ──────────────────────────── -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "WebApplication",
+                "name": "DocSchema",
+                "url": "https://docschema.piwi.ai",
+                "description": "An open standard for AI-readable JSON schemas that define document types, entity types, conditional requirements, and workflows for Intelligent Document Processing.",
+                "applicationCategory": "DeveloperApplication",
+                "operatingSystem": "Any",
+                "isAccessibleForFree": true,
+                "creator": {
+                    "@type": "Organization",
+                    "name": "PIWI AI",
+                    "url": "https://piwi.ai"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                },
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://docschema.piwi.ai/documents?q={search_term}",
+                    "query-input": "required name=search_term"
+                }
+            }
+        </script>
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Dataset",
+                "name": "DocSchema Document Library",
+                "description": "100+ AI-readable JSON schemas for business documents across 33 countries including invoices, contracts, identity documents, tax forms, and more.",
+                "url": "https://docschema.piwi.ai/documents",
+                "license": "https://opensource.org/licenses/MIT",
+                "creator": {
+                    "@type": "Organization",
+                    "name": "PIWI AI"
+                },
+                "distribution": [
+                    {
+                        "@type": "DataDownload",
+                        "encodingFormat": "application/json",
+                        "contentUrl": "https://www.npmjs.com/package/@piwi.ai/business-schema-configurations"
+                    }
+                ],
+                "keywords": [
+                    "document schema",
+                    "JSON Schema",
+                    "AI extraction",
+                    "IDP",
+                    "document types",
+                    "entity types"
+                ]
+            }
+        </script>
+
+        <!-- ── Fonts ────────────────────────────────────────────── -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link

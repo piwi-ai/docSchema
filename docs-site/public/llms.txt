@@ -1,0 +1,33 @@
+# DocSchema
+
+> DocSchema is an open standard for AI-readable JSON schemas that define document types, entity types, conditional requirements, and workflows for Intelligent Document Processing (IDP). It powers the PIWI platform and is designed for community adoption.
+
+Important notes:
+- DocSchema defines four core primitives: Document Types, Entity Types, Conditional Requirements, and Workflows
+- All schemas are validated against the `docschema.schema.json` meta-schema
+- Configurations are organized by business vertical (e.g. Real Estate, Insurance) and country
+- The standard supports 33 countries with 100+ document type schemas
+- WebMCP tools are available on this site for AI agents to programmatically query all schemas
+
+## Specification
+
+- [DocSchema Specification](https://docschema.piwi.ai/SPECIFICATION.md): Full technical specification of the four core primitives
+- [Contributing Guide](https://docschema.piwi.ai/CONTRIBUTING.md): How to contribute new verticals, document types, and entity types
+
+## Business Verticals
+
+- [Accountant Italy](https://docschema.piwi.ai/verticals?slug=accountant-it): Italian accountant schemas with invoices, tax forms, and fiscal documents
+- [Car Dealership Italy](https://docschema.piwi.ai/verticals?slug=car-dealership-it): Italian car dealership schemas for vehicle registration, insurance, and sales
+- [Insurance Italy](https://docschema.piwi.ai/verticals?slug=insurance-it): Italian insurance schemas for policies, claims, and compliance
+- [Real Estate Italy](https://docschema.piwi.ai/verticals?slug=real-estate-it): Italian real estate schemas for contracts, cadastral data, and property records
+- [Real Estate USA](https://docschema.piwi.ai/verticals?slug=real-estate-us): US real estate schemas for deeds, titles, and closing documents
+
+## Document Library
+
+- [Document Library](https://docschema.piwi.ai/documents): Browse all 100+ document schemas organized by country
+- [GitHub Repository](https://github.com/piwi-ai/business-schema-configurations): Source code and JSON configurations
+
+## Optional
+
+- [npm Package](https://www.npmjs.com/package/@piwi.ai/business-schema-configurations): Install via npm for programmatic access
+- [PIWI Platform](https://piwi.ai): The IDP platform powered by DocSchema

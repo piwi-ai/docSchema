@@ -15,6 +15,7 @@ import {
     Check,
 } from 'lucide-react';
 import './Documents.css';
+import './Explorer.css';
 
 /* ── Document Card ─────────────────────────────────────────── */
 function DocCard({ doc }: { doc: DocTypeDef }) {

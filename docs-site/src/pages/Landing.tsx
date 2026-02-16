@@ -1,5 +1,19 @@
 import { Link } from 'react-router-dom';
-import { FileText, Database, GitBranch, ArrowRight, Sparkles, Globe, Boxes } from 'lucide-react';
+import {
+    FileText,
+    Database,
+    GitBranch,
+    ArrowRight,
+    Sparkles,
+    Globe,
+    Boxes,
+    Bot,
+    Cpu,
+    Search,
+    BookOpen,
+    Zap,
+    ExternalLink,
+} from 'lucide-react';
 import { getStats } from '../data/configs';
 import { getDocLibraryStats } from '../data/documents';
 import './Landing.css';
@@ -56,6 +70,24 @@ const principles = [
     },
 ];
 
+const webMcpTools = [
+    { icon: <Boxes size={18} />, name: 'list_verticals', desc: 'Browse all business verticals' },
+    { icon: <Zap size={18} />, name: 'get_stats', desc: 'Aggregate schema statistics' },
+    { icon: <FileText size={18} />, name: 'get_document_types', desc: 'Doc types per vertical' },
+    { icon: <BookOpen size={18} />, name: 'get_document_schema', desc: 'Full JSON Schema for a doc' },
+    { icon: <Database size={18} />, name: 'get_entity_types', desc: 'Entity types and mappings' },
+    { icon: <Cpu size={18} />, name: 'get_full_config', desc: 'Complete vertical config' },
+    { icon: <Globe size={18} />, name: 'list_countries', desc: '33 countries with doc counts' },
+    {
+        icon: <FileText size={18} />,
+        name: 'get_documents_by_country',
+        desc: 'All docs for a country',
+    },
+    { icon: <Search size={18} />, name: 'search_documents', desc: 'Search across all schemas' },
+    { icon: <BookOpen size={18} />, name: 'get_document_detail', desc: 'Full schema by country + ID' },
+    { icon: <Zap size={18} />, name: 'get_doc_library_stats', desc: 'Library-wide statistics' },
+];
+
 export default function Landing() {
     return (
         <div className="landing">
@@ -110,6 +142,95 @@ export default function Landing() {
                             <span className="hero__stat-label">Fields Defined</span>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            {/* ── WebMCP / AI Integration ─────────────────── */}
+            <section className="webmcp container" id="webmcp">
+                <div className="webmcp__header">
+                    <div className="webmcp__icon-wrap">
+                        <Bot size={32} />
+                    </div>
+                    <div className="webmcp__badge badge badge--cyan">WebMCP Enabled</div>
+                    <h2 className="features__heading">Built for AI Agents</h2>
+                    <p className="features__subheading">
+                        This site exposes <strong>11 structured tools</strong> via the{' '}
+                        <a
+                            href="https://webmachinelearning.github.io/webmcp/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="webmcp__link"
+                        >
+                            WebMCP standard
+                        </a>
+                        . AI assistants can query schemas, search documents, and browse configurations
+                        programmatically — no scraping needed.
+                    </p>
+                </div>
+
+                {/* Discovery endpoints */}
+                <div className="webmcp__discovery stagger">
+                    <a
+                        href="/.well-known/mcp.json"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="webmcp__endpoint glass-card"
+                    >
+                        <div className="webmcp__endpoint-icon webmcp__endpoint-icon--purple">
+                            <Cpu size={20} />
+                        </div>
+                        <div className="webmcp__endpoint-info">
+                            <code className="webmcp__endpoint-path">
+                                /.well-known/mcp.json
+                            </code>
+                            <span className="webmcp__endpoint-desc">
+                                Machine-readable tool catalog for AI agents
+                            </span>
+                        </div>
+                        <ExternalLink size={14} className="webmcp__endpoint-arrow" />
+                    </a>
+                    <a
+                        href="/llms.txt"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="webmcp__endpoint glass-card"
+                    >
+                        <div className="webmcp__endpoint-icon webmcp__endpoint-icon--blue">
+                            <BookOpen size={20} />
+                        </div>
+                        <div className="webmcp__endpoint-info">
+                            <code className="webmcp__endpoint-path">/llms.txt</code>
+                            <span className="webmcp__endpoint-desc">
+                                LLM-optimized site overview with resource links
+                            </span>
+                        </div>
+                        <ExternalLink size={14} className="webmcp__endpoint-arrow" />
+                    </a>
+                    <div className="webmcp__endpoint glass-card">
+                        <div className="webmcp__endpoint-icon webmcp__endpoint-icon--cyan">
+                            <Bot size={20} />
+                        </div>
+                        <div className="webmcp__endpoint-info">
+                            <code className="webmcp__endpoint-path">navigator.modelContext</code>
+                            <span className="webmcp__endpoint-desc">
+                                Browser-native WebMCP API with 11 registered tools
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Tool grid */}
+                <h3 className="webmcp__tools-heading">Available Tools</h3>
+                <div className="webmcp__tools stagger">
+                    {webMcpTools.map((t) => (
+                        <div key={t.name} className="webmcp__tool glass-card">
+                            <div className="webmcp__tool-icon">{t.icon}</div>
+                            <div>
+                                <code className="webmcp__tool-name">{t.name}</code>
+                                <p className="webmcp__tool-desc">{t.desc}</p>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </section>
 
