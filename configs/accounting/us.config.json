@@ -1,0 +1,871 @@
+{
+  "id": "ACCOUNTING-US-DEFAULT",
+  "name": "US Accounting",
+  "description": "Document processing for US accounting and bookkeeping",
+  "schemaVersion": 1,
+  "documentTypes": [
+    {
+      "id": "doc-1099",
+      "name": "1099 Form",
+      "description": "IRS Form 1099 (NEC/MISC) - Non-Employee Compensation or Miscellaneous Income",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "formType": {
+            "type": "string",
+            "description": "Form 1099 type",
+            "enum": [
+              "NEC",
+              "MISC",
+              "INT",
+              "DIV",
+              null
+            ],
+            "nullable": true
+          },
+          "year": {
+            "type": "number",
+            "description": "Calendar year"
+          },
+          "payerName": {
+            "type": "string",
+            "description": "Payer's name"
+          },
+          "payerAddress": {
+            "type": "string",
+            "description": "Payer's address"
+          },
+          "payerTIN": {
+            "type": "string",
+            "description": "Payer's TIN (EIN or SSN)"
+          },
+          "recipientName": {
+            "type": "string",
+            "description": "Recipient's name"
+          },
+          "recipientAddress": {
+            "type": "string",
+            "description": "Recipient's address"
+          },
+          "recipientTIN": {
+            "type": "string",
+            "description": "Recipient's TIN (SSN or EIN)"
+          },
+          "accountNumber": {
+            "type": "string",
+            "description": "Account number (optional)"
+          },
+          "nonEmployeeCompensation": {
+            "type": "number",
+            "description": "Non-employee compensation (Box 1 of 1099-NEC) (USD, numbers only, no dollar sign)"
+          },
+          "federalTaxWithheld": {
+            "type": "number",
+            "description": "Federal income tax withheld (Box 4) (USD, numbers only, no dollar sign)"
+          },
+          "stateTaxWithheld": {
+            "type": "number",
+            "description": "State tax withheld (Box 5) (USD, numbers only, no dollar sign)"
+          },
+          "stateIncome": {
+            "type": "number",
+            "description": "State income (Box 7) (USD, numbers only, no dollar sign)"
+          },
+          "state": {
+            "type": "string",
+            "description": "State abbreviation (Box 6)"
+          },
+          "payerStateNo": {
+            "type": "string",
+            "description": "Payer's state no (Box 6)"
+          }
+        },
+        "required": [
+          "formType",
+          "year",
+          "payerName",
+          "recipientName"
+        ]
+      }
+    },
+    {
+      "id": "doc-bank-statement",
+      "name": "Bank Statement",
+      "description": "Monthly statement of account activity",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "bankName": {
+            "type": "string",
+            "description": "Name of the bank/financial institution"
+          },
+          "accountNumber": {
+            "type": "string",
+            "description": "Account number (masked or full)"
+          },
+          "accountHolderName": {
+            "type": "string",
+            "description": "Name of the account holder"
+          },
+          "statementDate": {
+            "type": "string",
+            "description": "Statement generation date",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+          },
+          "periodStart": {
+            "type": "string",
+            "description": "Statement period start date",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+          },
+          "periodEnd": {
+            "type": "string",
+            "description": "Statement period end date",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+          },
+          "openingBalance": {
+            "type": "number",
+            "description": "Opening balance (USD, numbers only, no dollar sign)"
+          },
+          "closingBalance": {
+            "type": "number",
+            "description": "Closing balance (USD, numbers only, no dollar sign)"
+          },
+          "totalDeposits": {
+            "type": "number",
+            "description": "Total amount of deposits/credits (USD, numbers only, no dollar sign)"
+          },
+          "totalWithdrawals": {
+            "type": "number",
+            "description": "Total amount of withdrawals/debits (USD, numbers only, no dollar sign)"
+          },
+          "transactions": {
+            "type": "array",
+            "description": "List of transactions",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "description": "Transaction date",
+                  "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Transaction description"
+                },
+                "amount": {
+                  "type": "number",
+                  "description": "Transaction amount (USD, numbers only, no dollar sign)"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Transaction type",
+                  "enum": [
+                    "credit",
+                    "debit",
+                    null
+                  ],
+                  "nullable": true
+                },
+                "balance": {
+                  "type": "number",
+                  "description": "Balance after transaction (USD, numbers only, no dollar sign)"
+                }
+              },
+              "required": [
+                "date",
+                "description",
+                "amount"
+              ]
+            }
+          }
+        },
+        "required": [
+          "bankName",
+          "periodEnd",
+          "closingBalance"
+        ]
+      }
+    },
+    {
+      "id": "doc-contact",
+      "name": "Contact Information",
+      "description": "Phone, email, and mailing address for a party",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "First name (given name)"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Last name (surname / family name)"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Primary phone number"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Email address"
+          },
+          "mailingAddress": {
+            "type": "string",
+            "description": "Mailing address (if different from residential)"
+          },
+          "currentAddress": {
+            "type": "string",
+            "description": "Current residential address"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "phone",
+          "email"
+        ]
+      }
+    },
+    {
+      "id": "doc-invoice",
+      "name": "Invoice",
+      "description": "Commercial invoice requesting payment for goods or services",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "invoiceNumber": {
+            "type": "string",
+            "description": "Invoice number (unique identifier)"
+          },
+          "invoiceDate": {
+            "type": "string",
+            "description": "Invoice issue date",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+          },
+          "dueDate": {
+            "type": "string",
+            "description": "Payment due date",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+          },
+          "vendorName": {
+            "type": "string",
+            "description": "Name of the vendor/supplier issuing the invoice"
+          },
+          "vendorAddress": {
+            "type": "string",
+            "description": "Vendor address"
+          },
+          "customerName": {
+            "type": "string",
+            "description": "Name of the customer/recipient"
+          },
+          "customerAddress": {
+            "type": "string",
+            "description": "Customer address"
+          },
+          "subtotal": {
+            "type": "number",
+            "description": "Subtotal amount before tax (USD, numbers only, no dollar sign)"
+          },
+          "taxAmount": {
+            "type": "number",
+            "description": "Total tax amount (USD, numbers only, no dollar sign)"
+          },
+          "totalAmount": {
+            "type": "number",
+            "description": "Total amount due (USD, numbers only, no dollar sign)"
+          },
+          "paymentStatus": {
+            "type": "string",
+            "description": "Payment status",
+            "enum": [
+              "paid",
+              "unpaid",
+              "overdue",
+              "partially_paid",
+              null
+            ],
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "description": "Line items listed on the invoice",
+            "items": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "description": "Item or service description"
+                },
+                "quantity": {
+                  "type": "number",
+                  "description": "Quantity"
+                },
+                "unitPrice": {
+                  "type": "number",
+                  "description": "Unit price (USD, numbers only, no dollar sign)"
+                },
+                "amount": {
+                  "type": "number",
+                  "description": "Line item total amount (USD, numbers only, no dollar sign)"
+                }
+              },
+              "required": [
+                "description",
+                "amount"
+              ]
+            }
+          }
+        },
+        "required": [
+          "invoiceNumber",
+          "invoiceDate",
+          "totalAmount",
+          "vendorName"
+        ]
+      }
+    },
+    {
+      "id": "doc-paystub",
+      "name": "Paystub",
+      "description": "Statement of earnings and deductions",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "employerName": {
+            "type": "string",
+            "description": "Name of the employer"
+          },
+          "employerAddress": {
+            "type": "string",
+            "description": "Employer address"
+          },
+          "employeeName": {
+            "type": "string",
+            "description": "Name of the employee"
+          },
+          "employeeAddress": {
+            "type": "string",
+            "description": "Employee address"
+          },
+          "employeeId": {
+            "type": "string",
+            "description": "Employee ID"
+          },
+          "ssn": {
+            "type": "string",
+            "description": "Social Security Number — 9 digits, format XXX-XX-XXXX (extract with dashes)",
+            "pattern": "^\\d{3}-\\d{2}-\\d{4}$"
+          },
+          "payPeriodStart": {
+            "type": "string",
+            "description": "Start date of the pay period",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+          },
+          "payPeriodEnd": {
+            "type": "string",
+            "description": "End date of the pay period",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+          },
+          "payDate": {
+            "type": "string",
+            "description": "Payment date",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+          },
+          "grossPay": {
+            "type": "number",
+            "description": "Total gross pay (before deductions) (USD, numbers only, no dollar sign)"
+          },
+          "netPay": {
+            "type": "number",
+            "description": "Total net pay (take-home) (USD, numbers only, no dollar sign)"
+          },
+          "hoursWorked": {
+            "type": "number",
+            "description": "Total hours worked"
+          },
+          "ytdGrossPay": {
+            "type": "number",
+            "description": "Year-to-date gross pay (USD, numbers only, no dollar sign)"
+          },
+          "deductions": {
+            "type": "array",
+            "description": "List of deductions",
+            "items": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "description": "Deduction description (e.g., Federal Tax, Medicare)"
+                },
+                "currentAmount": {
+                  "type": "number",
+                  "description": "Amount deducted this period (USD, numbers only, no dollar sign)"
+                },
+                "ytdAmount": {
+                  "type": "number",
+                  "description": "Year-to-date deduction (USD, numbers only, no dollar sign)"
+                }
+              },
+              "required": [
+                "description",
+                "currentAmount"
+              ]
+            }
+          }
+        },
+        "required": [
+          "employerName",
+          "payDate",
+          "grossPay",
+          "netPay"
+        ]
+      }
+    },
+    {
+      "id": "doc-receipt",
+      "name": "Receipt",
+      "description": "Proof of payment for goods or services",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "receiptNumber": {
+            "type": "string",
+            "description": "Receipt identifier"
+          },
+          "date": {
+            "type": "string",
+            "description": "Date of transaction",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+          },
+          "merchantName": {
+            "type": "string",
+            "description": "Name of the merchant/store"
+          },
+          "merchantAddress": {
+            "type": "string",
+            "description": "Merchant address"
+          },
+          "paymentMethod": {
+            "type": "string",
+            "description": "Payment method used",
+            "enum": [
+              "credit_card",
+              "cash",
+              "debit_card",
+              "check",
+              "digital_wallet",
+              null
+            ],
+            "nullable": true
+          },
+          "subtotal": {
+            "type": "number",
+            "description": "Subtotal amount (USD, numbers only, no dollar sign)"
+          },
+          "tax": {
+            "type": "number",
+            "description": "Tax amount (USD, numbers only, no dollar sign)"
+          },
+          "total": {
+            "type": "number",
+            "description": "Total amount paid (USD, numbers only, no dollar sign)"
+          },
+          "items": {
+            "type": "array",
+            "description": "Items purchased",
+            "items": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "description": "Item description"
+                },
+                "price": {
+                  "type": "number",
+                  "description": "Item price (USD, numbers only, no dollar sign)"
+                },
+                "quantity": {
+                  "type": "number",
+                  "description": "Quantity"
+                }
+              },
+              "required": [
+                "description",
+                "price"
+              ]
+            }
+          }
+        },
+        "required": [
+          "date",
+          "merchantName",
+          "total"
+        ]
+      }
+    },
+    {
+      "id": "doc-w2",
+      "name": "W-2 Form",
+      "description": "Wage and Tax Statement",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "taxYear": {
+            "type": "number",
+            "description": "Tax year (e.g. 2023)"
+          },
+          "employerId": {
+            "type": "string",
+            "description": "Employer Identification Number (EIN)"
+          },
+          "employerName": {
+            "type": "string",
+            "description": "Employer name"
+          },
+          "employerAddress": {
+            "type": "string",
+            "description": "Employer address"
+          },
+          "controlNumber": {
+            "type": "string",
+            "description": "Control number"
+          },
+          "employeeSSN": {
+            "type": "string",
+            "description": "Social Security Number — 9 digits, format XXX-XX-XXXX (extract with dashes)",
+            "pattern": "^\\d{3}-\\d{2}-\\d{4}$"
+          },
+          "employeeName": {
+            "type": "string",
+            "description": "Employee full name"
+          },
+          "employeeAddress": {
+            "type": "string",
+            "description": "Employee address"
+          },
+          "wages": {
+            "type": "number",
+            "description": "Wages, tips, other compensation (Box 1) (USD, numbers only, no dollar sign)"
+          },
+          "federalIncomeTax": {
+            "type": "number",
+            "description": "Federal income tax withheld (Box 2) (USD, numbers only, no dollar sign)"
+          },
+          "socialSecurityWages": {
+            "type": "number",
+            "description": "Social security wages (Box 3) (USD, numbers only, no dollar sign)"
+          },
+          "socialSecurityTax": {
+            "type": "number",
+            "description": "Social security tax withheld (Box 4) (USD, numbers only, no dollar sign)"
+          },
+          "medicareWages": {
+            "type": "number",
+            "description": "Medicare wages and tips (Box 5) (USD, numbers only, no dollar sign)"
+          },
+          "medicareTax": {
+            "type": "number",
+            "description": "Medicare tax withheld (Box 6) (USD, numbers only, no dollar sign)"
+          },
+          "socialSecurityTips": {
+            "type": "number",
+            "description": "Social security tips (Box 7) (USD, numbers only, no dollar sign)"
+          },
+          "allocatedTips": {
+            "type": "number",
+            "description": "Allocated tips (Box 8) (USD, numbers only, no dollar sign)"
+          },
+          "state": {
+            "type": "string",
+            "description": "State abbreviation (Box 15)"
+          },
+          "stateEmployerId": {
+            "type": "string",
+            "description": "Employer state ID number (Box 15)"
+          },
+          "stateWages": {
+            "type": "number",
+            "description": "State wages (Box 16) (USD, numbers only, no dollar sign)"
+          },
+          "stateTax": {
+            "type": "number",
+            "description": "State income tax (Box 17) (USD, numbers only, no dollar sign)"
+          }
+        },
+        "required": [
+          "taxYear",
+          "employerName",
+          "wages",
+          "federalIncomeTax"
+        ]
+      }
+    }
+  ],
+  "entityTypes": [
+    {
+      "id": "entity-vendor",
+      "name": "Vendor",
+      "icon": "briefcase",
+      "color": "#f97316",
+      "displayOrder": 0,
+      "fieldOrder": [
+        "vendorName",
+        "address",
+        "taxId",
+        "phone",
+        "email"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-invoice",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "vendorName",
+              "targetField": "vendorName",
+              "matchFields": [
+                {
+                  "field": "vendorName",
+                  "fuzzyThreshold": 0.1
+                }
+              ]
+            },
+            {
+              "sourceField": "vendorAddress",
+              "targetField": "address",
+              "matchFields": [
+                {
+                  "field": "address",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-1099",
+          "enabled": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "payerName",
+              "targetField": "vendorName",
+              "matchFields": [
+                {
+                  "field": "vendorName",
+                  "fuzzyThreshold": 0.1
+                }
+              ]
+            },
+            {
+              "sourceField": "payerAddress",
+              "targetField": "address",
+              "matchFields": [
+                {
+                  "field": "address",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "payerTIN",
+              "targetField": "taxId",
+              "matchFields": [
+                {
+                  "field": "taxId",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-receipt",
+          "enabled": true,
+          "fieldMappings": [
+            {
+              "sourceField": "merchantName",
+              "targetField": "vendorName",
+              "matchFields": [
+                {
+                  "field": "vendorName",
+                  "fuzzyThreshold": 0.1
+                }
+              ]
+            },
+            {
+              "sourceField": "merchantAddress",
+              "targetField": "address",
+              "matchFields": [
+                {
+                  "field": "address",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": []
+    },
+    {
+      "id": "entity-employee",
+      "name": "Employee",
+      "icon": "user",
+      "color": "#3b82f6",
+      "displayOrder": 1,
+      "fieldOrder": [
+        "fullName",
+        "ssn",
+        "address",
+        "idNumber"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-w2",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "employeeName",
+              "targetField": "fullName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "employeeSSN",
+              "targetField": "ssn",
+              "matchFields": [
+                {
+                  "field": "taxId",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "employeeAddress",
+              "targetField": "address",
+              "matchFields": [
+                {
+                  "field": "address",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-paystub",
+          "enabled": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "employeeName",
+              "targetField": "fullName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            },
+            {
+              "sourceField": "ssn",
+              "targetField": "ssn",
+              "matchFields": [
+                {
+                  "field": "taxId",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "employeeAddress",
+              "targetField": "address",
+              "matchFields": [
+                {
+                  "field": "address",
+                  "fuzzyThreshold": 0.3
+                }
+              ]
+            },
+            {
+              "sourceField": "employeeId",
+              "targetField": "idNumber"
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": []
+    },
+    {
+      "id": "entity-bank-account",
+      "name": "Bank Account",
+      "icon": "credit-card",
+      "color": "#10b981",
+      "displayOrder": 2,
+      "fieldOrder": [
+        "bankName",
+        "accountNumber",
+        "accountHolderName"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-bank-statement",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "bankName",
+              "targetField": "bankName"
+            },
+            {
+              "sourceField": "accountNumber",
+              "targetField": "accountNumber",
+              "matchFields": [
+                {
+                  "field": "accountNumber",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "accountHolderName",
+              "targetField": "accountHolderName",
+              "matchFields": [
+                {
+                  "field": "firstName",
+                  "fuzzyThreshold": 0.2
+                },
+                {
+                  "field": "lastName",
+                  "fuzzyThreshold": 0.2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": []
+    }
+  ]
+}

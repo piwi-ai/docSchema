@@ -1,0 +1,677 @@
+{
+  "id": "LOGISTICS-US-DEFAULT",
+  "name": "US Logistics",
+  "description": "Document processing for US logistics and supply chain",
+  "schemaVersion": 1,
+  "documentTypes": [
+    {
+      "id": "doc-bill-of-lading",
+      "name": "Bill of Lading",
+      "description": "A legal document between a shipper and a carrier detailing the type, quantity, and destination of goods.",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "bolNumber": {
+            "type": "string",
+            "description": "Bill of Lading Number (B/L No.)"
+          },
+          "date": {
+            "type": "string",
+            "description": "Date of issue",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+          },
+          "shipperName": {
+            "type": "string",
+            "description": "Shipper/Exporter name"
+          },
+          "shipperAddress": {
+            "type": "string",
+            "description": "Shipper address"
+          },
+          "consigneeName": {
+            "type": "string",
+            "description": "Consignee/Receiver name"
+          },
+          "consigneeAddress": {
+            "type": "string",
+            "description": "Consignee address"
+          },
+          "carrierName": {
+            "type": "string",
+            "description": "Carrier/Transporter name"
+          },
+          "carrierSCAC": {
+            "type": "string",
+            "description": "Standard Carrier Alpha Code (SCAC)"
+          },
+          "portOfLoading": {
+            "type": "string",
+            "description": "Port of Loading"
+          },
+          "portOfDischarge": {
+            "type": "string",
+            "description": "Port of Discharge"
+          },
+          "vesselName": {
+            "type": "string",
+            "description": "Vessel/Vehicle name"
+          },
+          "voyageNumber": {
+            "type": "string",
+            "description": "Voyage/Trip number"
+          },
+          "freightTerms": {
+            "type": "string",
+            "description": "Freight payment terms",
+            "enum": [
+              "prepaid",
+              "collect",
+              "third_party",
+              null
+            ],
+            "nullable": true
+          },
+          "totalWeight": {
+            "type": "number",
+            "description": "Total Gross Weight"
+          },
+          "weightUnit": {
+            "type": "string",
+            "description": "Weight unit",
+            "enum": [
+              "kg",
+              "lb",
+              null
+            ],
+            "nullable": true
+          },
+          "goodsDescription": {
+            "type": "array",
+            "description": "List of goods being transported",
+            "items": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "description": "Description of goods"
+                },
+                "quantity": {
+                  "type": "number",
+                  "description": "Quantity/Packages"
+                },
+                "weight": {
+                  "type": "number",
+                  "description": "Weight of item"
+                },
+                "dimensions": {
+                  "type": "string",
+                  "description": "Dimensions (L x W x H)"
+                }
+              },
+              "required": [
+                "description",
+                "quantity"
+              ]
+            }
+          }
+        },
+        "required": [
+          "bolNumber",
+          "shipperName",
+          "consigneeName",
+          "carrierName"
+        ]
+      }
+    },
+    {
+      "id": "doc-contract",
+      "name": "Contract",
+      "description": "A legally binding agreement between parties.",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "contractTitle": {
+            "type": "string",
+            "description": "Title of the contract/agreement"
+          },
+          "effectiveDate": {
+            "type": "string",
+            "description": "Date the contract becomes effective",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+          },
+          "expirationDate": {
+            "type": "string",
+            "description": "Date the contract expires",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+          },
+          "partyOneName": {
+            "type": "string",
+            "description": "Name of the first party (e.g., Service Provider, Seller)"
+          },
+          "partyOneAddress": {
+            "type": "string",
+            "description": "Address of the first party"
+          },
+          "partyTwoName": {
+            "type": "string",
+            "description": "Name of the second party (e.g., Client, Buyer)"
+          },
+          "partyTwoAddress": {
+            "type": "string",
+            "description": "Address of the second party"
+          },
+          "contractValue": {
+            "type": "number",
+            "description": "Total value of the contract (USD, numbers only, no dollar sign)"
+          },
+          "governingLaw": {
+            "type": "string",
+            "description": "State or jurisdiction governing the contract"
+          },
+          "signatures": {
+            "type": "array",
+            "description": "Signatures present on the document",
+            "items": {
+              "type": "object",
+              "properties": {
+                "signerName": {
+                  "type": "string",
+                  "description": "Name of the person signing"
+                },
+                "signerTitle": {
+                  "type": "string",
+                  "description": "Title of the person signing"
+                },
+                "signatureDate": {
+                  "type": "string",
+                  "description": "Date of signature",
+                  "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+                }
+              },
+              "required": [
+                "signerName"
+              ]
+            }
+          }
+        },
+        "required": [
+          "contractTitle",
+          "partyOneName",
+          "partyTwoName",
+          "effectiveDate"
+        ]
+      }
+    },
+    {
+      "id": "doc-invoice",
+      "name": "Invoice",
+      "description": "Commercial invoice requesting payment for goods or services",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "invoiceNumber": {
+            "type": "string",
+            "description": "Invoice number (unique identifier)"
+          },
+          "invoiceDate": {
+            "type": "string",
+            "description": "Invoice issue date",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+          },
+          "dueDate": {
+            "type": "string",
+            "description": "Payment due date",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+          },
+          "vendorName": {
+            "type": "string",
+            "description": "Name of the vendor/supplier issuing the invoice"
+          },
+          "vendorAddress": {
+            "type": "string",
+            "description": "Vendor address"
+          },
+          "customerName": {
+            "type": "string",
+            "description": "Name of the customer/recipient"
+          },
+          "customerAddress": {
+            "type": "string",
+            "description": "Customer address"
+          },
+          "subtotal": {
+            "type": "number",
+            "description": "Subtotal amount before tax (USD, numbers only, no dollar sign)"
+          },
+          "taxAmount": {
+            "type": "number",
+            "description": "Total tax amount (USD, numbers only, no dollar sign)"
+          },
+          "totalAmount": {
+            "type": "number",
+            "description": "Total amount due (USD, numbers only, no dollar sign)"
+          },
+          "paymentStatus": {
+            "type": "string",
+            "description": "Payment status",
+            "enum": [
+              "paid",
+              "unpaid",
+              "overdue",
+              "partially_paid",
+              null
+            ],
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "description": "Line items listed on the invoice",
+            "items": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "description": "Item or service description"
+                },
+                "quantity": {
+                  "type": "number",
+                  "description": "Quantity"
+                },
+                "unitPrice": {
+                  "type": "number",
+                  "description": "Unit price (USD, numbers only, no dollar sign)"
+                },
+                "amount": {
+                  "type": "number",
+                  "description": "Line item total amount (USD, numbers only, no dollar sign)"
+                }
+              },
+              "required": [
+                "description",
+                "amount"
+              ]
+            }
+          }
+        },
+        "required": [
+          "invoiceNumber",
+          "invoiceDate",
+          "totalAmount",
+          "vendorName"
+        ]
+      }
+    },
+    {
+      "id": "doc-packing-list",
+      "name": "Packing List",
+      "description": "A document detailing the contents of a package or shipment.",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "packingListNumber": {
+            "type": "string",
+            "description": "Packing List Number"
+          },
+          "invoiceNumber": {
+            "type": "string",
+            "description": "Associated Invoice Number"
+          },
+          "date": {
+            "type": "string",
+            "description": "Date of issue",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+          },
+          "shipperName": {
+            "type": "string",
+            "description": "Shipper/Exporter name"
+          },
+          "shipperAddress": {
+            "type": "string",
+            "description": "Shipper address"
+          },
+          "consigneeName": {
+            "type": "string",
+            "description": "Consignee/Receiver name"
+          },
+          "consigneeAddress": {
+            "type": "string",
+            "description": "Consignee address"
+          },
+          "totalPackages": {
+            "type": "number",
+            "description": "Total number of packages/cartons"
+          },
+          "totalNetWeight": {
+            "type": "number",
+            "description": "Total Net Weight"
+          },
+          "totalGrossWeight": {
+            "type": "number",
+            "description": "Total Gross Weight"
+          },
+          "weightUnit": {
+            "type": "string",
+            "description": "Weight unit",
+            "enum": [
+              "kg",
+              "lb",
+              null
+            ],
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "description": "List of items in the shipment",
+            "items": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "description": "Item description"
+                },
+                "quantity": {
+                  "type": "number",
+                  "description": "Quantity"
+                },
+                "partNumber": {
+                  "type": "string",
+                  "description": "Part/SKU Number"
+                },
+                "netWeight": {
+                  "type": "number",
+                  "description": "Net Weight"
+                },
+                "grossWeight": {
+                  "type": "number",
+                  "description": "Gross Weight"
+                }
+              },
+              "required": [
+                "description",
+                "quantity"
+              ]
+            }
+          }
+        },
+        "required": [
+          "packingListNumber",
+          "shipperName",
+          "items"
+        ]
+      }
+    },
+    {
+      "id": "doc-purchase-order",
+      "name": "Purchase Order",
+      "description": "A commercial document and first official offer issued by a buyer to a seller indicating types, quantities, and agreed prices for products or services.",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "poNumber": {
+            "type": "string",
+            "description": "Purchase Order (PO) Number"
+          },
+          "date": {
+            "type": "string",
+            "description": "PO Date",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$"
+          },
+          "buyerName": {
+            "type": "string",
+            "description": "Buyer/Company Name"
+          },
+          "buyerAddress": {
+            "type": "string",
+            "description": "Buyer Address"
+          },
+          "vendorName": {
+            "type": "string",
+            "description": "Vendor/Supplier Name"
+          },
+          "vendorAddress": {
+            "type": "string",
+            "description": "Vendor Address"
+          },
+          "shippingAddress": {
+            "type": "string",
+            "description": "Ship-To Address"
+          },
+          "billingAddress": {
+            "type": "string",
+            "description": "Bill-To Address"
+          },
+          "paymentTerms": {
+            "type": "string",
+            "description": "Payment Terms (e.g., Net 30)"
+          },
+          "totalAmount": {
+            "type": "number",
+            "description": "Total Amount (USD, numbers only, no dollar sign)"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Currency",
+            "enum": [
+              "USD",
+              null
+            ],
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "description": "List of items ordered",
+            "items": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "description": "Item Description"
+                },
+                "quantity": {
+                  "type": "number",
+                  "description": "Quantity"
+                },
+                "unitPrice": {
+                  "type": "number",
+                  "description": "Unit Price (USD, numbers only, no dollar sign)"
+                },
+                "total": {
+                  "type": "number",
+                  "description": "Line Total (USD, numbers only, no dollar sign)"
+                },
+                "sku": {
+                  "type": "string",
+                  "description": "Item SKU/Product Code"
+                }
+              },
+              "required": [
+                "description",
+                "quantity",
+                "unitPrice"
+              ]
+            }
+          }
+        },
+        "required": [
+          "poNumber",
+          "buyerName",
+          "vendorName",
+          "totalAmount"
+        ]
+      }
+    }
+  ],
+  "entityTypes": [
+    {
+      "id": "entity-shipment",
+      "name": "Shipment",
+      "icon": "truck",
+      "color": "#f59e0b",
+      "displayOrder": 0,
+      "fieldOrder": [
+        "bolNumber",
+        "shipperName",
+        "consigneeName",
+        "date"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-bill-of-lading",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "bolNumber",
+              "targetField": "bolNumber",
+              "matchFields": [
+                {
+                  "field": "bolNumber",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "shipperName",
+              "targetField": "shipperName"
+            },
+            {
+              "sourceField": "consigneeName",
+              "targetField": "consigneeName"
+            },
+            {
+              "sourceField": "date",
+              "targetField": "date"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-packing-list",
+          "enabled": true,
+          "canCreateEntity": false,
+          "fieldMappings": [
+            {
+              "sourceField": "packingListNumber",
+              "targetField": "packingListNumber"
+            },
+            {
+              "sourceField": "shipperName",
+              "targetField": "shipperName"
+            },
+            {
+              "sourceField": "consigneeName",
+              "targetField": "consigneeName"
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": []
+    },
+    {
+      "id": "entity-order",
+      "name": "Order",
+      "icon": "shopping-cart",
+      "color": "#3b82f6",
+      "displayOrder": 1,
+      "fieldOrder": [
+        "poNumber",
+        "totalAmount",
+        "vendorName",
+        "buyerName"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-purchase-order",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "poNumber",
+              "targetField": "poNumber",
+              "matchFields": [
+                {
+                  "field": "poNumber",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "totalAmount",
+              "targetField": "totalAmount"
+            },
+            {
+              "sourceField": "vendorName",
+              "targetField": "vendorName"
+            },
+            {
+              "sourceField": "buyerName",
+              "targetField": "buyerName"
+            }
+          ]
+        },
+        {
+          "docTypeId": "doc-invoice",
+          "enabled": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "invoiceNumber",
+              "targetField": "invoiceNumber",
+              "matchFields": [
+                {
+                  "field": "invoiceNumber",
+                  "fuzzyThreshold": 0
+                }
+              ]
+            },
+            {
+              "sourceField": "totalAmount",
+              "targetField": "totalAmount"
+            },
+            {
+              "sourceField": "vendorName",
+              "targetField": "vendorName"
+            },
+            {
+              "sourceField": "buyerName",
+              "targetField": "buyerName"
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": []
+    },
+    {
+      "id": "entity-carrier",
+      "name": "Carrier",
+      "icon": "truck",
+      "color": "#10b981",
+      "displayOrder": 2,
+      "fieldOrder": [
+        "carrierName"
+      ],
+      "dataSources": [
+        {
+          "docTypeId": "doc-bill-of-lading",
+          "enabled": true,
+          "isRequired": true,
+          "canCreateEntity": true,
+          "fieldMappings": [
+            {
+              "sourceField": "carrierName",
+              "targetField": "carrierName",
+              "matchFields": [
+                {
+                  "field": "carrierName",
+                  "fuzzyThreshold": 0.1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditionalRequirements": []
+    }
+  ]
+}

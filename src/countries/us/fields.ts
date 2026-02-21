@@ -21,6 +21,7 @@ export const F = {
     JOB_TITLE: 'jobTitle',
     MONTHLY_INCOME: 'monthlyIncome',
     VESTING_TYPE: 'vestingType',
+    SSN: 'ssn',
 
     // ── Property ────────────────────────────────────────────────────────────
     PROPERTY_ADDRESS: 'propertyAddress',
@@ -62,4 +63,18 @@ export const F = {
     SELLER_PROCEEDS: 'sellerProceeds',
     CLOSING_COSTS: 'closingCosts',
     NET_PROCEEDS: 'netProceeds',
+    TOTAL_AMOUNT: 'totalAmount',
+    INVOICE_NUMBER: 'invoiceNumber',
+    INVOICE_DATE: 'invoiceDate',
+    ACCOUNT_NUMBER: 'accountNumber',
+    BANK_NAME: 'bankName',
+    TAX_ID: 'taxId',
+
+    // ── Logistics ───────────────────────────────────────────────────────────
+    SHIPMENT_ID: 'shipmentId',
+    TRACKING_NUMBER: 'trackingNumber',
+    CARRIER_NAME: 'carrierName',
+    PO_NUMBER: 'poNumber',
+    VENDOR_NAME: 'vendorName',
+    BUYER_NAME: 'buyerName',
 } as const;
